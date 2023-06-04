@@ -3,7 +3,7 @@ import DesktopSidebar from "./DesktopSidebar";
 
 const Sidebar = () => {
   return (
-    <div>
+    <div className="max-md:hidden">
       <DesktopSidebar />
     </div>
   );

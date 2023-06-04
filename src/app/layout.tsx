@@ -2,6 +2,7 @@ import "./globals.css";
 import { Inter } from "next/font/google";
 import Providers from "@/context/GlobalProvider";
 import Sidebar from "./component/sidenav/Sidebar";
+import Topnav from "./component/topnav/Topnav";
 import { Toaster } from "react-hot-toast";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -21,8 +22,11 @@ export default function RootLayout({
       <body className={inter.className}>
         <Providers>
           <Toaster />
-          <Sidebar />
-          <section className="pl-56">{children}</section>
+          <div className="max-w-[1440px] ">
+            <Sidebar />
+            <Topnav />
+            <section className="pl-56">{children}</section>
+          </div>
         </Providers>
       </body>
     </html>
