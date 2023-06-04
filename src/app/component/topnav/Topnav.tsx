@@ -1,9 +1,11 @@
 import React from "react";
-
+import SearchStatic from "./SearchStatic";
 const Topnav = () => {
   return (
     <div className="pl-56 h-full bg-transparent">
-      <section className="bg-_black_bg h-16 w-full"></section>
+      <section className="bg-_black_bg h-20 flex items-center w-full px-16">
+        <SearchStatic />
+      </section>
     </div>
   );
 };

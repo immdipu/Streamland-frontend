@@ -9,12 +9,13 @@ export interface getTrendingListResponse {
   adult: boolean;
   backdrop_path?: string;
   id: string;
-  title: string;
+  title?: string;
+  name?: string;
   original_language?: string;
   original_title?: string;
   overview?: string;
   poster_path?: string;
-  media_type: string;
+  media_type: "movie" | "tv";
   genre_id?: [];
   popularity?: number;
   release_date?: string;
