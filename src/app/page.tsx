@@ -23,6 +23,13 @@ export default async function Home() {
       ) : (
         <div>No data found</div>
       )}
+      <section className="mt-8">
+        <div>
+          <h2 className="font-medium pl-12 text-xl text-_white ">
+            Now Playing Movies
+          </h2>
+        </div>
+      </section>
     </div>
   );
 }
