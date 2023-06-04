@@ -14,7 +14,12 @@ interface dataProps {
 const CarouselContainer: React.FC<dataProps> = ({ data }) => {
   console.log(data);
   return (
-    <Carousel showThumbs={false} dynamicHeight={false}>
+    <Carousel
+      showThumbs={false}
+      showStatus={false}
+      showArrows={false}
+      dynamicHeight={false}
+    >
       {data.map((item: getTrendingListResponse) => {
         return (
           <div key={item.id} className="h-full relative">
@@ -26,8 +31,8 @@ const CarouselContainer: React.FC<dataProps> = ({ data }) => {
               alt={(item.title || item.original_title) ?? "poster"}
               style={{ objectFit: "cover", height: "100%" }}
             />
-            <section className="absolute flex flex-col justify-between inset-0 bg-black bg-opacity-40 p-6">
-              <div className="w-1/2  flex flex-col gap-2">
+            <section className="absolute flex flex-col pl-10 justify-between inset-0 bg-gradient-to-r from-_black_bg   p-6">
+              <div className="w-1/2  flex flex-col gap-2 mt-5">
                 <h3 className="font-bold leading-[45px] text-start font-Inter text-4xl text-_sidenav_bg">
                   {item.title || item.original_title}
                 </h3>
@@ -39,10 +44,10 @@ const CarouselContainer: React.FC<dataProps> = ({ data }) => {
                 </div>
               </div>
 
-              <div className="">
+              <div className="mb-5">
                 <Link
                   href={"/movie/id"}
-                  className="bg-blue-500 rounded-xl block text-white  py-3 px-5 font-medium font-Inter text-sm w-fit"
+                  className="bg-blue-500 rounded-xl hover:opacity-75 transition-opacity duration-300 ease-linear block text-white  py-3 px-5 font-medium font-Inter text-sm w-fit"
                 >
                   Watch
                 </Link>
