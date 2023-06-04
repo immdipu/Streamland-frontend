@@ -22,7 +22,7 @@ export default function RootLayout({
         <Providers>
           <Toaster />
           <Sidebar />
-          {children}
+          <section className="pl-56">{children}</section>
         </Providers>
       </body>
     </html>
