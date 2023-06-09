@@ -1,5 +1,6 @@
 import CarouselContainer from "./component/carousel/CarouselContainer";
 import { getTrendingListResponse } from "@/types/types";
+import NowPlaying from "./component/now playing/NowPlaying";
 
 async function getTrendingList() {
   const res = await fetch(
@@ -28,6 +29,7 @@ export default async function Home() {
           <h2 className="font-medium pl-12 text-xl text-_white ">
             Now Playing Movies
           </h2>
+          <NowPlaying />
         </div>
       </section>
     </div>
