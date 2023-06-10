@@ -26,7 +26,7 @@ const SingleCard: React.FC<NowPlayingResponse> = ({
         height={0}
         alt={title ?? "poster"}
         style={{ objectFit: "cover" }}
-        className="rounded-lg w-40 h-auto"
+        className="rounded-lg w-36 h-52 select-none"
       />
     </div>
   );

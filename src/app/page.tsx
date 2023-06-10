@@ -26,9 +26,6 @@ export default async function Home() {
       )}
       <section className="mt-8">
         <div>
-          <h2 className="font-medium pl-12 text-xl text-_white ">
-            Now Playing Movies
-          </h2>
           <NowPlaying />
         </div>
       </section>

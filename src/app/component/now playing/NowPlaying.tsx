@@ -16,6 +16,9 @@ const NowPlaying = async () => {
   const data = res.results;
   return (
     <div className="px-6">
+      <h2 className="font-medium pl-9 my-4 text-xl text-_white ">
+        Now Playing Movies
+      </h2>
       <Slider data={data} />
     </div>
   );
