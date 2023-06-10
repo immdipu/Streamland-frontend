@@ -5,6 +5,7 @@ import { SingleShowProps } from "@/types/types";
 import Genres from "./Genres";
 import { convertMinutesToHours } from "@/utils/converter";
 import { GiRoundStar } from "react-icons/gi";
+import Cast from "../cast/Cast";
 
 const SingleShow: React.FC<SingleShowProps> = ({
   id,
@@ -16,6 +17,7 @@ const SingleShow: React.FC<SingleShowProps> = ({
   release_date,
   vote_average,
   overview,
+  credits,
 }) => {
   return (
     <div>
@@ -82,6 +84,9 @@ const SingleShow: React.FC<SingleShowProps> = ({
             </p>
           </section>
         </div>
+        <section className="px-16 mt-5">
+          <Cast data={credits.cast} />
+        </section>
       </section>
     </div>
   );
