@@ -16,7 +16,7 @@ export default async function Home() {
   const res = await getTrendingList();
   const data: getTrendingListResponse[] = res.results;
   return (
-    <div className="bg-_black_bg min-h-screen">
+    <div className="bg-_black_bg min-h-screen pt-20">
       {data ? (
         <section className=" relative overflow-hidden w-11/12 mx-auto rounded-3xl">
           <CarouselContainer data={data} />
