@@ -22,10 +22,10 @@ export default function RootLayout({
       <body className={inter.className}>
         <Providers>
           <Toaster />
-          <div className="max-w-[1440px] ">
+          <div>
             <Sidebar />
             <Topnav />
-            <section className="pl-56">{children}</section>
+            <section className="pl-56 max-md:pl-0">{children}</section>
           </div>
         </Providers>
       </body>

@@ -17,3 +17,7 @@ axis-horizontal,
 .carousel .slider-wrapper {
     height: 100%;
 }
+
+::-webkit-scrollbar {
+    display: none;
+}

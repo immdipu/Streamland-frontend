@@ -1,4 +1,5 @@
 import React from "react";
+import Slider from "../silder/Slider";
 
 async function getNowPlaying() {
   const res = await fetch(
@@ -12,7 +13,12 @@ async function getNowPlaying() {
 
 const NowPlaying = async () => {
   const res = await getNowPlaying();
-  return <div></div>;
+  const data = res.results;
+  return (
+    <div className="px-6">
+      <Slider data={data} />
+    </div>
+  );
 };
 
 export default NowPlaying;
