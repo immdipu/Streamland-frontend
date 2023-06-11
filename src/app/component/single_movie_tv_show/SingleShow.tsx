@@ -1,4 +1,3 @@
-"use client";
 import React from "react";
 import Image from "next/image";
 import { SingleShowProps } from "@/types/types";
@@ -6,6 +5,7 @@ import Genres from "./Genres";
 import { convertMinutesToHours } from "@/utils/converter";
 import { GiRoundStar } from "react-icons/gi";
 import Cast from "../cast/Cast";
+import SimilarMovie from "../similar_movie/SimilarMovie";
 
 const SingleShow: React.FC<SingleShowProps> = ({
   id,
@@ -86,6 +86,9 @@ const SingleShow: React.FC<SingleShowProps> = ({
         </div>
         <section className="px-16 mt-5">
           <Cast data={credits.cast} />
+        </section>
+        <section className="px-16 mt-5">
+          <SimilarMovie id={id} />
         </section>
       </section>
     </div>

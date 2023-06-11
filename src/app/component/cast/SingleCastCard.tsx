@@ -38,12 +38,12 @@ const SingleCastCard: React.FC<castProps> = ({
           content={name}
         />
         <ReactTooltip
-          anchorSelect={`#movie${character}`}
+          anchorSelect={`#character${cast_id}`}
           place="top"
           content={character}
         />
         <h3
-          id={`movie${character}`}
+          id={`character${cast_id}`}
           className="text-xs mt-1 whitespace-nowrap overflow-hidden text-ellipsis font-light  text-white"
         >
           {character}
