@@ -32,7 +32,7 @@ const Slider: React.FC<dataProps> = ({ data }) => {
     <div className="flex items-center">
       {showLeftButton && (
         <div
-          className="border-[0.4px] border-_light_white rounded-sm border-opacity-0 hover:bg-_dark hover:bg-opacity-10 self-stretch mr-3 hover:border-opacity-25 transition-all duration-300 ease-in-out cursor-pointer  flex items-center"
+          className="border-[0.4px] border-_light_white rounded-sm mb-14 border-opacity-0 hover:bg-_dark hover:bg-opacity-10 self-stretch mr-3 hover:border-opacity-25 transition-all duration-300 ease-in-out cursor-pointer  flex items-center"
           onClick={handleLeftScrollClick}
         >
           <MdKeyboardArrowLeft className="text-2xl text-_light_white" />
@@ -49,7 +49,7 @@ const Slider: React.FC<dataProps> = ({ data }) => {
       {showRightButton && (
         <div
           onClick={handleRightScrollClick}
-          className="border-[0.4px] border-_light_white rounded-sm border-opacity-0 hover:bg-_dark hover:bg-opacity-10 self-stretch ml-3 hover:border-opacity-25 transition-all duration-300 ease-in-out cursor-pointer  flex items-center"
+          className="border-[0.4px] border-_light_white mb-14 rounded-sm border-opacity-0 hover:bg-_dark hover:bg-opacity-10 self-stretch ml-3 hover:border-opacity-25 transition-all duration-300 ease-in-out cursor-pointer  flex items-center"
         >
           <MdKeyboardArrowRight className="text-2xl text-_light_white" />
         </div>

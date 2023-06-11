@@ -84,10 +84,10 @@ const SingleShow: React.FC<SingleShowProps> = ({
             </p>
           </section>
         </div>
-        <section className="px-16 mt-5">
+        <section className="px-6 mt-10">
           <Cast data={credits.cast} />
         </section>
-        <section className="px-16 mt-5">
+        <section className="px-6 mt-12">
           <SimilarMovie id={id} />
         </section>
       </section>
