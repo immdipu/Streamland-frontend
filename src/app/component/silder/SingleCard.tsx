@@ -5,6 +5,7 @@ import Link from "next/link";
 import "react-tooltip/dist/react-tooltip.css";
 import { Tooltip as ReactTooltip } from "react-tooltip";
 import { GiRoundStar } from "react-icons/gi";
+import Logo from "../../../../public/cinemaalogo.png";
 
 const SingleCard: React.FC<NowPlayingResponse> = ({
   id,

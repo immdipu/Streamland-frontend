@@ -4,6 +4,7 @@ import { NowPlayingResponse } from "@/types/types";
 import SingleCard from "./SingleCard";
 import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from "react-icons/md";
 
+
 interface dataProps {
   data: NowPlayingResponse[];
 }
@@ -27,6 +28,8 @@ const Slider: React.FC<dataProps> = ({ data }) => {
       behavior: "smooth",
     });
   };
+
+
 
   return (
     <div className="flex items-center">
