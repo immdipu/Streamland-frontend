@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import Image from "next/image";
 import { NowPlayingResponse } from "@/types/types";
@@ -6,6 +7,7 @@ import "react-tooltip/dist/react-tooltip.css";
 import { Tooltip as ReactTooltip } from "react-tooltip";
 import { GiRoundStar } from "react-icons/gi";
 import Logo from "../../../../public/cinemaalogo.png";
+import Images from "../ImageComponent/Image";
 
 const SingleCard: React.FC<NowPlayingResponse> = ({
   id,
@@ -23,20 +25,33 @@ const SingleCard: React.FC<NowPlayingResponse> = ({
   vote_average,
   vote_count,
 }) => {
+  const logoImage: string = Logo.src;
+  console.log({ title }, { poster_path });
+
   return (
     <Link
       href={`movie/${id}`}
       className=" rounded-lg flex-grow-0 w-36 flex-shrink-0"
       prefetch={false}
     >
-      <Image
-        src={`https://image.tmdb.org/t/p/original/${poster_path!}`}
-        width={125}
-        height={0}
-        alt={title ?? "poster"}
-        style={{ objectFit: "cover" }}
-        className="rounded-lg w-36 h-52 select-none"
-      />
+      {poster_path ? (
+        <Images
+          src={`https://image.tmdb.org/t/p/original/${poster_path}`}
+          width={125}
+          height={0}
+          alt={title}
+          placeholderImage={Logo}
+        />
+      ) : (
+        <Images
+          src={Logo.src}
+          width={125}
+          height={0}
+          alt={title}
+          placeholderImage={Logo}
+        />
+      )}
+
       <h3
         id={`movie${id}`}
         className="text-base py-2 whitespace-nowrap overflow-hidden text-ellipsis font-medium  text-white"

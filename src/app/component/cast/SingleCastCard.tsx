@@ -3,6 +3,8 @@ import { castProps } from "@/types/types";
 import Image from "next/image";
 import Link from "next/link";
 import { Tooltip as ReactTooltip } from "react-tooltip";
+import Images from "../ImageComponent/Image";
+import Logo from "../../../../public/cinemaalogo.png";
 const SingleCastCard: React.FC<castProps> = ({
   cast_id,
   name,
@@ -18,14 +20,23 @@ const SingleCastCard: React.FC<castProps> = ({
         className=" rounded-lg flex-grow-0 w-36 flex-shrink-0"
         prefetch={false}
       >
-        <Image
-          src={`https://image.tmdb.org/t/p/original/${profile_path}`}
-          width={125}
-          height={0}
-          alt={name ?? "poster"}
-          style={{ objectFit: "cover" }}
-          className="rounded-lg w-36 h-52 select-none"
-        />
+        {profile_path ? (
+          <Images
+            src={`https://image.tmdb.org/t/p/original/${profile_path}`}
+            width={125}
+            height={0}
+            alt={name}
+            placeholderImage={Logo}
+          />
+        ) : (
+          <Images
+            src={Logo.src}
+            width={125}
+            height={0}
+            alt={name}
+            placeholderImage={Logo}
+          />
+        )}
         <h3
           id={`movie${cast_id}`}
           className="text-sm tracking-wide mt-3 whitespace-nowrap overflow-hidden text-ellipsis  text-white"
