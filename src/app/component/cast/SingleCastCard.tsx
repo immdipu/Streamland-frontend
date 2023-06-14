@@ -1,6 +1,6 @@
 import React from "react";
 import { castProps } from "@/types/types";
-import Image from "next/image";
+
 import Link from "next/link";
 import { Tooltip as ReactTooltip } from "react-tooltip";
 import Images from "../ImageComponent/Image";

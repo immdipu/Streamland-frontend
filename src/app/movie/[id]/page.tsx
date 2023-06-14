@@ -14,7 +14,6 @@ async function getSingleMovie(id: string) {
 
 const page = async ({ params }: any) => {
   const res: SingleShowProps = await getSingleMovie(params.id);
-  console.log(res);
   return (
     <div>
       <SingleShow {...res} />
