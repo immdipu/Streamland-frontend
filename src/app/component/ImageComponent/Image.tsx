@@ -19,7 +19,7 @@ const Images: React.FC<ImagesProps> = ({
   alt,
   placeholderImage,
   ImageWidth = 36,
-  Imageheight = 52,
+  Imageheight = 210,
 }) => {
   return (
     <>
@@ -28,12 +28,10 @@ const Images: React.FC<ImagesProps> = ({
         width={width}
         height={height}
         alt={alt ?? "poster"}
-        style={{ objectFit: "cover" }}
+        style={{ objectFit: "cover", height: `${Imageheight}px` }}
         placeholder="blur"
         blurDataURL={placeholderImage.src}
-        className={
-          "rounded-lg select-none " + `w-${ImageWidth} h-${Imageheight}`
-        }
+        className={"rounded-lg select-none " + `w-${ImageWidth}`}
       />
     </>
   );
