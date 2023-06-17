@@ -6,6 +6,7 @@ import { convertMinutesToHours } from "@/utils/converter";
 import { GiRoundStar } from "react-icons/gi";
 import Cast from "../cast/Cast";
 import SimilarMovie from "../similar_movie/SimilarMovie";
+import ReccomendationMovie from "../reccomendation_movie/ReccomendationMovie";
 
 const SingleShow: React.FC<SingleShowProps> = ({
   id,
@@ -89,6 +90,9 @@ const SingleShow: React.FC<SingleShowProps> = ({
         </section>
         <section className="px-6 mt-12">
           <SimilarMovie id={id} />
+        </section>
+        <section className="px-6 mt-12">
+          <ReccomendationMovie id={id} />
         </section>
       </section>
     </div>

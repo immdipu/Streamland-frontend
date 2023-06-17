@@ -19,7 +19,7 @@ const SimilarMovie = async ({ id }: { id: string | number }) => {
       <h3 className="text-_white  text-2xl mb-4 font-medium pl-10">
         Similar Movies
       </h3>
-      <Slider data={results} />
+      <Slider className="similar_movies" data={results} />
     </div>
   );
 };
