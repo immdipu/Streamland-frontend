@@ -9,6 +9,9 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@emotion/react": "^11.11.1",
+    "@emotion/styled": "^11.11.0",
+    "@mui/material": "^5.13.5",
     "@reduxjs/toolkit": "^1.9.5",
     "@tanstack/react-query": "^4.29.12",
     "@types/node": "20.2.5",

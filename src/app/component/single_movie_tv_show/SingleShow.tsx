@@ -1,6 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import { SingleShowProps } from "@/types/types";
+import Link from "next/link";
 import Genres from "./Genres";
 import { convertMinutesToHours } from "@/utils/converter";
 import { GiRoundStar } from "react-icons/gi";
@@ -74,9 +75,12 @@ const SingleShow: React.FC<SingleShowProps> = ({
               </div>
             </div>
             <div className=" mr-24 pt-3">
-              <button className="text-_white  px-6 text-base tracking-wider py-2 rounded-lg bg-_genre_chip_bg">
+              <Link
+                href={`https://vidsrc.me/embed/${id}`}
+                className="text-_white  px-6 text-base tracking-wider py-2 rounded-lg bg-_genre_chip_bg"
+              >
                 Watch
-              </button>
+              </Link>
             </div>
           </section>
           <section>
