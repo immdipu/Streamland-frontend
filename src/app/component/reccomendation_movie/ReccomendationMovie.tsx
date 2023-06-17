@@ -1,5 +1,6 @@
 import React from "react";
 import Slider from "../silder/Slider";
+import { NowPlayingResponse } from "@/types/types";
 
 async function getReccomededMOvies(id: string | number) {
   const res = await fetch(
@@ -12,14 +13,21 @@ async function getReccomededMOvies(id: string | number) {
 }
 
 const ReccomendationMovie = async ({ id }: { id: string | number }) => {
-  const { results } = await getReccomededMOvies(id);
+  const { results }: { results: NowPlayingResponse[] } =
+    await getReccomededMOvies(id);
   return (
-    <div>
-      <h3 className="text-_white  text-2xl mb-4 font-medium pl-10">
-        Recommendation
-      </h3>
-      <Slider className="recommedation_movies" data={results} />
-    </div>
+    <>
+      {results.length > 0 ? (
+        <div className="px-6 mt-12">
+          <h3 className="text-_white  text-2xl mb-4 font-medium pl-10">
+            Recommendation
+          </h3>
+          <Slider className="recommedation_movies" data={results} />
+        </div>
+      ) : (
+        <></>
+      )}
+    </>
   );
 };
 

@@ -35,7 +35,7 @@ const SingleShow: React.FC<SingleShowProps> = ({
         />
         <div className="absolute bottom-0 bg-gradient-to-t from-_black_bg inset-x-0 h-40" />
       </div>
-      <section className="bg-_black_bg  -translate-y-12 rounded-t-[45px]">
+      <section className="bg-_black_bg pb-7 -translate-y-12 rounded-t-[45px]">
         <div>
           <div className="w-52 h-72 absolute -translate-y-36 translate-x-16">
             <Image
@@ -91,7 +91,7 @@ const SingleShow: React.FC<SingleShowProps> = ({
         <section className="px-6 mt-12">
           <SimilarMovie id={id} />
         </section>
-        <section className="px-6 mt-12">
+        <section>
           <ReccomendationMovie id={id} />
         </section>
       </section>

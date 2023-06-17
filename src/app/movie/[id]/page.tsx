@@ -15,7 +15,7 @@ async function getSingleMovie(id: string) {
 const page = async ({ params }: any) => {
   const res: SingleShowProps = await getSingleMovie(params.id);
   return (
-    <div>
+    <div className="bg-_black_bg">
       <SingleShow {...res} />
     </div>
   );
