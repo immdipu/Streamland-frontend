@@ -25,9 +25,6 @@ const SingleCard: React.FC<NowPlayingResponse> = ({
   vote_average,
   vote_count,
 }) => {
-  const logoImage: string = Logo.src;
-  console.log({ title }, { poster_path });
-
   return (
     <Link
       href={`movie/${id}`}
@@ -45,8 +42,8 @@ const SingleCard: React.FC<NowPlayingResponse> = ({
       ) : (
         <Images
           src={Logo.src}
-          width={125}
-          height={0}
+          width={500}
+          height={500}
           alt={title}
           placeholderImage={Logo}
         />

@@ -1,6 +1,6 @@
 import CarouselContainer from "./component/carousel/CarouselContainer";
 import { getTrendingListResponse } from "@/types/types";
-import NowPlaying from "./component/now playing/NowPlaying";
+import { NowPlaying, TrendingMovies } from "./component";
 
 async function getTrendingList() {
   const res = await fetch(
@@ -27,6 +27,9 @@ export default async function Home() {
       <section className="mt-8">
         <div>
           <NowPlaying />
+        </div>
+        <div>
+          <TrendingMovies />
         </div>
       </section>
     </div>

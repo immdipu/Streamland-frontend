@@ -4,32 +4,30 @@ import { NowPlayingResponse } from "@/types/types";
 import SingleCard from "./SingleCard";
 import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from "react-icons/md";
 
-
 interface dataProps {
   data: NowPlayingResponse[];
+  className: string;
 }
 
-const Slider: React.FC<dataProps> = ({ data }) => {
+const Slider: React.FC<dataProps> = ({ data, className }) => {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const [showLeftButton, setShowLeftButton] = useState(true);
   const [showRightButton, setShowRightButton] = useState(true);
 
   const handleLeftScrollClick = () => {
-    const container = document.querySelector(".Card_Container");
+    const container = document.querySelector(`.${className}`);
     container?.scrollBy({
       left: -500,
       behavior: "smooth",
     });
   };
   const handleRightScrollClick = () => {
-    const container = document.querySelector(".Card_Container");
+    const container = document.querySelector(`.${className}`);
     container?.scrollBy({
       left: 500,
       behavior: "smooth",
     });
   };
-
-
 
   return (
     <div className="flex items-center">
@@ -43,7 +41,10 @@ const Slider: React.FC<dataProps> = ({ data }) => {
       )}
       <div
         ref={containerRef}
-        className="Card_Container overflow-x-auto flex gap-8 max-w-screen overflow-hidden whitespace-nowrap flex-nowrap"
+        className={
+          "overflow-x-auto flex gap-8 max-w-screen overflow-hidden whitespace-nowrap flex-nowrap " +
+          `${className}`
+        }
       >
         {data.map((item) => (
           <SingleCard {...item} key={item.id} />
