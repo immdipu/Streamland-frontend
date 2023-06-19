@@ -3,10 +3,8 @@ import React, { useState } from "react";
 import { genres } from "@/utils/genreData";
 import clsx from "clsx";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 
 const MovieGenreList = () => {
-  const router = useRouter();
   const [activeTab, setActiveTab] = useState(28);
   const handleTabClick = (index: number) => {
     setActiveTab(index);

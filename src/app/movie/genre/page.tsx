@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { MovieGenreList } from "@/app/component";
+import { MovieGenreList, MoviesGrid } from "@/app/component";
 
 const page = () => {
   return (
@@ -7,6 +7,9 @@ const page = () => {
       <h2 className="text-_sidenav_bg text-2xl pl-16">Movies</h2>
       <section>
         <MovieGenreList />
+      </section>
+      <section>
+        <MoviesGrid />
       </section>
     </div>
   );
