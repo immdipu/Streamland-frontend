@@ -3,11 +3,14 @@ import React, { useState } from "react";
 import { genres } from "@/utils/genreData";
 import clsx from "clsx";
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 
 const MovieGenreList = () => {
-  const [activeTab, setActiveTab] = useState(28);
+  const searchParams = useSearchParams();
+  const genreId = searchParams.get("tab");
+  const [activeTab, setActiveTab] = useState(genreId ?? "28");
   const handleTabClick = (index: number) => {
-    setActiveTab(index);
+    setActiveTab(index.toString());
   };
 
   return (
@@ -20,7 +23,7 @@ const MovieGenreList = () => {
               key={item.id}
               className={clsx(
                 " px-2 text-sm py-1 cursor-pointer hover:text-_sidenav_bg hover:bg-_blue duration-200 transition-all ease-linear hover:shadow-lg rounded-lg",
-                activeTab === item.id
+                activeTab === item.id.toString()
                   ? "bg-_blue text-_sidenav_bg"
                   : "bg-_sidenav_bg"
               )}

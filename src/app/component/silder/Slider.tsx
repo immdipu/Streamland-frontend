@@ -42,7 +42,7 @@ const Slider: React.FC<dataProps> = ({ data, className }) => {
       <div
         ref={containerRef}
         className={
-          "overflow-x-auto flex gap-8 max-w-screen overflow-hidden whitespace-nowrap flex-nowrap " +
+          "overflow-x-auto card_container flex gap-8 max-w-screen overflow-hidden whitespace-nowrap flex-nowrap " +
           `${className}`
         }
       >

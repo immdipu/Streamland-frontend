@@ -1,84 +1,98 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
+import { useSearchParams } from "next/navigation";
 import { NowPlayingResponse } from "@/types/types";
 import SingleCard from "../silder/SingleCard";
 import SmallLoader from "../loader/SmallLoader";
-import InfiniteScroll from "react-infinite-scroll-component";
-import { useSearchParams } from "next/navigation";
 
 const MoviesGrid = () => {
-  const [data, setData] = useState<NowPlayingResponse[] | null>(null);
   const searchParams = useSearchParams();
   const genreId = searchParams.get("tab");
-
-  const [currentPage, setCurrentPage] = useState(1);
+  const [data, setData] = useState<NowPlayingResponse[]>([]);
   const [loading, setLoading] = useState(false);
+  const [hasMore, setHasMore] = useState(true);
+  const containerRef = useRef<HTMLDivElement | null>(null);
+  const currentPageRef = useRef(1); // Use a ref to store the current page number
+
   useEffect(() => {
-    async function getMovies(id: string, intialPage: number) {
+    const getMovies = async (id: string, page: number) => {
       setLoading(true);
       const res = await fetch(
-        `${process.env.NEXT_PUBLIC_BASE_URL}/3/discover/movie?api_key=${process.env.NEXT_PUBLIC_API_KEY}&sort_by=popularity.desc&include_adult=false&page=1&with_genres=${id}`
+        `${process.env.NEXT_PUBLIC_BASE_URL}/3/discover/movie?api_key=${process.env.NEXT_PUBLIC_API_KEY}&sort_by=popularity.desc&include_adult=false&page=${page}&with_genres=${id}`
       );
       if (!res.ok) {
         throw new Error("Failed to fetch data");
       }
       const { results }: { results: NowPlayingResponse[] } = await res.json();
-      setData(results);
       setLoading(false);
       return results;
-    }
-    if (genreId) {
-      getMovies(genreId, currentPage);
-    } else {
-      {
-        getMovies("28", currentPage);
+    };
+
+    const fetchNextPage = async (page: number) => {
+      try {
+        const newItems = await getMovies(genreId ?? "28", page);
+        if (newItems.length === 0) {
+          setHasMore(false);
+        } else {
+          setData((prevData) => [...prevData, ...newItems]);
+        }
+      } catch (error) {
+        console.error("Error fetching data:", error);
       }
-    }
-  }, [currentPage, genreId]);
+    };
 
-  if (loading) {
-    <>
-      <div>
-        <SmallLoader size={40} />
-      </div>
-    </>;
-  }
+    const handleScroll = () => {
+      if (
+        containerRef.current &&
+        containerRef.current.getBoundingClientRect().bottom <=
+          window.innerHeight
+      ) {
+        const nextPage = currentPageRef.current + 1; // Calculate the next page number using the ref
+        fetchNextPage(nextPage);
+        currentPageRef.current = nextPage; // Update the ref with the new page number
+      }
+    };
 
-  const HandleNextpage = async () => {
-    setCurrentPage(currentPage + 1);
-    try {
-      const res = await fetch(
-        `${process.env.NEXT_PUBLIC_BASE_URL}/3/discover/movie?api_key=${process.env.NEXT_PUBLIC_API_KEY}&sort_by=popularity.desc&include_adult=false&page=${currentPage}&with_genres=28`
-      );
-      const { results }: { results: NowPlayingResponse[] } = await res.json();
-      if (data) {
-        setData([...data, ...results]);
+    const fetchInitialPage = async () => {
+      console.log("this is initial page function");
+      const initialData = await getMovies(genreId ?? "28", 1);
+      if (initialData.length === 0) {
+        setHasMore(false);
       } else {
-        setData(results);
+        setData(initialData);
       }
-    } catch (error) {}
-  };
+    };
+
+    fetchInitialPage();
+
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, [genreId]);
 
   return (
-    <div>
-      {data && (
-        <InfiniteScroll
-          dataLength={data.length}
-          next={() => HandleNextpage}
-          hasMore={true}
-          loader={
-            <h4 className="text-white text-center mb-3 ">
-              <SmallLoader size={30} />
-            </h4>
-          }
-          endMessage={<p className="text-white text-center">End</p>}
-          className=" pl-16 mt-16 h-28 overflow-hidden pr-6 grid gap-y-9  grid-cols-[repeat(auto-fit,minmax(167px,1fr))] border"
-        >
-          {data &&
-            data?.length > 0 &&
-            data?.map((item) => <SingleCard key={item.id} {...item} />)}
-        </InfiniteScroll>
+    <div style={{ overflow: "auto" }} ref={containerRef}>
+      {data && data.length > 0 ? (
+        <div className="pl-16 mt-16 h-full grid gap-y-9 grid-cols-[repeat(auto-fit,minmax(167px,1fr))]">
+          {data.map((item) => (
+            <SingleCard key={item.id} {...item} />
+          ))}
+        </div>
+      ) : (
+        <>
+          <div className="bg-_black_bg grid place-content-center min-h-screen">
+            <div className="text-_white">Loading...</div>
+          </div>
+        </>
       )}
+
+      {loading && hasMore && (
+        <div className="text-center">
+          <SmallLoader size={30} />
+        </div>
+      )}
+      {!loading && !hasMore && <p className="text-white text-center">End</p>}
     </div>
   );
 };

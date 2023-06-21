@@ -18,6 +18,7 @@ axis-horizontal,
     height: 100%;
 }
 
-::-webkit-scrollbar {
+
+.card_container::-webkit-scrollbar {
     display: none;
 }
