@@ -1,40 +1,61 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import { genres } from "@/utils/genreData";
+import { MoviesgenresList, TvgenresList } from "@/utils/genreData";
 import clsx from "clsx";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { usePathname } from "next/navigation";
+import { type } from "os";
 
-const MovieGenreList = () => {
+interface MovieGenreListTypes {
+  genre: "MOVIE" | "TV";
+}
+
+const MovieGenreList: React.FC<MovieGenreListTypes> = ({ genre }) => {
   const searchParams = useSearchParams();
-  const pathname = usePathname();
   const genreId = searchParams.get("tab");
-  const [activeTab, setActiveTab] = useState(genreId ?? "28");
+  const [activeTab, setActiveTab] = useState(
+    genreId ?? genre === "MOVIE" ? "28" : "10759"
+  );
 
   useEffect(() => {
-    setActiveTab(genreId ?? "28");
-  }, [genreId]);
+    if (genre === "MOVIE") {
+      setActiveTab(genreId ?? "28");
+    }
+  }, [genreId, genre]);
 
   return (
     <div>
       <ul className="flex flex-wrap gap-3 pl-16 mt-6">
-        {genres.map((item) => {
-          return (
-            <Link
-              href={`movie/genre/?tab=${item.id}`}
-              key={item.id}
-              className={clsx(
-                " px-2 text-sm py-1 cursor-pointer hover:text-_sidenav_bg hover:bg-_blue duration-200 transition-all ease-linear hover:shadow-lg rounded-lg",
-                activeTab === item.id.toString()
-                  ? "bg-_blue text-_sidenav_bg"
-                  : "bg-_sidenav_bg"
-              )}
-            >
-              {item.name}
-            </Link>
-          );
-        })}
+        {genre === "MOVIE"
+          ? MoviesgenresList.map((item) => (
+              <Link
+                href={`movie/genre/?tab=${item.id}`}
+                key={item.id}
+                className={clsx(
+                  " px-2 text-sm py-1 cursor-pointer hover:text-_sidenav_bg hover:bg-_blue duration-200 transition-all ease-linear hover:shadow-lg rounded-lg",
+                  activeTab === item.id.toString()
+                    ? "bg-_blue text-_sidenav_bg"
+                    : "bg-_sidenav_bg"
+                )}
+              >
+                {item.name}
+              </Link>
+            ))
+          : TvgenresList.map((item) => (
+              <Link
+                href={`tv/genre/?tab=${item.id}`}
+                key={item.id}
+                className={clsx(
+                  " px-2 text-sm py-1 cursor-pointer hover:text-_sidenav_bg hover:bg-_blue duration-200 transition-all ease-linear hover:shadow-lg rounded-lg",
+                  activeTab === item.id.toString()
+                    ? "bg-_blue text-_sidenav_bg"
+                    : "bg-_sidenav_bg"
+                )}
+              >
+                {item.name}
+              </Link>
+            ))}
       </ul>
     </div>
   );

@@ -6,7 +6,7 @@ const page = () => {
     <div className="bg-_black_bg pt-20">
       <h2 className="text-_sidenav_bg text-2xl pl-16">Movies</h2>
       <section>
-        <MovieGenreList />
+        <MovieGenreList genre="MOVIE" />
       </section>
       <section className="bg-_black_bg">
         <MoviesGrid />
