@@ -16,10 +16,6 @@ const MovieGenreList = () => {
     setActiveTab(genreId ?? "28");
   }, [genreId]);
 
-  const handleTabClick = (index: number) => {
-    setActiveTab(index.toString());
-  };
-
   return (
     <div>
       <ul className="flex flex-wrap gap-3 pl-16 mt-6">
