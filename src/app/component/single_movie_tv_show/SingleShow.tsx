@@ -77,6 +77,7 @@ const SingleShow: React.FC<SingleShowProps> = ({
             <div className=" mr-24 pt-3">
               <Link
                 href={`https://vidsrc.me/embed/${id}`}
+                target="_blank"
                 className="text-_white  px-6 text-base tracking-wider py-2 rounded-lg bg-_genre_chip_bg"
               >
                 Watch
