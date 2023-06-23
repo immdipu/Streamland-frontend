@@ -1,14 +1,21 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { genres } from "@/utils/genreData";
 import clsx from "clsx";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
+import { usePathname } from "next/navigation";
 
 const MovieGenreList = () => {
   const searchParams = useSearchParams();
+  const pathname = usePathname();
   const genreId = searchParams.get("tab");
   const [activeTab, setActiveTab] = useState(genreId ?? "28");
+
+  useEffect(() => {
+    setActiveTab(genreId ?? "28");
+  }, [genreId]);
+
   const handleTabClick = (index: number) => {
     setActiveTab(index.toString());
   };
@@ -27,9 +34,6 @@ const MovieGenreList = () => {
                   ? "bg-_blue text-_sidenav_bg"
                   : "bg-_sidenav_bg"
               )}
-              onClick={() => {
-                handleTabClick(item.id);
-              }}
             >
               {item.name}
             </Link>
