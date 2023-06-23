@@ -16,9 +16,9 @@ const useSidebarRoutes = () => {
       },
       {
         label: "Movies",
-        href: "/movie",
+        href: "/movie/genre",
         icon: RiMovie2Line,
-        active: pathname === "/movie",
+        active: pathname === "/movie/genre",
       },
     ],
     [pathname]

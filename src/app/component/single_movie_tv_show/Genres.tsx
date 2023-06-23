@@ -10,7 +10,7 @@ const Genres = ({ data }: { data: genresProps[] }) => {
           <Link
             key={item.id}
             className="text-_welcometext_lightblue whitespace-nowrap bg-_genre_chip_bg shadow-sm  px-2 py-1 rounded-md font-normal tracking-wide hover:text-_white duration-300 transition-colors ease-linear text-xs"
-            href={`/category/${item.id}`}
+            href={`movie/genre?tab=${item.id}`}
           >
             {item.name}
           </Link>

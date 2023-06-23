@@ -37,7 +37,7 @@ const Cast = ({ data }: { data: castProps[] }) => {
         )}
         <section
           ref={castContainerRef}
-          className="overflow-x-auto Cast_card_Container flex gap-8 max-w-screen overflow-hidden whitespace-nowrap flex-nowrap"
+          className="overflow-x-auto Cast_card_Container card_container flex gap-8 max-w-screen overflow-hidden whitespace-nowrap flex-nowrap"
         >
           {data.map((item) => (
             <SingleCastCard key={item.id} {...item} />
