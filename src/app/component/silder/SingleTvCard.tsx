@@ -30,16 +30,9 @@ const SingleTvCard: React.FC<singleTVShowProps> = ({
           width={125}
           height={0}
           alt={name}
-          placeholderImage={Logo}
         />
       ) : (
-        <Images
-          src={Logo.src}
-          width={500}
-          height={500}
-          alt={name}
-          placeholderImage={Logo}
-        />
+        <Images src={Logo.src} width={500} height={500} alt={name} />
       )}
 
       <h3

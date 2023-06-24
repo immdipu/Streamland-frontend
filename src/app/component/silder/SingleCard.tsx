@@ -37,16 +37,9 @@ const SingleCard: React.FC<NowPlayingResponse> = ({
           width={125}
           height={0}
           alt={title}
-          placeholderImage={Logo}
         />
       ) : (
-        <Images
-          src={Logo.src}
-          width={500}
-          height={500}
-          alt={title}
-          placeholderImage={Logo}
-        />
+        <Images src={Logo.src} width={500} height={500} alt={title} />
       )}
 
       <h3

@@ -1,9 +1,8 @@
 import React from "react";
 import { castProps } from "@/types/types";
-
+import Images from "../ImageComponent/Image";
 import Link from "next/link";
 import { Tooltip as ReactTooltip } from "react-tooltip";
-import Images from "../ImageComponent/Image";
 import Logo from "../../../../public/cinemaalogo.png";
 const SingleCastCard: React.FC<castProps> = ({
   cast_id,
@@ -26,16 +25,9 @@ const SingleCastCard: React.FC<castProps> = ({
             width={125}
             height={0}
             alt={name}
-            placeholderImage={Logo}
           />
         ) : (
-          <Images
-            src={Logo.src}
-            width={125}
-            height={0}
-            alt={name}
-            placeholderImage={Logo}
-          />
+          <Images src={Logo.src} width={125} height={0} alt={name} />
         )}
         <h3
           id={`movie${cast_id}`}
