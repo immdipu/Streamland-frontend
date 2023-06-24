@@ -29,7 +29,7 @@ const Images: React.FC<ImagesProps> = ({
   return (
     <>
       <Image
-        src={fallbackSrc}
+        src={imgSrc}
         width={width}
         height={height}
         alt={alt ?? "poster"}
