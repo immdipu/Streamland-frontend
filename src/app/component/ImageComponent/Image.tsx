@@ -9,8 +9,10 @@ interface ImagesProps {
   width: number;
   height: number;
   alt: string | undefined;
-  ImageWidth?: number;
-  Imageheight?: number;
+  ImageWidth?: number | "full";
+  Imageheight?: number | "full";
+  rounded?: string;
+  objectFit?: "cover" | "contain";
 }
 
 const toBase64 = (str: string) =>
@@ -24,6 +26,8 @@ const Images: React.FC<ImagesProps> = ({
   alt,
   ImageWidth = 36,
   Imageheight = 210,
+  rounded = "lg",
+  objectFit = "cover",
 }) => {
   const [imgSrc, setImgSrc] = useState<string | StaticImageData>(src);
   return (
@@ -43,8 +47,8 @@ const Images: React.FC<ImagesProps> = ({
           console.log("error occured");
           setImgSrc(fallbackSrc);
         }}
-        style={{ objectFit: "cover", height: `${Imageheight}px` }}
-        className={"rounded-lg select-none " + `w-${ImageWidth}`}
+        style={{ objectFit: `${objectFit}`, height: `${Imageheight}px` }}
+        className={"select-none  " + `w-${ImageWidth} rounded-${rounded} `}
         placeholder="blur"
         blurDataURL={`data:image/svg+xml;base64,${toBase64(fallbackSrc.src)}`}
       />

@@ -1,3 +1,7 @@
+export interface showType {
+  TYPE: "MOVIE" | "TV";
+}
+
 export interface DesktopSingleComponentProps {
   href: string;
   icon: any;
@@ -67,7 +71,28 @@ export interface genresProps {
   name: string;
 }
 
-export interface SingleShowProps {
+export interface tvshowCreatorProps {
+  id: number;
+  credit_id: string;
+  name: string;
+  gender: number;
+  profile_path: string;
+}
+
+export interface TVshowNetworkProps {
+  id: number;
+  logo_path: string;
+  name: string;
+  origin_country: string;
+}
+
+export interface TVshowSpokenLanguage {
+  english_name: string;
+  iso_639_1: string;
+  name: string;
+}
+
+export interface SingleShowProps extends showType {
   adult: boolean;
   backdrop_path: string;
   budget: number;
@@ -84,9 +109,21 @@ export interface SingleShowProps {
   release_date: string;
   runtime: number;
   status: string;
-  title: string;
+  title?: string;
   vote_average: number;
   vote_count: number;
+  episode_run_time?: [];
+  first_air_date?: string;
+  name?: string;
+  number_of_episodes?: number;
+  number_of_seasons?: number;
+  original_name?: string;
+  in_production?: boolean;
+  created_by?: tvshowCreatorProps[];
+  networks?: TVshowNetworkProps[];
+  spoken_languages?: TVshowSpokenLanguage[];
+  tagline?: string;
+  last_air_date?: string;
 }
 
 export interface singleTVShowProps {
