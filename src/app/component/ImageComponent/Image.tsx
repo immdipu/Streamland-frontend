@@ -19,7 +19,7 @@ const Images: React.FC<ImagesProps> = ({
   ImageWidth = 36,
   Imageheight = 210,
 }) => {
-  const [isImageLoading, setIsImageLoading] = useState(false);
+  const [isImageLoading, setIsImageLoading] = useState(true);
   return (
     <>
       {isImageLoading ? (
@@ -33,8 +33,7 @@ const Images: React.FC<ImagesProps> = ({
         />
       ) : (
         <Image
-          placeholder="blur"
-          blurDataURL="/cinemaalogo.png"
+          onLoad={() => setIsImageLoading(false)}
           src={src}
           width={width}
           height={height}
