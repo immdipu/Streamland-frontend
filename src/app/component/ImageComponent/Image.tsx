@@ -1,6 +1,8 @@
 "use client";
 import React, { useState } from "react";
 import Image from "next/image";
+import fallbackSrc from "@/assets/logo.png";
+import { StaticImageData } from "next/image";
 
 interface ImagesProps {
   src: string;
@@ -11,6 +13,10 @@ interface ImagesProps {
   Imageheight?: number;
 }
 
+const toBase64 = (str: string) =>
+  typeof window === "undefined"
+    ? Buffer.from(str).toString("base64")
+    : window.btoa(str);
 const Images: React.FC<ImagesProps> = ({
   src,
   width,
@@ -19,29 +25,30 @@ const Images: React.FC<ImagesProps> = ({
   ImageWidth = 36,
   Imageheight = 210,
 }) => {
-  const [isImageLoading, setIsImageLoading] = useState(true);
+  const [imgSrc, setImgSrc] = useState<string | StaticImageData>(src);
   return (
     <>
-      {isImageLoading ? (
-        <Image
-          src={"/cinemaalogo.png"}
-          width={width}
-          height={height}
-          alt={alt ?? "poster"}
-          style={{ objectFit: "cover", height: `${Imageheight}px` }}
-          className={"rounded-lg select-none " + `w-${ImageWidth}`}
-        />
-      ) : (
-        <Image
-          onLoad={() => setIsImageLoading(false)}
-          src={src}
-          width={width}
-          height={height}
-          alt={alt ?? "poster"}
-          style={{ objectFit: "cover", height: `${Imageheight}px` }}
-          className={"rounded-lg select-none " + `w-${ImageWidth}`}
-        />
-      )}
+      <Image
+        src={fallbackSrc}
+        width={width}
+        height={height}
+        alt={alt ?? "poster"}
+        onLoadingComplete={(result) => {
+          if (result.naturalWidth === 0) {
+            // Broken image
+            setImgSrc(fallbackSrc);
+          }
+        }}
+        onError={() => {
+          console.log("error occured");
+          setImgSrc(fallbackSrc);
+        }}
+        style={{ objectFit: "cover", height: `${Imageheight}px` }}
+        className={"rounded-lg select-none " + `w-${ImageWidth}`}
+        placeholder="blur"
+        // blurDataURL={`data:image/svg+xml;base64,${toBase64(fallbackSrc.src)}`}
+        blurDataURL={fallbackSrc.src}
+      />
     </>
   );
 };
