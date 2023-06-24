@@ -46,8 +46,7 @@ const Images: React.FC<ImagesProps> = ({
         style={{ objectFit: "cover", height: `${Imageheight}px` }}
         className={"rounded-lg select-none " + `w-${ImageWidth}`}
         placeholder="blur"
-        // blurDataURL={`data:image/svg+xml;base64,${toBase64(fallbackSrc.src)}`}
-        blurDataURL={fallbackSrc.src}
+        blurDataURL={`data:image/svg+xml;base64,${toBase64(fallbackSrc.src)}`}
       />
     </>
   );
