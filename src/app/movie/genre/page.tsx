@@ -9,7 +9,7 @@ const page = () => {
         <MovieGenreList genre="MOVIE" />
       </section>
       <section className="bg-_black_bg">
-        <MoviesGrid />
+        <MoviesGrid genre="MOVIE" />
       </section>
     </div>
   );

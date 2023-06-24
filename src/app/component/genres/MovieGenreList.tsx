@@ -5,7 +5,6 @@ import clsx from "clsx";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { usePathname } from "next/navigation";
-import { type } from "os";
 
 interface MovieGenreListTypes {
   genre: "MOVIE" | "TV";
@@ -21,6 +20,9 @@ const MovieGenreList: React.FC<MovieGenreListTypes> = ({ genre }) => {
   useEffect(() => {
     if (genre === "MOVIE") {
       setActiveTab(genreId ?? "28");
+    }
+    if (genre === "TV") {
+      setActiveTab(genreId ?? "10759");
     }
   }, [genreId, genre]);
 

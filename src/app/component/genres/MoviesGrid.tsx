@@ -1,14 +1,21 @@
 "use client";
 import React, { useEffect, useRef, useState } from "react";
 import { useSearchParams } from "next/navigation";
-import { NowPlayingResponse } from "@/types/types";
+import { NowPlayingResponse, singleTVShowProps } from "@/types/types";
 import SingleCard from "../silder/SingleCard";
 import SmallLoader from "../loader/SmallLoader";
+import SingleTvCard from "../silder/SingleTvCard";
 
-const MoviesGrid = () => {
+interface MovieGridTypes {
+  genre: "MOVIE" | "TV";
+}
+
+const MoviesGrid: React.FC<MovieGridTypes> = ({ genre }) => {
   const searchParams = useSearchParams();
   const genreId = searchParams.get("tab");
-  const [data, setData] = useState<NowPlayingResponse[]>([]);
+  const [data, setData] = useState<NowPlayingResponse[] | singleTVShowProps[]>(
+    []
+  );
   const [loading, setLoading] = useState(false);
   const [hasMore, setHasMore] = useState(true);
   const containerRef = useRef<HTMLDivElement | null>(null);
@@ -18,23 +25,38 @@ const MoviesGrid = () => {
     const getMovies = async (id: string, page: number) => {
       setLoading(true);
       const res = await fetch(
-        `${process.env.NEXT_PUBLIC_BASE_URL}/3/discover/movie?api_key=${process.env.NEXT_PUBLIC_API_KEY}&sort_by=popularity.desc&include_adult=false&page=${page}&with_genres=${id}`
+        `${process.env.NEXT_PUBLIC_BASE_URL}/3/discover/${
+          genre === "MOVIE" ? "movie" : "tv"
+        }?api_key=${
+          process.env.NEXT_PUBLIC_API_KEY
+        }&sort_by=popularity.desc&include_adult=false&page=${page}&with_genres=${id}`
       );
       if (!res.ok) {
         throw new Error("Failed to fetch data");
       }
-      const { results }: { results: NowPlayingResponse[] } = await res.json();
+      const {
+        results,
+      }: { results: NowPlayingResponse[] | singleTVShowProps[] } =
+        await res.json();
       setLoading(false);
       return results;
     };
 
     const fetchNextPage = async (page: number) => {
       try {
-        const newItems = await getMovies(genreId ?? "28", page);
+        const newItems = await getMovies(
+          genreId ? genreId : genre === "MOVIE" ? "28" : "10759",
+          page
+        );
         if (newItems.length === 0) {
           setHasMore(false);
         } else {
-          setData((prevData) => [...prevData, ...newItems]);
+          setData(
+            (prevData: NowPlayingResponse[] | singleTVShowProps[]) =>
+              [...prevData, ...newItems] as typeof genre extends "MOVIE"
+                ? NowPlayingResponse[]
+                : singleTVShowProps[]
+          );
         }
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -54,8 +76,11 @@ const MoviesGrid = () => {
     };
 
     const fetchInitialPage = async () => {
-      console.log("this is initial page function");
-      const initialData = await getMovies(genreId ?? "28", 1);
+      const initialData = await getMovies(
+        genreId ? genreId : genre === "MOVIE" ? "28" : "10759",
+        1
+      );
+
       if (initialData.length === 0) {
         setHasMore(false);
       } else {
@@ -69,15 +94,21 @@ const MoviesGrid = () => {
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
-  }, [genreId]);
+  }, [genreId, genre]);
 
   return (
     <div style={{ overflow: "auto" }} ref={containerRef}>
       {data && data.length > 0 ? (
         <div className="pl-16 mt-16 h-full grid gap-y-9 grid-cols-[repeat(auto-fit,minmax(167px,1fr))]">
-          {data.map((item) => (
-            <SingleCard key={item.id} {...item} />
-          ))}
+          {data.map((item) => {
+            if (genre === "MOVIE") {
+              return <SingleCard key={item.id} {...item} />;
+            }
+            if (genre === "TV") {
+              return <SingleTvCard key={item.id} {...item} />;
+            }
+            return "";
+          })}
         </div>
       ) : (
         <>
@@ -88,8 +119,8 @@ const MoviesGrid = () => {
       )}
 
       {loading && hasMore && (
-        <div className="text-center">
-          <SmallLoader size={30} />
+        <div className="text-center py-4">
+          <SmallLoader size={34} />
         </div>
       )}
       {!loading && !hasMore && <p className="text-white text-center">End</p>}

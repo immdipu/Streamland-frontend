@@ -26,7 +26,7 @@ export interface getTrendingListResponse {
 }
 
 export interface NowPlayingResponse {
-  adult: boolean;
+  adult?: boolean;
   backdrop_path?: string;
   id: string;
   title?: string;
@@ -48,7 +48,7 @@ export interface castProps {
   character: string;
   credit_id: string;
   gender: number;
-  id: number;
+  id: string;
   know_for_department: string;
   name: string;
   order: number;
@@ -86,4 +86,16 @@ export interface SingleShowProps {
   title: string;
   vote_average: number;
   vote_count: number;
+}
+
+export interface singleTVShowProps {
+  backdrop_path: string;
+  first_air_date: string;
+  genre_ids: [];
+  id: string;
+  name: string;
+  original_name: string;
+  overview: string;
+  vote_average: number;
+  poster_path: string;
 }

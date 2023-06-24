@@ -1,5 +1,5 @@
 import React from "react";
-import { MovieGenreList } from "@/app/component";
+import { MovieGenreList, MoviesGrid } from "@/app/component";
 
 const page = () => {
   return (
@@ -8,7 +8,9 @@ const page = () => {
       <section>
         <MovieGenreList genre="TV" />
       </section>
-      <section className="bg-_black_bg">{/* <MoviesGrid /> */}</section>
+      <section className="bg-_black_bg">
+        <MoviesGrid genre={"TV"} />
+      </section>
     </div>
   );
 };
