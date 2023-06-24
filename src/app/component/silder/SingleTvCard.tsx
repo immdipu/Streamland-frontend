@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import Image from "next/image";
-import { singleTVShow } from "@/types/types";
+import { singleTVShowProps } from "@/types/types";
 import Link from "next/link";
 import "react-tooltip/dist/react-tooltip.css";
 import { Tooltip as ReactTooltip } from "react-tooltip";
@@ -9,12 +9,11 @@ import { GiRoundStar } from "react-icons/gi";
 import Logo from "../../../../public/cinemaalogo.png";
 import Images from "../ImageComponent/Image";
 
-const SingleTvCard: React.FC<singleTVShow> = ({
+const SingleTvCard: React.FC<singleTVShowProps> = ({
   id,
   backdrop_path,
   genre_ids,
   name,
-  overview,
   poster_path,
   vote_average,
   first_air_date,
@@ -57,7 +56,7 @@ const SingleTvCard: React.FC<singleTVShow> = ({
       <div className="flex items-center justify-between text-xs">
         <div className="flex items-center gap-2">
           <p className="text-_light_white font-normal ">
-            {first_air_date.split("-")[0]}
+            {first_air_date ? first_air_date.split("-")[0] : ""}
           </p>
           <p className="flex gap-1  text-_light_white items-center">
             <span>{vote_average?.toFixed(1)}</span>

@@ -40,6 +40,7 @@ export interface NowPlayingResponse {
   video?: boolean;
   vote_average?: number;
   vote_count?: number;
+  name?: string;
 }
 
 export interface castProps {
@@ -89,13 +90,13 @@ export interface SingleShowProps {
 }
 
 export interface singleTVShowProps {
-  backdrop_path: string;
-  first_air_date: string;
-  genre_ids: [];
+  backdrop_path?: string;
+  first_air_date?: string;
+  genre_ids?: [];
   id: string;
-  name: string;
-  original_name: string;
-  overview: string;
-  vote_average: number;
-  poster_path: string;
+  name?: string;
+  original_name?: string;
+  overview?: string;
+  vote_average?: number;
+  poster_path?: string;
 }
