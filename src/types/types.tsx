@@ -94,6 +94,16 @@ export interface TVshowSpokenLanguage {
   name: string;
 }
 
+export interface seasonsProps {
+  air_date: string;
+  episode_count: number;
+  id: number;
+  name: string;
+  overview: string;
+  poster_path: string;
+  season_number: number;
+}
+
 export interface SingleShowProps extends showType {
   adult: boolean;
   backdrop_path: string;
@@ -126,6 +136,7 @@ export interface SingleShowProps extends showType {
   spoken_languages?: TVshowSpokenLanguage[];
   tagline?: string;
   last_air_date?: string;
+  seasons: seasonsProps[];
   similar: {
     page: number;
     results: NowPlayingResponse[];

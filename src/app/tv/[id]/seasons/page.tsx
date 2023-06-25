@@ -18,9 +18,7 @@ const page = async ({ params }: any) => {
   return (
     <div className="bg-_black_bg pt-20">
       <h1 className="text-_white text-3xl font-bold pt-6 pl-14">{res.name}</h1>
-      {res.number_of_seasons && (
-        <Seasons number_of_seasons={res.number_of_seasons} />
-      )}
+      {res.seasons && <Seasons seasons={res.seasons} />}
     </div>
   );
 };
