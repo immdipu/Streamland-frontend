@@ -20,7 +20,11 @@ const TrendingMovies = async () => {
         <h2 className="font-medium pl-9 my-4 text-xl text-_white ">
           Popular Movies
         </h2>
-        <Slider data={data} className="trending_movies_container" />
+        <Slider
+          type="MOVIE"
+          data={data}
+          className="trending_movies_container"
+        />
       </div>
     </div>
   );

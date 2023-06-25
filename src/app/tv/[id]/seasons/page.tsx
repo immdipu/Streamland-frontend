@@ -1,10 +1,10 @@
 import React from "react";
-import SingleShow from "@/app/component/single_movie_tv_show/SingleShow";
+import Seasons from "@/app/component/seasons/Seasons";
 import { SingleShowProps } from "@/types/types";
 
 async function getSingleTv(id: string) {
   const res = await fetch(
-    `${process.env.BASE_URL}/3/tv/${id}?api_key=${process.env.API_KEY}&append_to_response=credits,recommendations,similar`
+    `${process.env.BASE_URL}/3/tv/${id}?api_key=${process.env.API_KEY}`
   );
   if (!res.ok) {
     throw new Error("Failed to fetch data");
@@ -16,8 +16,11 @@ const page = async ({ params }: any) => {
   const res: SingleShowProps = await getSingleTv(params.id);
   console.log(res);
   return (
-    <div className="bg-_black_bg">
-      <SingleShow {...res} TYPE="TV" />
+    <div className="bg-_black_bg pt-20">
+      <h1 className="text-_white text-3xl font-bold pt-6 pl-14">{res.name}</h1>
+      {res.number_of_seasons && (
+        <Seasons number_of_seasons={res.number_of_seasons} />
+      )}
     </div>
   );
 };

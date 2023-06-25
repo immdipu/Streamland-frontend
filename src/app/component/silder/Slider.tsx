@@ -2,14 +2,16 @@
 import React, { useEffect, useState, useRef } from "react";
 import { NowPlayingResponse } from "@/types/types";
 import SingleCard from "./SingleCard";
+import SingleTvCard from "./SingleTvCard";
 import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from "react-icons/md";
 
 interface dataProps {
   data: NowPlayingResponse[];
   className: string;
+  type: "MOVIE" | "TV";
 }
 
-const Slider: React.FC<dataProps> = ({ data, className }) => {
+const Slider: React.FC<dataProps> = ({ data, className, type }) => {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const [showLeftButton, setShowLeftButton] = useState(true);
   const [showRightButton, setShowRightButton] = useState(true);
@@ -21,6 +23,7 @@ const Slider: React.FC<dataProps> = ({ data, className }) => {
       behavior: "smooth",
     });
   };
+
   const handleRightScrollClick = () => {
     const container = document.querySelector(`.${className}`);
     container?.scrollBy({
@@ -46,9 +49,11 @@ const Slider: React.FC<dataProps> = ({ data, className }) => {
           `${className}`
         }
       >
-        {data.map((item) => (
-          <SingleCard {...item} key={item.id} />
-        ))}
+        {type === "MOVIE" &&
+          data.map((item) => <SingleCard {...item} key={item.id} />)}
+
+        {type === "TV" &&
+          data.map((item) => <SingleTvCard {...item} key={item.id} />)}
       </div>
       {showRightButton && (
         <div

@@ -19,7 +19,7 @@ const NowPlaying = async () => {
       <h2 className="font-medium pl-9 my-4 text-xl text-_white ">
         Now Playing Movies
       </h2>
-      <Slider data={data} className="nowplaying_movies" />
+      <Slider type="MOVIE" data={data} className="nowplaying_movies" />
     </div>
   );
 };

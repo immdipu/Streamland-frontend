@@ -45,6 +45,8 @@ export interface NowPlayingResponse {
   vote_average?: number;
   vote_count?: number;
   name?: string;
+  media_type?: string;
+  first_air_date?: string;
 }
 
 export interface castProps {
@@ -124,6 +126,18 @@ export interface SingleShowProps extends showType {
   spoken_languages?: TVshowSpokenLanguage[];
   tagline?: string;
   last_air_date?: string;
+  similar: {
+    page: number;
+    results: NowPlayingResponse[];
+    total_pages: number;
+    total_results: number;
+  };
+  recommendations: {
+    page: number;
+    results: NowPlayingResponse[];
+    total_pages: number;
+    total_results: number;
+  };
 }
 
 export interface singleTVShowProps {

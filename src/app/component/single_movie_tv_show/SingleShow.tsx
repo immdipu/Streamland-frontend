@@ -1,7 +1,7 @@
 import React, { Suspense } from "react";
 import Images from "../ImageComponent/Image";
 import Image from "next/image";
-import { SingleShowProps } from "@/types/types";
+import { SingleShowProps, showType } from "@/types/types";
 import Link from "next/link";
 import Genres from "./Genres";
 import { convertMinutesToHours } from "@/utils/converter";
@@ -37,6 +37,8 @@ const SingleShow: React.FC<SingleShowProps> = ({
   tagline,
   homepage,
   last_air_date,
+  similar,
+  recommendations,
 }) => {
   return (
     <div>
@@ -129,13 +131,23 @@ const SingleShow: React.FC<SingleShowProps> = ({
               </div>
             </div>
             <div className=" mr-24 pt-3">
-              <Link
-                href={`https://vidsrc.me/embed/${id}`}
-                target="_blank"
-                className="text-_white  px-6 text-base tracking-wider py-2 rounded-lg bg-_genre_chip_bg"
-              >
-                Watch
-              </Link>
+              {TYPE === "MOVIE" && (
+                <Link
+                  href={`https://vidsrc.me/embed/${id}`}
+                  target="_blank"
+                  className="text-_white  px-6 text-base tracking-wider py-2 rounded-lg bg-_genre_chip_bg"
+                >
+                  Watch
+                </Link>
+              )}
+              {TYPE === "TV" && (
+                <Link
+                  href={`tv/${id}/seasons`}
+                  className="text-_white  px-6 text-base tracking-wider py-2 rounded-lg bg-_genre_chip_bg"
+                >
+                  Seasons
+                </Link>
+              )}
             </div>
           </section>
           <section>
@@ -147,10 +159,19 @@ const SingleShow: React.FC<SingleShowProps> = ({
         <section className="px-6 mt-10">
           <Cast data={credits.cast} />
         </section>
-        <section className="px-6 mt-12">
-          {/* <SimilarMovie id={id} /> */}
-        </section>
-        <section>{/* <ReccomendationMovie id={id} /> */}</section>
+        {similar.results.length > 0 && (
+          <section className="px-6 mt-12">
+            <SimilarMovie type={TYPE} results={similar.results} />
+          </section>
+        )}
+        {recommendations.results.length > 0 && (
+          <section className="px-6 mt-12">
+            <ReccomendationMovie
+              type={TYPE}
+              results={recommendations.results}
+            />
+          </section>
+        )}
       </section>
     </div>
   );
