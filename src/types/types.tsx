@@ -162,3 +162,18 @@ export interface singleTVShowProps {
   vote_average?: number;
   poster_path?: string;
 }
+
+export interface singleEpisodeTypes {
+  air_date: string;
+  episode_number: number;
+  gues_star: any;
+  id: number;
+  name: string;
+  overview: string;
+  production_code: string;
+  runtime: number;
+  season_number: number;
+  still_path: string;
+  vote_average: number;
+  vote_count: number;
+}
