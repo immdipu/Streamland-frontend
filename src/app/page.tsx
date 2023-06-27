@@ -1,6 +1,12 @@
 import CarouselContainer from "./component/carousel/CarouselContainer";
 import { getTrendingListResponse } from "@/types/types";
 import { NowPlaying, TrendingMovies } from "./component";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Cinemaa | Home",
+  // description: "...",
+};
 
 async function getTrendingList() {
   const res = await fetch(

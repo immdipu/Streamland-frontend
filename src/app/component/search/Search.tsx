@@ -77,7 +77,7 @@ const Search = () => {
             <>
               <section className="bg-_black_bg min-h-screen grid place-content-center">
                 <h3 className="text-_light_white text-lg tracking-wide">
-                  Search Movies, TV shows, Actores
+                  Search Movies, TV shows, Actors
                 </h3>
               </section>
             </>
