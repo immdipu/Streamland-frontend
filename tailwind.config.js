@@ -7,6 +7,10 @@ module.exports = {
   ],
   theme: {
     extend: {
+      gridTemplateColumns: {
+        autoFit: "repeat(auto-fit, minmax(160px, 1fr))",
+      },
+
       fontFamily: {
         Helvetica: ["Yantramanav", "sans-serif", "Poppins"],
         Inter: ["Inter", "sans-serif", "Poppins"],

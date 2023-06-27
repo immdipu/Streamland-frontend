@@ -5,7 +5,6 @@ import Sidebar from "./component/sidenav/Sidebar";
 import Topnav from "./component/topnav/Topnav";
 import { Toaster } from "react-hot-toast";
 import ProgressBar from "./component/progressbar/ProgressBar";
-
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
@@ -25,7 +24,6 @@ export default function RootLayout({
           <div>
             <ProgressBar />
             <Sidebar />
-            <Topnav />
             <section className="pl-56 max-md:pl-0">{children}</section>
           </div>
         </Providers>
