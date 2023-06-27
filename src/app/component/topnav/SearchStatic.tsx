@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import { CiSearch } from "react-icons/ci";
 import { usePathname } from "next/navigation";
 import { SearchContext } from "./../../../context/GlobalProvider";
+import Link from "next/link";
 
 const SearchStatic = () => {
   const router = useRouter();
@@ -26,14 +27,14 @@ const SearchStatic = () => {
           </div>
         </section>
       ) : (
-        <button
-          onClick={() => router.push("/search")}
+        <Link
+          href={"/search"}
           className="border-[0.4px] border-opacity-20 px-3 py-4 border-_light_white  flex items-center  font-light gap-3 text-_light_white rounded-2xl max-w-[250px] w-full h-7"
         >
           <CiSearch className="text-_light_white text-xl" />
 
           <p className="text-xs">Search Everything</p>
-        </button>
+        </Link>
       )}
     </>
   );

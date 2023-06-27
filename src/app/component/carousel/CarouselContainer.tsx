@@ -18,6 +18,9 @@ const CarouselContainer: React.FC<dataProps> = ({ data }) => {
       showThumbs={false}
       showStatus={false}
       showArrows={false}
+      emulateTouch
+      autoPlay
+      infiniteLoop
       dynamicHeight={false}
     >
       {data.map((item: getTrendingListResponse) => {
@@ -48,7 +51,10 @@ const CarouselContainer: React.FC<dataProps> = ({ data }) => {
 
               <div className="mb-5">
                 <Link
-                  href={"/movie/id"}
+                  href={`${item.media_type === "movie" ? "movie" : ""}${
+                    item.media_type === "tv" ? "tv" : ""
+                  }/${item.id}`}
+                  prefetch={false}
                   className="bg-blue-500 rounded-xl hover:opacity-75 transition-opacity duration-300 ease-linear block text-white  py-3 px-5 font-medium font-Inter text-sm w-fit"
                 >
                   Watch

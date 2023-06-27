@@ -156,9 +156,11 @@ const SingleShow: React.FC<SingleShowProps> = ({
             </p>
           </section>
         </div>
-        <section className="px-6 mt-10">
-          <Cast data={credits.cast} />
-        </section>
+        {credits.cast.length > 0 && (
+          <section className="px-6 mt-10">
+            <Cast data={credits.cast} />
+          </section>
+        )}
         {similar.results.length > 0 && (
           <section className="px-6 mt-12">
             <SimilarMovie type={TYPE} results={similar.results} />
