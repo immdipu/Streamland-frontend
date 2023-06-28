@@ -11,7 +11,7 @@ const Topnav = () => {
   const pathname = usePathname();
   return (
     <div
-      className="pl-56  z-50 fixed bg-transparent
+      className="pl-56 max-md:pl-0  z-50 fixed bg-transparent
      inset-x-0 h-20 top-0"
     >
       <section className="backdrop-blur-md h-full flex items-center w-full px-5">

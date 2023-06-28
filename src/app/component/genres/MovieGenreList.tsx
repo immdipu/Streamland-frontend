@@ -38,7 +38,7 @@ const MovieGenreList: React.FC<MovieGenreListTypes> = ({ genre }) => {
                   " px-2 text-sm py-1 cursor-pointer hover:text-_sidenav_bg hover:bg-_blue duration-200 transition-all ease-linear hover:shadow-lg rounded-lg",
                   activeTab === item.id.toString()
                     ? "bg-_blue text-_sidenav_bg"
-                    : "bg-_sidenav_bg"
+                    : "bg-_genre_chip_bg"
                 )}
               >
                 {item.name}
@@ -52,7 +52,7 @@ const MovieGenreList: React.FC<MovieGenreListTypes> = ({ genre }) => {
                   " px-2 text-sm py-1 cursor-pointer hover:text-_sidenav_bg hover:bg-_blue duration-200 transition-all ease-linear hover:shadow-lg rounded-lg",
                   activeTab === item.id.toString()
                     ? "bg-_blue text-_sidenav_bg"
-                    : "bg-_sidenav_bg"
+                    : "bg-_genre_chip_bg"
                 )}
               >
                 {item.name}

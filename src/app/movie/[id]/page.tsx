@@ -4,11 +4,6 @@ import { SingleShowProps } from "@/types/types";
 
 import { Metadata } from "next";
 
-export const metadata: Metadata = {
-  title: "Cinemaa | Home",
-  // description: "...",
-};
-
 async function getSingleMovie(id: string) {
   const res = await fetch(
     `${process.env.BASE_URL}/3/movie/${id}?api_key=${process.env.API_KEY}&append_to_response=credits,recommendations,similar`
@@ -19,9 +14,16 @@ async function getSingleMovie(id: string) {
   return res.json();
 }
 
+export async function generateMetadata({ params }: any) {
+  const res: SingleShowProps = await getSingleMovie(params.id);
+  return {
+    title: res.title ?? res.name,
+  };
+}
+
 const page = async ({ params }: any) => {
   const res: SingleShowProps = await getSingleMovie(params.id);
-  console.log(res);
+
   return (
     <div className="bg-_black_bg">
       <SingleShow {...res} TYPE="MOVIE" />

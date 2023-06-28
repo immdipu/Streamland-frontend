@@ -44,7 +44,7 @@ const SingleCard: React.FC<NowPlayingResponse> = ({
 
       <h3
         id={`movie${id}`}
-        className="text-base py-2 whitespace-nowrap overflow-hidden text-ellipsis font-medium  text-white"
+        className="text-base max-md:text-sm py-2 whitespace-nowrap overflow-hidden text-ellipsis font-medium  text-white"
       >
         {title}
       </h3>
@@ -54,17 +54,17 @@ const SingleCard: React.FC<NowPlayingResponse> = ({
         content={title}
       />
       <div className="flex items-center justify-between text-xs">
-        <div className="flex items-center gap-2">
-          <p className="text-_light_white font-normal ">
+        <div className="flex  items-center gap-2">
+          <p className="text-_light_white max-md:text-xs font-normal ">
             {release_date?.split("-")[0]}
           </p>
-          <p className="flex gap-1  text-_light_white items-center">
+          <p className="flex gap-1 max-md:text-xs  text-_light_white items-center">
             <span>{vote_average?.toFixed(1)}</span>
             <GiRoundStar className="text-yellow-500 mb-[1px]" />
           </p>
         </div>
 
-        <span className=" border-_light_white tracking-wider border-[1px] border-opacity-25 font-thin px-2 rounded-md py-1 scale-90 text-_white">
+        <span className=" max-md:text-xs border-_light_white tracking-wider border-[1px] border-opacity-25 font-thin px-2 rounded-md py-1 scale-90 text-_white">
           Movie
         </span>
       </div>

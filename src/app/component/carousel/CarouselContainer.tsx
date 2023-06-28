@@ -17,6 +17,7 @@ const CarouselContainer: React.FC<dataProps> = ({ data }) => {
     <Carousel
       showThumbs={false}
       showStatus={false}
+      showIndicators={false}
       showArrows={false}
       emulateTouch
       autoPlay
@@ -35,8 +36,8 @@ const CarouselContainer: React.FC<dataProps> = ({ data }) => {
               style={{ objectFit: "cover", height: "100%" }}
             />
             <section className="absolute flex flex-col pl-10 justify-between inset-0 bg-gradient-to-r from-_black_bg   p-6">
-              <div className="w-1/2  flex flex-col gap-2 mt-5">
-                <h3 className="font-bold leading-[45px] text-start font-Inter text-4xl text-_sidenav_bg">
+              <div className="w-1/2 max-md:w-10/12  flex flex-col gap-2 mt-5">
+                <h3 className="font-bold max-md:text-xl leading-[45px] text-start font-Inter text-4xl text-_sidenav_bg">
                   {item.media_type === "movie"
                     ? item.title || item.original_title
                     : item.name}
@@ -46,6 +47,13 @@ const CarouselContainer: React.FC<dataProps> = ({ data }) => {
                   <p className="text-_light_white text-sm font-sans">
                     {Number(item.vote_average?.toFixed(1))}
                   </p>
+                  <span className="border-_light_white border-[1px] rounded-2xl px-2 py-1 text-xs text-_light_white max-md:scale-75">
+                    {item.media_type === "movie"
+                      ? "Movie"
+                      : item.media_type === "tv"
+                      ? "TV"
+                      : ""}
+                  </span>
                 </div>
               </div>
 

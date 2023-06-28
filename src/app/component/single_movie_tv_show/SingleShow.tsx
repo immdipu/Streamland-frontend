@@ -57,7 +57,7 @@ const SingleShow: React.FC<SingleShowProps> = ({
       </div>
       <section className="bg-_black_bg pb-7 -translate-y-12 rounded-t-[45px]">
         <div>
-          <div className="w-52 h-72 absolute -translate-y-36 translate-x-16">
+          <div className="w-52 h-72 absolute -translate-y-36 max-md:translate-x-32 translate-x-16">
             <Images
               src={`https://image.tmdb.org/t/p/original/${poster_path}`}
               width={500}
@@ -68,16 +68,16 @@ const SingleShow: React.FC<SingleShowProps> = ({
               rounded="2xl"
             />
           </div>
-          <section className="pl-72 h-60 py-6 flex justify-between">
+          <section className="pl-72  max-md:justify-center  max-md:pl-0 max-md:flex-col   max-md:pt-44 h-60 max-md:h-full py-6 flex justify-between">
             <div>
-              <h2 className="text-4xl text-_show_title font-bold tracking-wide">
+              <h2 className="text-4xl max-md:text-center text-_show_title font-bold tracking-wide">
                 {TYPE === "MOVIE" && title}
                 {TYPE === "TV" && name}
               </h2>
-              <div className="mt-4">
+              <div className="mt-4  max-md:flex max-md:justify-center max-md:flex-wrap">
                 <Genres TYPE={TYPE} data={genres} />
               </div>
-              <div className="mt-3 pl-1 flex items-center gap-2">
+              <div className="mt-3 pl-1 flex max-md:justify-center items-center gap-2">
                 <span className="text-_welcometext_lightblue font-Inter text-[13px]">
                   {TYPE === "MOVIE" &&
                     runtime &&
@@ -130,7 +130,7 @@ const SingleShow: React.FC<SingleShowProps> = ({
                 </section>
               </div>
             </div>
-            <div className=" mr-24 pt-3">
+            <div className=" mr-24 max-md:mr-0 max-md:mt-6 max-md:flex max-md:justify-center pt-3">
               {TYPE === "MOVIE" && (
                 <Link
                   href={`https://vidsrc.me/embed/${id}`}
@@ -151,23 +151,23 @@ const SingleShow: React.FC<SingleShowProps> = ({
             </div>
           </section>
           <section>
-            <p className="text-_welcometext_lightblue font-light tracking-wide px-16 text-base font-Helvetica">
+            <p className="text-_welcometext_lightblue font-light tracking-wide px-16 max-md:px-2 text-base font-Helvetica">
               {overview}
             </p>
           </section>
         </div>
         {credits.cast.length > 0 && (
-          <section className="px-6 mt-10">
+          <section className="px-6 max-md:px-1 max-md:mx-1 mt-10">
             <Cast data={credits.cast} />
           </section>
         )}
         {similar.results.length > 0 && (
-          <section className="px-6 mt-12">
+          <section className="px-6 max-md:px-1  mt-12">
             <SimilarMovie type={TYPE} results={similar.results} />
           </section>
         )}
         {recommendations.results.length > 0 && (
-          <section className="px-6 mt-12">
+          <section className="px-6 max-md:px-1 mt-12">
             <ReccomendationMovie
               type={TYPE}
               results={recommendations.results}

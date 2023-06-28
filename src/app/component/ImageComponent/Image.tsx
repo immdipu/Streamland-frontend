@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import Image from "next/image";
 import fallbackSrc from "@/assets/logo.png";
 import { StaticImageData } from "next/image";
+import failedImage from "@/assets/cinemaaFailedImage.png";
 
 interface ImagesProps {
   src: string;
@@ -31,7 +32,7 @@ const Images: React.FC<ImagesProps> = ({
 }) => {
   const [imgSrc, setImgSrc] = useState<string | StaticImageData>(src);
   return (
-    <>
+    <div className={"overflow-hidden " + `rounded-${rounded}`}>
       <Image
         src={imgSrc}
         width={width}
@@ -40,19 +41,22 @@ const Images: React.FC<ImagesProps> = ({
         onLoadingComplete={(result) => {
           if (result.naturalWidth === 0) {
             // Broken image
-            setImgSrc(fallbackSrc);
+            setImgSrc(failedImage);
           }
         }}
         onError={() => {
           console.log("error occured");
-          setImgSrc(fallbackSrc);
+          setImgSrc(failedImage);
         }}
         style={{ objectFit: `${objectFit}`, height: `${Imageheight}px` }}
-        className={"select-none  " + `w-${ImageWidth} rounded-${rounded} `}
+        className={
+          "select-none hover:scale-125  transition-transform duration-150 ease-in " +
+          `w-${ImageWidth} rounded-${rounded} `
+        }
         placeholder="blur"
-        blurDataURL={`data:image/svg+xml;base64,${toBase64(fallbackSrc.src)}`}
+        blurDataURL={`data:image/svg+xml;base64,${toBase64(failedImage.src)}`}
       />
-    </>
+    </div>
   );
 };
 

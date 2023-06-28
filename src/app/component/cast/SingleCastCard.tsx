@@ -16,7 +16,7 @@ const SingleCastCard: React.FC<castProps> = ({
     <>
       <Link
         href={`cast/${cast_id}`}
-        className=" rounded-lg flex-grow-0 w-36 flex-shrink-0"
+        className=" rounded-lg flex-grow-0 w-36 flex-shrink-0 "
         prefetch={false}
       >
         {profile_path ? (

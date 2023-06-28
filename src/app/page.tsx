@@ -5,7 +5,6 @@ import { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Cinemaa | Home",
-  // description: "...",
 };
 
 async function getTrendingList() {
