@@ -43,7 +43,7 @@ const Search = () => {
         ) {
           getSearch(searchProvider.searchTerm);
         }
-      }, 2500)
+      }, 1500)
     );
 
     // eslint-disable-next-line react-hooks/exhaustive-deps

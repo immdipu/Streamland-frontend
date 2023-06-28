@@ -19,6 +19,7 @@ const SearchStatic = () => {
             <input
               type="search"
               value={searchTerm?.searchTerm}
+              autoFocus
               onChange={(e) => searchTerm?.setSearchTerm(e.target.value)}
               placeholder="Search Everything"
               className="placeholder:text-xs bg-_black_bg w-full border-none text-_helptool_bg pl-1 outline-none text-sm  placeholder:text-_light_white"

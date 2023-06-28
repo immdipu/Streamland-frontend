@@ -12,18 +12,10 @@ export const metadata = {
   description:
     "CINEMAA is a website where you can stream different movies and tv shows for free. We do not store any copyright-protected content on our website. Any linked content is stored only in third-party websites. This is a promotional website only. All files placed here are for introducing purpose.",
   generator: "Next.js",
-  applicationName: "Next.js",
+  applicationName: "Cinemaa",
   referrer: "origin-when-cross-origin",
   keywords: ["Next.js", "React", "JavaScript"],
-  authors: [{ name: "Seb" }, { name: "Josh", url: "https://nextjs.org" }],
   colorScheme: "dark",
-  creator: "Jiachi Liu",
-  publisher: "Sebastian Markbåge",
-  formatDetection: {
-    email: false,
-    address: false,
-    telephone: false,
-  },
 };
 
 export default function RootLayout({
