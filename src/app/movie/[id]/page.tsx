@@ -2,8 +2,6 @@ import React from "react";
 import SingleShow from "@/app/component/single_movie_tv_show/SingleShow";
 import { SingleShowProps } from "@/types/types";
 
-import { Metadata } from "next";
-
 async function getSingleMovie(id: string) {
   const res = await fetch(
     `${process.env.BASE_URL}/3/movie/${id}?api_key=${process.env.API_KEY}&append_to_response=credits,recommendations,similar`

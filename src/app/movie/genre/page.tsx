@@ -1,5 +1,10 @@
 import React, { useState } from "react";
 import { MovieGenreList, MoviesGrid } from "@/app/component";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Cinemaa | Movies",
+};
 
 const page = () => {
   return (

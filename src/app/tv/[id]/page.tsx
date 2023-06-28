@@ -12,6 +12,13 @@ async function getSingleTv(id: string) {
   return res.json();
 }
 
+export async function generateMetadata({ params }: any) {
+  const res: SingleShowProps = await getSingleTv(params.id);
+  return {
+    title: res.title ?? res.name,
+  };
+}
+
 const page = async ({ params }: any) => {
   const res: SingleShowProps = await getSingleTv(params.id);
   console.log(res);

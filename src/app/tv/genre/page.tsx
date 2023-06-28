@@ -1,6 +1,12 @@
 import React from "react";
 import { MovieGenreList, MoviesGrid } from "@/app/component";
 
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Cinemaa | TV shows",
+};
+
 const page = () => {
   return (
     <div className="bg-_black_bg pt-20">

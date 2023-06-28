@@ -1,6 +1,10 @@
-"use client";
 import React from "react";
 import Search from "../component/search/Search";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Cinemaa | Search",
+};
 
 const page = () => {
   return (

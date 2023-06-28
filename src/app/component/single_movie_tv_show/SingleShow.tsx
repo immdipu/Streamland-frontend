@@ -133,8 +133,7 @@ const SingleShow: React.FC<SingleShowProps> = ({
             <div className=" mr-24 max-md:mr-0 max-md:mt-6 max-md:flex max-md:justify-center pt-3">
               {TYPE === "MOVIE" && (
                 <Link
-                  href={`https://vidsrc.me/embed/${id}`}
-                  target="_blank"
+                  href={`/player/movie/${id}`}
                   className="text-_white  px-6 text-base tracking-wider py-2 rounded-lg bg-_genre_chip_bg"
                 >
                   Watch
