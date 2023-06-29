@@ -1,6 +1,6 @@
 import CarouselContainer from "./component/carousel/CarouselContainer";
 import { getTrendingListResponse } from "@/types/types";
-import { NowPlaying, TrendingMovies } from "./component";
+import { NowPlaying, TrendingMovies, ContinueWatch } from "./component";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -30,6 +30,9 @@ export default async function Home() {
         <div>No data found</div>
       )}
       <section className="mt-8">
+        <div>
+          <ContinueWatch />
+        </div>
         <div>
           <NowPlaying />
         </div>

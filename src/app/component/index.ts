@@ -4,6 +4,7 @@ import MovieGenreList from "./genres/MovieGenreList";
 import MoviesGrid from "./genres/MoviesGrid";
 import SingleCard from "./silder/SingleCard";
 import SingleTvCard from "./silder/SingleTvCard";
+import ContinueWatch from "./continueWatch/ContinueWatch";
 
 export {
   NowPlaying,
@@ -12,4 +13,5 @@ export {
   MoviesGrid,
   SingleCard,
   SingleTvCard,
+  ContinueWatch,
 };
