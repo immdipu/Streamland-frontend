@@ -19,6 +19,9 @@ const page = async ({ params }: any) => {
 
   return (
     <div className="pt-24 px-6">
+      <h2 className="font-medium text-2xl text-_white py-3 mb-4 px-1">
+        {res.name}{" "}
+      </h2>
       <section className="flex gap-5 max-md:flex-col">
         {res.profile_path && (
           <div className="w-72 flex-shrink-0">
