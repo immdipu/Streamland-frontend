@@ -16,10 +16,14 @@ async function getSingleMovie(id: string) {
 }
 
 const ContinueWatch = () => {
-  const movieId = localStorage.getItem("movieId");
   const [moviedata, setMoviedata] = useState<SingleShowProps | null>(null);
+  const [MovieId, setMovieId] = useState<null | string>(null);
 
   useEffect(() => {
+    const movieId = localStorage.getItem("movieId");
+    if (movieId) {
+      setMovieId(movieId);
+    }
     async function fetchData() {
       if (movieId) {
         try {
@@ -31,9 +35,9 @@ const ContinueWatch = () => {
       }
     }
     fetchData();
-  }, [movieId]);
+  }, []);
 
-  if (!movieId) {
+  if (!MovieId) {
     return <></>;
   }
 
@@ -55,7 +59,7 @@ const ContinueWatch = () => {
               rounded="2xl"
             />
             <Link
-              href={`/player/movie/${movieId}`}
+              href={`/player/movie/${MovieId}`}
               prefetch={false}
               className="absolute bg-gradient-to-t rounded-2xl from-neutral-800 inset-0 group items-end flex hover:backdrop-blur-[2px] "
             >
