@@ -11,6 +11,7 @@ import SmallLoader from "../loader/SmallLoader";
 import Cast from "../cast/Cast";
 import SimilarMovie from "../similar_movie/SimilarMovie";
 import ReccomendationMovie from "../reccomendation_movie/ReccomendationMovie";
+import CustomModal from "../modal/CustomModal";
 
 const SingleShow: React.FC<SingleShowProps> = ({
   id,
@@ -40,6 +41,17 @@ const SingleShow: React.FC<SingleShowProps> = ({
   similar,
   recommendations,
 }) => {
+  let Trailer = (
+    <iframe
+      src={`https://autoembed.to/trailer/${
+        TYPE === "MOVIE" ? "movie" : TYPE === "TV" ? "tv" : ""
+      }/${id}`}
+      width="100%"
+      height="100%"
+      allowFullScreen
+    />
+  );
+
   return (
     <div>
       <div className="relative">
@@ -77,7 +89,7 @@ const SingleShow: React.FC<SingleShowProps> = ({
               <div className="mt-4  max-md:flex max-md:justify-center max-md:flex-wrap">
                 <Genres TYPE={TYPE} data={genres} />
               </div>
-              <div className="mt-3 pl-1 flex max-md:justify-center items-center gap-2">
+              <div className="mt-3 pl-1 flex max-md:flex-wrap max-md:justify-center items-center gap-2">
                 <span className="text-_welcometext_lightblue font-Inter text-[13px]">
                   {TYPE === "MOVIE" &&
                     runtime &&
@@ -128,6 +140,16 @@ const SingleShow: React.FC<SingleShowProps> = ({
                     />
                   </Suspense>
                 </section>
+                <CustomModal
+                  tooltip="watch Trailer"
+                  width={"1/2"}
+                  buttonElement={
+                    <button className="text-xs ml-1 hover:border-opacity-80 duration-150 ease-in transition-opacity border-_light_white border-opacity-30 text-_light_white border px-2 py-1 font-light rounded-md">
+                      Watch Trailer
+                    </button>
+                  }
+                  data={<div className="h-80">{Trailer}</div>}
+                />
               </div>
             </div>
             <div className=" mr-24 max-md:mr-0 max-md:mt-6 max-md:flex max-md:justify-center pt-3">

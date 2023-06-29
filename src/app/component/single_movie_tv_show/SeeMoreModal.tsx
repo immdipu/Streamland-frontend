@@ -21,6 +21,7 @@ import ListItems from "../MuiComponent/ListItem";
 import { BiChevronDown, BiChevronUp } from "react-icons/bi";
 import Images from "../ImageComponent/Image";
 import Link from "next/link";
+import { AiOutlineClose } from "react-icons/ai";
 
 interface FadeProps {
   children: React.ReactElement;
@@ -135,6 +136,12 @@ const SeeMoreModal: React.FC<seeMoreModal> = ({
       >
         <Fade in={open}>
           <Box sx={style}>
+            <div
+              onClick={handleClose}
+              className="absolute -right-5 -top-5 bg-_genre_chip_bg rounded-lg px-3 py-3 z-10 cursor-pointer"
+            >
+              <AiOutlineClose />
+            </div>
             {original_name && (
               <>
                 <ListItems>
