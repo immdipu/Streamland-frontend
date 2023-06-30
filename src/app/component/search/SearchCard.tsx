@@ -34,14 +34,14 @@ const SearchCard: React.FC<serachItemProps> = ({
       >
         {poster_path ? (
           <Images
-            src={`https://image.tmdb.org/t/p/original/${poster_path}`}
+            src={`https://image.tmdb.org/t/p/w200/${poster_path}`}
             width={125}
             height={0}
             alt={title}
           />
         ) : profile_path ? (
           <Images
-            src={`https://image.tmdb.org/t/p/original/${profile_path}`}
+            src={`https://image.tmdb.org/t/p/w200/${profile_path}`}
             width={125}
             height={0}
             alt={title}

@@ -22,7 +22,7 @@ const SingleCastCard: React.FC<castProps> = ({
       >
         {profile_path ? (
           <Images
-            src={`https://image.tmdb.org/t/p/original/${profile_path}`}
+            src={`https://image.tmdb.org/t/p/w200/${profile_path}`}
             width={125}
             height={0}
             alt={name}

@@ -33,7 +33,7 @@ const SingleCard: React.FC<NowPlayingResponse> = ({
     >
       {poster_path ? (
         <Images
-          src={`https://image.tmdb.org/t/p/original/${poster_path}`}
+          src={`https://image.tmdb.org/t/p/w200/${poster_path}`}
           width={125}
           height={0}
           alt={title}

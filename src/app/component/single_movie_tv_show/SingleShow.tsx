@@ -71,7 +71,7 @@ const SingleShow: React.FC<SingleShowProps> = ({
         <div>
           <div className="w-52 h-72 absolute -translate-y-36 max-md:translate-x-32 translate-x-16">
             <Images
-              src={`https://image.tmdb.org/t/p/original/${poster_path}`}
+              src={`https://image.tmdb.org/t/p/w200/${poster_path}`}
               width={500}
               height={500}
               alt={title}

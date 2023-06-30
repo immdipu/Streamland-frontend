@@ -74,7 +74,7 @@ const ContinueWatch = () => {
         {moviedata && (
           <div className="w-72 relative slide-in-top">
             <Images
-              src={`https://image.tmdb.org/t/p/original/${moviedata.backdrop_path}`}
+              src={`https://image.tmdb.org/t/p/w200/${moviedata.backdrop_path}`}
               width={300}
               height={300}
               alt={moviedata.title ?? moviedata.name}
@@ -100,7 +100,7 @@ const ContinueWatch = () => {
         {tvdata && (
           <div className="w-72 relative slide-in-top">
             <Images
-              src={`https://image.tmdb.org/t/p/original/${tvdata.backdrop_path}`}
+              src={`https://image.tmdb.org/t/p/w200/${tvdata.backdrop_path}`}
               width={300}
               height={300}
               alt={tvdata.title ?? tvdata.name}

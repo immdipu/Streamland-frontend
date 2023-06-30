@@ -183,7 +183,7 @@ const SeeMoreModal: React.FC<seeMoreModal> = ({
                                   height={100}
                                   Imageheight={50}
                                   ImageWidth={"full"}
-                                  src={`https://image.tmdb.org/t/p/original/${item.profile_path}`}
+                                  src={`https://image.tmdb.org/t/p/w200/${item.profile_path}`}
                                 />
                               </div>
 
@@ -229,7 +229,7 @@ const SeeMoreModal: React.FC<seeMoreModal> = ({
                                   height={100}
                                   Imageheight={50}
                                   ImageWidth={"full"}
-                                  src={`https://image.tmdb.org/t/p/original/${item.logo_path}`}
+                                  src={`https://image.tmdb.org/t/p/w200/${item.logo_path}`}
                                 />
                               </div>
 
