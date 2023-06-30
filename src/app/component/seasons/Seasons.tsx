@@ -5,7 +5,6 @@ import { useSearchParams, useParams } from "next/navigation";
 import clsx from "clsx";
 import Episode from "./Episodes";
 import { seasonsProps, singleEpisodeTypes } from "@/types/types";
-import PlayerIframe from "./PlayerIframe";
 
 const getEpisode = async function getSingleTv(
   tv_id: string,
@@ -73,6 +72,7 @@ const Seasons = ({ seasons }: { seasons?: seasonsProps[] }) => {
   const SeasonId = searchParams.get("s");
   const Episodes = searchParams.get("e");
   const [currentEpisode, setCurrentEpisode] = useState(1);
+  const [showOverlay, setShowOverlay] = useState(true);
   const [activeSeason, setActiveSeason] = useState(SeasonId ?? "1");
   const [totalEpi, setTotalEpi] = useState(
     Episodes ? parseFloat(Episodes) : seasons![0].episode_count
@@ -107,10 +107,21 @@ const Seasons = ({ seasons }: { seasons?: seasonsProps[] }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [activeSeason, totalEpi]);
 
+  const HanldeClick = () => {
+    localStorage.setItem("tvId", params.id);
+    setShowOverlay(false);
+  };
+
   return (
     <div>
       <>
-        <div className="h-[35rem]  py-6">
+        <div className="h-[35rem] relative  py-6">
+          {showOverlay && (
+            <div
+              className="absolute inset-0 bg-black opacity-0"
+              onClick={HanldeClick}
+            ></div>
+          )}
           <iframe
             src={`https://autoembed.to/tv/tmdb/${params.id}-${SeasonId}-${currentEpisode}`}
             width="100%"
