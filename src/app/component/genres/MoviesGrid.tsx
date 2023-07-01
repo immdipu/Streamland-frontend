@@ -33,6 +33,70 @@ const MoviesGrid: React.FC<MovieGridTypes> = ({ genre }) => {
         setLoading(false);
         return results;
       }
+      if (genreId === "topratedmovie") {
+        const {
+          results,
+        }: { results: NowPlayingResponse[] | singleTVShowProps[] } =
+          await await Apis.TopRatedMovies(page);
+        setLoading(false);
+        return results;
+      }
+      if (genreId === "popularmovie") {
+        const {
+          results,
+        }: { results: NowPlayingResponse[] | singleTVShowProps[] } =
+          await await Apis.PopularMovies(page);
+        setLoading(false);
+        return results;
+      }
+      if (genreId === "upcomingmovie") {
+        const {
+          results,
+        }: { results: NowPlayingResponse[] | singleTVShowProps[] } =
+          await await Apis.UpcomingMovies(page);
+        setLoading(false);
+        return results;
+      }
+      if (genreId === "trendingtv") {
+        const {
+          results,
+        }: { results: NowPlayingResponse[] | singleTVShowProps[] } =
+          await await Apis.TrendingTv(page);
+        setLoading(false);
+        return results;
+      }
+      if (genreId === "airingtoday") {
+        const {
+          results,
+        }: { results: NowPlayingResponse[] | singleTVShowProps[] } =
+          await await Apis.AiringTodayTv(page);
+        setLoading(false);
+        return results;
+      }
+      if (genreId === "ontheair") {
+        const {
+          results,
+        }: { results: NowPlayingResponse[] | singleTVShowProps[] } =
+          await await Apis.OnTheAirTv(page);
+        setLoading(false);
+        return results;
+      }
+      if (genreId === "populartv") {
+        const {
+          results,
+        }: { results: NowPlayingResponse[] | singleTVShowProps[] } =
+          await await Apis.PopularTv(page);
+        setLoading(false);
+        return results;
+      }
+      if (genreId === "topratedtv") {
+        const {
+          results,
+        }: { results: NowPlayingResponse[] | singleTVShowProps[] } =
+          await await Apis.TopRatedTv(page);
+        setLoading(false);
+        return results;
+      }
 
       let res = await fetch(
         `${process.env.NEXT_PUBLIC_BASE_URL}/3/discover/${
