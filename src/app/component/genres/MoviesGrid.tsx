@@ -5,6 +5,7 @@ import { NowPlayingResponse, singleTVShowProps } from "@/types/types";
 import SingleCard from "../silder/SingleCard";
 import SmallLoader from "../loader/SmallLoader";
 import SingleTvCard from "../silder/SingleTvCard";
+import { Apis } from "@/app/tmdbApi/TmdbApi";
 
 interface MovieGridTypes {
   genre: "MOVIE" | "TV";
@@ -24,13 +25,23 @@ const MoviesGrid: React.FC<MovieGridTypes> = ({ genre }) => {
   useEffect(() => {
     const getMovies = async (id: string, page: number) => {
       setLoading(true);
-      const res = await fetch(
+      if (genreId === "trendingmovie") {
+        const {
+          results,
+        }: { results: NowPlayingResponse[] | singleTVShowProps[] } =
+          await await Apis.TrendingMovies(page);
+        setLoading(false);
+        return results;
+      }
+
+      let res = await fetch(
         `${process.env.NEXT_PUBLIC_BASE_URL}/3/discover/${
           genre === "MOVIE" ? "movie" : "tv"
         }?api_key=${
           process.env.NEXT_PUBLIC_API_KEY
         }&sort_by=popularity.desc&include_adult=false&page=${page}&with_genres=${id}`
       );
+
       if (!res.ok) {
         throw new Error("Failed to fetch data");
       }

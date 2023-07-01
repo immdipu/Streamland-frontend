@@ -18,4 +18,17 @@ export const Apis = {
     }
     return res.json();
   },
+  TrendingMovies: async (page: number) => {
+    const res = await fetch(
+      `${
+        process.env.BASE_URL ?? process.env.NEXT_PUBLIC_BASE_URL
+      }/3/trending/movie/week?api_key=${
+        process.env.API_KEY ?? process.env.NEXT_PUBLIC_API_KEY
+      }&page=${page}`
+    );
+    if (!res.ok) {
+      throw new Error("Failed to fetch data");
+    }
+    return res.json();
+  },
 };
