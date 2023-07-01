@@ -5,6 +5,7 @@ import MoviesGrid from "./genres/MoviesGrid";
 import SingleCard from "./silder/SingleCard";
 import SingleTvCard from "./silder/SingleTvCard";
 import ContinueWatch from "./continueWatch/ContinueWatch";
+import TrendingPerson from "./trending/TrendingPerson";
 
 export {
   NowPlaying,
@@ -14,4 +15,5 @@ export {
   SingleCard,
   SingleTvCard,
   ContinueWatch,
+  TrendingPerson,
 };

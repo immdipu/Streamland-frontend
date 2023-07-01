@@ -16,8 +16,8 @@ const TrendingMovies = async () => {
   const data = res.results;
   return (
     <div>
-      <div className="px-6 max-md:px-1 mt-10">
-        <h2 className="font-medium pl-9 max-md:pl-6 my-4 text-xl text-_white ">
+      <div className="px-6 max-md:px-1  pb-6 mt-10">
+        <h2 className="font-medium pl-9 max-md:pl-6 my-6 text-xl text-_white ">
           Popular Movies
         </h2>
         <Slider

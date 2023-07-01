@@ -20,3 +20,23 @@ export interface SingleActorProps {
     crew: any;
   };
 }
+
+export interface SingleTrendingPersonProp {
+  adult: boolean;
+  id: number;
+  name: string;
+  original_name: string;
+  media_type: string;
+  popularity: number;
+  gender: number;
+  known_for_department: string;
+  profile_path: string;
+  known_for: any;
+}
+
+export interface TrendingPersonProps {
+  page: number;
+  results: SingleTrendingPersonProp[];
+  total_pages: number;
+  total_results: number;
+}

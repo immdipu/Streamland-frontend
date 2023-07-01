@@ -12,7 +12,6 @@ interface dataProps {
 }
 
 const CarouselContainer: React.FC<dataProps> = ({ data }) => {
-  console.log(data);
   return (
     <Carousel
       showThumbs={false}

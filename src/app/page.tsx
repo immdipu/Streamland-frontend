@@ -1,7 +1,15 @@
 import CarouselContainer from "./component/carousel/CarouselContainer";
 import { getTrendingListResponse } from "@/types/types";
-import { NowPlaying, TrendingMovies, ContinueWatch } from "./component";
+import {
+  NowPlaying,
+  TrendingMovies,
+  ContinueWatch,
+  TrendingPerson,
+} from "./component";
 import { Metadata } from "next";
+
+import { Apis } from "./tmdbApi/TmdbApi";
+import { Suspense } from "react";
 
 export const metadata: Metadata = {
   title: "Cinemaa | Home",
@@ -20,6 +28,7 @@ async function getTrendingList() {
 export default async function Home() {
   const res = await getTrendingList();
   const data: getTrendingListResponse[] = res.results;
+  const trendingPerson = Apis.TrendingPerson();
   return (
     <div className="bg-_black_bg pt-20">
       {data ? (
@@ -35,6 +44,11 @@ export default async function Home() {
         </div>
         <div>
           <NowPlaying />
+        </div>
+        <div>
+          <Suspense fallback={<div>Loading...</div>}>
+            <TrendingPerson data={trendingPerson} />
+          </Suspense>
         </div>
         <div>
           <TrendingMovies />
