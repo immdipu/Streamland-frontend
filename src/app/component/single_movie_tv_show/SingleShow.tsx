@@ -144,9 +144,9 @@ const SingleShow: React.FC<SingleShowProps> = ({
                   tooltip="watch Trailer"
                   width={"1/2"}
                   buttonElement={
-                    <button className="text-xs ml-1 hover:border-opacity-80 duration-150 ease-in transition-opacity border-_light_white border-opacity-30 text-_light_white border px-2 py-1 font-light rounded-md">
+                    <p className="text-xs ml-1 hover:border-opacity-80 duration-150 ease-in transition-opacity border-_light_white border-opacity-30 text-_light_white border px-2 py-1 font-light rounded-md">
                       Watch Trailer
-                    </button>
+                    </p>
                   }
                   data={<div className="h-80">{Trailer}</div>}
                 />

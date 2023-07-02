@@ -172,7 +172,7 @@ const SeeMoreModal: React.FC<seeMoreModal> = ({
                     {created_by?.map((item) => {
                       return (
                         <>
-                          <ListItems>
+                          <ListItems key={item.id}>
                             <div className="flex gap-3 items-center">
                               <div className="w-12">
                                 <Images
@@ -218,7 +218,7 @@ const SeeMoreModal: React.FC<seeMoreModal> = ({
                     {networks?.map((item) => {
                       return (
                         <>
-                          <ListItems>
+                          <ListItems key={item.id}>
                             <div className="flex gap-3 items-center">
                               <div className="w-12">
                                 <Images
@@ -257,7 +257,10 @@ const SeeMoreModal: React.FC<seeMoreModal> = ({
                       {spoken_languages.map((item) => {
                         return (
                           <>
-                            <p className="text-xs text-_light_white">
+                            <p
+                              className="text-xs text-_light_white"
+                              key={item.name}
+                            >
                               {item.name}
                             </p>
                           </>
