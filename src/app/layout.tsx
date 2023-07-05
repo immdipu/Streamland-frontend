@@ -2,10 +2,9 @@ import "./globals.css";
 import { Inter } from "next/font/google";
 import Providers from "@/context/GlobalProvider";
 import Sidebar from "./component/sidenav/Sidebar";
-import Topnav from "./component/topnav/Topnav";
-import { Toaster } from "react-hot-toast";
 import ProgressBar from "./component/progressbar/ProgressBar";
 const inter = Inter({ subsets: ["latin"] });
+import { Analytics } from "@vercel/analytics/react";
 
 export const metadata = {
   title: "Cinemaa",
@@ -30,7 +29,10 @@ export default function RootLayout({
           <div>
             <ProgressBar />
             <Sidebar />
-            <section className="pl-56 max-md:pl-0">{children}</section>
+            <section className="pl-56 max-md:pl-0">
+              {children}
+              <Analytics />
+            </section>
           </div>
         </Providers>
       </body>
