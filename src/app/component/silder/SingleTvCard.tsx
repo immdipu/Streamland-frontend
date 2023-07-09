@@ -20,7 +20,7 @@ const SingleTvCard: React.FC<singleTVShowProps> = ({
 }) => {
   return (
     <Link
-      href={`tv/${id}`}
+      href={`/tv/${id}`}
       className=" rounded-lg flex-grow-0 w-36 flex-shrink-0"
       prefetch={false}
     >

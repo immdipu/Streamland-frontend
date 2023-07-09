@@ -16,7 +16,7 @@ const SingleCastCard: React.FC<castProps> = ({
   return (
     <>
       <Link
-        href={`person/${id}`}
+        href={`/person/${id}`}
         className=" rounded-lg flex-grow-0 w-36 flex-shrink-0 "
         prefetch={false}
       >

@@ -26,7 +26,7 @@ const SearchCard: React.FC<serachItemProps> = ({
   return (
     <>
       <Link
-        href={`${media_type === "movie" ? "movie" : ""}${
+        href={`/${media_type === "movie" ? "movie" : ""}${
           media_type === "tv" ? "tv" : ""
         }${media_type === "person" ? "person" : ""}/${id}`}
         className=" rounded-lg flex-grow-0 w-36 flex-shrink-0"

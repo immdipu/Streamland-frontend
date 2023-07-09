@@ -27,7 +27,7 @@ const SingleCard: React.FC<NowPlayingResponse> = ({
 }) => {
   return (
     <Link
-      href={`movie/${id}`}
+      href={`/movie/${id}`}
       className=" rounded-lg flex-grow-0 w-36 flex-shrink-0"
       prefetch={false}
     >

@@ -135,7 +135,7 @@ const Seasons = ({ seasons }: { seasons?: seasonsProps[] }) => {
           {seasons?.map((item) => {
             return (
               <Link
-                href={`tv/${params.id}/seasons?s=${item.season_number}&e=${item.episode_count}`}
+                href={`/tv/${params.id}/seasons?s=${item.season_number}&e=${item.episode_count}`}
                 key={item.id}
                 className={clsx(
                   " text-_black_bg text-center py-1 font-medium px-2 rounded-md min-w-[35px] hover:text-_sidenav_bg hover:bg-_blue duration-200 transition-all ease-linear hover:shadow-lg",
