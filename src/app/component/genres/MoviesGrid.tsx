@@ -142,11 +142,11 @@ const MoviesGrid: React.FC<MovieGridTypes> = ({ genre }) => {
       if (
         containerRef.current &&
         containerRef.current.getBoundingClientRect().bottom <=
-          window.innerHeight
+          window.innerHeight + 10
       ) {
-        const nextPage = currentPageRef.current + 1; // Calculate the next page number using the ref
+        const nextPage = currentPageRef.current + 1;
         fetchNextPage(nextPage);
-        currentPageRef.current = nextPage; // Update the ref with the new page number
+        currentPageRef.current = nextPage;
       }
     };
 
@@ -174,7 +174,7 @@ const MoviesGrid: React.FC<MovieGridTypes> = ({ genre }) => {
   return (
     <div style={{ overflow: "auto" }} ref={containerRef}>
       {data && data.length > 0 ? (
-        <div className="pl-16 mt-16 h-full grid gap-y-9 grid-cols-[repeat(auto-fit,minmax(167px,1fr))]">
+        <div className="pl-16 mt-16 h-full grid gap-y-9 max-md:pl-1 max-md:grid-cols-smallAutoFit max-md:justify-center max-md:mb-16 grid-cols-[repeat(auto-fit,minmax(167px,1fr))]">
           {data.map((item) => {
             if (genre === "MOVIE") {
               return <SingleCard key={item.id} {...item} />;

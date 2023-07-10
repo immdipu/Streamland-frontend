@@ -9,6 +9,7 @@ module.exports = {
     extend: {
       gridTemplateColumns: {
         autoFit: "repeat(auto-fit, minmax(160px, 1fr))",
+        smallAutoFit: "repeat(auto-fit, minmax(127px, 127px))",
       },
 
       fontFamily: {
