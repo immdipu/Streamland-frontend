@@ -4,6 +4,7 @@ import Image from "next/image";
 import fallbackSrc from "@/assets/logo.png";
 import { StaticImageData } from "next/image";
 import failedImage from "@/assets/cinemaaFailedImage.png";
+import clsx from "clsx";
 
 interface ImagesProps {
   src: string;
@@ -14,6 +15,7 @@ interface ImagesProps {
   Imageheight?: number | "full";
   rounded?: string;
   objectFit?: "cover" | "contain";
+  trendingPerson?: boolean;
 }
 
 const toBase64 = (str: string) =>
@@ -28,6 +30,7 @@ const Images: React.FC<ImagesProps> = ({
   ImageWidth = 36,
   Imageheight = 210,
   rounded = "lg",
+  trendingPerson = false,
   objectFit = "cover",
 }) => {
   const [imgSrc, setImgSrc] = useState<string | StaticImageData>(src);
@@ -48,11 +51,12 @@ const Images: React.FC<ImagesProps> = ({
           console.log("error occured");
           setImgSrc(failedImage);
         }}
-        style={{ objectFit: `${objectFit}`, height: `${Imageheight}px` }}
-        className={
-          "select-none hover:scale-125  transition-transform duration-150 ease-in " +
-          `w-${ImageWidth} rounded-${rounded} `
-        }
+        style={{ objectFit: `${objectFit}` }}
+        className={clsx(
+          "select-none hover:scale-125 max-md:w-28  transition-transform duration-150 ease-in ",
+          `w-${ImageWidth} h-[${Imageheight}px] rounded-${rounded} `,
+          trendingPerson ? "max-md:h-28" : "max-md:h-36"
+        )}
         placeholder="blur"
         blurDataURL={`data:image/svg+xml;base64,${toBase64(failedImage.src)}`}
       />

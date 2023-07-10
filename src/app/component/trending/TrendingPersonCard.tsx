@@ -17,7 +17,7 @@ const TrendingPersonCard: React.FC<SingleTrendingPersonProp> = ({
 }) => {
   return (
     <Link href={`/person/${id}`} prefetch={false} className="block">
-      <div className="w-36 h-36 rounded-full ">
+      <div className="w-36 max-md:w-28 max-md:h-28 h-36 rounded-full ">
         <Images
           src={`https://image.tmdb.org/t/p/w200/${profile_path}`}
           height={200}
@@ -26,11 +26,12 @@ const TrendingPersonCard: React.FC<SingleTrendingPersonProp> = ({
           ImageWidth={"full"}
           Imageheight={144}
           rounded="full"
+          trendingPerson={true}
         />
       </div>
       <h3
         id={`person${id}`}
-        className="text-center mt-3 w-36 overflow-hidden text-ellipsis"
+        className="text-center mt-3 w-36 max-md:w-28 max-md:text-xs overflow-hidden text-ellipsis"
       >
         {original_name}
       </h3>

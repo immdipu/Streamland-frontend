@@ -37,6 +37,9 @@ module.exports = {
         _genre_chip_bg: "#2b2b2b",
         _show_title: "#e2e2e2",
       },
+      fontSize: {
+        xxs: "8px",
+      },
     },
   },
   plugins: [],
