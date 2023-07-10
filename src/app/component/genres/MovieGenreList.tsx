@@ -31,7 +31,7 @@ const MovieGenreList: React.FC<MovieGenreListTypes> = ({ genre }) => {
       <div className="">
         {genre === "MOVIE" ? (
           <>
-            <section className="flex flex-wrap max-md:justify-center gap-3 max-md:gap-2 pl-16 max-md:pl-1  mt-6">
+            <section className="flex flex-wrap max-md:justify-center gap-3  max-md:gap-2 pl-16 max-md:pl-1  mt-6">
               <Link
                 href={"/movie/genre/?tab=trendingmovie"}
                 className={clsx(
@@ -96,11 +96,11 @@ const MovieGenreList: React.FC<MovieGenreListTypes> = ({ genre }) => {
           </>
         ) : (
           <>
-            <section className="flex flex-wrap gap-3 pl-16  mt-6">
+            <section className="flex flex-wrap max-md:pl-1 max-md:gap-2 max-md:justify-center  gap-3 pl-16  mt-6">
               <Link
                 href={`/tv/genre/?tab=trendingtv`}
                 className={clsx(
-                  " px-2 text-sm py-1 cursor-pointer hover:text-_sidenav_bg hover:bg-_blue duration-200 transition-all ease-linear hover:shadow-lg rounded-lg",
+                  " px-2 text-sm py-1 cursor-pointer max-md:text-xs hover:text-_sidenav_bg hover:bg-_blue duration-200 transition-all ease-linear hover:shadow-lg rounded-lg",
                   activeTab === "trendingtv"
                     ? "bg-_blue text-_sidenav_bg"
                     : "bg-_genre_chip_bg"
@@ -111,7 +111,7 @@ const MovieGenreList: React.FC<MovieGenreListTypes> = ({ genre }) => {
               <Link
                 href={`/tv/genre/?tab=airingtoday`}
                 className={clsx(
-                  " px-2 text-sm py-1 cursor-pointer hover:text-_sidenav_bg hover:bg-_blue duration-200 transition-all ease-linear hover:shadow-lg rounded-lg",
+                  " px-2 text-sm py-1 cursor-pointer max-md:text-xs hover:text-_sidenav_bg hover:bg-_blue duration-200 transition-all ease-linear hover:shadow-lg rounded-lg",
                   activeTab === "airingtoday"
                     ? "bg-_blue text-_sidenav_bg"
                     : "bg-_genre_chip_bg"
@@ -122,7 +122,7 @@ const MovieGenreList: React.FC<MovieGenreListTypes> = ({ genre }) => {
               <Link
                 href={`/tv/genre/?tab=ontheair`}
                 className={clsx(
-                  " px-2 text-sm py-1 cursor-pointer hover:text-_sidenav_bg hover:bg-_blue duration-200 transition-all ease-linear hover:shadow-lg rounded-lg",
+                  " px-2 text-sm py-1 cursor-pointer max-md:text-xs hover:text-_sidenav_bg hover:bg-_blue duration-200 transition-all ease-linear hover:shadow-lg rounded-lg",
                   activeTab === "ontheair"
                     ? "bg-_blue text-_sidenav_bg"
                     : "bg-_genre_chip_bg"
@@ -133,7 +133,7 @@ const MovieGenreList: React.FC<MovieGenreListTypes> = ({ genre }) => {
               <Link
                 href={`/tv/genre/?tab=populartv`}
                 className={clsx(
-                  " px-2 text-sm py-1 cursor-pointer hover:text-_sidenav_bg hover:bg-_blue duration-200 transition-all ease-linear hover:shadow-lg rounded-lg",
+                  " px-2 text-sm py-1 cursor-pointer max-md:text-xs hover:text-_sidenav_bg hover:bg-_blue duration-200 transition-all ease-linear hover:shadow-lg rounded-lg",
                   activeTab === "populartv"
                     ? "bg-_blue text-_sidenav_bg"
                     : "bg-_genre_chip_bg"
@@ -144,7 +144,7 @@ const MovieGenreList: React.FC<MovieGenreListTypes> = ({ genre }) => {
               <Link
                 href={`/tv/genre/?tab=topratedtv`}
                 className={clsx(
-                  " px-2 text-sm py-1 cursor-pointer hover:text-_sidenav_bg hover:bg-_blue duration-200 transition-all ease-linear hover:shadow-lg rounded-lg",
+                  " px-2 text-sm py-1 cursor-pointer max-md:text-xs hover:text-_sidenav_bg hover:bg-_blue duration-200 transition-all ease-linear hover:shadow-lg rounded-lg",
                   activeTab === "topratedtv"
                     ? "bg-_blue text-_sidenav_bg"
                     : "bg-_genre_chip_bg"
@@ -153,13 +153,13 @@ const MovieGenreList: React.FC<MovieGenreListTypes> = ({ genre }) => {
                 Top Rated Show
               </Link>
             </section>
-            <section className="flex flex-wrap gap-3 pl-16 mt-4">
+            <section className="flex flex-wrap gap-3 max-md:pl-1 max-md:gap-2 max-md:justify-center pl-16 mt-4">
               {TvgenresList.map((item) => (
                 <Link
                   href={`/tv/genre/?tab=${item.id}`}
                   key={item.id}
                   className={clsx(
-                    " px-2 text-sm py-1 cursor-pointer hover:text-_sidenav_bg hover:bg-_blue duration-200 transition-all ease-linear hover:shadow-lg rounded-lg",
+                    " px-2 text-sm py-1 cursor-pointer max-md:text-xs hover:text-_sidenav_bg hover:bg-_blue duration-200 transition-all ease-linear hover:shadow-lg rounded-lg",
                     activeTab === item.id.toString()
                       ? "bg-_blue text-_sidenav_bg"
                       : "bg-_genre_chip_bg"
