@@ -8,7 +8,7 @@ export const metadata: Metadata = {
 
 const page = () => {
   return (
-    <div className="pt-20 bg-_black_bg">
+    <div className="pt-20 bg-_black_bg min-h-screen">
       <Search />
     </div>
   );

@@ -29,7 +29,7 @@ const SearchCard: React.FC<serachItemProps> = ({
         href={`/${media_type === "movie" ? "movie" : ""}${
           media_type === "tv" ? "tv" : ""
         }${media_type === "person" ? "person" : ""}/${id}`}
-        className=" rounded-lg flex-grow-0 w-36 flex-shrink-0"
+        className=" rounded-lg flex-grow-0 max-md:w-28 w-36 flex-shrink-0"
         prefetch={false}
       >
         {poster_path ? (

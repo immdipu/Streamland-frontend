@@ -7,7 +7,7 @@ import SmallLoader from "../loader/SmallLoader";
 
 const Search = () => {
   const searchProvider = useContext(SearchContext);
-  const [searchData, setSearchData] = useState<serachItemProps[]>([]);
+  const [searchData, setSearchData] = useState<serachItemProps[] | null>(null);
   const [loading, setLoading] = useState(false);
   const [searchTimer, setSearchTimer] = useState<any>(null);
   useEffect(() => {
@@ -53,7 +53,7 @@ const Search = () => {
     <div className="bg-_black_bg pt-7 text-_white">
       {searchProvider?.searchTerm.trim() !== "" && (
         <div>
-          <h2 className="px-16">
+          <h2 className="px-16 max-md:pl-1">
             Search Results for :{" "}
             <span className="text-xl capitalize">
               {searchProvider?.searchTerm}
@@ -66,16 +66,28 @@ const Search = () => {
           <SmallLoader size={60} />
         </section>
       ) : (
-        <section className="grid w-full py-7 gap-y-9 grid-cols-autoFit px-16">
-          {searchData.length > 0 ? (
+        <section className="flex w-full py-7  gap-9 max-md:gap-3 flex-wrap pl-16 max-md:pl-1 pr-4 max-md:pr-1">
+          {searchData ? (
             <>
-              {searchData.map((item) => (
-                <SearchCard key={item.id} {...item} />
-              ))}
+              {searchData.length > 0 ? (
+                <>
+                  {searchData.map((item) => (
+                    <SearchCard key={item.id} {...item} />
+                  ))}
+                </>
+              ) : (
+                <>
+                  <section className="bg-_black_bg min-h-screen  w-full grid place-content-center">
+                    <h3 className="text-_light_white text-lg tracking-wide">
+                      No Result found
+                    </h3>
+                  </section>
+                </>
+              )}
             </>
           ) : (
             <>
-              <section className="bg-_black_bg min-h-screen grid place-content-center">
+              <section className="bg-_black_bg w-full  min-h-[74vh] overflow-hidden grid place-content-center">
                 <h3 className="text-_light_white text-lg tracking-wide">
                   Search Movies, TV shows, Actors
                 </h3>
