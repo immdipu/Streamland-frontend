@@ -7,7 +7,7 @@ import { DesktopSingleComponentProps } from "@/types/types";
 const Sidebarcomponent = () => {
   const routes = useSidebarRoutes();
   return (
-    <div>
+    <div className="relative">
       <h1 className="text-_white font-Helvetica text-2xl font-bold tracking-wider pl-7 mt-8">
         CINEMAA
       </h1>

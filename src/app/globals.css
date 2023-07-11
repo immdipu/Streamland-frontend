@@ -62,3 +62,38 @@ axis-horizontal,
         opacity: 1
     }
 }
+
+
+.hideNotifi {
+    -webkit-animation: hideNotifi .5s cubic-bezier(.55, .085, .68, .53) both;
+    animation: hideNotifi .5s cubic-bezier(.55, .085, .68, .53) both
+}
+
+
+@-webkit-keyframes hideNotifi {
+    0% {
+        -webkit-transform: translateY(0);
+        transform: translateY(0);
+        opacity: 1
+    }
+
+    100% {
+        -webkit-transform: translateY(1000px);
+        transform: translateY(1000px);
+        opacity: 0
+    }
+}
+
+@keyframes hideNotifi {
+    0% {
+        -webkit-transform: translateY(0);
+        transform: translateY(0);
+        opacity: 1
+    }
+
+    100% {
+        -webkit-transform: translateY(1000px);
+        transform: translateY(1000px);
+        opacity: 0
+    }
+}
