@@ -43,7 +43,6 @@ const Images: React.FC<ImagesProps> = ({
         alt={alt ?? "poster"}
         onLoadingComplete={(result) => {
           if (result.naturalWidth === 0) {
-            // Broken image
             setImgSrc(failedImage);
           }
         }}
@@ -51,12 +50,12 @@ const Images: React.FC<ImagesProps> = ({
           console.log("error occured");
           setImgSrc(failedImage);
         }}
-        style={{ objectFit: `${objectFit}` }}
         className={clsx(
-          "select-none hover:scale-125 max-md:w-28  transition-transform duration-150 ease-in ",
-          `w-${ImageWidth} h-[${Imageheight}px] rounded-${rounded} `,
-          trendingPerson ? "max-md:h-28" : "max-md:h-36"
+          "select-none hover:scale-125 max-md:w-28 transition-transform duration-150 ease-in ",
+          `w-${ImageWidth} rounded-${rounded} `,
+          trendingPerson ? "max-md:!h-28 h-36" : "max-md:!h-36"
         )}
+        style={{ objectFit: `${objectFit}`, height: `${Imageheight}px` }}
         placeholder="blur"
         blurDataURL={`data:image/svg+xml;base64,${toBase64(failedImage.src)}`}
       />

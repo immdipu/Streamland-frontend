@@ -67,9 +67,9 @@ const SingleShow: React.FC<SingleShowProps> = ({
         />
         <div className="absolute bottom-0 bg-gradient-to-t from-_black_bg inset-x-0 h-40" />
       </div>
-      <section className="bg-_black_bg pb-7 -translate-y-12 rounded-t-[45px]">
+      <section className="bg-_black_bg pb-7 relative -translate-y-12 rounded-t-[45px]">
         <div>
-          <div className="w-52 h-72 absolute -translate-y-36 max-md:translate-x-32 translate-x-16">
+          <div className="w-52 max-md:hidden block h-72 absolute -translate-y-36 max-md:translate-x-32 translate-x-16">
             <Images
               src={`https://image.tmdb.org/t/p/w200/${poster_path}`}
               width={500}
@@ -80,6 +80,20 @@ const SingleShow: React.FC<SingleShowProps> = ({
               rounded="2xl"
             />
           </div>
+
+          <div className="absolute -top-40 left-0 right-0 w-full flex justify-center">
+            <Image
+              src={`https://image.tmdb.org/t/p/w500/${poster_path}`}
+              width={1000}
+              height={1000}
+              quality={100}
+              priority
+              alt={title ?? "poster"}
+              style={{ objectFit: "cover" }}
+              className=" w-56 h-80 rounded-2xl hidden max-md:block select-none object-top"
+            />
+          </div>
+
           <section className="pl-72  max-md:justify-center  max-md:pl-0 max-md:flex-col   max-md:pt-44 h-60 max-md:h-full py-6 flex justify-between">
             <div>
               <h2 className="text-4xl max-md:text-center text-_show_title font-bold tracking-wide">
