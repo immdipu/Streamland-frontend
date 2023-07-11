@@ -34,9 +34,9 @@ const Episode: React.FC<EpisodeProps> = ({
         setCurrentEpisode(episode_number);
         handleScrollToTop();
       }}
-      className="flex gap-10 cursor-pointer bg-_dark_blue bg-opacity-50 mx-6 ml-14 rounded-md"
+      className="flex gap-10 max-md:gap-2 cursor-pointer bg-_dark_blue bg-opacity-50 mx-6  max-md:mx-0 ml-14 max-md:ml-0 rounded-md"
     >
-      <div className="w-44 flex-shrink-0 ">
+      <div className="w-44 max-md:w-32 flex-shrink-0">
         <Images
           src={`https://image.tmdb.org/t/p/w500/${still_path}`}
           width={200}
@@ -47,13 +47,12 @@ const Episode: React.FC<EpisodeProps> = ({
         />
       </div>
       <section>
-        <section className="pr-14 flex flex-col gap-3">
-          <h2 className="text-_white mt-4 font-medium text-xl">
+        <section className="pr-14 max-md:pr-1  flex flex-col gap-3">
+          <h2 className="text-_white mt-4 max-md:text-base font-medium text-xl">
             <span className="font-semibold">{episode_number}.</span> {name}
           </h2>
-          <p className="text-_light_white text-sm pl-2 font-light h-1/2 text-ellipsis overflow-hidden ">
+          <p className="text-_light_white max-md:text-xs text-sm pl-2 font-light h-1/2 text-ellipsis overflow-hidden ">
             {overview}
-            {id}
           </p>
         </section>
       </section>

@@ -131,7 +131,7 @@ const Seasons = ({ seasons }: { seasons?: seasonsProps[] }) => {
           />
         </div>
 
-        <section className="flex flex-wrap gap-3 py-5 pl-14 mt-10">
+        <section className="flex flex-wrap gap-3 max-md:pl-1 py-5 pl-14 mt-10">
           {seasons?.map((item) => {
             return (
               <Link
