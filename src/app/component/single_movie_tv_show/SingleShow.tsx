@@ -81,7 +81,7 @@ const SingleShow: React.FC<SingleShowProps> = ({
             />
           </div>
 
-          <div className="absolute -top-40 left-0 right-0 w-full flex justify-center">
+          <div className="absolute -top-40 hidden  left-0 bg-transparent right-0 w-full max-md:flex justify-center">
             <Image
               src={`https://image.tmdb.org/t/p/w500/${poster_path}`}
               width={1000}
