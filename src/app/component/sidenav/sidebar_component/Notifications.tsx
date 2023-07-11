@@ -24,7 +24,7 @@ const Notifications = () => {
           <span className="bg-green-500   font-semibold text-center rounded-full block w-6 h-6">
             {data.length}
           </span>
-          <span className="block ">updates</span>
+          <span className="block font-semibold tracking-wide">Updates</span>
         </div>
         <div className="flex flex-col gap-1 pr-2 pb-5 ">
           {data.map((item, index) => {
