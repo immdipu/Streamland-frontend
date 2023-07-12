@@ -1,15 +1,11 @@
 import React from "react";
-import Images from "../ImageComponent/Image";
-import Link from "next/link";
-import { useParams } from "next/navigation";
 import { singleEpisodeTypes } from "@/types/types";
-import { SetStateAction } from "react";
+import { useSearchParams, useParams } from "next/navigation";
+import { useRouter } from "next/navigation";
+import clsx from "clsx";
+import Tooltip from "@mui/material/Tooltip";
 
-interface EpisodeProps extends singleEpisodeTypes {
-  setCurrentEpisode: React.Dispatch<SetStateAction<number>>;
-}
-
-const Episode: React.FC<EpisodeProps> = ({
+const Episode: React.FC<singleEpisodeTypes> = ({
   id,
   still_path,
   episode_number,
@@ -22,40 +18,42 @@ const Episode: React.FC<EpisodeProps> = ({
   overview,
   production_code,
   vote_count,
-  setCurrentEpisode,
 }) => {
-  const handleScrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  };
+  const params = useParams();
+  const searchParams = useSearchParams();
+  const TotalEpisodes = searchParams.get("e");
+  const currentEpisode = searchParams.get("ce");
 
+  const router = useRouter();
   return (
     <div
       onClick={() => {
-        setCurrentEpisode(episode_number);
-        handleScrollToTop();
+        router.push(
+          `/tv/${params.id}/seasons?s=${season_number}&e=${TotalEpisodes}&ce=${episode_number}`
+        );
       }}
-      className="flex gap-10 max-md:gap-2 cursor-pointer bg-_dark_blue bg-opacity-50 mx-6  max-md:mx-0 ml-14 max-md:ml-0 rounded-md"
+      className={clsx(
+        "flex gap-2 cursor-pointer rounded-3xl px-5 py-[6px]",
+        currentEpisode === episode_number.toString()
+          ? "bg-_blue bg-opacity-50 font-normal text-white"
+          : "bg-_black_bg hover:bg-neutral-700"
+      )}
     >
-      <div className="w-44 max-md:w-32 flex-shrink-0">
-        <Images
-          src={`https://image.tmdb.org/t/p/w500/${still_path}`}
-          width={200}
-          height={200}
-          Imageheight={130}
-          alt={name}
-          ImageWidth={"full"}
-        />
-      </div>
-      <section>
-        <section className="pr-14 max-md:pr-1  flex flex-col gap-3">
-          <h2 className="text-_white mt-4 max-md:text-base font-medium text-xl">
-            <span className="font-semibold">{episode_number}.</span> {name}
-          </h2>
-          <p className="text-_light_white max-md:text-xs text-sm pl-2 font-light h-1/2 text-ellipsis overflow-hidden ">
-            {overview}
-          </p>
-        </section>
-      </section>
+      <p className=" flex-shrink-0 text-neutral-300 font-normal">
+        Episode {episode_number}:
+      </p>
+      <Tooltip title={name} placement="bottom">
+        <p
+          className={clsx(
+            "whitespace-nowrap overflow-ellipsis block font-light  text-sm overflow-hidden",
+            currentEpisode === episode_number.toString()
+              ? " text-white"
+              : "text-neutral-400"
+          )}
+        >
+          {name}
+        </p>
+      </Tooltip>
     </div>
   );
 };

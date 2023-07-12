@@ -97,3 +97,21 @@ axis-horizontal,
         opacity: 0
     }
 }
+
+
+.seasonScroll::-webkit-scrollbar {
+    width: 5px;
+
+}
+
+.seasonScroll::-webkit-scrollbar-track {
+    background: #3e3b3bc5;
+    border-radius: 0px 20px 20px 0px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.seasonScroll::-webkit-scrollbar-thumb {
+    background: #aeaeae;
+    border-radius: 20px;
+}

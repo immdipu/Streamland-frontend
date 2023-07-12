@@ -1,10 +1,13 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { useSearchParams, useParams } from "next/navigation";
 import clsx from "clsx";
 import Episode from "./Episodes";
 import { seasonsProps, singleEpisodeTypes } from "@/types/types";
+import { AiFillCaretDown } from "react-icons/ai";
+import { IconBaseProps } from "react-icons/lib";
+import { useRouter } from "next/navigation";
 
 const getEpisode = async function getSingleTv(
   tv_id: string,
@@ -70,33 +73,50 @@ const Seasons = ({ seasons }: { seasons?: seasonsProps[] }) => {
   const params = useParams();
   const searchParams = useSearchParams();
   const SeasonId = searchParams.get("s");
-  const Episodes = searchParams.get("e");
-  const [currentEpisode, setCurrentEpisode] = useState(1);
+  const TotalEpisodes = searchParams.get("e");
+  const currentEpisode = searchParams.get("ce");
+  const [showSeasondropdown, setShowSeasondropdown] = useState(false);
+  const Seasondropdown = useRef<HTMLElement>(null);
+  const SeasonBtn = useRef<HTMLElement>(null);
+  const SeasonBtn2 = useRef<HTMLDivElement>(null);
+  const SeasonBtn4 = useRef<HTMLDivElement>(null);
+  const SeasonBtn3 = useRef<HTMLParagraphElement>(null);
   const [showOverlay, setShowOverlay] = useState(true);
-  const [activeSeason, setActiveSeason] = useState(SeasonId ?? "1");
-  const [totalEpi, setTotalEpi] = useState(
-    Episodes ? parseFloat(Episodes) : seasons![0].episode_count
-  );
+
+  const router = useRouter();
 
   const [allEpisodes, setAllEpisodes] = useState<singleEpisodeTypes[] | null>(
     null
   );
 
   useEffect(() => {
-    setActiveSeason(SeasonId ?? seasons![0].season_number.toString());
-    setTotalEpi(Episodes ? parseFloat(Episodes) : seasons![0].episode_count);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [SeasonId]);
+    const handleOutSideClick = (e: Event) => {
+      if (
+        showSeasondropdown &&
+        e.target !== Seasondropdown.current &&
+        e.target !== SeasonBtn.current &&
+        e.target !== SeasonBtn2.current &&
+        e.target !== SeasonBtn3.current &&
+        e.target !== SeasonBtn4.current
+      ) {
+        setShowSeasondropdown(false);
+      }
+    };
+    window.addEventListener("click", handleOutSideClick);
+    return () => {
+      window.removeEventListener("click", handleOutSideClick);
+    };
+  }, [showSeasondropdown]);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const allEpisodes = await getAllEpisodes(
           params.id,
-          activeSeason,
-          totalEpi
+          SeasonId ? SeasonId : "1",
+          TotalEpisodes ? parseFloat(TotalEpisodes) : seasons![0].episode_count
         );
-        console.log(allEpisodes);
+
         setAllEpisodes(allEpisodes);
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -105,7 +125,7 @@ const Seasons = ({ seasons }: { seasons?: seasonsProps[] }) => {
 
     fetchData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [activeSeason, totalEpi]);
+  }, [SeasonId, TotalEpisodes]);
 
   const HanldeClick = () => {
     localStorage.setItem("tvId", params.id);
@@ -115,56 +135,88 @@ const Seasons = ({ seasons }: { seasons?: seasonsProps[] }) => {
   return (
     <div>
       <>
-        <div className="h-[35rem] relative  py-6">
-          {showOverlay && (
-            <div
-              className="absolute inset-0 bg-black opacity-0"
-              onClick={HanldeClick}
-            ></div>
-          )}
-          <iframe
-            src={`https://autoembed.to/tv/tmdb/${params.id}-${SeasonId}-${currentEpisode}`}
-            width="100%"
-            height="100%"
-            allowFullScreen
-            className="full"
-          />
+        <div className="flex h-[35rem] max-md:h-full max-md:flex-col">
+          <div className=" relative w-full py-6 max-md:h-full max-md:flex-shrink-0">
+            {showOverlay && (
+              <div
+                className="absolute inset-0  bg-black opacity-0"
+                onClick={HanldeClick}
+              ></div>
+            )}
+            <iframe
+              src={`https://autoembed.to/tv/tmdb/${params.id}-${
+                SeasonId ? SeasonId : 1
+              }-${currentEpisode ? currentEpisode : 1}`}
+              width="100%"
+              height="100%"
+              allowFullScreen
+              className="full"
+            />
+          </div>
+          <div className=" w-[450px] max-md:w-full  py-6 px-3 ">
+            <section className="bg-neutral-800 h-full overflow-y-auto rounded-3xl py-5 px-4">
+              <section
+                className="flex items-center relative  bg-_black_bg hover:bg-opacity-60 cursor-pointer justify-center rounded-3xl"
+                onClick={() => setShowSeasondropdown(!showSeasondropdown)}
+                ref={SeasonBtn}
+              >
+                <div
+                  className="flex items-center gap-2 py-1 select-none"
+                  ref={SeasonBtn2}
+                >
+                  <p className="text-neutral-300 font-normal" ref={SeasonBtn3}>
+                    Season {SeasonId ?? seasons![0].season_number}
+                  </p>
+                  <div
+                    className="border-transparent border-[6px] border-t-neutral-400 w-0 h-0 mt-3"
+                    ref={SeasonBtn4}
+                  />
+                </div>
+                {/* dropdown */}
+                <section
+                  className={clsx(
+                    "bg-_black_bg absolute mt-2 top-8 w-full overflow-y-auto duration-200 transition-all ease-in-out  flex flex-col  rounded-3xl seasonScroll",
+                    showSeasondropdown ? "max-h-60 py-3 px-3" : "p-0 max-h-0"
+                  )}
+                  ref={Seasondropdown}
+                >
+                  {seasons?.map((item) => {
+                    return (
+                      <div
+                        key={item.id}
+                        onClick={() => {
+                          router.push(
+                            `/tv/${params.id}/seasons?s=${item.season_number}&e=${item.episode_count}&ce=1`
+                          );
+                        }}
+                        className={clsx(
+                          " text-neutral-400 py-1 text-center font-light  rounded-3xl  px-2 hover:text-_sidenav_bg hover:bg-neutral-800  duration-200 transition-all ease-linear hover:shadow-lg",
+                          SeasonId === item.season_number.toString()
+                            ? "bg-_blue bg-opacity-50 font-normal text-white"
+                            : "bg-inherit"
+                        )}
+                      >
+                        {item.name}
+                      </div>
+                    );
+                  })}
+                </section>
+              </section>
+              {/* Episodes */}
+              <section className="w-80 max-md:w-full  h-[26rem] mt-4 seasonScroll overflow-y-auto flex gap-1 flex-col">
+                {allEpisodes &&
+                  allEpisodes.map((item) => {
+                    if (item === null) return;
+                    return <Episode {...item} key={item.id} />;
+                  })}
+              </section>
+            </section>
+          </div>
         </div>
 
-        <section className="flex flex-wrap gap-3 max-md:pl-1 py-5 pl-14 mt-10">
-          {seasons?.map((item) => {
-            return (
-              <Link
-                href={`/tv/${params.id}/seasons?s=${item.season_number}&e=${item.episode_count}`}
-                key={item.id}
-                className={clsx(
-                  " text-_black_bg text-center py-1 font-medium px-2 rounded-md min-w-[35px] hover:text-_sidenav_bg hover:bg-_blue duration-200 transition-all ease-linear hover:shadow-lg",
-                  activeSeason === item.season_number.toString()
-                    ? "bg-_blue text-_sidenav_bg"
-                    : "bg-_sidenav_bg"
-                )}
-              >
-                {activeSeason === item.season_number.toString()
-                  ? `${item.name}`
-                  : `${item.season_number}`}
-              </Link>
-            );
-          })}
-        </section>
+        <section className="flex flex-wrap gap-3 max-md:pl-1 py-5 pl-14 mt-10"></section>
       </>
-      <section className="flex flex-col gap-5 pb-10 mt-10">
-        {allEpisodes &&
-          allEpisodes.map((item) => {
-            if (item === null) return;
-            return (
-              <Episode
-                setCurrentEpisode={setCurrentEpisode}
-                {...item}
-                key={item.id}
-              />
-            );
-          })}
-      </section>
+      <section className="flex flex-col gap-5 pb-10 mt-10"></section>
     </div>
   );
 };
