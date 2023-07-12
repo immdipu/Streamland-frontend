@@ -5,8 +5,7 @@ import { useSearchParams, useParams } from "next/navigation";
 import clsx from "clsx";
 import Episode from "./Episodes";
 import { seasonsProps, singleEpisodeTypes } from "@/types/types";
-import { AiFillCaretDown } from "react-icons/ai";
-import { IconBaseProps } from "react-icons/lib";
+
 import { useRouter } from "next/navigation";
 
 const getEpisode = async function getSingleTv(
