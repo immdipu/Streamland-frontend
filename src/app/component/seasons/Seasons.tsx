@@ -138,15 +138,15 @@ const Seasons = ({ seasons }: { seasons?: seasonsProps[] }) => {
         {SeasonId && currentEpisode && (
           <>
             <div className="flex gap-2 items-center mt-3">
-              <h3 className="w-fit pl-14 text-neutral-400 flex items-center text-lg font-medium gap-3">
+              <h3 className="w-fit pl-14 max-md:pl-2 max-md:text-sm text-neutral-400 flex items-center text-lg font-medium gap-3">
                 <SiVlcmediaplayer className="text-orange-400 " />
                 Now Playing :
               </h3>
               <div>
-                <span className="font-light">
+                <span className="font-light max-md:text-sm">
                   {parseInt(SeasonId) < 10 ? `S0${SeasonId}` : "S" + SeasonId}
                 </span>
-                <span className="font-light">
+                <span className="font-light max-md:text-sm">
                   {parseInt(currentEpisode) < 10
                     ? `e0${currentEpisode}`
                     : "e" + currentEpisode}
@@ -158,7 +158,7 @@ const Seasons = ({ seasons }: { seasons?: seasonsProps[] }) => {
       </div>
       <>
         <div className="flex h-[35rem] max-md:h-full max-md:flex-col">
-          <div className=" relative w-full py-6 max-md:h-full max-md:flex-shrink-0">
+          <div className=" relative w-full py-6 flex-grow-1  max-md:h-[25rem] max-md:flex-shrink-0">
             {showOverlay && (
               <div
                 className="absolute inset-0  bg-black opacity-0"
@@ -172,7 +172,7 @@ const Seasons = ({ seasons }: { seasons?: seasonsProps[] }) => {
               width="100%"
               height="100%"
               allowFullScreen
-              className="full"
+              className="h-full full"
             />
           </div>
           <div className=" w-[450px] max-md:w-full  py-6 px-3 ">
