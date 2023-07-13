@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useSearchParams, useParams } from "next/navigation";
 import clsx from "clsx";
 import Episode from "./Episodes";
+import { SiVlcmediaplayer } from "react-icons/si";
 import { seasonsProps, singleEpisodeTypes } from "@/types/types";
 
 import { useRouter } from "next/navigation";
@@ -133,6 +134,28 @@ const Seasons = ({ seasons }: { seasons?: seasonsProps[] }) => {
 
   return (
     <div>
+      <div>
+        {SeasonId && currentEpisode && (
+          <>
+            <div className="flex gap-2 items-center mt-3">
+              <h3 className="w-fit pl-14 text-neutral-400 flex items-center text-lg font-medium gap-3">
+                <SiVlcmediaplayer className="text-orange-400 " />
+                Now Playing :
+              </h3>
+              <div>
+                <span className="font-light">
+                  {parseInt(SeasonId) < 10 ? `S0${SeasonId}` : "S" + SeasonId}
+                </span>
+                <span className="font-light">
+                  {parseInt(currentEpisode) < 10
+                    ? `e0${currentEpisode}`
+                    : "e" + currentEpisode}
+                </span>
+              </div>
+            </div>
+          </>
+        )}
+      </div>
       <>
         <div className="flex h-[35rem] max-md:h-full max-md:flex-col">
           <div className=" relative w-full py-6 max-md:h-full max-md:flex-shrink-0">
@@ -167,7 +190,7 @@ const Seasons = ({ seasons }: { seasons?: seasonsProps[] }) => {
                     Season {SeasonId ?? seasons![0].season_number}
                   </p>
                   <div
-                    className="border-transparent border-[6px] border-t-neutral-400 w-0 h-0 mt-3"
+                    className="border-transparent border-[6px] border-t-neutral-400 w-0 h-0 mt-2"
                     ref={SeasonBtn4}
                   />
                 </div>
