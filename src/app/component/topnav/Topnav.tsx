@@ -1,17 +1,21 @@
 "use client";
-import React from "react";
+import React, { useContext } from "react";
 import SearchStatic from "./SearchStatic";
 import { useRouter } from "next/navigation";
-import { BiArrowBack } from "react-icons/bi";
+import { BiArrowBack, BiMenuAltLeft } from "react-icons/bi";
 import clsx from "clsx";
+import IconButton from "@mui/material/IconButton";
+import { SearchContext } from "@/context/GlobalProvider";
+
 import { usePathname } from "next/navigation";
 
 const Topnav = () => {
   const router = useRouter();
   const pathname = usePathname();
+  const GlobalContext = useContext(SearchContext);
   return (
     <div
-      className="pl-56 max-md:pl-0  z-50 fixed bg-transparent
+      className="pl-56 max-md:pl-0 z-50 fixed bg-transparent
      inset-x-0 h-20 top-0"
     >
       <section className="backdrop-blur-md h-full flex items-center w-full px-5">
@@ -20,7 +24,7 @@ const Topnav = () => {
             router.back();
           }}
           className={clsx(
-            "mr-5",
+            "mr-5 max-md:hidden",
             pathname === "/"
               ? "opacity-0 pointer-events-none"
               : "opacity-100 pointer-events-auto"
@@ -28,6 +32,18 @@ const Topnav = () => {
         >
           <BiArrowBack className="text-2xl hover:text-_sidenav_bg duration-200 transition-colors ease-in-out text-_welcometext_lightblue" />
         </button>
+
+        <button
+          className={clsx("mr-5 hidden max-md:block")}
+          onClick={() =>
+            GlobalContext?.setShowSidebar(!GlobalContext.showSider)
+          }
+        >
+          <IconButton sx={{ color: "#7f8080" }}>
+            <BiMenuAltLeft className="text-2xl  hover:text-_sidenav_bg duration-200 transition-colors ease-in-out text-_welcometext_lightblue" />
+          </IconButton>
+        </button>
+
         <SearchStatic />
       </section>
     </div>

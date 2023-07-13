@@ -4,8 +4,15 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+    html {
+
+        -webkit-tap-highlight-color: transparent;
+
+    }
 
 
+}
 
 axis-horizontal,
 .carousel-root {
@@ -47,6 +54,7 @@ axis-horizontal,
         opacity: 1
     }
 }
+
 
 
 @keyframes slide-in-top {
