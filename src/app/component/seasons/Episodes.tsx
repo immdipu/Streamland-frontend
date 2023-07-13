@@ -33,7 +33,7 @@ const Episode: React.FC<singleEpisodeTypes> = ({
         );
       }}
       className={clsx(
-        "flex gap-2 cursor-pointer rounded-3xl px-5 py-[6px]",
+        "flex gap-2 cursor-pointer items-center rounded-3xl px-5 py-[6px]",
         currentEpisode === episode_number.toString()
           ? "bg-_blue bg-opacity-50 font-normal text-white"
           : "bg-_black_bg hover:bg-neutral-700"
