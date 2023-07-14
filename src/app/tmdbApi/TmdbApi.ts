@@ -1,3 +1,6 @@
+import axios from "axios";
+import { singleEpisodeTypes } from "@/types/types";
+
 export const Apis = {
   TrendingPerson: async () => {
     const res = await fetch(
@@ -140,5 +143,25 @@ export const Apis = {
       throw new Error("Failed to fetch data");
     }
     return res.json();
+  },
+
+  GetAllEpisodes: async (
+    tv_id: string,
+    currSea: string,
+    totalEpisodes: number
+  ) => {
+    const Episodes = [];
+
+    for (let i = 1; i <= totalEpisodes; i++) {
+      try {
+        const res = await axios.get(
+          `${process.env.NEXT_PUBLIC_BASE_URL}/3/tv/${tv_id}/season/${currSea}/episode/${i}?api_key=${process.env.NEXT_PUBLIC_API_KEY}`
+        );
+        Episodes.push(res.data);
+      } catch (error) {
+        Episodes.push(null);
+      }
+    }
+    return Episodes as singleEpisodeTypes[];
   },
 };

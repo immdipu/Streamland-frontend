@@ -8,6 +8,7 @@ import React, {
 import { Provider } from "react-redux";
 import { store } from "@/redux/store";
 import Topnav from "@/app/component/topnav/Topnav";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 interface SearchContextProps {
   searchTerm: string;
@@ -19,6 +20,8 @@ interface SearchContextProps {
 export const SearchContext = createContext<SearchContextProps | undefined>(
   undefined
 );
+
+const queryClient = new QueryClient();
 
 const getSearchResult = async (query: string) => {};
 const Providers = ({ children }: { children: React.ReactNode }) => {
@@ -34,10 +37,12 @@ const Providers = ({ children }: { children: React.ReactNode }) => {
 
   return (
     <Provider store={store}>
-      <SearchContext.Provider value={searchContextValue}>
-        <Topnav />
-        {children}
-      </SearchContext.Provider>
+      <QueryClientProvider client={queryClient}>
+        <SearchContext.Provider value={searchContextValue}>
+          <Topnav />
+          {children}
+        </SearchContext.Provider>
+      </QueryClientProvider>
     </Provider>
   );
 };

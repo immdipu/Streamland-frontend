@@ -7,68 +7,10 @@ import Episode from "./Episodes";
 import { SiVlcmediaplayer } from "react-icons/si";
 import { seasonsProps, singleEpisodeTypes } from "@/types/types";
 import SmallLoader from "../loader/SmallLoader";
+import { Apis } from "@/app/tmdbApi/TmdbApi";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 
 import { useRouter } from "next/navigation";
-
-const getEpisode = async function getSingleTv(
-  tv_id: string,
-  currSea: string,
-  currEpiso: number
-) {
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_BASE_URL}/3/tv/${tv_id}/season/${currSea}/episode/${currEpiso}?api_key=${process.env.NEXT_PUBLIC_API_KEY}`
-  );
-  if (!res.ok) {
-    throw new Error("Failed to fetch data");
-  }
-  return res.json();
-};
-
-const getAllEpisodes = async function getAllTvEpisodes(
-  tv_id: string,
-  currSea: string,
-  totalEpisodes: number
-) {
-  const batchSize = Math.min(50, totalEpisodes); // Number of episodes to load initially (limited to totalEpisodes if less than 50)
-  const episodes = [];
-
-  // Fetch all episodes at once if the total number of episodes is less than or equal to 50
-  if (batchSize >= totalEpisodes) {
-    for (let i = 1; i <= totalEpisodes; i++) {
-      try {
-        const episode = await getEpisode(tv_id, currSea, i);
-        episodes.push(episode);
-      } catch (error) {
-        console.error(`Failed to fetch episode ${i}:`, error);
-        episodes.push(null); // Push null or any placeholder value for the failed episode
-      }
-    }
-  } else {
-    // Fetch the initial batch of episodes
-    for (let i = 1; i <= batchSize; i++) {
-      try {
-        const episode = await getEpisode(tv_id, currSea, i);
-        episodes.push(episode);
-      } catch (error) {
-        console.error(`Failed to fetch episode ${i}:`, error);
-        episodes.push(null); // Push null or any placeholder value for the failed episode
-      }
-    }
-
-    // Fetch the remaining episodes one by one
-    for (let i = batchSize + 1; i <= totalEpisodes; i++) {
-      try {
-        const episode = await getEpisode(tv_id, currSea, i);
-        episodes.push(episode);
-      } catch (error) {
-        console.error(`Failed to fetch episode ${i}:`, error);
-        episodes.push(null); // Push null or any placeholder value for the failed episode
-      }
-    }
-  }
-
-  return episodes as singleEpisodeTypes[];
-};
 
 const Seasons = ({ seasons }: { seasons?: seasonsProps[] }) => {
   const params = useParams();
@@ -83,13 +25,8 @@ const Seasons = ({ seasons }: { seasons?: seasonsProps[] }) => {
   const SeasonBtn4 = useRef<HTMLDivElement>(null);
   const SeasonBtn3 = useRef<HTMLParagraphElement>(null);
   const [showOverlay, setShowOverlay] = useState(true);
-  const [EpisodeLoading, setEpisodeLoading] = useState(false);
 
   const router = useRouter();
-
-  const [allEpisodes, setAllEpisodes] = useState<singleEpisodeTypes[] | null>(
-    null
-  );
 
   useEffect(() => {
     const handleOutSideClick = (e: Event) => {
@@ -110,32 +47,29 @@ const Seasons = ({ seasons }: { seasons?: seasonsProps[] }) => {
     };
   }, [showSeasondropdown]);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      setEpisodeLoading(true);
-      try {
-        const allEpisodes = await getAllEpisodes(
-          params.id,
-          SeasonId ? SeasonId : seasons![0].season_number.toString(),
-          TotalEpisodes ? parseFloat(TotalEpisodes) : seasons![0].episode_count
-        );
-
-        setAllEpisodes(allEpisodes);
-        setEpisodeLoading(false);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-        setEpisodeLoading(false);
-      }
-    };
-
-    fetchData();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [SeasonId, TotalEpisodes]);
-
   const HanldeClick = () => {
     localStorage.setItem("tvId", params.id);
     setShowOverlay(false);
   };
+
+  const { data, isLoading, refetch, isFetching } = useQuery(
+    [
+      "allEpisodes",
+      params.id,
+      SeasonId ? SeasonId : seasons![0].season_number.toString(),
+      TotalEpisodes ? parseFloat(TotalEpisodes) : seasons![0].episode_count,
+    ],
+    () =>
+      Apis.GetAllEpisodes(
+        params.id!,
+        SeasonId ? SeasonId : seasons![0].season_number.toString(),
+        TotalEpisodes ? parseFloat(TotalEpisodes) : seasons![0].episode_count
+      ),
+    {
+      refetchOnWindowFocus: false,
+      retry: 2,
+    }
+  );
 
   return (
     <div>
@@ -231,7 +165,7 @@ const Seasons = ({ seasons }: { seasons?: seasonsProps[] }) => {
               </section>
               {/* Episodes */}
               <section className="w-80 max-md:w-full   h-[26rem] mt-4 seasonScroll overflow-y-auto flex gap-1 flex-col">
-                {EpisodeLoading ? (
+                {isLoading || isFetching ? (
                   <>
                     <div className="grid h-full place-content-center">
                       <SmallLoader size={50} />
@@ -239,8 +173,8 @@ const Seasons = ({ seasons }: { seasons?: seasonsProps[] }) => {
                   </>
                 ) : (
                   <>
-                    {allEpisodes &&
-                      allEpisodes.map((item) => {
+                    {data &&
+                      data.map((item) => {
                         if (item === null) return;
                         return <Episode {...item} key={item.id} />;
                       })}
