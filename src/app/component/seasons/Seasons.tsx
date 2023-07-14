@@ -6,6 +6,7 @@ import clsx from "clsx";
 import Episode from "./Episodes";
 import { SiVlcmediaplayer } from "react-icons/si";
 import { seasonsProps, singleEpisodeTypes } from "@/types/types";
+import SmallLoader from "../loader/SmallLoader";
 
 import { useRouter } from "next/navigation";
 
@@ -82,6 +83,7 @@ const Seasons = ({ seasons }: { seasons?: seasonsProps[] }) => {
   const SeasonBtn4 = useRef<HTMLDivElement>(null);
   const SeasonBtn3 = useRef<HTMLParagraphElement>(null);
   const [showOverlay, setShowOverlay] = useState(true);
+  const [EpisodeLoading, setEpisodeLoading] = useState(false);
 
   const router = useRouter();
 
@@ -110,16 +112,19 @@ const Seasons = ({ seasons }: { seasons?: seasonsProps[] }) => {
 
   useEffect(() => {
     const fetchData = async () => {
+      setEpisodeLoading(true);
       try {
         const allEpisodes = await getAllEpisodes(
           params.id,
-          SeasonId ? SeasonId : "1",
+          SeasonId ? SeasonId : seasons![0].season_number.toString(),
           TotalEpisodes ? parseFloat(TotalEpisodes) : seasons![0].episode_count
         );
 
         setAllEpisodes(allEpisodes);
+        setEpisodeLoading(false);
       } catch (error) {
         console.error("Error fetching data:", error);
+        setEpisodeLoading(false);
       }
     };
 
@@ -197,7 +202,7 @@ const Seasons = ({ seasons }: { seasons?: seasonsProps[] }) => {
                 {/* dropdown */}
                 <section
                   className={clsx(
-                    "bg-_black_bg absolute mt-2 top-8 w-full overflow-y-auto duration-200 transition-all ease-in-out  flex flex-col  rounded-3xl seasonScroll",
+                    "bg-_black_bg border border-neutral-500 border-opacity-25 absolute mt-2 shadow-lg  top-8 w-full overflow-y-auto duration-200 transition-all ease-in-out  flex flex-col  rounded-3xl seasonScroll",
                     showSeasondropdown ? "max-h-60 py-3 px-3" : "p-0 max-h-0"
                   )}
                   ref={Seasondropdown}
@@ -212,10 +217,10 @@ const Seasons = ({ seasons }: { seasons?: seasonsProps[] }) => {
                           );
                         }}
                         className={clsx(
-                          " text-neutral-400 py-1 text-center font-light  rounded-3xl  px-2 hover:text-_sidenav_bg hover:bg-neutral-800  duration-200 transition-all ease-linear hover:shadow-lg",
+                          " text-neutral-400 py-1 my-1 text-center font-light  rounded-3xl  px-2 hover:text-_sidenav_bg   duration-200 transition-all ease-linear hover:shadow-lg",
                           SeasonId === item.season_number.toString()
                             ? "bg-_blue bg-opacity-50 font-normal text-white"
-                            : "bg-inherit"
+                            : "bg-inherit hover:bg-neutral-800"
                         )}
                       >
                         {item.name}
@@ -225,12 +230,22 @@ const Seasons = ({ seasons }: { seasons?: seasonsProps[] }) => {
                 </section>
               </section>
               {/* Episodes */}
-              <section className="w-80 max-md:w-full  h-[26rem] mt-4 seasonScroll overflow-y-auto flex gap-1 flex-col">
-                {allEpisodes &&
-                  allEpisodes.map((item) => {
-                    if (item === null) return;
-                    return <Episode {...item} key={item.id} />;
-                  })}
+              <section className="w-80 max-md:w-full   h-[26rem] mt-4 seasonScroll overflow-y-auto flex gap-1 flex-col">
+                {EpisodeLoading ? (
+                  <>
+                    <div className="grid h-full place-content-center">
+                      <SmallLoader size={50} />
+                    </div>
+                  </>
+                ) : (
+                  <>
+                    {allEpisodes &&
+                      allEpisodes.map((item) => {
+                        if (item === null) return;
+                        return <Episode {...item} key={item.id} />;
+                      })}
+                  </>
+                )}
               </section>
             </section>
           </div>

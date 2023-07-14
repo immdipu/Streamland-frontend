@@ -4,7 +4,6 @@ import SearchStatic from "./SearchStatic";
 import { useRouter } from "next/navigation";
 import { BiArrowBack, BiMenuAltLeft } from "react-icons/bi";
 import clsx from "clsx";
-import IconButton from "@mui/material/IconButton";
 import { SearchContext } from "@/context/GlobalProvider";
 
 import { usePathname } from "next/navigation";
@@ -39,9 +38,7 @@ const Topnav = () => {
             GlobalContext?.setShowSidebar(!GlobalContext.showSider)
           }
         >
-          <IconButton sx={{ color: "#7f8080" }}>
-            <BiMenuAltLeft className="text-2xl  hover:text-_sidenav_bg duration-200 transition-colors ease-in-out text-_welcometext_lightblue" />
-          </IconButton>
+          <BiMenuAltLeft className="text-2xl  hover:text-_sidenav_bg duration-200 transition-colors ease-in-out text-_welcometext_lightblue" />
         </button>
 
         <SearchStatic />
