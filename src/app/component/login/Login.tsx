@@ -40,7 +40,7 @@ const Login = () => {
             <form action="#" className="flex flex-col space-y-5">
               <div className="flex flex-col space-y-1">
                 <label
-                  htmlFor="email"
+                  htmlFor="text"
                   className="text-sm font-medium tracking-wide text-neutral-200"
                 >
                   Email or username
@@ -68,7 +68,7 @@ const Login = () => {
                   </a>
                 </div>
                 <input
-                  type="password"
+                  type="text"
                   id="password"
                   className="px-4 py-2 transition duration-300 border border-neutral-400 rounded focus:border-transparent focus:outline-none focus:ring-4 focus:ring-blue-200"
                 />
