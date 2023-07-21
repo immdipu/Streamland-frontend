@@ -3,6 +3,7 @@ import { useMemo } from "react";
 import { useParams, usePathname } from "next/navigation";
 import { MdExplore } from "react-icons/md";
 import { RiMovie2Line } from "react-icons/ri";
+import { BiHelpCircle } from "react-icons/bi";
 import { SiAirplayvideo } from "react-icons/si";
 
 const useSidebarRoutes = () => {
@@ -26,6 +27,12 @@ const useSidebarRoutes = () => {
         href: "/tv/genre",
         icon: SiAirplayvideo,
         active: pathname === "/tv/genre",
+      },
+      {
+        label: "About",
+        href: "/about",
+        icon: BiHelpCircle,
+        active: pathname === "/about",
       },
     ],
     [pathname]

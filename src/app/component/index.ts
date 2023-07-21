@@ -7,6 +7,7 @@ import SingleTvCard from "./silder/SingleTvCard";
 import ContinueWatch from "./continueWatch/ContinueWatch";
 import TrendingPerson from "./trending/TrendingPerson";
 import Login from "./login/Login";
+import About from "./about/About";
 
 export {
   NowPlaying,
@@ -18,4 +19,5 @@ export {
   ContinueWatch,
   TrendingPerson,
   Login,
+  About,
 };
