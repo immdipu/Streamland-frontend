@@ -35,12 +35,6 @@ export default function RootLayout({
           </div>
         </Providers>
       </body>
-      <Script
-        src="https://alwingulla.com/88/tag.min.js"
-        data-zone="582"
-        async
-        data-cfasync="false"
-      />
     </html>
   );
 }
