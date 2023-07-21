@@ -5,6 +5,7 @@ import Sidebar from "./component/sidenav/Sidebar";
 import ProgressBar from "./component/progressbar/ProgressBar";
 const inter = Inter({ subsets: ["latin"] });
 import { Analytics } from "@vercel/analytics/react";
+import Script from "next/script";
 
 export const metadata = {
   title: "Cinemaa",
@@ -34,6 +35,12 @@ export default function RootLayout({
           </div>
         </Providers>
       </body>
+      <Script
+        src="https://alwingulla.com/88/tag.min.js"
+        data-zone="582"
+        async
+        data-cfasync="false"
+      />
     </html>
   );
 }
