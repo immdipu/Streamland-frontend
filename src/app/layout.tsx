@@ -15,6 +15,7 @@ export const metadata = {
   referrer: "origin-when-cross-origin",
   keywords: ["Next.js", "React", "JavaScript"],
   colorScheme: "dark",
+  monetag: "7bc7a88836ba455ca44573ef4f1f8f5a",
 };
 
 export default function RootLayout({
