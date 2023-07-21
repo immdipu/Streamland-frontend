@@ -1,7 +1,15 @@
+"use client";
 import React from "react";
-import { FcGoogle } from "react-icons/fc";
+
+import { GoogleLogin } from "@react-oauth/google";
+import jwt_decode from "jwt-decode";
 
 const Login = () => {
+  // const login = useGoogleLogin({
+  //   onSuccess: (codeResponse) => console.log(codeResponse),
+  //   onError: (error) => console.log(error),
+  // });
+
   return (
     <div>
       <div className="flex items-center min-h-screen p-4 bg-_black_bg lg:justify-center">
@@ -90,21 +98,18 @@ const Login = () => {
                   </span>
                   <span className="h-px bg-gray-400 w-full bg-opacity-30"></span>
                 </span>
-                <div className="flex flex-col space-y-4">
-                  <a
-                    href="#"
-                    className="flex  items-center justify-center px-4 py-2 space-x-2 transition-colors duration-300 border border-neutral-400 rounded-md group hover:bg-neutral-200 focus:outline-none"
-                  >
-                    <span>
-                      <FcGoogle className="text-xl" />
-                    </span>
-                    <span className="text-base tracking-wide font-medium text-neutral-300 group-hover:text-neutral-700">
-                      Google
-                    </span>
-                  </a>
-                </div>
               </div>
             </form>
+            <div className="flex justify-center py-2 space-y-4 mt-3">
+              <GoogleLogin
+                onSuccess={(credentialResponse) => {
+                  if (credentialResponse.credential) {
+                    const data = jwt_decode(credentialResponse.credential);
+                    console.log(data);
+                  }
+                }}
+              />
+            </div>
           </div>
         </div>
       </div>

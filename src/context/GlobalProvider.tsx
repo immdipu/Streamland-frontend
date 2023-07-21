@@ -9,6 +9,7 @@ import { Provider } from "react-redux";
 import { store } from "@/redux/store";
 import Topnav from "@/app/component/topnav/Topnav";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { GoogleOAuthProvider } from "@react-oauth/google";
 
 interface SearchContextProps {
   searchTerm: string;
@@ -40,7 +41,9 @@ const Providers = ({ children }: { children: React.ReactNode }) => {
       <QueryClientProvider client={queryClient}>
         <SearchContext.Provider value={searchContextValue}>
           <Topnav />
-          {children}
+          <GoogleOAuthProvider clientId="88109165363-pmgv7577bn2co8j3bhln257akuvqo32r.apps.googleusercontent.com">
+            {children}
+          </GoogleOAuthProvider>
         </SearchContext.Provider>
       </QueryClientProvider>
     </Provider>

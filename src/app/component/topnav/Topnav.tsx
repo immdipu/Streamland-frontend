@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { BiArrowBack, BiMenuAltLeft } from "react-icons/bi";
 import clsx from "clsx";
 import { SearchContext } from "@/context/GlobalProvider";
-
+import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 const Topnav = () => {
@@ -42,10 +42,13 @@ const Topnav = () => {
         </button>
 
         <SearchStatic />
-        <section className=" w-full flex justify-end mr-16 hidden">
-          <button className="bg-_genre_chip_bg py-2 bg-opacity-60 border border-neutral-500 hover:border-opacity-75 duration-200 transition-colors  ease-linear border-opacity-25 px-4 block rounded-md  text-sm tracking-wider text-neutral-200">
+        <section className=" w-full flex justify-end mr-16 ">
+          <Link
+            href={"/login"}
+            className="bg-_genre_chip_bg py-2 bg-opacity-60 border border-neutral-500 hover:border-opacity-75 duration-200 transition-colors  ease-linear border-opacity-25 px-4 block rounded-md  text-sm tracking-wider text-neutral-200"
+          >
             Login
-          </button>
+          </Link>
         </section>
       </section>
     </div>
