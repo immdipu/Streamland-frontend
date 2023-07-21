@@ -13,7 +13,6 @@ export const metadata = {
   applicationName: "Cinemaa",
   referrer: "origin-when-cross-origin",
   colorScheme: "dark",
-  monetag: "7bc7a88836ba455ca44573ef4f1f8f5a",
 };
 
 export default function RootLayout({

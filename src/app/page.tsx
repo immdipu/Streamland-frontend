@@ -13,6 +13,9 @@ import { Suspense } from "react";
 
 export const metadata: Metadata = {
   title: "Cinemaa | Home",
+  other: {
+    monetag: "7bc7a88836ba455ca44573ef4f1f8f5a",
+  },
 };
 
 async function getTrendingList() {
