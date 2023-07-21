@@ -11,7 +11,7 @@ import Typography from "@mui/material/Typography";
 const Accordion = styled((props: any) => (
   <MuiAccordion disableGutters elevation={0} square {...props} />
 ))(({ theme }) => ({
-  border: `1px solid ${"#1d242c"}`,
+  border: `1px solid ${"#373737"}`,
   "&:not(:last-child)": {
     borderBottom: 0,
   },
@@ -26,7 +26,7 @@ const AccordionSummary = styled((props: any) => (
     {...props}
   />
 ))(({ theme }) => ({
-  backgroundColor: "#16191e",
+  backgroundColor: "#262626",
   color: "#d9d9d9",
   flexDirection: "row-reverse",
   "& .MuiAccordionSummary-expandIconWrapper.Mui-expanded": {
@@ -39,7 +39,7 @@ const AccordionSummary = styled((props: any) => (
 }));
 
 const AccordionDetails = styled(MuiAccordionDetails)(({ theme }) => ({
-  backgroundColor: "#16191e",
+  backgroundColor: "#262626",
   color: "#d9d9d9",
   padding: theme.spacing(2),
 }));
