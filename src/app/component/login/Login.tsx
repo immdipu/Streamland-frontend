@@ -131,8 +131,9 @@ const Login = () => {
                 </span>
               </div>
             </form>
-            <div className="flex justify-center py-2 space-y-4 mt-3">
+            <div className="flex bg-transparent justify-center py-2 space-y-4 mt-3">
               <GoogleLogin
+                ux_mode="popup"
                 onSuccess={(credentialResponse) => {
                   if (credentialResponse.credential) {
                     googleLogin.mutate(credentialResponse.credential);
