@@ -8,6 +8,7 @@ import { LoggedIn } from "@/redux/slice/authSlice";
 import { useDispatch } from "react-redux";
 import { toast } from "react-hot-toast";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 import { useAppSelector } from "@/redux/hooks";
 import clsx from "clsx";
 import SmallLoader from "../loader/SmallLoader";
@@ -119,7 +120,7 @@ const Login = () => {
     const emailUsernameValue = LoginEmailUser.current?.value?.trim() || "";
     const passwordValue = LoginPassword.current?.value?.trim() || "";
     if (!emailUsernameValue) {
-      toast.error("FullName is required");
+      toast.error("email or username is required");
       return;
     }
     if (!passwordValue) {
@@ -168,13 +169,19 @@ const Login = () => {
             </p>
             <p className="mt-6 text-sm text-center text-gray-300">
               Read our{" "}
-              <a href="#" className="underline underline-offset-2 text-white">
+              <Link
+                href={"/terms"}
+                className="underline underline-offset-2 text-white"
+              >
                 terms
-              </a>{" "}
+              </Link>{" "}
               and{" "}
-              <a href="#" className="underline text-white underline-offset-2">
+              <Link
+                href={"/terms"}
+                className="underline text-white underline-offset-2"
+              >
                 conditions
-              </a>
+              </Link>
             </p>
           </div>
           {/* signup section */}

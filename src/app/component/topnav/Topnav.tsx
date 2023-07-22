@@ -77,7 +77,10 @@ const Topnav = () => {
               ) : (
                 <Link
                   href={"/login"}
-                  className="bg-_genre_chip_bg py-2 bg-opacity-60 border border-neutral-500 hover:border-opacity-75 duration-200 transition-colors  ease-linear border-opacity-25 px-4 block rounded-md  text-sm tracking-wider text-neutral-200"
+                  className={clsx(
+                    "bg-_genre_chip_bg  py-2 bg-opacity-60 border border-neutral-500 hover:border-opacity-75 duration-200 transition-colors  ease-linear border-opacity-25 px-4 block rounded-md  text-sm tracking-wider text-neutral-200",
+                    pathname === "/login" && "hidden"
+                  )}
                 >
                   Login
                 </Link>

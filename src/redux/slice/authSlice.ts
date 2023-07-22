@@ -33,8 +33,16 @@ export const authSlice = createSlice({
         localStorage.setItem("token", action.payload.token);
       }
     },
+    LoggedOut: (state) => {
+      state.fullName = null;
+      state.id = null;
+      state.profilePic = null;
+      state.username = null;
+      state.isUserAuthenticated = false;
+      localStorage.removeItem("token");
+    },
   },
 });
 
-export const { LoggedIn } = authSlice.actions;
+export const { LoggedIn, LoggedOut } = authSlice.actions;
 export default authSlice.reducer;
