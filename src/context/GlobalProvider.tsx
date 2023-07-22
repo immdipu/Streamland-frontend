@@ -43,7 +43,7 @@ const Providers = ({ children }: { children: React.ReactNode }) => {
         <SearchContext.Provider value={searchContextValue}>
           <Toaster />
           <Topnav />
-          <GoogleOAuthProvider clientId="88109165363-pmgv7577bn2co8j3bhln257akuvqo32r.apps.googleusercontent.com">
+          <GoogleOAuthProvider clientId="999403015017-rodh8011hs8r1l0tjlakeidj4vnu1u53.apps.googleusercontent.com">
             {children}
           </GoogleOAuthProvider>
         </SearchContext.Provider>
