@@ -1,17 +1,48 @@
 "use client";
-import React from "react";
-
+import React, { useEffect } from "react";
 import { GoogleLogin } from "@react-oauth/google";
-import jwt_decode from "jwt-decode";
+import { userApis } from "@/app/userApi";
+import { useMutation } from "@tanstack/react-query";
+import FullScreenLoader from "../loader/FullScreenLoader";
+import { LoggedIn } from "@/redux/slice/authSlice";
+import { useDispatch } from "react-redux";
+import { toast } from "react-hot-toast";
+import { useRouter } from "next/navigation";
+import { useAppSelector } from "@/redux/hooks";
 
 const Login = () => {
-  // const login = useGoogleLogin({
-  //   onSuccess: (codeResponse) => console.log(codeResponse),
-  //   onError: (error) => console.log(error),
-  // });
+  const dispatch = useDispatch();
+  const router = useRouter();
+  const user = useAppSelector((state) => state.auth);
+
+  const googleLogin = useMutation(
+    (data: string) => userApis.GoogleLogin(data),
+    {
+      onSuccess: (data) => {
+        dispatch(LoggedIn(data));
+        toast.success("Logged in successfully");
+      },
+      onError: (data: any) => {
+        const msg: string = data.response.data;
+        if (msg) {
+          console.log(msg);
+        } else {
+          console.log("something went wrong");
+        }
+      },
+    }
+  );
+
+  useEffect(() => {
+    if (user.isUserAuthenticated) {
+      router.back();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [user.isUserAuthenticated]);
 
   return (
     <div>
+      {googleLogin.isLoading && <FullScreenLoader />}
       <div className="flex items-center min-h-screen p-4 bg-_black_bg lg:justify-center">
         <div className="flex flex-col overflow-hidden bg-white rounded-md shadow-lg max md:flex-row md:flex-1 lg:max-w-screen-md">
           <div className="p-4 py-6 text-white bg-blue-500 md:w-80 md:flex-shrink-0 md:flex md:flex-col md:items-center md:justify-evenly">
@@ -104,8 +135,7 @@ const Login = () => {
               <GoogleLogin
                 onSuccess={(credentialResponse) => {
                   if (credentialResponse.credential) {
-                    const data = jwt_decode(credentialResponse.credential);
-                    console.log(data);
+                    googleLogin.mutate(credentialResponse.credential);
                   }
                 }}
               />
