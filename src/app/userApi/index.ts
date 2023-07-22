@@ -24,4 +24,11 @@ export const userApis = {
     const res = await axiosInstance().get("/user/login");
     return res.data;
   },
+  LogIn: async (data: any) => {
+    const res = await axios.post(
+      `${process.env.NEXT_PUBLIC_USER_URL}/user/login`,
+      data
+    );
+    return res.data;
+  },
 };
