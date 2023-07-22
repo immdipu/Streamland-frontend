@@ -137,13 +137,15 @@ const Login = () => {
   return (
     <div>
       {googleLogin.isLoading && <FullScreenLoader />}
-      <div className="flex items-center min-h-screen p-4 bg-_black_bg lg:justify-center">
-        <div className="flex  relative flex-col overflow-hidden bg-white rounded-md shadow-lg max md:flex-row md:flex-1 lg:max-w-screen-md">
+      <div className="flex items-center min-h-screen p-4 max-md:p-0 bg-_black_bg lg:justify-center">
+        <div className="flex relative flex-col max-w-3xl max-md:w-full overflow-hidden bg-_black_bg max-md:mt-20 rounded-md shadow-lg max md:flex-row ">
           {/* Information section */}
           <div
             className={clsx(
-              "p-4 absolute transition-all duration-200 ease-linear w-1/2 z-20 flex flex-col justify-center gap-5 bottom-0 top-0 py-6 text-white bg-blue-500",
-              showSignup ? "right-0 left-1/2" : "left-0 right-1/2"
+              "p-4 absolute max-md:h-1/2 max-md:w-full  transition-all duration-200 ease-linear w-1/2 z-20 flex flex-col justify-center gap-5 bottom-0 top-0 py-6 text-white bg-blue-500",
+              showSignup
+                ? "right-0 left-1/2 max-md:left-0 max-md:top-1/2"
+                : "left-0 right-1/2 max-md:right-0   max-md:bottom-0"
             )}
           >
             <div className="my-3 text-4xl font-bold tracking-wider text-center">
@@ -176,7 +178,7 @@ const Login = () => {
             </p>
           </div>
           {/* signup section */}
-          <div className="p-5 bg-_genre_chip_bg md:flex-1 w-1/2 shrink-0">
+          <div className="p-5 bg-_genre_chip_bg md:flex-1 w-1/2 max-md:w-full max-md:px-10 shrink-0">
             <h3 className="my-4 text-2xl font-semibold text-neutral-100">
               Sign up
             </h3>
@@ -266,7 +268,7 @@ const Login = () => {
             </form>
           </div>
           {/* login section */}
-          <div className="p-5 bg-_genre_chip_bg md:flex-1 w-1/2 shrink-0">
+          <div className="p-5 bg-_genre_chip_bg md:flex-1 max-md:w-full max-md:px-10 w-1/2 shrink-0">
             <h3 className="my-4 text-2xl font-semibold text-neutral-100">
               Account Login
             </h3>
