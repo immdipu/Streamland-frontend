@@ -1,6 +1,6 @@
 import { axiosInstance } from "@/utils/AxiosInterceptor";
 import axios from "axios";
-import { signupParamsTypes } from "@/types/userTypes";
+import { signupParamsTypes, AddMediaDataTypes } from "@/types/userTypes";
 
 export const userApis = {
   signUp: async (data: signupParamsTypes) => {
@@ -27,6 +27,13 @@ export const userApis = {
   LogIn: async (data: any) => {
     const res = await axios.post(
       `${process.env.NEXT_PUBLIC_USER_URL}/user/login`,
+      data
+    );
+    return res.data;
+  },
+  AddMedia: async (data: AddMediaDataTypes) => {
+    const res = await axiosInstance().post(
+      `${process.env.NEXT_PUBLIC_USER_URL}/media/addmedia`,
       data
     );
     return res.data;
