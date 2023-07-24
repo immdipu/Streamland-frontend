@@ -8,10 +8,10 @@ import { Analytics } from "@vercel/analytics/react";
 import Script from "next/script";
 
 export const metadata = {
-  title: "Cinemaa",
+  title: "ShowMania",
   description:
-    "CINEMAA is a website where you can stream different movies and tv shows for free. We do not store any copyright-protected content on our website. Any linked content is stored only in third-party websites. This is a promotional website only. All files placed here are for introducing purpose.",
-  applicationName: "Cinemaa",
+    "ShowMania is a website where you can stream different movies and tv shows for free. We do not store any copyright-protected content on our website. Any linked content is stored only in third-party websites. This is a promotional website only. All files placed here are for introducing purpose.",
+  applicationName: "ShowMania",
   referrer: "origin-when-cross-origin",
   colorScheme: "dark",
 };

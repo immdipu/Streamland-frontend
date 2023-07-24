@@ -8,6 +8,7 @@ import ContinueWatch from "./continueWatch/ContinueWatch";
 import TrendingPerson from "./trending/TrendingPerson";
 import Login from "./login/Login";
 import About from "./about/About";
+import Watchlist from "./watchlist/Watchlist";
 
 export {
   NowPlaying,
@@ -20,4 +21,5 @@ export {
   TrendingPerson,
   Login,
   About,
+  Watchlist,
 };

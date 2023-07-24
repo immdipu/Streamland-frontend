@@ -38,4 +38,10 @@ export const userApis = {
     );
     return res.data;
   },
+  GetAllMedia: async () => {
+    const res = await axiosInstance().get(
+      `${process.env.NEXT_PUBLIC_USER_URL}/media`
+    );
+    return res.data;
+  },
 };

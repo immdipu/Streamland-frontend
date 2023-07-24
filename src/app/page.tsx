@@ -12,7 +12,7 @@ import { Apis } from "./tmdbApi/TmdbApi";
 import { Suspense } from "react";
 
 export const metadata: Metadata = {
-  title: "Cinemaa | Home",
+  title: "ShowMania | Home",
   other: {
     monetag: "7bc7a88836ba455ca44573ef4f1f8f5a",
   },

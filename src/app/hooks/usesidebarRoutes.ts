@@ -5,6 +5,7 @@ import { MdExplore } from "react-icons/md";
 import { RiMovie2Line } from "react-icons/ri";
 import { BiHelpCircle } from "react-icons/bi";
 import { SiAirplayvideo } from "react-icons/si";
+import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 
 const useSidebarRoutes = () => {
   const pathname = usePathname();
@@ -15,6 +16,12 @@ const useSidebarRoutes = () => {
         href: "/",
         icon: MdExplore,
         active: pathname === "/",
+      },
+      {
+        label: "Watchlist",
+        href: "/watchlist",
+        icon: pathname === "/watchlist" ? AiFillHeart : AiOutlineHeart,
+        active: pathname === "/watchlist",
       },
       {
         label: "Movies",

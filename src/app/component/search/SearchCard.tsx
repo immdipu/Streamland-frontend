@@ -1,6 +1,6 @@
 import React from "react";
 import Images from "../ImageComponent/Image";
-import Logo from "../../../../public/cinemaalogo.png";
+import Logo from "../../../../public/ShowManialogo.png";
 import Link from "next/link";
 import "react-tooltip/dist/react-tooltip.css";
 import { Tooltip as ReactTooltip } from "react-tooltip";

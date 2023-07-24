@@ -3,7 +3,7 @@ import { castProps } from "@/types/types";
 import Images from "../ImageComponent/Image";
 import Link from "next/link";
 import { Tooltip as ReactTooltip } from "react-tooltip";
-import Logo from "../../../../public/cinemaalogo.png";
+import Logo from "../../../../public/ShowManialogo.png";
 const SingleCastCard: React.FC<castProps> = ({
   cast_id,
   name,

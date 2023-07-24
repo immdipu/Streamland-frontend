@@ -23,7 +23,7 @@ const SingleComponent: React.FC<DesktopSingleComponentProps> = ({
         <Icon
           className={clsx(
             "text-2xl",
-            active ? "text-blue-500" : "text-_light_white"
+            active ? "text-blue-500 " : "text-_light_white "
           )}
         />
         <p>{label}</p>

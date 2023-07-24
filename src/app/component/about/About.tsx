@@ -58,7 +58,7 @@ export default function CustomizedAccordions() {
         onChange={handleChange("panel1")}
       >
         <AccordionSummary aria-controls="panel1d-content" id="panel1d-header">
-          <Typography>What is CINEMAA?</Typography>
+          <Typography>What is ShowMania?</Typography>
         </AccordionSummary>
         <AccordionDetails>
           <Typography>

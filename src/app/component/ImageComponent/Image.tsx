@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import Image from "next/image";
 import fallbackSrc from "@/assets/logo.png";
 import { StaticImageData } from "next/image";
-import failedImage from "@/assets/cinemaaFailedImage.png";
+import failedImage from "@/assets/ShowManiaFailedImage.png";
 import clsx from "clsx";
 
 interface ImagesProps {
