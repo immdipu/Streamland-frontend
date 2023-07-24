@@ -25,3 +25,9 @@ export interface AddMediaDataTypes {
   first_air_date?: string;
   vote_average?: number;
 }
+
+export interface AddMediaResponse extends AddMediaDataTypes {
+  createdAt: string;
+  _id: string;
+  Index: number;
+}

@@ -123,3 +123,13 @@ axis-horizontal,
     background: #aeaeae;
     border-radius: 20px;
 }
+
+@keyframes skeleton-loading {
+    0% {
+        background-position: -200%;
+    }
+
+    100% {
+        background-position: 200%;
+    }
+}
