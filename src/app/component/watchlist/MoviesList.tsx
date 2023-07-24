@@ -4,6 +4,12 @@ import Images from "../ImageComponent/Image";
 import Link from "next/link";
 import { GiRoundStar } from "react-icons/gi";
 import { AddMediaResponse } from "@/types/userTypes";
+import { userApis } from "@/app/userApi";
+import { useMutation } from "@tanstack/react-query";
+import { toast } from "react-hot-toast";
+import SmallLoader from "../loader/SmallLoader";
+import clsx from "clsx";
+import { useQueryClient } from "@tanstack/react-query";
 
 const MoviesList: React.FC<AddMediaResponse> = ({
   _id,
@@ -20,6 +26,23 @@ const MoviesList: React.FC<AddMediaResponse> = ({
   vote_average,
   Index,
 }) => {
+  const queryClient = useQueryClient();
+  const RemoveWatchlist = useMutation(
+    (id: string) => userApis.RemoveMedia(id),
+    {
+      onSuccess: (data) => {
+        queryClient.invalidateQueries(["watchlist"]);
+        toast.success("Successfully Removed");
+      },
+      onError: (data: any) => {
+        if (data.response.data) {
+          toast.error(data.response.data);
+        } else {
+          toast.error("Failed  Try Again!");
+        }
+      },
+    }
+  );
   return (
     <div>
       <section className="mt-10 ">
@@ -62,8 +85,22 @@ const MoviesList: React.FC<AddMediaResponse> = ({
                   >
                     Watch
                   </Link>
-                  <button className="bg-red-400  max-md:px-3 max-md:py-1 hover:bg-opacity-90 transition-opacity duration-150 ease-linear px-5 py-2 rounded-md tracking-wide text-sm  font-normal text-neutral-900">
-                    Remove
+                  <button
+                    onClick={() => {
+                      RemoveWatchlist.mutate(_id);
+                    }}
+                    className={clsx(
+                      "bg-red-400  max-md:px-3 max-md:py-1 hover:bg-opacity-90 transition-opacity duration-150 ease-linear px-5 py-2 rounded-md tracking-wide text-sm  font-normal text-neutral-900",
+                      RemoveWatchlist.isLoading
+                        ? "pointer-events-none bg-opacity-60"
+                        : "opacity-100 pointer-events-auto"
+                    )}
+                  >
+                    {RemoveWatchlist.isLoading ? (
+                      <SmallLoader size={25} />
+                    ) : (
+                      "Remove"
+                    )}
                   </button>
                 </section>
               </div>

@@ -44,4 +44,10 @@ export const userApis = {
     );
     return res.data;
   },
+  RemoveMedia: async (id: string) => {
+    const res = await axiosInstance().delete(
+      `${process.env.NEXT_PUBLIC_USER_URL}/media/${id}`
+    );
+    return res.data;
+  },
 };
