@@ -1,6 +1,10 @@
 import { axiosInstance } from "@/utils/AxiosInterceptor";
 import axios from "axios";
-import { signupParamsTypes, AddMediaDataTypes } from "@/types/userTypes";
+import {
+  signupParamsTypes,
+  AddMediaDataTypes,
+  feedbackDataTypes,
+} from "@/types/userTypes";
 
 export const userApis = {
   signUp: async (data: signupParamsTypes) => {
@@ -47,6 +51,13 @@ export const userApis = {
   RemoveMedia: async (id: string) => {
     const res = await axiosInstance().delete(
       `${process.env.NEXT_PUBLIC_USER_URL}/media/${id}`
+    );
+    return res.data;
+  },
+  SendFeeback: async (data: feedbackDataTypes) => {
+    const res = await axios.post(
+      `${process.env.NEXT_PUBLIC_USER_URL}/media/feedback`,
+      data
     );
     return res.data;
   },

@@ -113,7 +113,8 @@ const CustomModal: React.FC<seeMoreModal> = ({
           >
             <div
               onClick={handleClose}
-              className="absolute -right-5 -top-5 bg-_genre_chip_bg rounded-lg px-3 py-3 z-10 cursor-pointer"
+              className="absolute -right-5 -top-5  bg-_genre_chip_bg rounded-lg px-3 py-3 z-10 cursor-pointer"
+              id="modalclosebtn"
             >
               <AiOutlineClose />
             </div>

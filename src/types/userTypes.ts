@@ -31,3 +31,9 @@ export interface AddMediaResponse extends AddMediaDataTypes {
   _id: string;
   Index: number;
 }
+
+export interface feedbackDataTypes {
+  name?: string;
+  user?: string;
+  message: string;
+}
