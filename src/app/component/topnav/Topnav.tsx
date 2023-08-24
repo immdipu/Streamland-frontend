@@ -1,5 +1,5 @@
 "use client";
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import SearchStatic from "./SearchStatic";
 import { useRouter } from "next/navigation";
 import { BiArrowBack, BiMenuAltLeft } from "react-icons/bi";
@@ -14,7 +14,7 @@ import { userApis } from "@/app/userApi";
 import SmallLoader from "../loader/SmallLoader";
 import { LoggedIn } from "@/redux/slice/authSlice";
 import { useAppDispatch } from "@/redux/hooks";
-import { toast } from "react-hot-toast";
+import { set } from "nprogress";
 
 const Topnav = () => {
   const router = useRouter();
@@ -34,6 +34,7 @@ const Topnav = () => {
 
   useEffect(() => {
     AutoLogin.mutate();
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

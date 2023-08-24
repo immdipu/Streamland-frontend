@@ -61,4 +61,10 @@ export const userApis = {
     );
     return res.data;
   },
+  GetNotification: async (): Promise<string[]> => {
+    const res = await axios.get(
+      `${process.env.NEXT_PUBLIC_USER_URL}/media/notification`
+    );
+    return res.data;
+  },
 };

@@ -2,10 +2,9 @@
 
 import React, { useState } from "react";
 import { IoIosClose } from "react-icons/io";
-import data from "../../../../utils/NotficationsMsg.json";
 import clsx from "clsx";
 
-const Notifications = () => {
+const Notifications = ({ data }: { data: string[] }) => {
   const [showNotifi, setShowNotifi] = useState(true);
 
   return (
