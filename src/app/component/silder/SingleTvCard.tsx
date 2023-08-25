@@ -28,6 +28,7 @@ const SingleTvCard: React.FC<singleTVShowProps> = ({
         media_type={"tv"}
         poster_path={poster_path}
         id={id}
+        vote_average={vote_average}
       />
 
       <Link href={`/tv/${id}`} prefetch={false}>

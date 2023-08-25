@@ -60,13 +60,15 @@ const MoviesList: React.FC<AddMediaResponse> = ({
             <div className="flex flex-col">
               <h3 className="text-2xl mt-2 font-medium max-md:text-base">
                 <span className="font-light text-xl  pr-1">{Index + 1}.</span>
-                {title}
+                {media_type === "movie" ? title : name}
               </h3>
               <div className="flex flex-col justify-between  h-full justify-self-stretch ">
                 <div className="flex items-center  gap-6 ml-2 max-md:ml-0 max-md:mb-3 mt-2 text-xs">
                   <div className="flex  items-center gap-2">
                     <p className="text-_light_white max-md:text-xxs text-sm font-normal ">
-                      {release_date?.split("-")[0]}
+                      {media_type === "movie"
+                        ? release_date?.split("-")[0]
+                        : first_air_date?.split("-")[0]}
                     </p>
                     <div className="flex gap-1 max-md:text-xxs text-sm  text-_light_white items-center">
                       <span>{vote_average}</span>
@@ -74,7 +76,7 @@ const MoviesList: React.FC<AddMediaResponse> = ({
                     </div>
                   </div>
 
-                  <span className=" max-md:text-xxs text-sm border-_light_white tracking-wider border-[1px] border-opacity-25 font-thin max-md:px-1 max-md:py-0 px-2 rounded-md py-1 scale-90 text-_white">
+                  <span className="capitalize max-md:text-xxs text-sm border-_light_white tracking-wider border-[1px] border-opacity-25 font-thin max-md:px-1 max-md:py-0 px-2 rounded-md py-1 scale-90 text-_white">
                     {media_type}
                   </span>
                 </div>
@@ -90,7 +92,7 @@ const MoviesList: React.FC<AddMediaResponse> = ({
                       RemoveWatchlist.mutate(_id);
                     }}
                     className={clsx(
-                      "bg-red-400  max-md:px-3 max-md:py-1 hover:bg-opacity-90 transition-opacity duration-150 ease-linear px-5 py-2 rounded-md tracking-wide text-sm  font-normal text-neutral-900",
+                      "bg-red-400 w-24  max-md:px-3 max-md:py-1 hover:bg-opacity-90 transition-opacity duration-150 ease-linear px-5 py-2 rounded-md tracking-wide text-sm  font-normal text-neutral-900",
                       RemoveWatchlist.isLoading
                         ? "pointer-events-none bg-opacity-60"
                         : "opacity-100 pointer-events-auto"
