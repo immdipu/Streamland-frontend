@@ -176,6 +176,8 @@ const SingleShow: React.FC<SingleShowProps> = ({
                       id={id}
                       vote_average={vote_average}
                       showAddToWatchlist={true}
+                      original_title={original_title}
+                      title={title}
                     />
                   ) : (
                     <AddToWatchlist
@@ -187,6 +189,7 @@ const SingleShow: React.FC<SingleShowProps> = ({
                       id={id}
                       vote_average={vote_average}
                       showAddToWatchlist={true}
+                      name={name}
                     />
                   )}
                 </section>
