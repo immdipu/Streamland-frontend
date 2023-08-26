@@ -1,6 +1,6 @@
 export interface serachItemProps {
   adult: boolean;
-  id: number;
+  id: string;
   media_type: "movie" | "tv" | "person";
   original_language: string;
   original_title?: string;

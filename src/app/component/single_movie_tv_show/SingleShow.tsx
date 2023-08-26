@@ -12,6 +12,7 @@ import Cast from "../cast/Cast";
 import SimilarMovie from "../similar_movie/SimilarMovie";
 import ReccomendationMovie from "../reccomendation_movie/ReccomendationMovie";
 import CustomModal from "../modal/CustomModal";
+import AddToWatchlist from "../Buttons/AddToWatchlist";
 
 const SingleShow: React.FC<SingleShowProps> = ({
   id,
@@ -24,6 +25,7 @@ const SingleShow: React.FC<SingleShowProps> = ({
   vote_average,
   overview,
   credits,
+  first_air_date,
   original_title,
   name,
   original_name,
@@ -164,6 +166,30 @@ const SingleShow: React.FC<SingleShowProps> = ({
                   }
                   data={<div className="h-80">{Trailer}</div>}
                 />
+                <section>
+                  {TYPE === "MOVIE" ? (
+                    <AddToWatchlist
+                      release_date={release_date}
+                      backdrop_path={backdrop_path}
+                      media_type={"movie"}
+                      poster_path={poster_path}
+                      id={id}
+                      vote_average={vote_average}
+                      showAddToWatchlist={true}
+                    />
+                  ) : (
+                    <AddToWatchlist
+                      first_air_date={first_air_date}
+                      backdrop_path={backdrop_path}
+                      media_type={"tv"}
+                      original_title={original_title}
+                      poster_path={poster_path}
+                      id={id}
+                      vote_average={vote_average}
+                      showAddToWatchlist={true}
+                    />
+                  )}
+                </section>
               </div>
             </div>
             <div className=" mr-24 max-md:mr-0 max-md:mt-6 max-md:flex max-md:justify-center pt-3">

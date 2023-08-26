@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import Tooltip from "@mui/material/Tooltip";
 import { useMutation } from "@tanstack/react-query";
@@ -6,8 +7,13 @@ import { AddMediaDataTypes } from "@/types/userTypes";
 import { userApis } from "@/app/userApi";
 import { TbPlaylistAdd } from "react-icons/tb";
 import { useAppSelector } from "@/redux/hooks";
+import clsx from "clsx";
 
-const AddToWatchlist: React.FC<AddMediaDataTypes> = ({
+interface AddToWatchlistProps extends AddMediaDataTypes {
+  showAddToWatchlist?: boolean;
+}
+
+const AddToWatchlist: React.FC<AddToWatchlistProps> = ({
   id,
   title,
   original_title,
@@ -18,6 +24,7 @@ const AddToWatchlist: React.FC<AddMediaDataTypes> = ({
   vote_average,
   name,
   first_air_date,
+  showAddToWatchlist = false,
 }) => {
   const user = useAppSelector((state) => state.auth);
   const AddtoWatchlist = useMutation(
@@ -58,10 +65,25 @@ const AddToWatchlist: React.FC<AddMediaDataTypes> = ({
               toast.error("To save Watchlist Login first");
             }
           }}
-          className="w-7 hidden group-hover:grid absolute z-20 h-7 top-2 left-2 border place-content-center border-neutral-500 border-opacity-50  bg-neutral-800 bg-opacity-40 rounded-md"
+          className={clsx(
+            "z-20  border place-content-center rounded-md ",
+            showAddToWatchlist
+              ? "grid w-fit py-1 px-2 border-_light_white border-opacity-30  hover:border-opacity-80 duration-150 ease-in transition-opacity"
+              : " hidden group-hover:grid w-7 h-7 absolute bg-neutral-800 bg-opacity-40  border-neutral-500 border-opacity-50 top-2 left-2"
+          )}
         >
           {AddtoWatchlist.isLoading ? (
-            <div className="w-4 h-4 rounded-full animate-spin border-2 border-solid border-blue-700 border-t-transparent" />
+            showAddToWatchlist ? (
+              <button className="text-_light_white text-xs font-light">
+                Adding...
+              </button>
+            ) : (
+              <div className="w-4 h-4 rounded-full animate-spin border-2 border-solid border-blue-700 border-t-transparent" />
+            )
+          ) : showAddToWatchlist ? (
+            <button className="text-_light_white text-xs font-light">
+              Add to Watchlist
+            </button>
           ) : (
             <TbPlaylistAdd className="text-2xl text-neutral-300" />
           )}

@@ -110,7 +110,7 @@ export interface SingleShowProps extends showType {
   budget: number;
   credits: creditsProps;
   homepage: string;
-  id: number;
+  id: string;
   genres: genresProps[];
   imdb_id: string;
   original_language: string;
