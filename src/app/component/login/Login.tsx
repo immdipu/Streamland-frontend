@@ -291,7 +291,7 @@ const Login = () => {
                   Email or username
                 </label>
                 <input
-                  type="email"
+                  type="text"
                   id="email"
                   autoFocus
                   ref={LoginEmailUser}
