@@ -7,6 +7,7 @@ import { BsPersonSquare } from "react-icons/bs";
 import { LoggedOut } from "@/redux/slice/authSlice";
 import { useAppDispatch } from "@/redux/hooks";
 import clsx from "clsx";
+import Link from "next/link";
 
 const UserAvatar = () => {
   const user = useAppSelector((state) => state.auth);
@@ -63,10 +64,13 @@ const UserAvatar = () => {
             </span>
           </li>
 
-          <li className="flex cursor-not-allowed items-center gap-5 hover:bg-black transition-colors duration-200 ease-linear  px-4 py-2">
+          <Link
+            href={`/profile/${user.username}`}
+            className="flex  items-center gap-5 hover:bg-black transition-colors duration-200 ease-linear  px-4 py-2"
+          >
             <BsPersonSquare className="text-neutral-400 text-xl" />
             <span className="text-sm">Account</span>
-          </li>
+          </Link>
           <li
             onClick={() => {
               dispatch(LoggedOut());

@@ -34,6 +34,14 @@ const Profile = () => {
     setActiveTab(TabName ?? "about");
   }, [TabName]);
 
+  if (!user.isUserAuthenticated) {
+    return (
+      <div className="mt-64 text-center w-full text-3xl text-neutral-400 max-md:text-xl font-semibold ">
+        You need to login to view this page
+      </div>
+    );
+  }
+
   if (isLoading) {
     return (
       <div className="mt-20">
