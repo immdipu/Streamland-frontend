@@ -1,3 +1,5 @@
+import { Role } from "./role";
+
 export interface signupParamsTypes {
   fullName: string;
   username: string;
@@ -11,6 +13,7 @@ export interface loginResponseTypes {
   _id: string;
   profilePic: string;
   token?: string;
+  role: Role;
 }
 
 export interface AddMediaDataTypes {
@@ -36,4 +39,36 @@ export interface feedbackDataTypes {
   name?: string;
   user?: string;
   message: string;
+}
+
+export interface getUserDataTypes {
+  genre: string[];
+  createdAt: Date;
+  following: string[];
+  _id: string;
+  fullName: string;
+  username: string;
+  profilePic: string;
+  email_verified: boolean;
+  followers: string[];
+  ownProfile: boolean;
+  isFollowing: boolean;
+  email?: string;
+  facebook?: string;
+  bio?: "";
+  twitter?: string;
+  instagram?: string;
+  github?: string;
+}
+
+export interface EditProfileDataTypes {
+  fullName?: string;
+  username?: string;
+  bio?: string;
+  facebook?: string;
+  twitter?: string;
+  instagram?: string;
+  github?: string;
+  profilePic?: string;
+  genre?: string[];
 }

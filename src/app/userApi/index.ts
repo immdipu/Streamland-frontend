@@ -3,7 +3,9 @@ import axios from "axios";
 import {
   signupParamsTypes,
   AddMediaDataTypes,
+  getUserDataTypes,
   feedbackDataTypes,
+  EditProfileDataTypes,
 } from "@/types/userTypes";
 
 export const userApis = {
@@ -64,6 +66,27 @@ export const userApis = {
   GetNotification: async (): Promise<string[]> => {
     const res = await axios.get(
       `${process.env.NEXT_PUBLIC_USER_URL}/media/notification`
+    );
+    return res.data;
+  },
+  GetUserProfile: async (username: string): Promise<getUserDataTypes> => {
+    const res = await axiosInstance().get(
+      `${process.env.NEXT_PUBLIC_USER_URL}/user/${username}`
+    );
+    return res.data;
+  },
+  FollowUser: async (id: string): Promise<string> => {
+    const res = await axiosInstance().get(
+      `${process.env.NEXT_PUBLIC_USER_URL}/user/follow/${id}`
+    );
+    return res.data;
+  },
+  EditProfile: async (
+    data: EditProfileDataTypes
+  ): Promise<EditProfileDataTypes> => {
+    const res = await axiosInstance().post(
+      `${process.env.NEXT_PUBLIC_USER_URL}/user/editprofile`,
+      data
     );
     return res.data;
   },
