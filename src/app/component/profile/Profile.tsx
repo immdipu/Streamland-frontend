@@ -26,7 +26,7 @@ const Profile = () => {
   const user = useAppSelector((state) => state.auth);
   const [activeTab, setActiveTab] = useState(TabName ?? "about");
 
-  const { data, isLoading } = useQuery(["getUser"], () =>
+  const { data, isLoading } = useQuery(["getUser", params.username], () =>
     userApis.GetUserProfile(params.username)
   );
 
@@ -48,10 +48,6 @@ const Profile = () => {
         <ProfileCardSkeleton />
       </div>
     );
-  }
-
-  if (data) {
-    console.log(user);
   }
 
   return (

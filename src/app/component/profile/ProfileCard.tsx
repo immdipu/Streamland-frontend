@@ -129,7 +129,7 @@ const ProfileCard: React.FC<ProfileCardProps> = ({
                       key={index}
                       className=" text-xs py-1 border border-opacity-30 border-_welcometext_lightblue px-2 rounded-2xl  text-_light_white font-normal"
                     >
-                      Action
+                      {item}
                     </span>
                   ))
                 ) : (

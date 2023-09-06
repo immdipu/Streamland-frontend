@@ -4,6 +4,7 @@ import SelectInput from "./inputComponents/SelectInput";
 import { GenreList } from "@/utils/genreData";
 import { getUserDataTypes, EditProfileDataTypes } from "@/types/userTypes";
 import clsx from "clsx";
+import { useRouter } from "next/navigation";
 import { Role } from "@/types/role";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { userApis } from "@/app/userApi";
@@ -57,7 +58,8 @@ const ProfileEdit: React.FC<ProfileEditProps> = ({
     [user, setuser] = useState<getUserDataTypes>({
       ...initialUser,
     }),
-    [isEdit, setisEdit] = useState<boolean>(false);
+    [isEdit, setisEdit] = useState<boolean>(false),
+    router = useRouter();
 
   function removeEmptyFields(obj: any) {
     const newobj = { ...obj };
@@ -78,7 +80,7 @@ const ProfileEdit: React.FC<ProfileEditProps> = ({
     const cleanInitialUser = removeEmptyFields(initialUser);
     const hasChanged =
       JSON.stringify(cleanInitialUser) !== JSON.stringify(cleanUser);
-    console.log(hasChanged);
+   
     setisEdit(hasChanged);
   }, [user, initialUser]);
 
@@ -87,7 +89,8 @@ const ProfileEdit: React.FC<ProfileEditProps> = ({
     {
       onSuccess: (data) => {
         toast.success("Profile Updated");
-        queryClient.invalidateQueries(["getUser"]);
+        router.push(`/profile/${user.username}?tab=editprofile`);
+        queryClient.invalidateQueries(["getUser", user.username]);
       },
       onError: (data: any) => {
         toast.error(data.response.data);
@@ -97,6 +100,9 @@ const ProfileEdit: React.FC<ProfileEditProps> = ({
   );
 
   const handleOnchange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.name === "username") {
+      setuser({ ...user, [e.target.name]: e.target.value.trim() });
+    }
     setuser({ ...user, [e.target.name]: e.target.value });
   };
 
@@ -104,7 +110,33 @@ const ProfileEdit: React.FC<ProfileEditProps> = ({
     setuser({ ...user, genre: e });
   };
 
+  function isUsernameValid(username: string): boolean {
+    const pattern = /^[a-zA-Z0-9]+$/;
+    return pattern.test(username);
+  }
+
   const handleSubmit = () => {
+    
+    const isValid = isUsernameValid(user.username);
+    if (user.username.length > 15) {
+      return toast.error("Username cannot be more than 15 characters");
+    }
+    if (user.username.length <= 2) {
+      return toast.error("Username cannot be less than 3 characters");
+    }
+    if (user.username === "admin") {
+      return toast.error("Username cannot be admin");
+    }
+    if (user.username === "Admin") {
+      return toast.error("Username cannot be Admin");
+    }
+    if (user.username === "ADMIN") {
+      return toast.error("Username cannot be ADMIN");
+    }
+    if (!isValid) {
+      return toast.error("Username cannot contain special characters");
+    }
+
     const changedValues: any = {};
     for (const key in user) {
       if (
