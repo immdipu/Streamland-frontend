@@ -26,8 +26,9 @@ const Profile = () => {
   const user = useAppSelector((state) => state.auth);
   const [activeTab, setActiveTab] = useState(TabName ?? "about");
 
-  const { data, isLoading } = useQuery(["getUser", params.username], () =>
-    userApis.GetUserProfile(params.username)
+  const { data, isLoading, error } = useQuery(
+    ["getUser", params.username],
+    () => userApis.GetUserProfile(params.username)
   );
 
   useEffect(() => {
@@ -46,6 +47,14 @@ const Profile = () => {
     return (
       <div className="mt-20">
         <ProfileCardSkeleton />
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="mt-20 min-h-screen grid place-content-center">
+        <h5 className="text-2xl text-neutral-400">User not found</h5>
       </div>
     );
   }
