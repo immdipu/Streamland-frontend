@@ -14,7 +14,7 @@ const SingleComponent: React.FC<DesktopSingleComponentProps> = ({
       <Link
         href={href}
         className={clsx(
-          " font-Inter gap-3 font-medium flex border-l-4 rounded-md hover:bg-blue-300 hover:bg-opacity-10  px-6  py-2 items-center",
+          " font-Helvetica gap-3 font-normal tracking-wider flex border-l-4 rounded-md hover:bg-blue-300 hover:bg-opacity-10  px-6  py-2 items-center",
           active
             ? "text-white border-blue-500 "
             : "text-_light_white border-transparent"

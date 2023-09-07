@@ -6,8 +6,11 @@ import { RiMovie2Line } from "react-icons/ri";
 import { BiHelpCircle } from "react-icons/bi";
 import { SiAirplayvideo } from "react-icons/si";
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
+import { BsPersonCircle } from "react-icons/bs";
+import { useAppSelector } from "@/redux/hooks";
 
 const useSidebarRoutes = () => {
+  const user = useAppSelector((state) => state.auth);
   const pathname = usePathname();
   const routes = useMemo(
     () => [
@@ -41,8 +44,15 @@ const useSidebarRoutes = () => {
         icon: BiHelpCircle,
         active: pathname === "/about",
       },
+      {
+        label: "Profile",
+        href: `/profile/${user?.username}`,
+        icon: BsPersonCircle,
+        active: pathname === `/profile/${user?.username}`,
+      },
     ],
-    [pathname]
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [pathname, user.isUserAuthenticated]
   );
   return routes;
 };
