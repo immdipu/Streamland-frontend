@@ -35,6 +35,12 @@ export default function RootLayout({
           </div>
         </Providers>
       </body>
+      <Script
+        defer
+        src="https://unpkg.com/@tinybirdco/flock.js"
+        data-host="https://api.tinybird.co"
+        data-token="p.eyJ1IjogImVhNmZiMjM3LTIxOTctNDg1Mi05YzFiLWUzYWIxYmU1MDExZiIsICJpZCI6ICIzMjczNzVlYS02ZGRhLTQzNzYtODlhMC04NWUxY2RiMDAwM2UiLCAiaG9zdCI6ICJldV9zaGFyZWQifQ.f778Jn6SAMjrd9GtUkDv0drA55t8jLyK0YFEhxeGIbI"
+      ></Script>
     </html>
   );
 }
