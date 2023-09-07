@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 "use client";
 import React, { useState, useEffect } from "react";
 import Component from "./sidebar_component/Sidebarcomponent";
@@ -5,6 +6,7 @@ import Notifications from "./sidebar_component/Notifications";
 import Feeback from "./sidebar_component/Feeback";
 import { useMutation } from "@tanstack/react-query";
 import { userApis } from "@/app/userApi";
+import Link from "next/link";
 
 const DesktopSidebar = () => {
   const [notification, setNotification] = useState<string[]>([]);
@@ -25,6 +27,14 @@ const DesktopSidebar = () => {
   return (
     <div className="w-56 border-r-[0.2px] border-r-_light_white border-opacity-10 bg-_black_bg fixed inset-y-0">
       <Component />
+      <div className=" absolute left-0 right-0 bottom-8 text-center">
+        <Link
+          href={"/supporter"}
+          className="text-base text-blue-600 font-semibold hover:underline"
+        >
+          Become a supporter
+        </Link>
+      </div>
       {notification.length > 0 && <Notifications data={notification} />}
       <div className=" absolute bottom-0 ">
         <Feeback />

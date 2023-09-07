@@ -11,7 +11,7 @@ const Notifications = ({ data }: { data: string[] }) => {
     <>
       <div
         className={clsx(
-          "absolute bottom-12 bg-neutral-800 pl-3 z-10  rounded-md  min-h-[3rem] left-0 right-0",
+          "absolute bottom-16 bg-neutral-800 pl-3 z-10  rounded-md  min-h-[3rem] left-0 right-0",
           showNotifi ? " " : "hideNotifi"
         )}
       >
