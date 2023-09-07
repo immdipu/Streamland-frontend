@@ -80,7 +80,7 @@ const ProfileEdit: React.FC<ProfileEditProps> = ({
     const cleanInitialUser = removeEmptyFields(initialUser);
     const hasChanged =
       JSON.stringify(cleanInitialUser) !== JSON.stringify(cleanUser);
-   
+
     setisEdit(hasChanged);
   }, [user, initialUser]);
 
@@ -116,7 +116,6 @@ const ProfileEdit: React.FC<ProfileEditProps> = ({
   }
 
   const handleSubmit = () => {
-    
     const isValid = isUsernameValid(user.username);
     if (user.username.length > 15) {
       return toast.error("Username cannot be more than 15 characters");
@@ -146,7 +145,8 @@ const ProfileEdit: React.FC<ProfileEditProps> = ({
         changedValues[key as any] = user[key as keyof getUserDataTypes];
       }
     }
-    EditProfile.mutate(changedValues);
+
+    EditProfile.mutate({ ...changedValues, _id: user._id });
   };
 
   const handleTextareaChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {

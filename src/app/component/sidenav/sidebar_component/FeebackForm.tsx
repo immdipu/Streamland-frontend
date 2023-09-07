@@ -5,10 +5,14 @@ import { userApis } from "@/app/userApi";
 import { toast } from "react-hot-toast";
 import clsx from "clsx";
 import SmallLoader from "../../loader/SmallLoader";
+import { useAppSelector } from "@/redux/hooks";
+import { Role } from "@/types/role";
 
 const FeebackForm = () => {
   const [name, setname] = useState("");
   const [message, setmessage] = useState("");
+  const [checked, setchecked] = useState(false);
+  const user = useAppSelector((state) => state.auth);
 
   const modelClose = () => {
     document.getElementById("modalclosebtn")?.click();
@@ -27,9 +31,23 @@ const FeebackForm = () => {
       },
     }
   );
+  const NOtifications = useMutation(
+    (data: any) => userApis.AddNotification(data),
+    {
+      onSuccess: (data) => {
+        modelClose();
+        toast.success(data);
+      },
+      onError: (error) => {
+        console.log(error);
+        toast.error("Something went wrong");
+      },
+    }
+  );
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    console.log(checked);
 
     if (message.length < 10) {
       toast.error("Message is too short" + message.length);
@@ -39,7 +57,18 @@ const FeebackForm = () => {
       toast.error("Message is too long");
       return;
     }
-    Feedback.mutate({ name, message });
+    if (checked && user.role === Role.admin) {
+      const notifications = {
+        notification: message,
+      };
+      NOtifications.mutate(notifications);
+    } else {
+      Feedback.mutate({ name, message });
+    }
+  };
+
+  const handleCheckbox = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setchecked(event.target.checked);
   };
 
   return (
@@ -47,7 +76,17 @@ const FeebackForm = () => {
       <section className="text-gray-600 body-font relative bg-neutral-800 p-14">
         <form onSubmit={handleSubmit}>
           <div className="rounded-lg flex flex-col md:ml-auto w-full mt-10 md:mt-0 relative z-10 ">
-            <h2 className="text-white text-xl mb-1 font-medium ">Feedback</h2>
+            <h2 className="text-white text-xl mb-1 font-medium ">
+              Feedback{" "}
+              {user && user.role === Role.admin && (
+                <input
+                  type="checkbox"
+                  checked={checked}
+                  onChange={handleCheckbox}
+                />
+              )}{" "}
+            </h2>
+
             <p className="leading-relaxed mb-5 text-sm text-neutral-300">
               Any feedback or suggestion is welcome here :{")"}
             </p>

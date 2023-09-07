@@ -1,15 +1,18 @@
 import React, { useEffect, useState, useRef } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import clsx from "clsx";
+import { Role } from "@/types/role";
 
 interface TabButtonsProps {
   username: string;
   ownprofile: boolean;
+  currentuserRole: Role;
 }
 
 const TabButtons: React.FC<TabButtonsProps> = ({
   username,
   ownprofile = false,
+  currentuserRole,
 }) => {
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -25,8 +28,11 @@ const TabButtons: React.FC<TabButtonsProps> = ({
   return (
     <>
       <div className=" pl-8 flex gap-8 flex-wrap max-md:gap-3 relative">
-        {Buttons.map((item, index) => {
-          if (item === "Edit Profile" && !ownprofile) return null;
+        {Buttons.filter((item) => {
+          if (item === "Edit Profile")
+            return ownprofile || currentuserRole === Role.admin;
+          return true;
+        }).map((item, index) => {
           return (
             <button
               key={index}

@@ -10,6 +10,7 @@ import { useMutation } from "@tanstack/react-query";
 import { userApis } from "@/app/userApi";
 import { useQueryClient } from "@tanstack/react-query";
 import { toast } from "react-hot-toast";
+import clsx from "clsx";
 
 interface ProfileCardProps extends getUserDataTypes {
   role: Role;
@@ -60,7 +61,14 @@ const ProfileCard: React.FC<ProfileCardProps> = ({
           <div className=" w-full flex justify-between">
             <h4 className="font-semibold text-xl flex items-center pb-0">
               {fullName}{" "}
-              <span className="font-light text-xs ml-4  text-green-400 border border-green-500 rounded-3xl px-2 py-1">
+              <span
+                className={clsx(
+                  "font-light text-xs ml-4 rounded-3xl px-2 py-1",
+                  email_verified
+                    ? "text-green-400 border border-green-500"
+                    : "text-red-300 border border-red-300"
+                )}
+              >
                 {email_verified ? "Verified" : "Not Verified"}
               </span>
             </h4>
@@ -133,7 +141,7 @@ const ProfileCard: React.FC<ProfileCardProps> = ({
                     </span>
                   ))
                 ) : (
-                  <span className=" text-xs p   text-_light_white font-normal">
+                  <span className=" text-xs p    text-_light_white font-normal">
                     Not Available
                   </span>
                 )}

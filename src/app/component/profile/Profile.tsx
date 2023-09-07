@@ -59,6 +59,8 @@ const Profile = () => {
     );
   }
 
+  console.log(user.role);
+
   return (
     <>
       <div>
@@ -67,6 +69,7 @@ const Profile = () => {
             {data ? <ProfileCard {...data} role={user.role} /> : null}
             <section className="py-7 max-md:mx-4 mx-11 bg-neutral-800 mb-16 rounded-b-md">
               <TabButtons
+                currentuserRole={user.role}
                 username={params.username}
                 ownprofile={data?.ownProfile!}
               />

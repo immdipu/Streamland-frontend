@@ -69,6 +69,15 @@ export const userApis = {
     );
     return res.data;
   },
+
+  AddNotification: async (data: any): Promise<string> => {
+    const res = await axiosInstance().post(
+      `${process.env.NEXT_PUBLIC_USER_URL}/media/notification`,
+      data
+    );
+    return res.data;
+  },
+
   GetUserProfile: async (username: string): Promise<getUserDataTypes> => {
     const res = await axiosInstance().get(
       `${process.env.NEXT_PUBLIC_USER_URL}/user/${username}`
