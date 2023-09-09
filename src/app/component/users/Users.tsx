@@ -13,7 +13,7 @@ const Users = () => {
   const user = useAppSelector((state) => state.auth);
   const { data, isLoading, error } = useQuery(
     ["getAllUsers", user.isUserAuthenticated],
-    () => userApis.getUserList(1)
+    () => userApis.getUserList(1, "newest")
   );
 
   if (!user.isUserAuthenticated) {

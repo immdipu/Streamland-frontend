@@ -100,9 +100,14 @@ export const userApis = {
     );
     return res.data;
   },
-  getUserList: async (currentPage: number): Promise<getUserListTypes> => {
+  getUserList: async (
+    currentPage: number,
+    sort?: string
+  ): Promise<getUserListTypes> => {
     const res = await axiosInstance().get(
-      `${process.env.NEXT_PUBLIC_USER_URL}/user?page=${currentPage}`
+      `${process.env.NEXT_PUBLIC_USER_URL}/user?page=${currentPage}${
+        sort ? `&sort=${sort}` : ""
+      }`
     );
     return res.data;
   },
