@@ -1,10 +1,12 @@
 import CarouselContainer from "./component/carousel/CarouselContainer";
 import { getTrendingListResponse } from "@/types/types";
+import dynamic from "next/dynamic";
 import {
   NowPlaying,
   TrendingMovies,
   ContinueWatch,
   TrendingPerson,
+  Users,
 } from "./component";
 import { Metadata } from "next";
 
@@ -34,13 +36,17 @@ export default async function Home() {
   const trendingPerson = Apis.TrendingPerson();
   return (
     <div className="bg-_black_bg pt-20">
-      {data ? (
-        <section className=" relative overflow-hidden w-11/12 mx-auto rounded-3xl">
-          <CarouselContainer data={data} />
-        </section>
-      ) : (
-        <div>No data found</div>
-      )}
+      <section className=" relative gap-7 max-lg:flex-col  flex overflow-hidden w-11/12 h-72 max-lg:h-fit  mx-auto">
+        {data ? (
+          <div className="rounded-3xl shrink overflow-hidden">
+            <CarouselContainer data={data} />
+          </div>
+        ) : (
+          <div>No data found</div>
+        )}
+
+        <Users />
+      </section>
       <section className="mt-8">
         <div>
           <ContinueWatch />

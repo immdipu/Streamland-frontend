@@ -72,3 +72,18 @@ export interface EditProfileDataTypes {
   profilePic?: string;
   genre?: string[];
 }
+
+export interface userList {
+  _id: string;
+  fullName: string;
+  username: string;
+  profilePic: string;
+  role: Role;
+  isFollowing: boolean;
+}
+
+export interface getUserListTypes {
+  data: userList[];
+  page: number;
+  results: number;
+}

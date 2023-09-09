@@ -6,6 +6,7 @@ import {
   getUserDataTypes,
   feedbackDataTypes,
   EditProfileDataTypes,
+  getUserListTypes,
 } from "@/types/userTypes";
 
 export const userApis = {
@@ -96,6 +97,12 @@ export const userApis = {
     const res = await axiosInstance().post(
       `${process.env.NEXT_PUBLIC_USER_URL}/user/editprofile`,
       data
+    );
+    return res.data;
+  },
+  getUserList: async (currentPage: number): Promise<getUserListTypes> => {
+    const res = await axiosInstance().get(
+      `${process.env.NEXT_PUBLIC_USER_URL}/user?page=${currentPage}`
     );
     return res.data;
   },

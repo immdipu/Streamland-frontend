@@ -133,3 +133,58 @@ axis-horizontal,
         background-position: 200%;
     }
 }
+
+
+
+.userlist::-webkit-scrollbar {
+    width: 5px;
+
+
+}
+
+.userlist::-webkit-scrollbar-track {
+    background: #3e3b3bc5;
+    border-radius: 0px 20px 20px 0px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+
+}
+
+.userlist::-webkit-scrollbar-thumb {
+    background: #6b6b6b;
+    border-radius: 20px;
+}
+
+
+.slide-in-right {
+    -webkit-animation: slide-in-right 1s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+    animation: slide-in-right 1s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+}
+
+@-webkit-keyframes slide-in-right {
+    0% {
+        -webkit-transform: translateX(1000px);
+        transform: translateX(1000px);
+        opacity: 0;
+    }
+
+    100% {
+        -webkit-transform: translateX(0);
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slide-in-right {
+    0% {
+        -webkit-transform: translateX(1000px);
+        transform: translateX(1000px);
+        opacity: 0;
+    }
+
+    100% {
+        -webkit-transform: translateX(0);
+        transform: translateX(0);
+        opacity: 1;
+    }
+}

@@ -30,7 +30,7 @@ const DesktopSidebar = () => {
       <div className=" absolute left-0 right-0 bottom-8 text-center">
         <Link
           href={"/supporter"}
-          className="text-base text-blue-600 font-semibold hover:underline"
+          className="text-sm   text-blue-600 font-medium opacity-80 hover:underline"
         >
           Become a supporter
         </Link>
