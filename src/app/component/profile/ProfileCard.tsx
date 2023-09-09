@@ -130,12 +130,12 @@ const ProfileCard: React.FC<ProfileCardProps> = ({
               <span className="text-neutral-300 tracking-wide font-normal text-sm">
                 Genre:
               </span>
-              <div className="flex gap-2 ml-2 ">
+              <div className="flex flex-wrap gap-2 ml-2 ">
                 {genre.length > 0 ? (
                   genre.map((item, index) => (
                     <span
                       key={index}
-                      className=" text-xs py-1 border border-opacity-30 border-_welcometext_lightblue px-2 rounded-2xl  text-_light_white font-normal"
+                      className=" text-xs shrink-0 py-1 border border-opacity-30 border-_welcometext_lightblue px-2 rounded-2xl  text-_light_white font-normal"
                     >
                       {item}
                     </span>
