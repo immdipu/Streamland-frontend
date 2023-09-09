@@ -27,7 +27,7 @@ const SingleUserCard: React.FC<userList> = ({
   return (
     <div className=" px-4 py-2  flex items-center hover:bg-neutral-900 transition-colors duration-200 ease-linear justify-between">
       <Link
-        className="flex items-center space-x-2"
+        className="flex  w-full items-center space-x-2"
         key={_id}
         href={`/profile/${username}`}
       >
@@ -39,10 +39,10 @@ const SingleUserCard: React.FC<userList> = ({
           height={52}
         />
         <div>
-          <h1 className="font-Helvetica capitalize text-neutral-200 font-normal text-base">
+          <h1 className="font-Helvetica  items-center capitalize text-neutral-200 font-normal text-base">
             {fullName}{" "}
             {role === Role.admin && (
-              <span className="border border-_light_white rounded-full text-xs border-opacity-40 text-neutral-400 bg-neutral-800 px-2 py-1">
+              <span className="border inline-block ml-5 border-_light_white rounded-full text-xs border-opacity-40 text-neutral-400 bg-neutral-800 px-2 py-[1px]">
                 {role}
               </span>
             )}

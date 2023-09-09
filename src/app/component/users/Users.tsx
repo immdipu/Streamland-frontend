@@ -33,7 +33,7 @@ const Users = () => {
   return (
     <div className="border slide-in-right border-_light_white border-opacity-30 max-lg:w-full max-lg:h-72 w-96 rounded-3xl overflow-hidden  bg-neutral-800 bg-opacity-95 userlist flex flex-col shrink-0  overflow-y-scroll ">
       <>
-        <h3 className="ml-5 pt-3 pb-2">Recent users</h3>
+        <h3 className="ml-5 pt-3 pb-2">Recently joined users</h3>
       </>
       {data?.data
         .sort((a, b) => {
