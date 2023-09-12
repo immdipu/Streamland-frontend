@@ -1,4 +1,5 @@
-import React from "react";
+"use client";
+import React, { useEffect } from "react";
 import Images from "../ImageComponent/Image";
 import { BsCalendar2Week } from "react-icons/bs";
 import { HiMail } from "react-icons/hi";
@@ -11,6 +12,10 @@ import { userApis } from "@/app/userApi";
 import { useQueryClient } from "@tanstack/react-query";
 import { toast } from "react-hot-toast";
 import clsx from "clsx";
+import { useRouter } from "next/navigation";
+import { AiOutlineMessage } from "react-icons/ai";
+import IconButton from "@mui/material/IconButton";
+import Tooltip from "@mui/material/Tooltip";
 
 interface ProfileCardProps extends getUserDataTypes {
   role: Role;
@@ -33,6 +38,7 @@ const ProfileCard: React.FC<ProfileCardProps> = ({
 }) => {
   const [follow, setFollow] = React.useState<boolean>(isFollowing);
   const queryClient = useQueryClient();
+  const router = useRouter();
   const updateFollow = useMutation((id: string) => userApis.FollowUser(id), {
     onSuccess: (data) => {
       queryClient.invalidateQueries(["getUser"]);
@@ -41,6 +47,27 @@ const ProfileCard: React.FC<ProfileCardProps> = ({
       toast.error("Failed to follow Try Again!");
     },
   });
+
+  const createAccessChat = useMutation(
+    (id: string) => userApis.createAccessChat(id),
+    {
+      onSuccess: (data) => {
+        router.push(`/chat?id=${data._id}`);
+      },
+      onError: (data) => {
+        toast.error("Failed to create access chat Try Again!");
+      },
+    }
+  );
+
+  useEffect(() => {
+    router.prefetch(`/chat?id=${_id}`);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [_id]);
+
+  const handleStartMessage = () => {
+    createAccessChat.mutate(_id);
+  };
 
   return (
     <>
@@ -72,25 +99,40 @@ const ProfileCard: React.FC<ProfileCardProps> = ({
                 {email_verified ? "Verified" : "Not Verified"}
               </span>
             </h4>
-            {!ownProfile && (
-              <button
-                onClick={() => {
-                  updateFollow.mutate(_id);
-                  setFollow(!follow);
-                }}
-                className="border flex items-center mr-14 py-1 border-opacity-60 hover:border-opacity-100 transition-colors ease-linear duration-200 border-_light_white px-5 rounded-2xl"
+            <div className="flex gap-3 items-center">
+              <Tooltip
+                title={
+                  createAccessChat.isLoading ? "Loading Chat" : "send message"
+                }
               >
-                {follow ? (
-                  <span className="text-base max-md:text-sm  text-neutral-300 font-normal">
-                    Following
-                  </span>
-                ) : (
-                  <span className="text-base max-md:text-sm text-neutral-300 font-normal">
-                    Follow
-                  </span>
-                )}
-              </button>
-            )}
+                <IconButton onClick={handleStartMessage}>
+                  {createAccessChat.isLoading ? (
+                    <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-white"></div>
+                  ) : (
+                    <AiOutlineMessage className="text-2xl text-neutral-400" />
+                  )}
+                </IconButton>
+              </Tooltip>
+              {!ownProfile && (
+                <button
+                  onClick={() => {
+                    updateFollow.mutate(_id);
+                    setFollow(!follow);
+                  }}
+                  className="border flex items-center mr-14 py-1 border-opacity-60 hover:border-opacity-100 transition-colors ease-linear duration-200 border-_light_white px-5 rounded-2xl"
+                >
+                  {follow ? (
+                    <span className="text-base max-md:text-sm  text-neutral-300 font-normal">
+                      Following
+                    </span>
+                  ) : (
+                    <span className="text-base max-md:text-sm text-neutral-300 font-normal">
+                      Follow
+                    </span>
+                  )}
+                </button>
+              )}
+            </div>
           </div>
           <p className=" mb-2 pb-2 ">
             <span className="text-sm tracking-wide text-neutral-400 font-light">

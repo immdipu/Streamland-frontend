@@ -20,6 +20,9 @@ const SingleMessage = () => {
   const ChatId = searchParams.get("id");
   const queryClient = useQueryClient();
   const user = useAppSelector((state) => state.auth);
+  const currentActiveChat = useAppSelector(
+    (state) => state.chat.currentActiveChat
+  );
 
   const [message, setMessage] = React.useState("");
   const [Messages, setMessages] = React.useState<MessageTypes[]>([]);
@@ -85,7 +88,12 @@ const SingleMessage = () => {
   return (
     <>
       <section className=" absolute bottom-0  top-0 flex-col  w-[calc(100%-384px)]">
-        <MessageHeader />
+        {currentActiveChat && (
+          <MessageHeader
+            fullName={currentActiveChat.users[0].fullName}
+            profilePic={currentActiveChat.users[0].profilePic}
+          />
+        )}
         <section className=" mx-auto w-full  flex flex-col  h-[calc(100%-64px)]">
           <AllMessages
             setMessage={setMessages}

@@ -135,4 +135,13 @@ export const userApis = {
     );
     return res.data;
   },
+  createAccessChat: async (id: string) => {
+    const res = await axiosInstance().post(
+      `${process.env.NEXT_PUBLIC_USER_URL}/chat`,
+      {
+        userId: id,
+      }
+    );
+    return res.data;
+  },
 };

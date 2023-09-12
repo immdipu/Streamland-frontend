@@ -19,13 +19,15 @@ const AllMessages: React.FC<AllMessagesProps> = ({
   setMessage,
 }) => {
   const user = useAppSelector((state) => state.auth);
-  const { data, isLoading } = useQuery(
+  const { data, isLoading, error } = useQuery(
     ["getAllMessages", ChatId],
     () => userApis.getallMessages(ChatId),
     {
       onSuccess: (data) => {
         setMessage(data);
       },
+      retry: 2,
+      refetchOnWindowFocus: false,
     }
   );
 
@@ -41,6 +43,25 @@ const AllMessages: React.FC<AllMessagesProps> = ({
       <div className="flex items-center justify-center h-screen">
         {" "}
         <div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-neutral-400"></div>
+      </div>
+    );
+  }
+
+  if (error && Messages.length === 0) {
+    if (
+      (error as { response?: { status?: number } })?.response?.status === 404
+    ) {
+      return (
+        <div className="flex items-center justify-center h-screen">
+          {" "}
+          <h1 className="text-2xl text-neutral-400">No Message found</h1>
+        </div>
+      );
+    }
+    return (
+      <div className="flex items-center justify-center h-screen">
+        {" "}
+        <h1 className="text-2xl text-neutral-400">Something went wrong</h1>
       </div>
     );
   }
