@@ -10,6 +10,7 @@ import Login from "./login/Login";
 import About from "./about/About";
 import Watchlist from "./watchlist/Watchlist";
 import Users from "./users/Users";
+import ChatSidebar from "./chat/Sidebar/ChatSidebar";
 
 export {
   NowPlaying,
@@ -24,4 +25,5 @@ export {
   About,
   Watchlist,
   Users,
+  ChatSidebar,
 };

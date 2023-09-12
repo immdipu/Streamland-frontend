@@ -9,6 +9,8 @@ import {
   getUserListTypes,
 } from "@/types/userTypes";
 
+import { ChatsTypes } from "@/types/chatTypes";
+
 export const userApis = {
   signUp: async (data: signupParamsTypes) => {
     const res = await axios.post(
@@ -108,6 +110,28 @@ export const userApis = {
       `${process.env.NEXT_PUBLIC_USER_URL}/user?page=${currentPage}${
         sort ? `&sort=${sort}` : ""
       }`
+    );
+    return res.data;
+  },
+
+  getUserChatList: async (): Promise<ChatsTypes[]> => {
+    const res = await axiosInstance().get(
+      `${process.env.NEXT_PUBLIC_USER_URL}/chat/allchats`
+    );
+    return res.data;
+  },
+
+  sendMessage: async (data: { content: string; chatId: string }) => {
+    const res = await axiosInstance().post(
+      `${process.env.NEXT_PUBLIC_USER_URL}/message`,
+      data
+    );
+    return res.data;
+  },
+
+  getallMessages: async (chatId: string) => {
+    const res = await axiosInstance().get(
+      `${process.env.NEXT_PUBLIC_USER_URL}/message/${chatId}`
     );
     return res.data;
   },

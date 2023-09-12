@@ -11,6 +11,7 @@ import Topnav from "@/app/component/topnav/Topnav";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import { Toaster } from "react-hot-toast";
+import { usePathname } from "next/navigation";
 
 interface SearchContextProps {
   searchTerm: string;
@@ -29,6 +30,7 @@ const getSearchResult = async (query: string) => {};
 const Providers = ({ children }: { children: React.ReactNode }) => {
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [showSider, setShowSidebar] = useState(false);
+  const path = usePathname();
 
   const searchContextValue: SearchContextProps = {
     searchTerm,
@@ -42,7 +44,7 @@ const Providers = ({ children }: { children: React.ReactNode }) => {
       <QueryClientProvider client={queryClient}>
         <SearchContext.Provider value={searchContextValue}>
           <Toaster />
-          <Topnav />
+          {path !== "/chat" && <Topnav />}
           <GoogleOAuthProvider clientId="999403015017-rodh8011hs8r1l0tjlakeidj4vnu1u53.apps.googleusercontent.com">
             {children}
           </GoogleOAuthProvider>

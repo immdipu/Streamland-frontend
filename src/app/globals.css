@@ -188,3 +188,60 @@ axis-horizontal,
         opacity: 1;
     }
 }
+
+
+
+
+.chatlist-container::-webkit-scrollbar {
+    width: 5px;
+
+}
+
+
+
+.chatlist-container::-webkit-scrollbar:hover {
+    opacity: 1;
+}
+
+
+.chatlist-container::-webkit-scrollbar-track {
+    background: #3e3b3bc5;
+    border-radius: 0px 20px 20px 0px;
+    margin-bottom: 20px;
+}
+
+.chatlist-container::-webkit-scrollbar-thumb {
+    background: #6b6b6b;
+    border-radius: 20px;
+}
+
+::-webkit-scrollbar {
+    width: 5px;
+}
+
+.MessageForm:empty::before {
+    content: attr(placeholder);
+    color: #b9b3b3a6;
+    font-size: 16px;
+
+}
+
+
+.message-container::-webkit-scrollbar {
+    width: 10px;
+    position: absolute;
+    right: 0;
+}
+
+.message-container::-webkit-scrollbar-track {
+    background: #3e3b3bc5;
+    border-radius: 0px 20px 20px 0px;
+    margin-bottom: 20px;
+    position: absolute;
+    right: 0;
+}
+
+.message-container::-webkit-scrollbar-thumb {
+    background: #6b6b6b;
+    border-radius: 20px;
+}

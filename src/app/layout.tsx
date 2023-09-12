@@ -6,6 +6,7 @@ import ProgressBar from "./component/progressbar/ProgressBar";
 const inter = Inter({ subsets: ["latin"] });
 import { Analytics } from "@vercel/analytics/react";
 import Script from "next/script";
+import { usePathname } from "next/navigation";
 
 export const metadata = {
   title: "ShowMania",

@@ -14,7 +14,6 @@ import { userApis } from "@/app/userApi";
 import SmallLoader from "../loader/SmallLoader";
 import { LoggedIn } from "@/redux/slice/authSlice";
 import { useAppDispatch } from "@/redux/hooks";
-import { set } from "nprogress";
 
 const Topnav = () => {
   const router = useRouter();
@@ -40,8 +39,10 @@ const Topnav = () => {
 
   return (
     <div
-      className="pl-56 max-md:pl-0 z-50 fixed bg-transparent
-     inset-x-0 h-20 top-0"
+      className={clsx(
+        " z-50 fixed bg-transparent  inset-x-0 h-20 top-0",
+        pathname === "/chat" ? "pl-0" : "pl-56 max-md:pl-0"
+      )}
     >
       <section className="backdrop-blur-md  h-full flex items-center w-full px-5">
         <button
