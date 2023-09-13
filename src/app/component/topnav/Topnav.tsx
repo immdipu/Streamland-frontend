@@ -15,6 +15,7 @@ import SmallLoader from "../loader/SmallLoader";
 import { LoggedIn } from "@/redux/slice/authSlice";
 import { useAppDispatch } from "@/redux/hooks";
 import { useSocket } from "@/context/SocketProvider";
+import { Role } from "@/types/role";
 
 const Topnav = () => {
   const router = useRouter();
@@ -71,16 +72,18 @@ const Topnav = () => {
         </button>
 
         <SearchStatic />
-        <div>
-          <span
-            className={clsx(
-              "text-xs block  font-semibold ",
-              isOnline ? "text-green-500" : "text-red-500"
-            )}
-          >
-            {isOnline ? "Online" : "Offline"}
-          </span>
-        </div>
+        {user.role === Role.admin && (
+          <div>
+            <span
+              className={clsx(
+                "text-xs block  font-semibold ",
+                isOnline ? "text-green-500" : "text-red-500"
+              )}
+            >
+              {isOnline ? "Online" : "Offline"}
+            </span>
+          </div>
+        )}
         <section className=" w-full flex justify-end mr-16 ">
           {AutoLogin.isLoading ? (
             <SmallLoader size={30} />
