@@ -24,7 +24,7 @@ export const SocketProvider = ({ children }: { children: React.ReactNode }) => {
     console.log(socket);
     if (!user.isUserAuthenticated) return;
 
-    socket = io(`${process.env.NEXT_PUBLIC_BASE_URL}`);
+    socket = io(`${process.env.NEXT_PUBLIC_USER_URL}`);
 
     function onConnect() {
       setIsOnline(true);
