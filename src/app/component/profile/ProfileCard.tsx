@@ -102,7 +102,7 @@ const ProfileCard: React.FC<ProfileCardProps> = ({
             <div className="flex gap-3 items-center">
               {!ownProfile && (
                 <>
-                  <Tooltip
+                  {/* <Tooltip
                     title={
                       createAccessChat.isLoading
                         ? "Loading Chat"
@@ -116,7 +116,7 @@ const ProfileCard: React.FC<ProfileCardProps> = ({
                         <AiOutlineMessage className="text-2xl text-neutral-400" />
                       )}
                     </IconButton>
-                  </Tooltip>
+                  </Tooltip> */}
 
                   <button
                     onClick={() => {
