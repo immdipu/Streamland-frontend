@@ -12,7 +12,7 @@ const SenderText = ({
   return (
     <div
       className={clsx(
-        "flex justify-end",
+        "flex justify-end ",
         lastMessageFromSameSender ? "mt-1" : "mt-5"
       )}
     >

@@ -100,37 +100,42 @@ const ProfileCard: React.FC<ProfileCardProps> = ({
               </span>
             </h4>
             <div className="flex gap-3 items-center">
-              <Tooltip
-                title={
-                  createAccessChat.isLoading ? "Loading Chat" : "send message"
-                }
-              >
-                <IconButton onClick={handleStartMessage}>
-                  {createAccessChat.isLoading ? (
-                    <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-white"></div>
-                  ) : (
-                    <AiOutlineMessage className="text-2xl text-neutral-400" />
-                  )}
-                </IconButton>
-              </Tooltip>
               {!ownProfile && (
-                <button
-                  onClick={() => {
-                    updateFollow.mutate(_id);
-                    setFollow(!follow);
-                  }}
-                  className="border flex items-center mr-14 py-1 border-opacity-60 hover:border-opacity-100 transition-colors ease-linear duration-200 border-_light_white px-5 rounded-2xl"
-                >
-                  {follow ? (
-                    <span className="text-base max-md:text-sm  text-neutral-300 font-normal">
-                      Following
-                    </span>
-                  ) : (
-                    <span className="text-base max-md:text-sm text-neutral-300 font-normal">
-                      Follow
-                    </span>
-                  )}
-                </button>
+                <>
+                  <Tooltip
+                    title={
+                      createAccessChat.isLoading
+                        ? "Loading Chat"
+                        : "send message"
+                    }
+                  >
+                    <IconButton onClick={handleStartMessage}>
+                      {createAccessChat.isLoading ? (
+                        <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-white"></div>
+                      ) : (
+                        <AiOutlineMessage className="text-2xl text-neutral-400" />
+                      )}
+                    </IconButton>
+                  </Tooltip>
+
+                  <button
+                    onClick={() => {
+                      updateFollow.mutate(_id);
+                      setFollow(!follow);
+                    }}
+                    className="border flex items-center mr-14 py-1 border-opacity-60 hover:border-opacity-100 transition-colors ease-linear duration-200 border-_light_white px-5 rounded-2xl"
+                  >
+                    {follow ? (
+                      <span className="text-base max-md:text-sm  text-neutral-300 font-normal">
+                        Following
+                      </span>
+                    ) : (
+                      <span className="text-base max-md:text-sm text-neutral-300 font-normal">
+                        Follow
+                      </span>
+                    )}
+                  </button>
+                </>
               )}
             </div>
           </div>

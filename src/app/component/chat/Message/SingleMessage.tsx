@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import MessageHeader from "./MessageHeader";
 import { TbSend } from "react-icons/tb";
 import { useSearchParams } from "next/navigation";
@@ -9,6 +9,7 @@ import toast from "react-hot-toast";
 import AllMessages from "./AllMessages";
 import { MessageTypes } from "@/types/chatTypes";
 import { useAppSelector } from "@/redux/hooks";
+import { useSocket } from "@/context/SocketProvider";
 
 interface sendMessageTypes {
   content: string;
@@ -18,20 +19,55 @@ interface sendMessageTypes {
 const SingleMessage = () => {
   const searchParams = useSearchParams();
   const ChatId = searchParams.get("id");
-  const queryClient = useQueryClient();
   const user = useAppSelector((state) => state.auth);
+  const { EmitCustomEvent, socket } = useSocket();
   const currentActiveChat = useAppSelector(
     (state) => state.chat.currentActiveChat
   );
 
   const [message, setMessage] = React.useState("");
   const [Messages, setMessages] = React.useState<MessageTypes[]>([]);
+  const [isTyping, setIsTyping] = React.useState(false);
+
+  const [typingTimeout, setTypingTimeout] = useState<NodeJS.Timeout | null>(
+    null
+  );
+
+  useEffect(() => {
+    if (!user.isUserAuthenticated || !socket) return;
+    function handleUserTyping(chatId: string) {
+      if (ChatId === chatId) {
+        const messageContainer = document.querySelector(".message-container");
+        if (messageContainer) {
+          messageContainer.scrollTo(0, messageContainer.scrollHeight);
+        }
+        setIsTyping(true);
+      }
+    }
+
+    function handleUserStopTyping(chatId: string) {
+      if (ChatId === chatId) {
+        console.log(chatId, ChatId, "stop");
+        setIsTyping(false);
+      }
+    }
+
+    socket.on("Usertyping", handleUserTyping);
+    socket.on("userStopTyping", handleUserStopTyping);
+
+    return () => {
+      socket.off("Usertyping", handleUserTyping);
+      socket.off("userStopTyping", handleUserStopTyping);
+    };
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [ChatId, user.isUserAuthenticated, socket]);
+
   const sendMessage = useMutation(
     (data: sendMessageTypes) => userApis.sendMessage(data),
     {
       onSuccess: (data) => {
-        queryClient.invalidateQueries(["getAllMessages", "getAllChats"]);
-        console.log("data", data);
+        EmitCustomEvent("new message", data);
       },
       onError: (data: any) => {
         if (data.response.data) {
@@ -43,6 +79,15 @@ const SingleMessage = () => {
     }
   );
 
+  if (!user.isUserAuthenticated) {
+    return (
+      <div className="flex items-center justify-center h-screen">
+        {" "}
+        <h1 className="text-2xl text-neutral-400">Please login to continue</h1>
+      </div>
+    );
+  }
+
   if (!ChatId) {
     return (
       <div className="flex items-center justify-center h-screen">
@@ -52,6 +97,9 @@ const SingleMessage = () => {
     );
   }
   const handleMsgSend = () => {
+    if (!message || message.trim() === "") {
+      return toast.error("Message can't be empty");
+    }
     let data = {
       content: message,
       chatId: ChatId,
@@ -70,11 +118,11 @@ const SingleMessage = () => {
     } as MessageTypes;
 
     setMessages((prev) => [...prev, newMsg]);
-
     sendMessage.mutate(data);
     const contentEditable = document.querySelector(".MessageForm");
+    setMessage("");
     if (contentEditable) {
-      contentEditable.innerHTML = ""; // Clear the content
+      contentEditable.innerHTML = "";
     }
   };
 
@@ -82,7 +130,30 @@ const SingleMessage = () => {
     if (e.key === "Enter") {
       e.preventDefault();
       handleMsgSend();
+
+      EmitCustomEvent("stop typing", ChatId);
+      if (typingTimeout) {
+        clearTimeout(typingTimeout);
+        setTypingTimeout(null);
+      }
     }
+  };
+
+  const handleInput = (e: any) => {
+    const content = e.target as HTMLDivElement;
+    setMessage(content.textContent || "");
+
+    if (typingTimeout !== null) {
+      clearTimeout(typingTimeout); // Clear the previous timeout if it exists
+    }
+
+    const newTimeout = setTimeout(() => {
+      socket.emit("stop typing", ChatId);
+      setTypingTimeout(null);
+    }, 3000);
+
+    setTypingTimeout(newTimeout);
+    socket.emit("typing", ChatId);
   };
 
   return (
@@ -99,6 +170,7 @@ const SingleMessage = () => {
             setMessage={setMessages}
             ChatId={ChatId}
             Messages={Messages}
+            isTyping={isTyping}
           />
 
           {/* SEND BUTTON */}
@@ -107,12 +179,9 @@ const SingleMessage = () => {
               <div
                 contentEditable
                 placeholder="Message"
-                onKeyDown={handleKeyDown}
                 className="text-neutral-100 bg-transparent   placeholder:text-xs  MessageForm w-full outline-none"
-                onInput={(e) => {
-                  const content = e.target as HTMLDivElement;
-                  setMessage(content.textContent || "");
-                }}
+                onKeyDown={handleKeyDown}
+                onInput={handleInput}
               ></div>
             </div>
 

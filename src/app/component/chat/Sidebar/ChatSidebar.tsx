@@ -14,7 +14,8 @@ const ChatSidebar = () => {
   const user = useAppSelector((state) => state.auth);
   const { data, isLoading } = useQuery(
     ["getAllChats", user.isUserAuthenticated],
-    () => userApis.getUserChatList()
+    () => userApis.getUserChatList(),
+    { enabled: user.isUserAuthenticated }
   );
   const dispatch = useAppDispatch();
   const router = useRouter();
