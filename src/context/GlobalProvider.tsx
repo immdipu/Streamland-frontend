@@ -12,7 +12,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import { Toaster } from "react-hot-toast";
 import { usePathname } from "next/navigation";
-// import { SocketProvider } from "./SocketProvider";
+import { SocketProvider } from "./SocketProvider";
 
 interface SearchContextProps {
   searchTerm: string;
@@ -42,17 +42,17 @@ const Providers = ({ children }: { children: React.ReactNode }) => {
 
   return (
     <Provider store={store}>
-      {/* <SocketProvider> */}
-      <QueryClientProvider client={queryClient}>
-        <SearchContext.Provider value={searchContextValue}>
-          <Toaster />
-          {path !== "/chat" && <Topnav />}
-          <GoogleOAuthProvider clientId="999403015017-rodh8011hs8r1l0tjlakeidj4vnu1u53.apps.googleusercontent.com">
-            {children}
-          </GoogleOAuthProvider>
-        </SearchContext.Provider>
-      </QueryClientProvider>
-      {/* </SocketProvider> */}
+      <SocketProvider>
+        <QueryClientProvider client={queryClient}>
+          <SearchContext.Provider value={searchContextValue}>
+            <Toaster />
+            {path !== "/chat" && <Topnav />}
+            <GoogleOAuthProvider clientId="999403015017-rodh8011hs8r1l0tjlakeidj4vnu1u53.apps.googleusercontent.com">
+              {children}
+            </GoogleOAuthProvider>
+          </SearchContext.Provider>
+        </QueryClientProvider>
+      </SocketProvider>
     </Provider>
   );
 };
