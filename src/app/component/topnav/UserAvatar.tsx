@@ -8,6 +8,7 @@ import { LoggedOut } from "@/redux/slice/authSlice";
 import { useAppDispatch } from "@/redux/hooks";
 import clsx from "clsx";
 import Link from "next/link";
+import { useSocket } from "@/context/SocketProvider";
 
 const UserAvatar = () => {
   const user = useAppSelector((state) => state.auth);
@@ -16,6 +17,7 @@ const UserAvatar = () => {
   const avatarREf = useRef<HTMLDivElement>(null);
   const modal = useRef<HTMLElement>(null);
   const avatarPicREf = useRef<HTMLImageElement>(null);
+  const { isOnline } = useSocket();
 
   useEffect(() => {
     const handleClick = (e: Event) => {
@@ -39,7 +41,7 @@ const UserAvatar = () => {
       <div
         ref={avatarREf}
         onClick={() => setShowModal(!showModal)}
-        className="bg-neutral-500 cursor-pointer p-[2px] rounded-md"
+        className="bg-neutral-500 cursor-pointer relative p-[2px] rounded-md"
       >
         {user.profilePic && (
           <img
@@ -48,6 +50,9 @@ const UserAvatar = () => {
             src={user.profilePic}
             alt="user profile"
           />
+        )}
+        {isOnline && (
+          <div className="bg-green-500 w-4 h-4 -top-1 border -right-1  rounded-full absolute" />
         )}
       </div>
       <section

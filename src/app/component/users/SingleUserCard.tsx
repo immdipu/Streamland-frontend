@@ -6,38 +6,42 @@ import { Role } from "@/types/role";
 import { useMutation } from "@tanstack/react-query";
 import { userApis } from "@/app/userApi";
 import toast from "react-hot-toast";
+import { OnlineUsersTypese } from "@/types/chatTypes";
 
-const SingleUserCard: React.FC<userList> = ({
+const SingleUserCard: React.FC<OnlineUsersTypese> = ({
   _id,
   fullName,
   profilePic,
   username,
   role,
-  isFollowing,
 }) => {
-  const [follow, setFollow] = React.useState<boolean>(
-    isFollowing ? isFollowing : false
-  );
-  const updateFollow = useMutation((id: string) => userApis.FollowUser(id), {
-    onError: () => {
-      toast.error("Failed to follow Try Again!");
-    },
-  });
+  // const [follow, setFollow] = React.useState<boolean>(
+  //   isFollowing ? isFollowing : false
+  // );
+  // const updateFollow = useMutation((id: string) => userApis.FollowUser(id), {
+  //   onError: () => {
+  //     toast.error("Failed to follow Try Again!");
+  //   },
+  // });
 
   return (
     <div className=" px-4 py-2  flex items-center hover:bg-neutral-900 transition-colors duration-200 ease-linear justify-between">
       <Link
-        className="flex  w-full items-center space-x-2"
+        className="flex  w-full items-center  space-x-2"
         key={_id}
         href={`/profile/${username}`}
       >
-        <Image
-          src={profilePic}
-          alt={fullName}
-          className="rounded-full"
-          width={52}
-          height={52}
-        />
+        <div className="relative">
+          <Image
+            src={profilePic}
+            alt={fullName}
+            className="rounded-full"
+            width={52}
+            height={52}
+          />
+          <div className="bg-green-500 w-3 h-3 top-1 border right-0 rounded-full absolute" />
+        </div>
+
         <div>
           <h1 className="font-Helvetica  items-center capitalize text-neutral-200 font-normal text-base">
             {fullName}{" "}
@@ -52,7 +56,7 @@ const SingleUserCard: React.FC<userList> = ({
           </h4>
         </div>
       </Link>
-      <div>
+      {/* <div>
         <button
           onClick={() => {
             updateFollow.mutate(_id);
@@ -62,7 +66,7 @@ const SingleUserCard: React.FC<userList> = ({
         >
           {follow ? "Following" : "Follow"}
         </button>
-      </div>
+      </div> */}
     </div>
   );
 };

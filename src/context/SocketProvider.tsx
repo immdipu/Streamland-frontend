@@ -1,34 +1,36 @@
-"use client";
 import React, { createContext, useEffect, useState } from "react";
 import { io, Socket } from "socket.io-client";
-import { useAppSelector } from "@/redux/hooks";
+import { useAppSelector, useAppDispatch } from "@/redux/hooks";
+import { addOnlineUser, removeOnlineUser } from "@/redux/slice/chatSlice";
+import { OnlineUsersTypese } from "@/types/chatTypes";
 
 interface SocketContextProps {
-  socket: Socket;
+  socket: Socket | null;
   isOnline: boolean;
   EmitCustomEvent: (event: string, data: any) => void;
-  ListenCustomEvent: (event: string, callback: any) => void;
+  ListenCustomEvent: (event: string, callback: (data: any) => void) => void;
 }
 
-const SocketContext = createContext<SocketContextProps>(
-  {} as SocketContextProps
-);
-
-let socket: Socket;
+const SocketContext = createContext<SocketContextProps>({
+  socket: null,
+  isOnline: false,
+  EmitCustomEvent: () => {},
+  ListenCustomEvent: () => {},
+});
 
 export const SocketProvider = ({ children }: { children: React.ReactNode }) => {
   const user = useAppSelector((state) => state.auth);
+  const [socket, setSocket] = useState<Socket | null>(null);
   const [isOnline, setIsOnline] = useState(false);
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
-    console.log(socket);
     if (!user.isUserAuthenticated) return;
 
-    socket = io("https://cinemaaapi-dev.fl0.io");
+    const newSocket = io(`${process.env.NEXT_PUBLIC_USER_URL}`);
 
     function onConnect() {
       setIsOnline(true);
-      console.log(socket);
       console.log("Socket connected");
     }
 
@@ -37,29 +39,52 @@ export const SocketProvider = ({ children }: { children: React.ReactNode }) => {
       console.log("Socket disconnected");
     }
 
-    socket.emit("setup", user);
+    function onOnlineUser(data: OnlineUsersTypese) {
+      dispatch(addOnlineUser(data));
+    }
 
-    socket.on("connect", onConnect);
+    function onOfflineUser(data: OnlineUsersTypese) {
+      dispatch(removeOnlineUser(data));
+    }
 
-    socket.on("disconnect", onDisconnect);
+    function AllOnlineUsers(data: OnlineUsersTypese[]) {
+      console.log(data);
+      data.forEach((user) => {
+        dispatch(addOnlineUser(user));
+      });
+    }
 
-    socket.on("connect_error", (err) => {
-      console.log(err.message); // not authorized
+    newSocket.on("onlineUser", onOnlineUser);
+    newSocket.on("offlineUser", onOfflineUser);
+    newSocket.on("AllOnlineUsers", AllOnlineUsers);
+
+    newSocket.emit("login", user);
+    newSocket.on("connect", onConnect);
+    newSocket.on("disconnect", onDisconnect);
+
+    newSocket.on("connect_error", (err) => {
+      console.log(err.message); //
     });
 
+    // Set the socket instance in state
+    setSocket(newSocket);
+
+    // Disconnect the socket when the component unmounts
     return () => {
-      socket.off("connect", onConnect);
-      socket.off("disconnect", onDisconnect);
+      newSocket.disconnect();
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user.isUserAuthenticated]);
 
   const EmitCustomEvent = (event: string, data: any) => {
-    socket.emit(event, data);
+    if (socket) {
+      socket.emit(event, data);
+    }
   };
 
-  const ListenCustomEvent = (event: string, callback: any) => {
-    socket.on(event, callback);
+  const ListenCustomEvent = (event: string, callback: (data: any) => void) => {
+    if (socket) {
+      socket.on(event, callback);
+    }
   };
 
   return (

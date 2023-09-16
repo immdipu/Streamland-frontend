@@ -146,14 +146,13 @@ const SingleMessage = () => {
     if (typingTimeout !== null) {
       clearTimeout(typingTimeout); // Clear the previous timeout if it exists
     }
-
     const newTimeout = setTimeout(() => {
-      socket.emit("stop typing", ChatId);
+      socket?.emit("stop typing", ChatId);
       setTypingTimeout(null);
     }, 3000);
 
     setTypingTimeout(newTimeout);
-    socket.emit("typing", ChatId);
+    socket?.emit("typing", ChatId);
   };
 
   return (

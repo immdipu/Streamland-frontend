@@ -1,3 +1,5 @@
+import { Role } from "./role";
+
 interface User {
   _id: string;
   username: string;
@@ -27,4 +29,12 @@ export interface ChatsTypes {
   createdAt: string;
   updatedAt: string;
   latestMessage?: latestMessageProps;
+}
+
+export interface OnlineUsersTypese {
+  _id: string;
+  username: string;
+  fullName: string;
+  profilePic: string;
+  role: Role;
 }

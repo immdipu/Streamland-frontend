@@ -1,12 +1,14 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { ChatsTypes } from "@/types/chatTypes";
+import { ChatsTypes, OnlineUsersTypese } from "@/types/chatTypes";
 
 interface initialStateProps {
   currentActiveChat: ChatsTypes | null;
+  OnlineUsers: OnlineUsersTypese[];
 }
 
 const initialState: initialStateProps = {
   currentActiveChat: null,
+  OnlineUsers: [],
 };
 
 export const chatSlice = createSlice({
@@ -16,8 +18,17 @@ export const chatSlice = createSlice({
     setCurrentActiveChat: (state, action: PayloadAction<ChatsTypes>) => {
       state.currentActiveChat = action.payload;
     },
+    addOnlineUser: (state, action: PayloadAction<OnlineUsersTypese>) => {
+      state.OnlineUsers.push(action.payload);
+    },
+    removeOnlineUser: (state, action: PayloadAction<OnlineUsersTypese>) => {
+      state.OnlineUsers = state.OnlineUsers.filter(
+        (user) => user._id !== action.payload._id
+      );
+    },
   },
 });
-export const { setCurrentActiveChat } = chatSlice.actions;
+export const { setCurrentActiveChat, addOnlineUser, removeOnlineUser } =
+  chatSlice.actions;
 
 export default chatSlice.reducer;
