@@ -29,7 +29,7 @@ export const SocketProvider = ({ children }: { children: React.ReactNode }) => {
   useEffect(() => {
     if (!user.isUserAuthenticated) return;
 
-    const newSocket = io(`${process.env.NEXT_SOCKET_URL}`);
+    const newSocket = io(`${process.env.NEXT_PUBLIC_SOCKET_URL}`);
 
     function onConnect() {
       setIsOnline(true);
