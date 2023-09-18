@@ -37,7 +37,7 @@ const AllMessages: React.FC<AllMessagesProps> = React.memo(
         refetchOnWindowFocus: false,
         onSettled: () => {
           if (!socket) return;
-          EmitCustomEvent("joinRoom", ChatId);
+          EmitCustomEvent("joinAConversation", ChatId);
         },
       }
     );
@@ -51,7 +51,9 @@ const AllMessages: React.FC<AllMessagesProps> = React.memo(
 
     useEffect(() => {
       if (!socket) return;
+
       const handleMessageReceived = (data: MessageTypes) => {
+        console.log(data, "message received");
         if (data.chat._id === ChatId) {
           setMessage((prev) => [...prev, data]);
         } else {
@@ -91,7 +93,7 @@ const AllMessages: React.FC<AllMessagesProps> = React.memo(
 
     return (
       <>
-        <section className="flex-grow px-36 pr-52  w-full message-container overflow-y-scroll pt-3   ">
+        <section className="flex-grow px-36  pr-52  w-full message-container overflow-y-scroll pt-3 max-xl:px-28 max-lg:px-8  max-md:px-3  ">
           {Messages.length > 0 &&
             Messages.map((msg, index) => {
               if (msg.sender._id === user.id) {
@@ -103,6 +105,7 @@ const AllMessages: React.FC<AllMessagesProps> = React.memo(
                       Messages[index - 1].sender._id === msg.sender._id
                     }
                     message={msg.content}
+                    date={msg.createdAt}
                   />
                 );
               } else {
@@ -114,6 +117,7 @@ const AllMessages: React.FC<AllMessagesProps> = React.memo(
                       Messages[index - 1].sender._id === msg.sender._id
                     }
                     message={msg.content}
+                    date={msg.createdAt}
                   />
                 );
               }

@@ -4,11 +4,13 @@ import { ChatsTypes, OnlineUsersTypese } from "@/types/chatTypes";
 interface initialStateProps {
   currentActiveChat: ChatsTypes | null;
   OnlineUsers: OnlineUsersTypese[];
+  showChatSidebar: boolean;
 }
 
 const initialState: initialStateProps = {
   currentActiveChat: null,
   OnlineUsers: [],
+  showChatSidebar: false,
 };
 
 export const chatSlice = createSlice({
@@ -26,9 +28,17 @@ export const chatSlice = createSlice({
         (user) => user._id !== action.payload._id
       );
     },
+    toggelChatSidebar: (state) => {
+      console.log("toggelChatSidebar");
+      state.showChatSidebar = !state.showChatSidebar;
+    },
   },
 });
-export const { setCurrentActiveChat, addOnlineUser, removeOnlineUser } =
-  chatSlice.actions;
+export const {
+  setCurrentActiveChat,
+  addOnlineUser,
+  removeOnlineUser,
+  toggelChatSidebar,
+} = chatSlice.actions;
 
 export default chatSlice.reducer;

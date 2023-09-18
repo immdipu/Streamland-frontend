@@ -1,19 +1,34 @@
+"use client";
 import React from "react";
 import Image from "next/image";
+import { useAppSelector, useAppDispatch } from "@/redux/hooks";
+import { LuArrowLeft } from "react-icons/lu";
+import { toggelChatSidebar } from "@/redux/slice/chatSlice";
 
 interface MessageHeaderProps {
   fullName: string;
   profilePic: string;
-  online?: boolean;
+
+  id: string;
 }
 
 const MessageHeader: React.FC<MessageHeaderProps> = ({
   fullName,
   profilePic,
-  online = false,
+  id,
 }) => {
+  const dispatch = useAppDispatch();
+  const chat = useAppSelector((state) => state.chat);
+  const userExist = chat.OnlineUsers.find((user) => user._id === id);
+
   return (
-    <div className="bg-neutral-900 w-full h-16  flex items-center px-5">
+    <div className="bg-neutral-900 w-full h-16  flex items-center px-5 max-md:pl-2">
+      <button
+        className="px-3 max-md:block hidden "
+        onClick={() => dispatch(toggelChatSidebar())}
+      >
+        <LuArrowLeft className="text-lg text-neutral-300" />
+      </button>
       <div className="shrink-0 grid place-content-center h-12 w-12 rounded-full  ">
         <Image
           src={profilePic || "https://i.imgur.com/phEO72D.png"}
@@ -26,8 +41,8 @@ const MessageHeader: React.FC<MessageHeaderProps> = ({
         <h3 className="text-neutral-200 font-medium whitespace-nowrap overflow-hidden text-ellipsis">
           {fullName}
         </h3>
-        <p className="font-light text-xs text-neutral-400 whitespace-nowrap">
-          Not available
+        <p className="font-normal text-xs text-neutral-400 whitespace-nowrap">
+          {userExist ? "Online" : "Offline"}
         </p>
       </div>
     </div>

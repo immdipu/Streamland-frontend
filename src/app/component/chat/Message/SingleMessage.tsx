@@ -47,7 +47,6 @@ const SingleMessage = () => {
 
     function handleUserStopTyping(chatId: string) {
       if (ChatId === chatId) {
-        console.log(chatId, ChatId, "stop");
         setIsTyping(false);
       }
     }
@@ -157,11 +156,12 @@ const SingleMessage = () => {
 
   return (
     <>
-      <section className=" absolute bottom-0  top-0 flex-col  w-[calc(100%-384px)]">
+      <section className=" absolute bottom-0  top-0 flex-col max-md:w-full  w-[calc(100%-384px)]">
         {currentActiveChat && (
           <MessageHeader
             fullName={currentActiveChat.users[0].fullName}
             profilePic={currentActiveChat.users[0].profilePic}
+            id={currentActiveChat.users[0]._id}
           />
         )}
         <section className=" mx-auto w-full  flex flex-col  h-[calc(100%-64px)]">
@@ -173,7 +173,7 @@ const SingleMessage = () => {
           />
 
           {/* SEND BUTTON */}
-          <section className="py-1 px-36  mt-3 justify-self-end  flex items-center  pb-7 gap-3   w-full">
+          <section className="py-1 px-36 max-xl:px-28  mt-3 justify-self-end  flex items-center  pb-7 gap-3 max-lg:px-8  max-md:px-2  w-full">
             <div className="w-full rounded-md min-h-[48px] flex items-center bg-neutral-800 py-1 px-3">
               <div
                 contentEditable

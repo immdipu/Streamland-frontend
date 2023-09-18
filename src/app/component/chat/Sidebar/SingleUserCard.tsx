@@ -1,6 +1,6 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
-import { ChatsTypes } from "@/types/chatTypes";
+import { ChatsTypes, MessageTypes } from "@/types/chatTypes";
 import { useAppSelector } from "@/redux/hooks";
 import { useRouter } from "next/navigation";
 import moment from "moment";
@@ -8,6 +8,7 @@ import { useSearchParams } from "next/navigation";
 import { useAppDispatch } from "@/redux/hooks";
 import { setCurrentActiveChat } from "@/redux/slice/chatSlice";
 import clsx from "clsx";
+import { useSocket } from "@/context/SocketProvider";
 
 const SingleUserCard: React.FC<ChatsTypes> = ({
   _id,
@@ -39,7 +40,7 @@ const SingleUserCard: React.FC<ChatsTypes> = ({
       );
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [_id, chatId, userChat, chatName]);
+  }, [chatId]);
 
   return (
     <>
@@ -76,7 +77,12 @@ const SingleUserCard: React.FC<ChatsTypes> = ({
 
           <div className="flex">
             {latestMessage ? (
-              <p className="text-neutral-400  whitespace-nowrap pr-3 w-full text-ellipsis font-light text-sm  overflow-hidden">
+              <p
+                className={clsx(
+                  "text-neutral-400  whitespace-nowrap pr-3 w-full text-ellipsis font-light text-sm  overflow-hidden"
+                )}
+              >
+                <span>{latestMessage.sender === user.id ? "You " : ""}</span>{" "}
                 {latestMessage.content}
               </p>
             ) : (

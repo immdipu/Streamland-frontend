@@ -9,6 +9,7 @@ interface SocketContextProps {
   isOnline: boolean;
   EmitCustomEvent: (event: string, data: any) => void;
   ListenCustomEvent: (event: string, callback: (data: any) => void) => void;
+  CloseCustomEvent: (event: string, callback: (data: any) => void) => void;
 }
 
 const SocketContext = createContext<SocketContextProps>({
@@ -16,6 +17,7 @@ const SocketContext = createContext<SocketContextProps>({
   isOnline: false,
   EmitCustomEvent: () => {},
   ListenCustomEvent: () => {},
+  CloseCustomEvent: () => {},
 });
 
 export const SocketProvider = ({ children }: { children: React.ReactNode }) => {
@@ -27,7 +29,7 @@ export const SocketProvider = ({ children }: { children: React.ReactNode }) => {
   useEffect(() => {
     if (!user.isUserAuthenticated) return;
 
-    const newSocket = io(`${process.env.NEXT_PUBLIC_USER_URL}`);
+    const newSocket = io(`${process.env.NEXT_SOCKET_URL}`);
 
     function onConnect() {
       setIsOnline(true);
@@ -87,9 +89,21 @@ export const SocketProvider = ({ children }: { children: React.ReactNode }) => {
     }
   };
 
+  const CloseCustomEvent = (event: string, callback: (data: any) => void) => {
+    if (socket) {
+      socket.off(event, callback);
+    }
+  };
+
   return (
     <SocketContext.Provider
-      value={{ socket, isOnline, EmitCustomEvent, ListenCustomEvent }}
+      value={{
+        socket,
+        isOnline,
+        EmitCustomEvent,
+        ListenCustomEvent,
+        CloseCustomEvent,
+      }}
     >
       {children}
     </SocketContext.Provider>
