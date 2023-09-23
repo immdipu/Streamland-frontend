@@ -22,6 +22,7 @@ const SingleUserCard: React.FC<ChatsTypes> = ({
   const user = useAppSelector((state) => state.auth);
   const router = useRouter();
   const chatId = useSearchParams().get("id");
+  const chatType = useSearchParams().get("type");
   const dispatch = useAppDispatch();
   const userChat = users.filter((item) => item._id !== user.id);
 
@@ -46,7 +47,7 @@ const SingleUserCard: React.FC<ChatsTypes> = ({
     <>
       <div
         onClick={() => {
-          router.push(`/chat?id=${_id}`);
+          router.push(`/chat?id=${_id}&type=${chatType}`);
         }}
         className={clsx(
           "flex  py-2 hover:bg-neutral-800 px-4 transition-colors duration-300 ease-linear gap-2 items-center",

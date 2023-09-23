@@ -3,7 +3,7 @@ import { useMemo } from "react";
 import { useParams, usePathname } from "next/navigation";
 import { MdExplore } from "react-icons/md";
 import { RiMovie2Line } from "react-icons/ri";
-import { BiHelpCircle } from "react-icons/bi";
+import { BiHelpCircle, BiMessageSquareDots } from "react-icons/bi";
 import { SiAirplayvideo } from "react-icons/si";
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 import { BsPersonCircle } from "react-icons/bs";
@@ -49,6 +49,12 @@ const useSidebarRoutes = () => {
         href: `/profile/${user?.username}`,
         icon: BsPersonCircle,
         active: pathname === `/profile/${user?.username}`,
+      },
+      {
+        label: "Chat",
+        href: `/chat`,
+        icon: BiMessageSquareDots,
+        active: pathname === `/chat`,
       },
     ],
     // eslint-disable-next-line react-hooks/exhaustive-deps

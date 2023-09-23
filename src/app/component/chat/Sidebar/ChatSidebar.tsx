@@ -1,22 +1,28 @@
 "use client";
-import React, { useEffect } from "react";
+import React, { use, useEffect } from "react";
 import Link from "next/link";
 import { BiSearch } from "react-icons/bi";
 import SingleUserCard from "./SingleUserCard";
 import { useQuery, useMutation } from "@tanstack/react-query";
 import { userApis } from "@/app/userApi";
 import { useAppSelector } from "@/redux/hooks";
+import { useSearchParams } from "next/navigation";
 import { LoggedIn } from "@/redux/slice/authSlice";
 import { useAppDispatch } from "@/redux/hooks";
 import { useRouter } from "next/navigation";
 import { toggelChatSidebar } from "@/redux/slice/chatSlice";
 import { LuArrowLeft } from "react-icons/lu";
 import { BiHomeAlt2 } from "react-icons/bi";
+import { GoPlus } from "react-icons/go";
 import clsx from "clsx";
 
 const ChatSidebar = () => {
+  const chatType = useSearchParams().get("type");
   const user = useAppSelector((state) => state.auth);
   const chat = useAppSelector((state) => state.chat);
+  const [currentChatType, setCurrentChatType] = React.useState<
+    "global" | "personal"
+  >(chatType === "personal" ? "personal" : "global");
   const { data, isLoading } = useQuery(
     ["getAllChats", user.isUserAuthenticated],
     () => userApis.getUserChatList(),
@@ -39,6 +45,14 @@ const ChatSidebar = () => {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user.isUserAuthenticated]);
+
+  useEffect(() => {
+    if (chatType === "personal") {
+      setCurrentChatType("personal");
+    } else {
+      setCurrentChatType("global");
+    }
+  }, [chatType]);
 
   if (isLoading) {
     return (
@@ -85,8 +99,48 @@ const ChatSidebar = () => {
         </Link>
       </div>
       {/* messages */}
-      <section className=" mt-20 flex flex-col gap-2 chatlist-container overflow-hidden hover:overflow-y-auto  max-h-[82%]">
-        <h2 className="px-6 font-semibold text-xl">Chats</h2>
+      <section className=" mt-12 flex flex-col gap-2 chatlist-container overflow-hidden hover:overflow-y-auto  max-h-[82%]">
+        <div>
+          <div className="flex items-center justify-around gap-2 mb-5 border-b border-neutral-700 ">
+            <div>
+              <button
+                className="pb-3"
+                onClick={() => {
+                  router.push("/chat?type=global");
+                }}
+              >
+                Global chat
+              </button>
+              <div
+                className={clsx(
+                  "border-b-4 border-blue-600 rounded-xl transition-opacity duration-200 ease-linear",
+                  currentChatType === "global" ? "opacity-100" : "opacity-0"
+                )}
+              />
+            </div>
+            <div>
+              <button
+                className="pb-3"
+                onClick={() => {
+                  router.push("/chat?type=personal");
+                }}
+              >
+                Personal chat
+              </button>
+              <div
+                className={clsx(
+                  "border-b-4 rounded-xl border-blue-600 transition-opacity duration-200 ease-linear",
+                  currentChatType === "personal" ? "opacity-100" : "opacity-0"
+                )}
+              />
+            </div>
+          </div>
+        </div>
+        <div className="px-10">
+          <button className=" bg-neutral-700 font-light text-sm py-1 w-full justify-center gap-2 flex items-center">
+            <GoPlus /> <span>Create a new group</span>
+          </button>
+        </div>
         {data?.map((chat) => {
           return <SingleUserCard key={chat._id} {...chat} />;
         })}
