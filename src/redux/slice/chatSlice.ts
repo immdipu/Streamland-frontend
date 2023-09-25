@@ -1,8 +1,12 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { ChatsTypes, OnlineUsersTypese } from "@/types/chatTypes";
+import {
+  ChatsTypes,
+  GroupChatTypes,
+  OnlineUsersTypese,
+} from "@/types/chatTypes";
 
 interface initialStateProps {
-  currentActiveChat: ChatsTypes | null;
+  currentActiveChat: ChatsTypes | GroupChatTypes | null;
   OnlineUsers: OnlineUsersTypese[];
   showChatSidebar: boolean;
 }
@@ -17,7 +21,10 @@ export const chatSlice = createSlice({
   name: "chat",
   initialState,
   reducers: {
-    setCurrentActiveChat: (state, action: PayloadAction<ChatsTypes>) => {
+    setCurrentActiveChat: (
+      state,
+      action: PayloadAction<ChatsTypes | GroupChatTypes>
+    ) => {
       state.currentActiveChat = action.payload;
     },
     addOnlineUser: (state, action: PayloadAction<OnlineUsersTypese>) => {

@@ -1,9 +1,8 @@
 "use client";
-import React, { use, useEffect } from "react";
+import React, { useEffect } from "react";
 import Link from "next/link";
 import { BiSearch } from "react-icons/bi";
-import SingleUserCard from "./SingleUserCard";
-import { useQuery, useMutation } from "@tanstack/react-query";
+import { useMutation } from "@tanstack/react-query";
 import { userApis } from "@/app/userApi";
 import { useAppSelector } from "@/redux/hooks";
 import { useSearchParams } from "next/navigation";
@@ -15,6 +14,10 @@ import { LuArrowLeft } from "react-icons/lu";
 import { BiHomeAlt2 } from "react-icons/bi";
 import { GoPlus } from "react-icons/go";
 import clsx from "clsx";
+import CustomModal from "../../modal/CustomModal";
+import CreateGroupForm from "../groupchat/CreateGroupForm";
+import GroupChat from "../groupchat/GroupChat";
+import PersonalChat from "../personalChat/PersonalChat";
 
 const ChatSidebar = () => {
   const chatType = useSearchParams().get("type");
@@ -23,11 +26,7 @@ const ChatSidebar = () => {
   const [currentChatType, setCurrentChatType] = React.useState<
     "global" | "personal"
   >(chatType === "personal" ? "personal" : "global");
-  const { data, isLoading } = useQuery(
-    ["getAllChats", user.isUserAuthenticated],
-    () => userApis.getUserChatList(),
-    { enabled: user.isUserAuthenticated }
-  );
+
   const dispatch = useAppDispatch();
   const router = useRouter();
   const AutoLogin = useMutation(() => userApis.AutoLogin(), {
@@ -54,23 +53,16 @@ const ChatSidebar = () => {
     }
   }, [chatType]);
 
-  if (isLoading) {
-    return (
-      <div className="flex items-center justify-center h-screen">
-        {" "}
-        <div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-neutral-400"></div>
-      </div>
-    );
-  }
+  AutoLogin.isLoading && <div>Loading...</div>;
 
-  if (data?.length === 0) {
-    return (
-      <div className="flex items-center justify-center h-screen">
-        {" "}
-        <h1 className="text-2xl text-neutral-400">No chat found</h1>
-      </div>
-    );
-  }
+  const CreateAgroup = (
+    <button className=" bg-neutral-800 hover:bg-neutral-700 transition-colors duration-300 rounded-sm ease-linear group shadow-md font-light text-sm py-1 px-4 w-full justify-center gap-2 flex items-center">
+      <GoPlus className="text-neutral-400 group-hover:text-neutral-300" />{" "}
+      <span className="text-neutral-400 group-hover:text-neutral-300">
+        Create a new group
+      </span>
+    </button>
+  );
 
   return (
     <div
@@ -136,14 +128,18 @@ const ChatSidebar = () => {
             </div>
           </div>
         </div>
-        <div className="px-10">
-          <button className=" bg-neutral-700 font-light text-sm py-1 w-full justify-center gap-2 flex items-center">
-            <GoPlus /> <span>Create a new group</span>
-          </button>
-        </div>
-        {data?.map((chat) => {
-          return <SingleUserCard key={chat._id} {...chat} />;
-        })}
+        {currentChatType === "global" && (
+          <div className="px-10 flex justify-center mb-5 ">
+            <CustomModal
+              buttonElement={CreateAgroup}
+              data={<CreateGroupForm />}
+              width={"20rem"}
+            />
+          </div>
+        )}
+        <section>
+          {currentChatType === "global" ? <GroupChat /> : <PersonalChat />}
+        </section>
       </section>
     </div>
   );

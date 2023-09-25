@@ -4,22 +4,28 @@ import Image from "next/image";
 import { useAppSelector, useAppDispatch } from "@/redux/hooks";
 import { LuArrowLeft } from "react-icons/lu";
 import { toggelChatSidebar } from "@/redux/slice/chatSlice";
+import { BsThreeDotsVertical } from "react-icons/bs";
 
 interface MessageHeaderProps {
   fullName: string;
   profilePic: string;
-
-  id: string;
+  isGroupChat: boolean;
+  id: string | null;
 }
 
 const MessageHeader: React.FC<MessageHeaderProps> = ({
   fullName,
   profilePic,
   id,
+  isGroupChat = false,
 }) => {
   const dispatch = useAppDispatch();
   const chat = useAppSelector((state) => state.chat);
-  const userExist = chat.OnlineUsers.find((user) => user._id === id);
+
+  let userExist;
+  if (id) {
+    userExist = chat.OnlineUsers.find((user) => user._id === id);
+  }
 
   return (
     <div className="bg-neutral-900 w-full h-16  flex items-center px-5 max-md:pl-2">
@@ -41,9 +47,18 @@ const MessageHeader: React.FC<MessageHeaderProps> = ({
         <h3 className="text-neutral-200 font-medium whitespace-nowrap overflow-hidden text-ellipsis">
           {fullName}
         </h3>
-        <p className="font-normal text-xs text-neutral-400 whitespace-nowrap">
-          {userExist ? "Online" : "Offline"}
-        </p>
+        {id && (
+          <p className="font-normal text-xs text-neutral-400 whitespace-nowrap">
+            {userExist ? "Online" : "Offline"}
+          </p>
+        )}
+      </div>
+      <div className="flex-grow">
+        <div className="flex justify-end">
+          <button className="p-2 rounded-full border-neutral-700 bg-neutral-800 active:scale-75 transition-transform duration-150 ease-linear border  ">
+            <BsThreeDotsVertical className="text-lg text-neutral-300" />
+          </button>
+        </div>
       </div>
     </div>
   );

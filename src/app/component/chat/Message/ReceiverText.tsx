@@ -1,17 +1,25 @@
+/* eslint-disable @next/next/no-img-element */
 "use client";
 import clsx from "clsx";
 import React from "react";
 import moment from "moment";
+import { useAppSelector } from "@/redux/hooks";
 
 const ReceiverText = ({
   lastMessageFromSameSender,
   message,
   date,
+  senderPicture,
+  senderId,
 }: {
   lastMessageFromSameSender: boolean;
+  senderId: string;
   message: string;
   date: string;
+  senderPicture: string;
 }) => {
+  const OnlineUsers = useAppSelector((state) => state.chat.OnlineUsers);
+  const isOnline = OnlineUsers.find((user) => user._id === senderId);
   return (
     <div
       className={clsx(
@@ -44,6 +52,17 @@ const ReceiverText = ({
         </svg>
       )}
 
+      {!lastMessageFromSameSender && (
+        <div className="w-6 h-6 rounded-full absolute -left-8 top-1">
+          <img src={senderPicture} className="w-6 h-6 rounded-full" alt="" />
+          <div
+            className={clsx(
+              " w-2 h-2 rounded-full absolute bottom-0 -right-0 border border-neutral-400",
+              isOnline ? "bg-green-500" : "bg-neutral-600"
+            )}
+          />
+        </div>
+      )}
       <div
         className={clsx(
           "bg-[#434343] rounded-lg py-2 max-w-xs relative",

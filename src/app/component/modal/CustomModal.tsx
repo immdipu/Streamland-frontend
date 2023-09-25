@@ -89,7 +89,7 @@ const CustomModal: React.FC<seeMoreModal> = ({
   return (
     <>
       <Tooltip title={tooltip}>
-        <IconButton onClick={handleOpen}>{buttonElement}</IconButton>
+        <div onClick={handleOpen}>{buttonElement}</div>
       </Tooltip>
       <Modal
         aria-labelledby="spring-modal-title"

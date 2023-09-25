@@ -9,7 +9,7 @@ import {
   getUserListTypes,
 } from "@/types/userTypes";
 
-import { ChatsTypes } from "@/types/chatTypes";
+import { ChatsTypes, GroupChatTypes } from "@/types/chatTypes";
 
 export const userApis = {
   signUp: async (data: signupParamsTypes) => {
@@ -141,6 +141,29 @@ export const userApis = {
       {
         userId: id,
       }
+    );
+    return res.data;
+  },
+  createGroupChat: async (data: {
+    name: string;
+    numberOfUsersAllowed: number;
+  }) => {
+    const res = await axiosInstance().post(
+      `${process.env.NEXT_PUBLIC_USER_URL}/chat/group`,
+      data
+    );
+    return res.data;
+  },
+  getAllGroupChats: async (): Promise<GroupChatTypes[]> => {
+    const res = await axiosInstance().get(
+      `${process.env.NEXT_PUBLIC_USER_URL}/chat/group`
+    );
+    return res.data;
+  },
+  addToGroupChat: async (data: { chatId: string; userId: string }) => {
+    const res = await axiosInstance().put(
+      `${process.env.NEXT_PUBLIC_USER_URL}/chat/group`,
+      data
     );
     return res.data;
   },

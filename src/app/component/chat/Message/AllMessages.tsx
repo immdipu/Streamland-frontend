@@ -93,7 +93,7 @@ const AllMessages: React.FC<AllMessagesProps> = React.memo(
 
     return (
       <>
-        <section className="flex-grow px-36  pr-52  w-full message-container overflow-y-scroll pt-3 max-xl:px-28 max-lg:px-8  max-md:px-3  ">
+        <section className="flex-grow px-36  pr-52  w-full message-container overflow-y-scroll pt-3 max-xl:px-28 max-lg:px-8  max-md:px-3 max-md:pl-8  ">
           {Messages.length > 0 &&
             Messages.map((msg, index) => {
               if (msg.sender._id === user.id) {
@@ -111,7 +111,9 @@ const AllMessages: React.FC<AllMessagesProps> = React.memo(
               } else {
                 return (
                   <ReceiverText
+                    senderPicture={msg.sender.profilePic}
                     key={index}
+                    senderId={msg.sender._id}
                     lastMessageFromSameSender={
                       index > 0 &&
                       Messages[index - 1].sender._id === msg.sender._id

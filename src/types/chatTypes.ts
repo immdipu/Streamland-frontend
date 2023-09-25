@@ -27,6 +27,7 @@ export interface ChatsTypes {
   isGroupChat: boolean;
   users: User[];
   createdAt: string;
+  isMember: boolean;
   updatedAt: string;
   latestMessage?: latestMessageProps;
 }
@@ -37,4 +38,17 @@ export interface OnlineUsersTypese {
   fullName: string;
   profilePic: string;
   role: Role;
+}
+
+export interface GroupChatTypes {
+  _id: string;
+  chatName: string;
+  isGroupChat: boolean;
+  users: string[];
+  createdAt: string;
+  isMember: boolean;
+  groupAdmin: string;
+  numberOfUsersAllowed: number;
+  updatedAt: string;
+  latestMessage?: latestMessageProps;
 }

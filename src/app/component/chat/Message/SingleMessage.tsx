@@ -10,6 +10,7 @@ import AllMessages from "./AllMessages";
 import { MessageTypes } from "@/types/chatTypes";
 import { useAppSelector } from "@/redux/hooks";
 import { useSocket } from "@/context/SocketProvider";
+import JoinGroup from "../groupchat/component/JoinGroup";
 
 interface sendMessageTypes {
   content: string;
@@ -49,6 +50,14 @@ const SingleMessage = () => {
       if (ChatId === chatId) {
         setIsTyping(false);
       }
+    }
+
+    if (
+      currentActiveChat &&
+      currentActiveChat.isGroupChat &&
+      !currentActiveChat.isMember
+    ) {
+      return;
     }
 
     socket.on("Usertyping", handleUserTyping);
@@ -95,6 +104,20 @@ const SingleMessage = () => {
       </div>
     );
   }
+
+  if (
+    currentActiveChat &&
+    currentActiveChat.isGroupChat &&
+    currentActiveChat.isMember === false
+  ) {
+    console.log("You are not a member of this group");
+    return (
+      <div className="grid  h-screen place-items-center">
+        <JoinGroup />
+      </div>
+    );
+  }
+
   const handleMsgSend = () => {
     if (!message || message.trim() === "") {
       return toast.error("Message can't be empty");
@@ -159,9 +182,24 @@ const SingleMessage = () => {
       <section className=" absolute bottom-0  top-0 flex-col max-md:w-full  w-[calc(100%-384px)]">
         {currentActiveChat && (
           <MessageHeader
-            fullName={currentActiveChat.users[0].fullName}
-            profilePic={currentActiveChat.users[0].profilePic}
-            id={currentActiveChat.users[0]._id}
+            fullName={
+              currentActiveChat.isGroupChat
+                ? currentActiveChat.chatName
+                : typeof currentActiveChat.users[0] === "string"
+                ? currentActiveChat.users[0]
+                : currentActiveChat.users[0].fullName
+            }
+            profilePic={
+              typeof currentActiveChat.users[0] === "string"
+                ? `https://avatars.dicebear.com/api/bottts/${currentActiveChat.chatName}.svg`
+                : currentActiveChat.users[0].profilePic
+            }
+            id={
+              typeof currentActiveChat.users[0] === "string"
+                ? null
+                : currentActiveChat.users[0]._id
+            }
+            isGroupChat={currentActiveChat.isGroupChat}
           />
         )}
         <section className=" mx-auto w-full  flex flex-col  h-[calc(100%-64px)]">
