@@ -42,10 +42,10 @@ const Providers = ({ children }: { children: React.ReactNode }) => {
 
   return (
     <Provider store={store}>
+      <Toaster />
       <SocketProvider>
         <QueryClientProvider client={queryClient}>
           <SearchContext.Provider value={searchContextValue}>
-            <Toaster />
             {path !== "/chat" && <Topnav />}
             <GoogleOAuthProvider clientId="999403015017-rodh8011hs8r1l0tjlakeidj4vnu1u53.apps.googleusercontent.com">
               {children}

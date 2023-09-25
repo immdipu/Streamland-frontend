@@ -5,6 +5,7 @@ import { useAppSelector, useAppDispatch } from "@/redux/hooks";
 import { LuArrowLeft } from "react-icons/lu";
 import { toggelChatSidebar } from "@/redux/slice/chatSlice";
 import { BsThreeDotsVertical } from "react-icons/bs";
+import { toggelRightSidebar } from "@/redux/slice/chatSlice";
 
 interface MessageHeaderProps {
   fullName: string;
@@ -55,7 +56,10 @@ const MessageHeader: React.FC<MessageHeaderProps> = ({
       </div>
       <div className="flex-grow">
         <div className="flex justify-end">
-          <button className="p-2 rounded-full border-neutral-700 bg-neutral-800 active:scale-75 transition-transform duration-150 ease-linear border  ">
+          <button
+            onClick={() => dispatch(toggelRightSidebar())}
+            className="p-2 rounded-full border-neutral-700 bg-neutral-800 active:scale-75 transition-transform duration-150 ease-linear border  "
+          >
             <BsThreeDotsVertical className="text-lg text-neutral-300" />
           </button>
         </div>

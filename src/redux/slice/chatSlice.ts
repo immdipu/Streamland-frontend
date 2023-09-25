@@ -9,12 +9,14 @@ interface initialStateProps {
   currentActiveChat: ChatsTypes | GroupChatTypes | null;
   OnlineUsers: OnlineUsersTypese[];
   showChatSidebar: boolean;
+  showRightSidebar: boolean;
 }
 
 const initialState: initialStateProps = {
   currentActiveChat: null,
   OnlineUsers: [],
   showChatSidebar: false,
+  showRightSidebar: false,
 };
 
 export const chatSlice = createSlice({
@@ -36,8 +38,10 @@ export const chatSlice = createSlice({
       );
     },
     toggelChatSidebar: (state) => {
-      console.log("toggelChatSidebar");
       state.showChatSidebar = !state.showChatSidebar;
+    },
+    toggelRightSidebar: (state) => {
+      state.showRightSidebar = !state.showRightSidebar;
     },
   },
 });
@@ -46,6 +50,7 @@ export const {
   addOnlineUser,
   removeOnlineUser,
   toggelChatSidebar,
+  toggelRightSidebar,
 } = chatSlice.actions;
 
 export default chatSlice.reducer;

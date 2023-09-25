@@ -11,6 +11,7 @@ import { MessageTypes } from "@/types/chatTypes";
 import { useAppSelector } from "@/redux/hooks";
 import { useSocket } from "@/context/SocketProvider";
 import JoinGroup from "../groupchat/component/JoinGroup";
+import RightSidebar from "../RightSidebar/RightSidebar";
 
 interface sendMessageTypes {
   content: string;
@@ -179,57 +180,60 @@ const SingleMessage = () => {
 
   return (
     <>
-      <section className=" absolute bottom-0  top-0 flex-col max-md:w-full  w-[calc(100%-384px)]">
-        {currentActiveChat && (
-          <MessageHeader
-            fullName={
-              currentActiveChat.isGroupChat
-                ? currentActiveChat.chatName
-                : typeof currentActiveChat.users[0] === "string"
-                ? currentActiveChat.users[0]
-                : currentActiveChat.users[0].fullName
-            }
-            profilePic={
-              typeof currentActiveChat.users[0] === "string"
-                ? `https://avatars.dicebear.com/api/bottts/${currentActiveChat.chatName}.svg`
-                : currentActiveChat.users[0].profilePic
-            }
-            id={
-              typeof currentActiveChat.users[0] === "string"
-                ? null
-                : currentActiveChat.users[0]._id
-            }
-            isGroupChat={currentActiveChat.isGroupChat}
-          />
-        )}
-        <section className=" mx-auto w-full  flex flex-col  h-[calc(100%-64px)]">
-          <AllMessages
-            setMessage={setMessages}
-            ChatId={ChatId}
-            Messages={Messages}
-            isTyping={isTyping}
-          />
+      <section className=" absolute bottom-0 flex  top-0  max-md:w-full  w-[calc(100%-384px)]">
+        <section className="flex-col w-full">
+          {currentActiveChat && (
+            <MessageHeader
+              fullName={
+                currentActiveChat.isGroupChat
+                  ? currentActiveChat.chatName
+                  : typeof currentActiveChat.users[0] === "string"
+                  ? currentActiveChat.users[0]
+                  : currentActiveChat.users[0].fullName
+              }
+              profilePic={
+                typeof currentActiveChat.users[0] === "string"
+                  ? `https://avatars.dicebear.com/api/bottts/${currentActiveChat.chatName}.svg`
+                  : currentActiveChat.users[0].profilePic
+              }
+              id={
+                typeof currentActiveChat.users[0] === "string"
+                  ? null
+                  : currentActiveChat.users[0]._id
+              }
+              isGroupChat={currentActiveChat.isGroupChat}
+            />
+          )}
+          <section className=" mx-auto w-full  flex flex-col  h-[calc(100%-64px)]">
+            <AllMessages
+              setMessage={setMessages}
+              ChatId={ChatId}
+              Messages={Messages}
+              isTyping={isTyping}
+            />
 
-          {/* SEND BUTTON */}
-          <section className="py-1 px-36 max-xl:px-28  mt-3 justify-self-end  flex items-center  pb-7 gap-3 max-lg:px-8  max-md:px-2  w-full">
-            <div className="w-full rounded-md min-h-[48px] flex items-center bg-neutral-800 py-1 px-3">
-              <div
-                contentEditable
-                placeholder="Message"
-                className="text-neutral-100 bg-transparent   placeholder:text-xs  MessageForm w-full outline-none"
-                onKeyDown={handleKeyDown}
-                onInput={handleInput}
-              ></div>
-            </div>
+            {/* SEND BUTTON */}
+            <section className="py-1 px-36 max-xl:px-28  mt-3 justify-self-end  flex items-center  pb-7 gap-3 max-lg:px-8  max-md:px-2  w-full">
+              <div className="w-full rounded-md min-h-[48px] flex items-center bg-neutral-800 py-1 px-3">
+                <div
+                  contentEditable
+                  placeholder="Message"
+                  className="text-neutral-100 bg-transparent   placeholder:text-xs  MessageForm w-full outline-none"
+                  onKeyDown={handleKeyDown}
+                  onInput={handleInput}
+                ></div>
+              </div>
 
-            <button
-              onClick={handleMsgSend}
-              className=" bg-blue-500 rounded-full w-12  grid place-content-center h-12 shrink-0"
-            >
-              <TbSend className="text-3xl text-neutral-200" />
-            </button>
+              <button
+                onClick={handleMsgSend}
+                className=" bg-blue-500 rounded-full w-12  grid place-content-center h-12 shrink-0"
+              >
+                <TbSend className="text-3xl text-neutral-200" />
+              </button>
+            </section>
           </section>
         </section>
+        <RightSidebar ChatId={ChatId} />
       </section>
     </>
   );

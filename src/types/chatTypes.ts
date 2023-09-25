@@ -1,10 +1,11 @@
 import { Role } from "./role";
 
-interface User {
+export interface User {
   _id: string;
   username: string;
   profilePic: string;
   fullName: string;
+  role: Role;
 }
 
 export interface MessageTypes {
@@ -51,4 +52,14 @@ export interface GroupChatTypes {
   numberOfUsersAllowed: number;
   updatedAt: string;
   latestMessage?: latestMessageProps;
+}
+
+export interface GroupDetailsTypes {
+  _id: string;
+  chatName: string;
+  isGroupChat: boolean;
+  users: User[];
+  createdAt: string;
+  groupAdmin: string;
+  numberOfUsersAllowed: number;
 }

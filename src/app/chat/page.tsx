@@ -1,5 +1,6 @@
 import React from "react";
 import SingleMessage from "../component/chat/Message/SingleMessage";
+import RightSidebar from "../component/chat/RightSidebar/RightSidebar";
 
 const page = () => {
   return (

@@ -53,12 +53,8 @@ const AllMessages: React.FC<AllMessagesProps> = React.memo(
       if (!socket) return;
 
       const handleMessageReceived = (data: MessageTypes) => {
-        console.log(data, "message received");
         if (data.chat._id === ChatId) {
           setMessage((prev) => [...prev, data]);
-        } else {
-          console.log(data);
-          toast.success(`New message from ${data.sender.fullName}`);
         }
       };
       socket.on("message received", handleMessageReceived);

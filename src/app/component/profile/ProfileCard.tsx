@@ -52,18 +52,13 @@ const ProfileCard: React.FC<ProfileCardProps> = ({
     (id: string) => userApis.createAccessChat(id),
     {
       onSuccess: (data) => {
-        router.push(`/chat?id=${data._id}`);
+        router.push(`/chat?id=${data._id}&type=personal`);
       },
       onError: (data) => {
         toast.error("Failed to create access chat Try Again!");
       },
     }
   );
-
-  useEffect(() => {
-    router.prefetch(`/chat?id=${_id}`);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [_id]);
 
   const handleStartMessage = () => {
     createAccessChat.mutate(_id);
