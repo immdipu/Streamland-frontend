@@ -28,7 +28,7 @@ const Profile = () => {
 
   const { data, isLoading, error } = useQuery(
     ["getUser", params.username],
-    () => userApis.GetUserProfile(params.username)
+    () => userApis.GetUserProfile(params.username as string)
   );
 
   useEffect(() => {
@@ -70,7 +70,7 @@ const Profile = () => {
             <section className="py-7 max-md:mx-4 mx-11 bg-neutral-800 mb-16 rounded-b-md">
               <TabButtons
                 currentuserRole={user.role}
-                username={params.username}
+                username={params.username as string}
                 ownprofile={data?.ownProfile!}
               />
               {data ? (

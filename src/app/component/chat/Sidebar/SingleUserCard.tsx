@@ -83,7 +83,9 @@ const SingleUserCard: React.FC<ChatsTypes> = ({
                   "text-neutral-400  whitespace-nowrap pr-3 w-full text-ellipsis font-light text-sm  overflow-hidden"
                 )}
               >
-                <span>{latestMessage.sender === user.id ? "You " : ""}</span>{" "}
+                <span className="text-neutral-50 font-medium ">
+                  {latestMessage.sender === user.id ? "You : " : ""}
+                </span>{" "}
                 {latestMessage.content}
               </p>
             ) : (
