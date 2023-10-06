@@ -69,7 +69,7 @@ const ProfileAbout: React.FC<ProfileAboutProps> = ({
               {" "}
               Favorite Genres
             </h2>
-            <div className="flex gap-4 mt-5 -translate-x-1">
+            <div className="flex gap-4 mt-5 -translate-x-1 flex-wrap">
               {genre.map((item, key) => {
                 return (
                   <span

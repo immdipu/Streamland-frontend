@@ -85,7 +85,7 @@ const ProfileCard: React.FC<ProfileCardProps> = ({
               {fullName}{" "}
               <span
                 className={clsx(
-                  "font-light text-xs ml-4 rounded-3xl px-2 py-1",
+                  "font-light text-xs ml-4 rounded-3xl px-2 py-px ",
                   email_verified
                     ? "text-green-400 border border-green-500"
                     : "text-red-300 border border-red-300"
@@ -134,7 +134,7 @@ const ProfileCard: React.FC<ProfileCardProps> = ({
               )}
             </div>
           </div>
-          <p className=" mb-2 pb-2 ">
+          <p className=" mb-2 -translate-y-2 pb-2 ">
             <span className="text-sm tracking-wide text-neutral-400 font-light">
               @{username}
             </span>

@@ -97,7 +97,6 @@ const FeebackForm = () => {
                 className="leading-7 text-sm text-neutral-200 mb-1"
               >
                 Name{" "}
-                <span className="text-neutral-400 ml-3 text-sm">optional</span>
               </label>
               <input
                 type="text"
@@ -105,7 +104,7 @@ const FeebackForm = () => {
                 value={name}
                 onChange={(e) => setname(e.target.value)}
                 name="email"
-                placeholder="Enter your name"
+                placeholder="Enter your name (optional)"
                 className="w-full placeholder:text-sm bg-neutal-600 text-neutral-100 rounded border border-gray-600 focus:border-gray-300 focus:ring-2 focus:ring-gray-300 text-base outline-none  py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
               />
             </div>

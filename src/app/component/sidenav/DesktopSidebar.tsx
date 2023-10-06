@@ -36,7 +36,7 @@ const DesktopSidebar = () => {
         </Link>
       </div>
       {notification.length > 0 && <Notifications data={notification} />}
-      <div className=" absolute bottom-0 ">
+      <div className=" absolute bottom-0  ">
         <Feeback />
       </div>
     </div>

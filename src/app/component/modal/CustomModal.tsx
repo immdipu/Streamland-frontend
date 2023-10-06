@@ -11,61 +11,10 @@ import {
   ListItemButton,
   Collapse,
 } from "@mui/material";
-import { useSpring, animated } from "@react-spring/web";
-import {
-  tvshowCreatorProps,
-  TVshowNetworkProps,
-  TVshowSpokenLanguage,
-} from "@/types/types";
-
-import { BiChevronDown, BiChevronUp } from "react-icons/bi";
+import Fade from "@mui/material/Fade";
 
 import { AiOutlineClose } from "react-icons/ai";
 import clsx from "clsx";
-
-interface FadeProps {
-  children: React.ReactElement;
-  in?: boolean;
-  onClick?: any;
-  onEnter?: (node: HTMLElement, isAppearing: boolean) => void;
-  onExited?: (node: HTMLElement, isAppearing: boolean) => void;
-  ownerState?: any;
-}
-
-const Fade = React.forwardRef<HTMLDivElement, FadeProps>(function Fade(
-  props,
-  ref
-) {
-  const {
-    children,
-    in: open,
-    onClick,
-    onEnter,
-    onExited,
-    ownerState,
-    ...other
-  } = props;
-  const style = useSpring({
-    from: { opacity: 0 },
-    to: { opacity: open ? 1 : 0 },
-    onStart: () => {
-      if (open && onEnter) {
-        onEnter(null as any, true);
-      }
-    },
-    onRest: () => {
-      if (!open && onExited) {
-        onExited(null as any, true);
-      }
-    },
-  });
-
-  return (
-    <animated.div ref={ref} style={style} {...other}>
-      {React.cloneElement(children, { onClick })}
-    </animated.div>
-  );
-});
 
 interface seeMoreModal {
   data: ReactNode;
@@ -89,7 +38,9 @@ const CustomModal: React.FC<seeMoreModal> = ({
   return (
     <>
       <Tooltip title={tooltip}>
-        <div onClick={handleOpen}>{buttonElement}</div>
+        <div onClick={handleOpen} className="cursor-pointer">
+          {buttonElement}
+        </div>
       </Tooltip>
       <Modal
         aria-labelledby="spring-modal-title"

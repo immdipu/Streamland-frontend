@@ -16,7 +16,7 @@ const Feeback = () => {
   );
 
   return (
-    <div className="flex justify-normal">
+    <div className="flex justify-center ml-2 mb-2">
       <CustomModal buttonElement={btn} data={<FeebackForm />} width={"1/2"} />
     </div>
   );
