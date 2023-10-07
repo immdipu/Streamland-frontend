@@ -58,6 +58,7 @@ const AddToWatchlist: React.FC<AddToWatchlistProps> = ({
               vote_average,
               name,
               first_air_date,
+              type: "watchlist",
             };
             if (user.isUserAuthenticated) {
               AddtoWatchlist.mutate(data);

@@ -27,6 +27,7 @@ export interface AddMediaDataTypes {
   release_date?: string;
   first_air_date?: string;
   vote_average?: number;
+  type?: "history" | "watchlist" | "favorite";
 }
 
 export interface AddMediaResponse extends AddMediaDataTypes {

@@ -65,6 +65,7 @@ const SingleCard: React.FC<NowPlayingResponse> = ({
                 media_type: "movie",
                 release_date,
                 vote_average,
+                type: "watchlist",
               };
               if (user.isUserAuthenticated) {
                 AddtoWatchlist.mutate(data);

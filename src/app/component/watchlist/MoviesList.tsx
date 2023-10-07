@@ -10,6 +10,8 @@ import { toast } from "react-hot-toast";
 import SmallLoader from "../loader/SmallLoader";
 import clsx from "clsx";
 import { useQueryClient } from "@tanstack/react-query";
+import { useAppSelector } from "@/redux/hooks";
+import { Role } from "@/types/role";
 
 const MoviesList: React.FC<AddMediaResponse> = ({
   _id,
@@ -25,8 +27,10 @@ const MoviesList: React.FC<AddMediaResponse> = ({
   title,
   vote_average,
   Index,
+  type,
 }) => {
   const queryClient = useQueryClient();
+  const user = useAppSelector((state) => state.auth);
   const RemoveWatchlist = useMutation(
     (id: string) => userApis.RemoveMedia(id),
     {
@@ -89,6 +93,10 @@ const MoviesList: React.FC<AddMediaResponse> = ({
                   </Link>
                   <button
                     onClick={() => {
+                      if (type === "history" && user.role !== Role.admin) {
+                        toast.error("Cannot Remove from History at the moment");
+                        return;
+                      }
                       RemoveWatchlist.mutate(_id);
                     }}
                     className={clsx(

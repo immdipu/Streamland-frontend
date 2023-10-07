@@ -8,12 +8,22 @@ import { SiVlcmediaplayer } from "react-icons/si";
 import { seasonsProps, singleEpisodeTypes } from "@/types/types";
 import SmallLoader from "../loader/SmallLoader";
 import { Apis } from "@/app/tmdbApi/TmdbApi";
-import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { useQuery, useQueryClient, useMutation } from "@tanstack/react-query";
+import { AddMediaDataTypes } from "@/types/userTypes";
+import { userApis } from "@/app/userApi";
+import { useAppSelector } from "@/redux/hooks";
 
 import { useRouter } from "next/navigation";
 
-const Seasons = ({ seasons }: { seasons?: seasonsProps[] }) => {
+const Seasons = ({
+  seasons,
+  Tvshowdata,
+}: {
+  Tvshowdata: any;
+  seasons?: seasonsProps[];
+}) => {
   const params = useParams();
+  const user = useAppSelector((state) => state.auth);
   const searchParams = useSearchParams();
   const SeasonId = searchParams.get("s");
   const TotalEpisodes = searchParams.get("e");
@@ -25,7 +35,6 @@ const Seasons = ({ seasons }: { seasons?: seasonsProps[] }) => {
   const SeasonBtn4 = useRef<HTMLDivElement>(null);
   const SeasonBtn3 = useRef<HTMLParagraphElement>(null);
   const [showOverlay, setShowOverlay] = useState(true);
-
   const router = useRouter();
 
   useEffect(() => {
@@ -47,8 +56,27 @@ const Seasons = ({ seasons }: { seasons?: seasonsProps[] }) => {
     };
   }, [showSeasondropdown]);
 
+  const AddtoWatchlist = useMutation((data: AddMediaDataTypes) =>
+    userApis.AddMedia(data)
+  );
+
+  console.log(Tvshowdata);
+
   const HanldeClick = () => {
-    localStorage.setItem("tvId", params.id);
+    const datas: AddMediaDataTypes = {
+      id: params.id as string,
+      title: Tvshowdata?.name,
+      original_title: Tvshowdata?.original_name,
+      backdrop_path: Tvshowdata?.backdrop_path,
+      poster_path: Tvshowdata?.poster_path,
+      media_type: "tv",
+      release_date: Tvshowdata?.first_air_date,
+      vote_average: Tvshowdata?.vote_average,
+      type: "history",
+    };
+    if (user.isUserAuthenticated) {
+      AddtoWatchlist.mutate(datas);
+    }
     setShowOverlay(false);
   };
 
@@ -61,7 +89,7 @@ const Seasons = ({ seasons }: { seasons?: seasonsProps[] }) => {
     ],
     () =>
       Apis.GetAllEpisodes(
-        params.id!,
+        params.id as string,
         SeasonId ? SeasonId : seasons![0].season_number.toString(),
         TotalEpisodes ? parseFloat(TotalEpisodes) : seasons![0].episode_count
       ),

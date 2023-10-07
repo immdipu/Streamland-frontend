@@ -27,7 +27,7 @@ const page = async ({ params }: any) => {
       <h1 className="text-_white text-3xl font-bold pt-6 max-md:pl-2 max-md:text-xl pl-14">
         {res.name}
       </h1>
-      {res.seasons && <Seasons seasons={res.seasons} />}
+      {res.seasons && <Seasons Tvshowdata={res} seasons={res.seasons} />}
     </div>
   );
 };
