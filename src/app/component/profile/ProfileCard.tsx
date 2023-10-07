@@ -7,15 +7,16 @@ import { BiMoviePlay } from "react-icons/bi";
 import { getUserDataTypes } from "@/types/userTypes";
 import { Role } from "@/types/role";
 import moment from "moment";
-import { useMutation } from "@tanstack/react-query";
 import { userApis } from "@/app/userApi";
-import { useQueryClient } from "@tanstack/react-query";
+import { useQueryClient, useMutation } from "@tanstack/react-query";
 import { toast } from "react-hot-toast";
 import clsx from "clsx";
 import { useRouter } from "next/navigation";
 import { AiOutlineMessage } from "react-icons/ai";
 import IconButton from "@mui/material/IconButton";
 import Tooltip from "@mui/material/Tooltip";
+import CustomModal from "../modal/CustomModal";
+import FollowersList from "./FollowersFollowing/FollowersList";
 
 interface ProfileCardProps extends getUserDataTypes {
   role: Role;
@@ -63,6 +64,29 @@ const ProfileCard: React.FC<ProfileCardProps> = ({
   const handleStartMessage = () => {
     createAccessChat.mutate(_id);
   };
+
+  const Followers = (
+    <div>
+      <span className="text-neutral-300 font-semibold tracking-wide  text-sm">
+        {followers.length}
+      </span>
+      <span className="ml-2 text-sm text-_light_white font-normal">
+        Followers
+      </span>
+    </div>
+  );
+
+  const Following = (
+    <div>
+      <span className="text-neutral-300 font-semibold tracking-wide text-sm">
+        {following.length}
+      </span>
+      <span className="ml-2 text-sm text-_light_white font-normal">
+        {" "}
+        Following
+      </span>
+    </div>
+  );
 
   return (
     <>
@@ -191,21 +215,22 @@ const ProfileCard: React.FC<ProfileCardProps> = ({
             </div>
             <div className="flex items-center mt-4 gap-8 mb-2  translate-x-[4px]">
               <div>
-                <span className="text-neutral-300 font-semibold tracking-wide text-sm">
-                  {following.length}
-                </span>
-                <span className="ml-2 text-sm text-_light_white font-normal">
-                  {" "}
-                  Following
-                </span>
+                <CustomModal
+                  buttonElement={Following}
+                  data={<FollowersList tab="Following" id={_id} />}
+                  key={_id}
+                  tooltip="Following"
+                  width={"1/2"}
+                />
               </div>
               <div>
-                <span className="text-neutral-300 font-semibold tracking-wide  text-sm">
-                  {followers.length}
-                </span>
-                <span className="ml-2 text-sm text-_light_white font-normal">
-                  Followers
-                </span>
+                <CustomModal
+                  buttonElement={Followers}
+                  data={<FollowersList tab="Followers" id={_id} />}
+                  key={_id}
+                  tooltip="Followers"
+                  width={"1/2"}
+                />
               </div>
             </div>
           </section>

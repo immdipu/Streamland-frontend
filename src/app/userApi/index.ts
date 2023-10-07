@@ -7,6 +7,7 @@ import {
   feedbackDataTypes,
   EditProfileDataTypes,
   getUserListTypes,
+  FollowFollowingList,
 } from "@/types/userTypes";
 
 import {
@@ -105,6 +106,16 @@ export const userApis = {
     );
     return res.data;
   },
+
+  getFollowersFollowingList: async (
+    id: string
+  ): Promise<FollowFollowingList> => {
+    const res = await axiosInstance().get(
+      `${process.env.NEXT_PUBLIC_USER_URL}/user/followers/${id}`
+    );
+    return res.data;
+  },
+
   EditProfile: async (
     data: EditProfileDataTypes
   ): Promise<EditProfileDataTypes> => {

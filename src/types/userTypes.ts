@@ -88,3 +88,17 @@ export interface getUserListTypes {
   page: number;
   results: number;
 }
+
+export interface FollowFollowersTypes {
+  _id: string;
+  fullName: string;
+  username: string;
+  profilePic: string;
+  isFollowing: boolean;
+  isAFollower: boolean;
+  role: Role;
+}
+export interface FollowFollowingList {
+  followers: FollowFollowersTypes[];
+  following: FollowFollowersTypes[];
+}
