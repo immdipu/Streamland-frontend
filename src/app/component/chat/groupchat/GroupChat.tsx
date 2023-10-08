@@ -21,7 +21,6 @@ const GroupChat = () => {
   if (!data) {
     return <div>No data found</div>;
   }
-  console.log(data);
 
   return (
     <>

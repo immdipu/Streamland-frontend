@@ -60,7 +60,7 @@ const Seasons = ({
     userApis.AddMedia(data)
   );
 
-  console.log(Tvshowdata);
+  
 
   const HanldeClick = () => {
     const datas: AddMediaDataTypes = {

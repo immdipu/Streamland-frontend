@@ -6,7 +6,7 @@ import { usePathname } from "next/navigation";
 
 const Sidebar = () => {
   const path = usePathname();
-  console.log(path);
+
   return path === "/chat" ? null : (
     <div className="">
       <div className="max-md:hidden">

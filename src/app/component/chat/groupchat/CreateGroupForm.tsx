@@ -22,9 +22,7 @@ const CreateGroupForm = () => {
         numberOfUsersAllowed: Number(numberOfUsersAllowed),
       }),
     {
-      onSuccess: (data) => {
-        console.log(data);
-      },
+      onSuccess: (data) => {},
       onError: (error) => {
         console.log(error);
       },

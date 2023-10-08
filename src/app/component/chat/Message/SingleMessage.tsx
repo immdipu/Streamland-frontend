@@ -111,7 +111,7 @@ const SingleMessage = () => {
     currentActiveChat.isGroupChat &&
     currentActiveChat.isMember === false
   ) {
-    console.log("You are not a member of this group");
+    
     return (
       <div className="grid  h-screen place-items-center">
         <JoinGroup />

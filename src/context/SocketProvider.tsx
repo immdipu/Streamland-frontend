@@ -10,6 +10,7 @@ import clsx from "clsx";
 
 interface SocketContextProps {
   socket: Socket | null;
+  notificationSocket: Socket | null;
   isOnline: boolean;
   EmitCustomEvent: (event: string, data: any) => void;
   ListenCustomEvent: (event: string, callback: (data: any) => void) => void;
@@ -17,6 +18,7 @@ interface SocketContextProps {
 }
 
 const SocketContext = createContext<SocketContextProps>({
+  notificationSocket: null,
   socket: null,
   isOnline: false,
   EmitCustomEvent: () => {},
@@ -30,8 +32,13 @@ export const SocketProvider = ({ children }: { children: React.ReactNode }) => {
   const pathanme = usePathname();
   const [isOnline, setIsOnline] = useState(false);
   const dispatch = useAppDispatch();
+  const [notificationSocket, setNotificationSocket] = useState<Socket | null>(
+    null
+  );
 
   useEffect(() => {
+    const notificationSocket = io(`${process.env.NEXT_PUBLIC_SOCKET_URL}`);
+    setNotificationSocket(notificationSocket);
     if (!user.isUserAuthenticated) return;
 
     const newSocket = io(`${process.env.NEXT_PUBLIC_SOCKET_URL}`);
@@ -55,7 +62,6 @@ export const SocketProvider = ({ children }: { children: React.ReactNode }) => {
     }
 
     function AllOnlineUsers(data: OnlineUsersTypese[]) {
-      console.log(data);
       data.forEach((user) => {
         dispatch(addOnlineUser(user));
       });
@@ -79,6 +85,7 @@ export const SocketProvider = ({ children }: { children: React.ReactNode }) => {
     // Disconnect the socket when the component unmounts
     return () => {
       newSocket.disconnect();
+      notificationSocket.disconnect();
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user.isUserAuthenticated]);
@@ -156,6 +163,7 @@ export const SocketProvider = ({ children }: { children: React.ReactNode }) => {
   return (
     <SocketContext.Provider
       value={{
+        notificationSocket,
         socket,
         isOnline,
         EmitCustomEvent,

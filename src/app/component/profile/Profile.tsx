@@ -59,7 +59,7 @@ const Profile = () => {
     );
   }
 
-  console.log(user.role);
+  
 
   return (
     <>

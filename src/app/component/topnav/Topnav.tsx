@@ -15,6 +15,7 @@ import SmallLoader from "../loader/SmallLoader";
 import { LoggedIn } from "@/redux/slice/authSlice";
 import { useAppDispatch } from "@/redux/hooks";
 import { Role } from "@/types/role";
+import Notification from "../notification/Notification";
 
 const Topnav = () => {
   const router = useRouter();
@@ -70,7 +71,11 @@ const Topnav = () => {
         </button>
 
         <SearchStatic />
+
         <section className=" w-full flex justify-end mr-16 ">
+          <section className=" mr-10 flex items-center">
+            <Notification />
+          </section>
           {AutoLogin.isLoading ? (
             <SmallLoader size={30} />
           ) : (

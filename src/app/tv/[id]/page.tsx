@@ -21,7 +21,7 @@ export async function generateMetadata({ params }: any) {
 
 const page = async ({ params }: any) => {
   const res: SingleShowProps = await getSingleTv(params.id);
-  console.log(res);
+
   return (
     <div className="bg-_black_bg">
       <SingleShow {...res} TYPE="TV" />

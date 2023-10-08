@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useMutation } from "@tanstack/react-query";
 import { feedbackDataTypes } from "@/types/userTypes";
 import { userApis } from "@/app/userApi";
@@ -7,12 +7,16 @@ import clsx from "clsx";
 import SmallLoader from "../../loader/SmallLoader";
 import { useAppSelector } from "@/redux/hooks";
 import { Role } from "@/types/role";
+import { useSocket } from "@/context/SocketProvider";
 
 const FeebackForm = () => {
   const [name, setname] = useState("");
   const [message, setmessage] = useState("");
-  const [checked, setchecked] = useState(false);
+  const [saveNotificatoinchecked, setSaveNotificationChecked] = useState(false);
+  const [sealTimeNotificationChecked, setRealTimeNotificationChecked] =
+    useState(false);
   const user = useAppSelector((state) => state.auth);
+  const { notificationSocket } = useSocket();
 
   const modelClose = () => {
     document.getElementById("modalclosebtn")?.click();
@@ -47,7 +51,6 @@ const FeebackForm = () => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(checked);
 
     if (message.length < 10) {
       toast.error("Message is too short" + message.length);
@@ -57,18 +60,32 @@ const FeebackForm = () => {
       toast.error("Message is too long");
       return;
     }
-    if (checked && user.role === Role.admin) {
-      const notifications = {
-        notification: message,
-      };
-      NOtifications.mutate(notifications);
+    if (user.role === Role.admin) {
+      if (saveNotificatoinchecked) {
+        const notifications = {
+          notification: message,
+        };
+        NOtifications.mutate(notifications);
+      }
+
+      if (sealTimeNotificationChecked && notificationSocket) {
+        notificationSocket.emit("NewNotification", {
+          message,
+        });
+      }
     } else {
       Feedback.mutate({ name, message });
     }
   };
 
-  const handleCheckbox = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setchecked(event.target.checked);
+  const handleSaveCheckbox = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setSaveNotificationChecked(event.target.checked);
+  };
+
+  const handleRealtimeCheckbox = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    setRealTimeNotificationChecked(event.target.checked);
   };
 
   return (
@@ -76,16 +93,39 @@ const FeebackForm = () => {
       <section className="text-gray-600 body-font relative bg-neutral-800 p-14">
         <form onSubmit={handleSubmit}>
           <div className="rounded-lg flex flex-col md:ml-auto w-full mt-10 md:mt-0 relative z-10 ">
-            <h2 className="text-white text-xl mb-1 font-medium ">
-              Feedback{" "}
-              {user && user.role === Role.admin && (
-                <input
-                  type="checkbox"
-                  checked={checked}
-                  onChange={handleCheckbox}
-                />
-              )}{" "}
-            </h2>
+            <h2 className="text-white text-xl mb-1 font-medium ">Feedback </h2>
+            {user && user.role === Role.admin && (
+              <div className="my-4">
+                <div className="flex items-center">
+                  <label
+                    htmlFor="savenotification"
+                    className="text-neutral-200 font-light text-sm"
+                  >
+                    Save Notification
+                  </label>
+                  <input
+                    type="checkbox"
+                    checked={saveNotificatoinchecked}
+                    onChange={handleSaveCheckbox}
+                    className="ml-20"
+                  />
+                </div>
+                <div className="flex items-center mt-2">
+                  <label
+                    htmlFor="savenotification"
+                    className="text-neutral-200 font-light text-sm"
+                  >
+                    Send Real-Time Notification
+                  </label>
+                  <input
+                    type="checkbox"
+                    checked={sealTimeNotificationChecked}
+                    onChange={handleRealtimeCheckbox}
+                    className="ml-2"
+                  />
+                </div>
+              </div>
+            )}
 
             <p className="leading-relaxed mb-5 text-sm text-neutral-300">
               Any feedback or suggestion is welcome here :{")"}

@@ -32,7 +32,7 @@ const AllUsers = () => {
       setLoading(true);
       try {
         const { data } = await userApis.getUserList(page);
-        console.log(data);
+
         if (data.length === 0) {
           setHasMore(false);
         }
