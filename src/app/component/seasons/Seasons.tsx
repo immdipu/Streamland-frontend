@@ -60,12 +60,10 @@ const Seasons = ({
     userApis.AddMedia(data)
   );
 
-  
-
   const HanldeClick = () => {
     const datas: AddMediaDataTypes = {
       id: params.id as string,
-      title: Tvshowdata?.name,
+      name: Tvshowdata?.name,
       original_title: Tvshowdata?.original_name,
       backdrop_path: Tvshowdata?.backdrop_path,
       poster_path: Tvshowdata?.poster_path,
