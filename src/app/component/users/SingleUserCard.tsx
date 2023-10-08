@@ -7,14 +7,21 @@ import { useMutation } from "@tanstack/react-query";
 import { userApis } from "@/app/userApi";
 import toast from "react-hot-toast";
 import { OnlineUsersTypese } from "@/types/chatTypes";
+import { useAppSelector } from "@/redux/hooks";
 
-const SingleUserCard: React.FC<OnlineUsersTypese> = ({
+interface OnlineusersLoginas extends OnlineUsersTypese {
+  showLoginAs?: boolean;
+}
+
+const SingleUserCard: React.FC<OnlineusersLoginas> = ({
   _id,
   fullName,
   profilePic,
   username,
   role,
+  showLoginAs = false,
 }) => {
+  const user = useAppSelector((state) => state.auth);
   // const [follow, setFollow] = React.useState<boolean>(
   //   isFollowing ? isFollowing : false
   // );
@@ -23,6 +30,20 @@ const SingleUserCard: React.FC<OnlineUsersTypese> = ({
   //     toast.error("Failed to follow Try Again!");
   //   },
   // });
+
+  const handleLoginAsUser = async () => {
+    if (user.role !== Role.admin) return toast.error("You are not admin");
+    try {
+      const data = await userApis.loginasUser(_id);
+      if (data?.token) {
+        localStorage.setItem("token", data.token);
+        toast.success("Logged in as " + fullName);
+        window.location.reload();
+      }
+    } catch (error: any) {
+      console.log(error);
+    }
+  };
 
   return (
     <div className=" px-4 py-2  flex items-center hover:bg-neutral-900 transition-colors duration-200 ease-linear justify-between">
@@ -67,6 +88,16 @@ const SingleUserCard: React.FC<OnlineUsersTypese> = ({
           {follow ? "Following" : "Follow"}
         </button>
       </div> */}
+      {user.role === Role.admin && showLoginAs && (
+        <div className="w-fit shrink-0">
+          <button
+            onClick={handleLoginAsUser}
+            className="text-xs text-neutral-400 w-full font-normal border border-_welcometext_lightblue rounded-full px-2 py-1 hover:text-neutral-200"
+          >
+            Login as <span className="text-blue-500">{fullName}</span>
+          </button>
+        </div>
+      )}
     </div>
   );
 };

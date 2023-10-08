@@ -68,7 +68,7 @@ const Seasons = ({
       backdrop_path: Tvshowdata?.backdrop_path,
       poster_path: Tvshowdata?.poster_path,
       media_type: "tv",
-      release_date: Tvshowdata?.first_air_date,
+      first_air_date: Tvshowdata?.first_air_date,
       vote_average: Tvshowdata?.vote_average,
       type: "history",
     };

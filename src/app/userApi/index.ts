@@ -208,4 +208,10 @@ export const userApis = {
     );
     return res.data;
   },
+  loginasUser: async (id: string) => {
+    const res = await axiosInstance().get(
+      `${process.env.NEXT_PUBLIC_USER_URL}/user/loginas/${id}`
+    );
+    return res.data;
+  },
 };

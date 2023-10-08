@@ -6,32 +6,30 @@ import { userApis } from "@/app/userApi";
 import SingleUserCard from "./SingleUserCard";
 import { useAppSelector } from "@/redux/hooks";
 import { Role } from "@/types/role";
-// const CustomModal = dynamic(() => import("@/app/component/modal/CustomModal"));
-// const AllUsers = dynamic(() => import("./AllUsers"));
+const CustomModal = dynamic(() => import("@/app/component/modal/CustomModal"));
+const AllUsers = dynamic(() => import("./AllUsers"));
 
 const Users = () => {
-  // const user = useAppSelector((state) => state.auth);
+  const user = useAppSelector((state) => state.auth);
   const chat = useAppSelector((state) => state.chat);
-  // const { data, isLoading, error } = useQuery(
-  //   ["getAllUsers", user.isUserAuthenticated],
-  //   () => userApis.getUserList(1, "newest")
-  // );
+  const { data, isLoading, error } = useQuery(
+    ["getAllUsers", user.isUserAuthenticated],
+    () => userApis.getUserList(1, "newest")
+  );
 
-  // if (!user.isUserAuthenticated) {
-  //   return null;
-  // }
+  if (!user.isUserAuthenticated) {
+    return null;
+  }
 
-  // if (isLoading) {
-  //   return null;
-  // }
+  if (isLoading) {
+    return null;
+  }
 
   const btn = (
     <button className="my-2 text-sm hover:text-neutral-100 transition-colors duration-200 ease-linear text-neutral-300">
       See More
     </button>
   );
-
-  if (chat.OnlineUsers.length === 0) return null;
 
   return (
     <div className="border slide-in-right border-_light_white border-opacity-30 max-lg:w-full max-lg:h-72 w-96 rounded-3xl overflow-hidden  bg-neutral-800 bg-opacity-95 userlist flex flex-col shrink-0  overflow-y-scroll ">
@@ -49,15 +47,19 @@ const Users = () => {
             return <SingleUserCard key={item._id} {...item} />;
           })}
       <>
-        {/* <CustomModal
-          buttonElement={btn}
-          data={
-            <>
-              <AllUsers />
-            </>
-          }
-          width={"1/2"}
-        /> */}
+        {user.role === Role.admin && (
+          <div className="absolute bottom-0 flex justify-center right-0 left-0">
+            <CustomModal
+              buttonElement={btn}
+              data={
+                <>
+                  <AllUsers />
+                </>
+              }
+              width={"1/2"}
+            />
+          </div>
+        )}
       </>
     </div>
   );

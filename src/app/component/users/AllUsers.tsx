@@ -89,7 +89,9 @@ const AllUsers = () => {
           })
           ?.map((item) => {
             if (item._id === user.id && item.role !== Role.admin) return null;
-            return <SingleUserCard key={item._id} {...item} />;
+            return (
+              <SingleUserCard showLoginAs={true} key={item._id} {...item} />
+            );
           })}
       </>
       {loading && hasMore && (
