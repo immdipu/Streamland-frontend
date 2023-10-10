@@ -6,123 +6,32 @@ import { useRouter, useSearchParams, useParams } from "next/navigation";
 import { createURL } from "@/utils/utils";
 
 const PersonMovieShows = ({ data }: { data: serachItemProps[] }) => {
-  const [sort, setSort] = React.useState("alpha-asc");
-  const [categories, setCategories] = React.useState("all");
-  const [filteredData, setFilteredData] = React.useState(data);
   const router = useRouter();
   const searchParams = useSearchParams();
   const { id } = useParams();
 
   const handleSortbyCategories = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setCategories(e.target.value);
     const newParams = new URLSearchParams(searchParams.toString());
     newParams.set("categories", e.target.value);
     router.push(createURL(`/person/${id}`, newParams));
   };
 
   const handleSortby = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setSort(e.target.value);
     const newParams = new URLSearchParams(searchParams.toString());
     newParams.set("sort", e.target.value);
     router.push(createURL(`/person/${id}`, newParams));
   };
 
-  React.useEffect(() => {
-    const params = new URLSearchParams(searchParams.toString());
-    const sort = params.get("sort");
-    const categories = params.get("categories");
-
-    if (sort) {
-      if (sort === "alpha-asc") {
-        setFilteredData(
-          data.sort((a, b) => {
-            if (a.title && b.title) {
-              return a.title.localeCompare(b.title);
-            } else if (a.name && b.name) {
-              return a.name.localeCompare(b.name);
-            } else {
-              return 0;
-            }
-          })
-        );
-      }
-      if (sort === "alpha-desc") {
-        setFilteredData(
-          filteredData.sort((a, b) => {
-            if (a.title && b.title) {
-              return b.title.localeCompare(a.title);
-            } else if (a.name && b.name) {
-              return b.name.localeCompare(a.name);
-            } else {
-              return 0;
-            }
-          })
-        );
-      }
-
-      if (sort === "date-asc") {
-        const refactoreddata = filteredData.filter(
-          (item) => item.release_date !== "" && item.first_air_date !== ""
-        );
-        setFilteredData(
-          refactoreddata.sort((a, b) => {
-            let aDate = a.release_date ? a.release_date : a.first_air_date;
-            let bDate = b.release_date ? b.release_date : b.first_air_date;
-
-            if (aDate && bDate) {
-              return aDate.localeCompare(bDate);
-            } else {
-              return 0;
-            }
-          })
-        );
-      }
-
-      if (sort === "date-desc") {
-        const refactoreddata = filteredData.filter(
-          (item) => item.release_date !== "" || item.first_air_date !== ""
-        );
-
-        setFilteredData(
-          refactoreddata.sort((a, b) => {
-            let aDate = a.release_date ? a.release_date : a.first_air_date;
-            let bDate = b.release_date ? b.release_date : b.first_air_date;
-            if (aDate && bDate) {
-              const dateA = new Date(aDate);
-              const dateB = new Date(bDate);
-              return dateA.getTime() - dateB.getTime();
-            } else {
-              return 0;
-            }
-          })
-        );
-      }
-    }
-    // if (categories) {
-    //   if (categories === "all") {
-    //     setFilteredData(data);
-    //   } else if (categories === "movie") {
-    //     setFilteredData(
-    //       filteredData.filter((item) => item.media_type === "movie")
-    //     );
-    //   } else if (categories === "tv") {
-    //     setFilteredData(
-    //       filteredData.filter((item) => item.media_type === "tv")
-    //     );
-    //   }
-    // }
-  }, [searchParams]);
-
   const dataSort = (data: serachItemProps[]) => {
     const params = new URLSearchParams(searchParams.toString());
-    const sort = params.get("sort");
+    let sort = params.get("sort");
     const categories = params.get("categories");
 
     let newData = data;
 
     if (sort) {
       if (sort === "alpha-asc") {
-        newData.sort((a, b) => {
+        newData = newData.sort((a, b) => {
           if (a.title && b.title) {
             return a.title.localeCompare(b.title);
           } else if (a.name && b.name) {
@@ -133,7 +42,7 @@ const PersonMovieShows = ({ data }: { data: serachItemProps[] }) => {
         });
       }
       if (sort === "alpha-desc") {
-        newData.sort((a, b) => {
+        newData = newData.sort((a, b) => {
           if (a.title && b.title) {
             return b.title.localeCompare(a.title);
           } else if (a.name && b.name) {
@@ -209,7 +118,19 @@ const PersonMovieShows = ({ data }: { data: serachItemProps[] }) => {
           }
         });
       }
+    } else {
+      sort = "alpha-asc";
+      newData = newData.sort((a, b) => {
+        if (a.title && b.title) {
+          return a.title.localeCompare(b.title);
+        } else if (a.name && b.name) {
+          return a.name.localeCompare(b.name);
+        } else {
+          return 0;
+        }
+      });
     }
+
     if (categories) {
       if (categories === "all") {
         newData = newData = data;
@@ -234,7 +155,6 @@ const PersonMovieShows = ({ data }: { data: serachItemProps[] }) => {
               id="sort"
               onChange={handleSortby}
               className=" text-sm px-1 py-1 rounded-sm font-normal text-neutral-200 "
-              defaultValue={searchParams.get("sort") ?? "alpha-asc"}
               value={searchParams.get("sort") ?? "alpha-asc"}
             >
               <option value="alpha-asc">Alphabetically (A-Z)</option>
@@ -250,7 +170,6 @@ const PersonMovieShows = ({ data }: { data: serachItemProps[] }) => {
               id="categories"
               className=" text-sm px-1 py-1 rounded-sm font-normal text-neutral-200 "
               onChange={handleSortbyCategories}
-              defaultValue={searchParams.get("categories") ?? "all"}
               value={searchParams.get("categories") ?? "all"}
             >
               <option value="all">All categories</option>
