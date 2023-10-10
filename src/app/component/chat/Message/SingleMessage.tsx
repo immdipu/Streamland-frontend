@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import MessageHeader from "./MessageHeader";
 import { TbSend } from "react-icons/tb";
 import { useSearchParams } from "next/navigation";
@@ -12,6 +12,9 @@ import { useAppSelector } from "@/redux/hooks";
 import { useSocket } from "@/context/SocketProvider";
 import JoinGroup from "../groupchat/component/JoinGroup";
 import RightSidebar from "../RightSidebar/RightSidebar";
+import data, { Emoji } from "@emoji-mart/data";
+import Picker from "@emoji-mart/react";
+import { HiOutlineEmojiHappy } from "react-icons/hi";
 
 interface sendMessageTypes {
   content: string;
@@ -30,6 +33,8 @@ const SingleMessage = () => {
   const [message, setMessage] = React.useState("");
   const [Messages, setMessages] = React.useState<MessageTypes[]>([]);
   const [isTyping, setIsTyping] = React.useState(false);
+  const [showEmoji, setShowEmoji] = useState(false);
+  const messageDivRef = useRef<HTMLDivElement>(null);
 
   const [typingTimeout, setTypingTimeout] = useState<NodeJS.Timeout | null>(
     null
@@ -111,7 +116,6 @@ const SingleMessage = () => {
     currentActiveChat.isGroupChat &&
     currentActiveChat.isMember === false
   ) {
-    
     return (
       <div className="grid  h-screen place-items-center">
         <JoinGroup />
@@ -123,6 +127,7 @@ const SingleMessage = () => {
     if (!message || message.trim() === "") {
       return toast.error("Message can't be empty");
     }
+
     let data = {
       content: message,
       chatId: ChatId,
@@ -214,14 +219,33 @@ const SingleMessage = () => {
 
             {/* SEND BUTTON */}
             <section className="py-1 px-36 max-xl:px-28  mt-3 justify-self-end  flex items-center  pb-7 gap-3 max-lg:px-8  max-md:px-2  w-full">
-              <div className="w-full rounded-md min-h-[48px] flex items-center bg-neutral-800 py-1 px-3">
+              <div className="w-full rounded-md  relative min-h-[48px] flex items-center bg-neutral-800 py-1 px-3">
                 <div
                   contentEditable
                   placeholder="Message"
                   className="text-neutral-100 bg-transparent   placeholder:text-xs  MessageForm w-full outline-none"
                   onKeyDown={handleKeyDown}
                   onInput={handleInput}
+                  ref={messageDivRef}
                 ></div>
+                <HiOutlineEmojiHappy
+                  className="text-neutral-400 text-2xl cursor-pointer"
+                  onClick={() => setShowEmoji(!showEmoji)}
+                />
+                {showEmoji && (
+                  <div className="absolute  bottom-14 right-0 z-10">
+                    <Picker
+                      data={data}
+                      onClickOutside={() => setShowEmoji(false)}
+                      onEmojiSelect={(e: any) => {
+                        setMessage(message + e.native);
+                        if (messageDivRef.current) {
+                          messageDivRef.current.innerHTML += e.native;
+                        }
+                      }}
+                    />
+                  </div>
+                )}
               </div>
 
               <button

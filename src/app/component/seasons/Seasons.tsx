@@ -143,7 +143,7 @@ const Seasons = ({
           <div className=" w-[450px] max-md:w-full  py-6 px-3 ">
             <section className="bg-neutral-800 h-full overflow-y-auto rounded-3xl py-5 px-4">
               <section
-                className="flex items-center relative  bg-_black_bg hover:bg-opacity-60 cursor-pointer justify-center rounded-3xl"
+                className="flex items-center relative  bg-blue-700 hover:bg-opacity-60 cursor-pointer justify-center rounded-3xl"
                 onClick={() => setShowSeasondropdown(!showSeasondropdown)}
                 ref={SeasonBtn}
               >
@@ -162,7 +162,7 @@ const Seasons = ({
                 {/* dropdown */}
                 <section
                   className={clsx(
-                    "bg-_black_bg border border-neutral-500 border-opacity-25 absolute mt-2 shadow-lg  top-8 w-full overflow-y-auto duration-200 transition-all ease-in-out  flex flex-col  rounded-3xl seasonScroll",
+                    "bg-_black_bg border border-neutral-500 z-10 border-opacity-25 absolute mt-2 shadow-lg  top-8 w-full overflow-y-auto duration-200 transition-all ease-in-out  flex flex-col  rounded-3xl seasonScroll",
                     showSeasondropdown ? "max-h-60 py-3 px-3" : "p-0 max-h-0"
                   )}
                   ref={Seasondropdown}
