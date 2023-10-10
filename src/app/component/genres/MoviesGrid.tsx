@@ -6,21 +6,21 @@ import SingleCard from "../silder/SingleCard";
 import SmallLoader from "../loader/SmallLoader";
 import SingleTvCard from "../silder/SingleTvCard";
 import { Apis } from "@/app/tmdbApi/TmdbApi";
+import { BiUpArrowAlt } from "react-icons/bi";
 
 interface MovieGridTypes {
   genre: "MOVIE" | "TV";
 }
 
 const MoviesGrid: React.FC<MovieGridTypes> = ({ genre }) => {
-  const searchParams = useSearchParams();
-  const genreId = searchParams.get("tab");
-  const [data, setData] = useState<NowPlayingResponse[] | singleTVShowProps[]>(
-    []
-  );
-  const [loading, setLoading] = useState(false);
-  const [hasMore, setHasMore] = useState(true);
-  const containerRef = useRef<HTMLDivElement | null>(null);
-  const currentPageRef = useRef(1); // Use a ref to store the current page number
+  const searchParams = useSearchParams(),
+    genreId = searchParams.get("tab"),
+    [data, setData] = useState<NowPlayingResponse[] | singleTVShowProps[]>([]),
+    [loading, setLoading] = useState(false),
+    [hasMore, setHasMore] = useState(true),
+    containerRef = useRef<HTMLDivElement | null>(null),
+    currentPageRef = useRef(1),
+    [showScrolltoTop, setShowScrolltoTop] = useState(false);
 
   useEffect(() => {
     const getMovies = async (id: string, page: number) => {
@@ -139,6 +139,12 @@ const MoviesGrid: React.FC<MovieGridTypes> = ({ genre }) => {
     };
 
     const handleScroll = () => {
+      if (window.scrollY > 1000) {
+        setShowScrolltoTop(true);
+      } else {
+        setShowScrolltoTop(false);
+      }
+
       if (
         containerRef.current &&
         containerRef.current.getBoundingClientRect().bottom <=
@@ -147,6 +153,7 @@ const MoviesGrid: React.FC<MovieGridTypes> = ({ genre }) => {
         const nextPage = currentPageRef.current + 1;
         fetchNextPage(nextPage);
         currentPageRef.current = nextPage;
+      } else {
       }
     };
 
@@ -199,6 +206,19 @@ const MoviesGrid: React.FC<MovieGridTypes> = ({ genre }) => {
         </div>
       )}
       {!loading && !hasMore && <p className="text-white text-center">End</p>}
+      {showScrolltoTop && (
+        <button
+          className="fixed active:scale-95 shadow-md bottom-5 w-10 grid place-content-center cursor-pointer h-10 right-6 bg-neutral-700 rounded-full  "
+          onClick={() => {
+            window.scrollTo({
+              top: 0,
+              behavior: "smooth",
+            });
+          }}
+        >
+          <BiUpArrowAlt className="text-xl" />
+        </button>
+      )}
     </div>
   );
 };
