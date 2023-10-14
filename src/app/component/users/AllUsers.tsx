@@ -15,6 +15,7 @@ const AllUsers = () => {
   const [loading, setLoading] = useState(false);
   const [hasMore, setHasMore] = useState(true);
   const containerRef = useRef<HTMLDivElement | null>(null);
+
   const currentPageRef = useRef(1);
 
   useEffect(() => {
@@ -78,6 +79,23 @@ const AllUsers = () => {
       ref={containerRef}
       className="h-[80vh] my-3 overflow-y-scroll userlist py-5 "
     >
+      <div className=" h-12 z-10 focus-within:border-neutral-700 transition-colors duration-300 ease-linear border border-transparent sticky px-3 rounded-md mx-6 top-0 bg-neutral-800">
+        <input
+          type="search"
+          className="bg-transparent outline-none w-full text-neutral-200 font-light h-full placeholder:text-neutral-500"
+          placeholder="Search users by name"
+          onChange={(e) => {
+            const value = e.target.value;
+            if (value === "") {
+              return setUsers([]);
+            }
+            const filteredUsers = users.filter((item) =>
+              item.fullName.toLowerCase().includes(value.toLowerCase())
+            );
+            setUsers(filteredUsers);
+          }}
+        />
+      </div>
       <>
         <h3 className="ml-5 pt-3 pb-2 ">Recent users</h3>
       </>
