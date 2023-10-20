@@ -12,6 +12,8 @@ import clsx from "clsx";
 import { useQueryClient } from "@tanstack/react-query";
 import { useAppSelector } from "@/redux/hooks";
 import { Role } from "@/types/role";
+import moment from "moment";
+import { Tooltip } from "@mui/material";
 
 const MoviesList: React.FC<AddMediaResponse> = ({
   _id,
@@ -68,28 +70,34 @@ const MoviesList: React.FC<AddMediaResponse> = ({
               </h3>
               <div className="flex flex-col justify-between  h-full justify-self-stretch ">
                 <div className="flex items-center  gap-6 ml-2 max-md:ml-0 max-md:mb-3 mt-2 text-xs">
-                  <div className="flex  items-center gap-2">
+                  <div className="flex  items-center gap-4">
                     <p className="text-_light_white max-md:text-xxs text-sm font-normal ">
                       {media_type === "movie"
                         ? release_date?.split("-")[0]
                         : first_air_date?.split("-")[0]}
                     </p>
                     <div className="flex gap-1 max-md:text-xxs text-sm  text-_light_white items-center">
-                      <span>{vote_average}</span>
+                      <span>{Number(vote_average)?.toFixed(2)}</span>
                       <GiRoundStar className="text-yellow-500 mb-[1px]" />
                     </div>
                   </div>
 
-                  <span className="capitalize max-md:text-xxs text-sm border-_light_white tracking-wider border-[1px] border-opacity-25 font-thin max-md:px-1 max-md:py-0 px-2 rounded-md py-1 scale-90 text-_white">
+                  <span className="uppercase max-md:text-xxs  text-xs  border-_light_white tracking-wider border-[1px] border-opacity-25 font-thin max-md:px-1 max-md:py-0 px-2 rounded-md py-px scale-90 text-_white">
                     {media_type}
                   </span>
                 </div>
+                <Tooltip title={moment(createdAt).format("llll")}>
+                  <p className="text-xs max-md:text-xxs text-_light_white font-light ml-2 max-md:ml-0">
+                    Added on {moment(createdAt).fromNow()}
+                  </p>
+                </Tooltip>
+
                 <section className=" flex  items-center  mb-3 gap-6">
                   <Link
                     href={`/${media_type}/${id}`}
                     className="bg-_genre_chip_bg hover:text-neutral-100 px-5 max-md:px-3 max-md:py-1  py-2 rounded-md tracking-wide text-sm font-light text-neutral-300 "
                   >
-                    Watch
+                    {type === "history" ? "Continue watching" : "Watch Now"}
                   </Link>
                   <button
                     onClick={() => {
