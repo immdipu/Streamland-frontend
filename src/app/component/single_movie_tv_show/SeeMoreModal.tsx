@@ -213,14 +213,12 @@ const SeeMoreModal: React.FC<seeMoreModal> = ({
                     <div className="flex  px-2 gap-2 mt-1 items-center flex-wrap">
                       {spoken_languages.map((item) => {
                         return (
-                          <>
-                            <p
-                              className="text-xs text-_light_white"
-                              key={item.name}
-                            >
-                              {item.name}
-                            </p>
-                          </>
+                          <p
+                            className="text-xs text-_light_white"
+                            key={item.name}
+                          >
+                            {item.name}
+                          </p>
                         );
                       })}
                     </div>

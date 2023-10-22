@@ -1,6 +1,5 @@
 import CarouselContainer from "./component/carousel/CarouselContainer";
 import { getTrendingListResponse } from "@/types/types";
-import dynamic from "next/dynamic";
 import {
   NowPlaying,
   TrendingMovies,
@@ -14,7 +13,7 @@ import { Apis } from "./tmdbApi/TmdbApi";
 import { Suspense } from "react";
 
 export const metadata: Metadata = {
-  title: "ShowMania | Home",
+  title: "ShowMania",
 };
 
 async function getTrendingList() {

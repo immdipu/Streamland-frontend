@@ -58,7 +58,6 @@ const Login = () => {
   });
   const LogIn = useMutation((data: any) => userApis.LogIn(data), {
     onSuccess: (data) => {
-     
       dispatch(LoggedIn(data));
       toast.success(" Logged in successfully");
     },

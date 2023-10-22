@@ -45,12 +45,10 @@ export const SocketProvider = ({ children }: { children: React.ReactNode }) => {
 
     function onConnect() {
       setIsOnline(true);
-      console.log("Socket connected");
     }
 
     function onDisconnect() {
       setIsOnline(false);
-      console.log("Socket disconnected");
     }
 
     function onOnlineUser(data: OnlineUsersTypese) {

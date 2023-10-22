@@ -8,6 +8,7 @@ import {
   EditProfileDataTypes,
   getUserListTypes,
   FollowFollowingList,
+  userList,
 } from "@/types/userTypes";
 
 import {
@@ -133,6 +134,13 @@ export const userApis = {
       `${process.env.NEXT_PUBLIC_USER_URL}/user?page=${currentPage}${
         sort ? `&sort=${sort}` : ""
       }`
+    );
+    return res.data;
+  },
+
+  searchUser: async (search: string): Promise<userList[]> => {
+    const res = await axiosInstance().get(
+      `${process.env.NEXT_PUBLIC_USER_URL}/user/search/term?q=${search}`
     );
     return res.data;
   },
