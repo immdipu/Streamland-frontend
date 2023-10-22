@@ -10,7 +10,7 @@ import Script from "next/script";
 export const metadata = {
   title: "ShowMania",
   description:
-    "ShowMania is a website where you can stream different movies and tv shows for free. We do not store any copyright-protected content on our website. Any linked content is stored only in third-party websites. This is a promotional website only. All files placed here are for introducing purpose.",
+    "At ShowMania, you can stream movies and TV shows for free. Plus, chat with other users, share your thoughts, and engage in discussions. We do not store any copyright-protected content on our website. Any linked content is stored only in third-party websites. This is a promotional website only. All files placed here are for introducing purposes",
   applicationName: "ShowMania",
   referrer: "origin-when-cross-origin",
   colorScheme: "dark",
