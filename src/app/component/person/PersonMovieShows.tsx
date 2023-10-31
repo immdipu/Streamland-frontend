@@ -13,13 +13,13 @@ const PersonMovieShows = ({ data }: { data: serachItemProps[] }) => {
   const handleSortbyCategories = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const newParams = new URLSearchParams(searchParams.toString());
     newParams.set("categories", e.target.value);
-    router.push(createURL(`/person/${id}`, newParams));
+    router.push(createURL(`/person/${id}`, newParams), { scroll: false });
   };
 
   const handleSortby = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const newParams = new URLSearchParams(searchParams.toString());
     newParams.set("sort", e.target.value);
-    router.push(createURL(`/person/${id}`, newParams));
+    router.push(createURL(`/person/${id}`, newParams), { scroll: false });
   };
 
   const dataSort = (data: serachItemProps[]) => {
