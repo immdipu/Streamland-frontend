@@ -61,6 +61,7 @@ const Seasons = ({
   );
 
   const HanldeClick = () => {
+    localStorage.setItem("tvId", params.id as string);
     const datas: AddMediaDataTypes = {
       id: params.id as string,
       name: Tvshowdata?.name,

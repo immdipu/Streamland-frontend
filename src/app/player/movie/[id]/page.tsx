@@ -26,6 +26,7 @@ const Page = ({ params }: any) => {
   );
 
   const HanldeClick = () => {
+    localStorage.setItem("movieId", params.id);
     const datas: AddMediaDataTypes = {
       id: params.id,
       title: data?.title,
