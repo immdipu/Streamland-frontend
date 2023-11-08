@@ -5,7 +5,6 @@ import Sidebar from "./component/sidenav/Sidebar";
 import ProgressBar from "./component/progressbar/ProgressBar";
 const inter = Inter({ subsets: ["latin"] });
 import { Analytics } from "@vercel/analytics/react";
-import Script from "next/script";
 
 export const metadata = {
   title: "ShowMania",
@@ -14,6 +13,24 @@ export const metadata = {
   applicationName: "ShowMania",
   referrer: "origin-when-cross-origin",
   colorScheme: "dark",
+  keywords: [
+    "showmania ",
+    "showmania movies ",
+    "showmania tv shows",
+    "showmania free movies",
+    "showmania free tv shows",
+    "showmania free movies and tv shows",
+    "showmania free movies and tv shows online",
+    "showmania free movies online",
+    "free tv shows",
+    "free movies and tv shows",
+    "free movies and tv shows online",
+    "free movies online",
+    "free hd movies",
+    "free tv shows online",
+    "free movies and tv shows app",
+  ],
+  robots: "index, follow",
 };
 
 export default function RootLayout({
@@ -35,12 +52,6 @@ export default function RootLayout({
           </div>
         </Providers>
       </body>
-      <Script
-        defer
-        src="https://unpkg.com/@tinybirdco/flock.js"
-        data-host="https://api.tinybird.co"
-        data-token="p.eyJ1IjogImVhNmZiMjM3LTIxOTctNDg1Mi05YzFiLWUzYWIxYmU1MDExZiIsICJpZCI6ICIzMjczNzVlYS02ZGRhLTQzNzYtODlhMC04NWUxY2RiMDAwM2UiLCAiaG9zdCI6ICJldV9zaGFyZWQifQ.f778Jn6SAMjrd9GtUkDv0drA55t8jLyK0YFEhxeGIbI"
-      ></Script>
     </html>
   );
 }
