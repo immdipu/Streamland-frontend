@@ -13,6 +13,7 @@ import SimilarMovie from "../similar_movie/SimilarMovie";
 import ReccomendationMovie from "../reccomendation_movie/ReccomendationMovie";
 import CustomModal from "../modal/CustomModal";
 import AddToWatchlist from "../Buttons/AddToWatchlist";
+import Trailers from "../Trailer/Trailer";
 
 const SingleShow: React.FC<SingleShowProps> = ({
   id,
@@ -156,6 +157,9 @@ const SingleShow: React.FC<SingleShowProps> = ({
                     />
                   </Suspense>
                 </section>
+                {/* <div>
+                  <Trailers />
+                </div> */}
                 <CustomModal
                   tooltip="watch Trailer"
                   width={"1/2"}

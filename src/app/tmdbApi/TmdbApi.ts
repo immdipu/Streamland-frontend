@@ -164,4 +164,15 @@ export const Apis = {
     }
     return Episodes as singleEpisodeTypes[];
   },
+
+  GetYouTubeTrailer: async () => {
+    try {
+      const res = await axios.get(
+        `https://www.youtube.com/results?search_query=foe+trailer`
+      );
+      return res.data;
+    } catch (error) {
+      return null;
+    }
+  },
 };
