@@ -32,6 +32,7 @@
     "eslint-config-next": "^13.5.4",
     "jwt-decode": "^3.1.2",
     "moment": "^2.29.4",
+    "movie-trailer": "^3.2.2",
     "next": "^13.5.4",
     "nprogress": "^0.2.0",
     "plaiceholder": "^3.0.0",
