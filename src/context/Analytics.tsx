@@ -9,7 +9,7 @@ const Analytics = () => {
     <>
       <Script
         async
-        src={`https://www.googletagmanager.com/gtag/js?id=${GA_TRACKING_ID}}`}
+        src={`https://www.googletagmanager.com/gtag/js?id=${GA_TRACKING_ID}`}
       ></Script>
       <Script id="google-analytics">
         {`window.dataLayer = window.dataLayer || [];
