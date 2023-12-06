@@ -4,7 +4,7 @@ import Providers from "@/context/GlobalProvider";
 import Sidebar from "./component/sidenav/Sidebar";
 import ProgressBar from "./component/progressbar/ProgressBar";
 const inter = Inter({ subsets: ["latin"] });
-import { Analytics } from "@vercel/analytics/react";
+import Analytics from "@/context/Analytics";
 
 export const metadata = {
   title: "ShowMania",
