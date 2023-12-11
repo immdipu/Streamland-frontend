@@ -47,8 +47,7 @@ const AllUsers = () => {
     const fetchNextPage = async (page: number) => {
       setLoading(true);
       try {
-        const { data } = await userApis.getUserList(page);
-
+        const { data } = await userApis.getUserList(page, sort);
         if (data.length === 0) {
           setHasMore(false);
         }
