@@ -38,7 +38,7 @@ const CarouselContainer: React.FC<dataProps> = ({ data }) => {
             />
             <section className="absolute flex flex-col pl-10 justify-between inset-0 bg-gradient-to-r from-_black_bg   p-6">
               <div className="w-1/2 max-md:w-10/12  flex flex-col gap-2 mt-5">
-                <h3 className="font-bold max-md:text-2xl leading-[45px] max-xl:text-xl text-start font-Inter text-4xl text-_sidenav_bg">
+                <h3 className="font-bold line-clamp-2 max-md:text-2xl leading-[45px] max-xl:text-xl text-start font-Inter text-4xl text-_sidenav_bg">
                   {item.media_type === "movie"
                     ? item.title || item.original_title
                     : item.name}

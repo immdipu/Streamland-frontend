@@ -32,7 +32,7 @@ export default async function Home() {
   const trendingPerson = Apis.TrendingPerson();
   return (
     <div className="bg-_black_bg pt-20">
-      <section className=" relative gap-7 max-lg:flex-col  flex overflow-hidden w-11/12 h-72 max-lg:h-fit  mx-auto">
+      <section className=" relative gap-7  max-lg:flex-col  flex overflow-hidden w-11/12 h-72 max-lg:h-fit  mx-auto">
         {data ? (
           <div className="rounded-3xl shrink overflow-hidden">
             <CarouselContainer data={data} />
