@@ -27,6 +27,7 @@ export interface getTrendingListResponse {
   vote_average?: number;
   vote_count?: number;
   origin_country?: [];
+  first_air_date?: string;
 }
 
 export interface NowPlayingResponse {

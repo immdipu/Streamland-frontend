@@ -6,12 +6,14 @@ import { getTrendingListResponse } from "@/types/types";
 import { FaImdb } from "react-icons/fa";
 import Image from "next/image";
 import Link from "next/link";
+import moment from "moment";
 
 interface dataProps {
   data: getTrendingListResponse[];
 }
 
 const CarouselContainer: React.FC<dataProps> = ({ data }) => {
+  console.log(data);
   return (
     <Carousel
       showThumbs={false}
@@ -41,12 +43,20 @@ const CarouselContainer: React.FC<dataProps> = ({ data }) => {
                     ? item.title || item.original_title
                     : item.name}
                 </h3>
-                <div className="flex items-center gap-2">
+                <div className="flex items-center gap-2 ">
                   <FaImdb className="text-yellow-400 text-xl" />
                   <p className="text-_light_white text-sm font-sans">
                     {Number(item.vote_average?.toFixed(1))}
                   </p>
-                  <span className="border-_light_white border-[1px] rounded-2xl px-2 py-1 text-xs text-_light_white max-md:scale-75">
+                  <span className="text-_welcometext_lightblue ml-5 before:-left-4 relative content-['*'] before:absolute before:bg-neutral-400  before:bottom-1/2 before:top-1/2 before:w-1 before:rounded-full before:h-1 font-Inter text-[13px]">
+                    {item.media_type === "movie" && item?.release_date
+                      ? moment(item?.release_date).format("YYYY")
+                      : ""}
+                    {item.media_type === "tv" && item?.first_air_date
+                      ? moment(item?.first_air_date).format("YYYY")
+                      : ""}
+                  </span>
+                  <span className="border-_light_white ml-5 before:-left-4 relative content-['*'] before:absolute before:bg-neutral-400  before:bottom-1/2 before:top-1/2 before:w-1 before:rounded-full before:h-1 border-[1px] rounded-2xl px-3 py-1 leading-none text-xs text-_light_white ">
                     {item.media_type === "movie"
                       ? "Movie"
                       : item.media_type === "tv"
