@@ -1,12 +1,12 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 "use client";
 import React, { useState, useEffect, useRef } from "react";
-import Link from "next/link";
 import { useSearchParams, useParams } from "next/navigation";
 import clsx from "clsx";
 import Episode from "./Episodes";
 import { SiVlcmediaplayer } from "react-icons/si";
-import { seasonsProps, singleEpisodeTypes } from "@/types/types";
+import { BsQuestionCircle } from "react-icons/bs";
+import { seasonsProps } from "@/types/types";
 import SmallLoader from "../loader/SmallLoader";
 import { Apis } from "@/app/tmdbApi/TmdbApi";
 import { useQuery, useMutation } from "@tanstack/react-query";
@@ -120,6 +120,13 @@ const Seasons = ({
                     ? `e0${currentEpisode}`
                     : "e" + currentEpisode}
                 </span>
+              </div>
+              <div className="flex gap-2  group ml-5 items-center float-right">
+                <BsQuestionCircle className="text-neutral-300 peer" />
+                <p className="text-sm font-extralight group-hover:opacity-75 duration-300 transition-opacity ease-in-out text-neutral-300 opacity-30 ">
+                  If the video isn&apos;t playing, simply switch to one of the
+                  other available servers below for uninterrupted streaming.
+                </p>
               </div>
             </div>
           </>
