@@ -147,12 +147,15 @@ export const Apis = {
 
   GetAllEpisodes: async (
     tv_id: string,
-    currSea: string,
-    totalEpisodes: number
+    currSea: string | null,
+    totalEpisodes: string | null
   ) => {
     const Episodes = [];
+    if (!currSea || !totalEpisodes) return;
 
-    for (let i = 1; i <= totalEpisodes; i++) {
+    let total = parseFloat(totalEpisodes);
+
+    for (let i = 1; i <= total; i++) {
       try {
         const res = await axios.get(
           `${process.env.NEXT_PUBLIC_BASE_URL}/3/tv/${tv_id}/season/${currSea}/episode/${i}?api_key=${process.env.NEXT_PUBLIC_API_KEY}`
