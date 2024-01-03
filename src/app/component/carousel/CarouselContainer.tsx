@@ -72,9 +72,9 @@ const CarouselContainer: React.FC<dataProps> = ({ data }) => {
                     item.media_type === "tv" ? "tv" : ""
                   }/${item.id}`}
                   prefetch={false}
-                  className="bg-blue-500 rounded-xl hover:opacity-75 transition-opacity duration-300 ease-linear block text-white  py-3 px-5 font-medium font-Inter text-sm w-fit"
+                  className="bg-blue-500 rounded-2xl  hover:opacity-75 transition-opacity duration-300 ease-linear block text-white  py-3 px-5 font-medium font-Inter text-sm w-fit"
                 >
-                  Watch
+                  Watch Now
                 </Link>
               </div>
             </section>

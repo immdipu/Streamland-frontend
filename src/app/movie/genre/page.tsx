@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { MovieGenreList, MoviesGrid } from "@/app/component";
 import { Metadata } from "next";
 
