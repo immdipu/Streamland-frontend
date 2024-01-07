@@ -142,9 +142,12 @@ const Seasons = ({
               ></div>
             )}
             <iframe
-              src={`https://autoembed.to/tv/tmdb/${params.id}-${
+              // src={`https://autoembed.to/tv/tmdb/${params.id}-${
+              //   SeasonId ? SeasonId : 1
+              // }-${currentEpisode ? currentEpisode : 1}`}
+              src={`https://www.2embed.cc/embedtv/${params.id}&s=${
                 SeasonId ? SeasonId : 1
-              }-${currentEpisode ? currentEpisode : 1}`}
+              }&e=${currentEpisode ? currentEpisode : 1}`}
               width="100%"
               height="100%"
               allowFullScreen

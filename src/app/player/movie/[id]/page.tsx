@@ -53,7 +53,8 @@ const Page = ({ params }: any) => {
           ></div>
         )}
         <iframe
-          src={`https://autoembed.to/movie/tmdb/${params.id}`}
+          // src={`https://autoembed.to/movie/tmdb/${params.id}`}
+          src={`https://www.2embed.cc/embed/${params.id}`}
           width="100%"
           height="100%"
           allowFullScreen
