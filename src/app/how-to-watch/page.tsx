@@ -5,7 +5,7 @@ const page = () => {
   return (
     <div className="ml-16 max-md:ml-3">
       <div className="mt-28">
-        <h1 className="text-2xl font-bold "> How to Watch Stream</h1>
+        <h1 className="text-2xl font-bold "> How to Watch</h1>
         <h3 className="mt-1 text-neutral-400">
           Follow these tips for uninterrupted streaming :
         </h3>
