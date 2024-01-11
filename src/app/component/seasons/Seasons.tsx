@@ -13,6 +13,7 @@ import { useQuery, useMutation } from "@tanstack/react-query";
 import { AddMediaDataTypes } from "@/types/userTypes";
 import { userApis } from "@/app/userApi";
 import { useAppSelector } from "@/redux/hooks";
+import PlayerTopToolTip from "../PlayerTopTooltip/PlayerTopToolTip";
 
 import { useRouter } from "next/navigation";
 
@@ -122,11 +123,7 @@ const Seasons = ({
                 </span>
               </div>
               <div className="flex gap-2  group ml-5 items-center float-right">
-                <BsQuestionCircle className="text-neutral-300 peer" />
-                <p className="text-sm font-extralight group-hover:opacity-75 duration-300 transition-opacity ease-in-out text-neutral-300 opacity-30 ">
-                  If the video isn&apos;t playing, simply switch to one of the
-                  other available servers below for uninterrupted streaming.
-                </p>
+                <PlayerTopToolTip />
               </div>
             </div>
           </>
