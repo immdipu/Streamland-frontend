@@ -40,17 +40,18 @@ const useSidebarRoutes = () => {
         icon: BsPersonCircle,
         active: pathname === `/profile/${user?.username}`,
       },
-      {
-        label: "Chat",
-        href: `/chat`,
-        icon: BiMessageSquareDots,
-        active: pathname === `/chat`,
-      },
+
       {
         label: "Watchlist",
         href: "/watchlist",
         icon: pathname === "/watchlist" ? AiFillHeart : AiOutlineHeart,
         active: pathname === "/watchlist",
+      },
+      {
+        label: "Chat",
+        href: `/chat`,
+        icon: BiMessageSquareDots,
+        active: pathname === `/chat`,
       },
       {
         label: "About",
