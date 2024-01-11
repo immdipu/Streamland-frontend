@@ -20,12 +20,7 @@ const useSidebarRoutes = () => {
         icon: MdExplore,
         active: pathname === "/",
       },
-      {
-        label: "Watchlist",
-        href: "/watchlist",
-        icon: pathname === "/watchlist" ? AiFillHeart : AiOutlineHeart,
-        active: pathname === "/watchlist",
-      },
+
       {
         label: "Movies",
         href: "/movie/genre",
@@ -38,12 +33,7 @@ const useSidebarRoutes = () => {
         icon: SiAirplayvideo,
         active: pathname === "/tv/genre",
       },
-      {
-        label: "About",
-        href: "/about",
-        icon: BiHelpCircle,
-        active: pathname === "/about",
-      },
+
       {
         label: "Profile",
         href: `/profile/${user?.username}`,
@@ -55,6 +45,18 @@ const useSidebarRoutes = () => {
         href: `/chat`,
         icon: BiMessageSquareDots,
         active: pathname === `/chat`,
+      },
+      {
+        label: "Watchlist",
+        href: "/watchlist",
+        icon: pathname === "/watchlist" ? AiFillHeart : AiOutlineHeart,
+        active: pathname === "/watchlist",
+      },
+      {
+        label: "About",
+        href: "/about",
+        icon: BiHelpCircle,
+        active: pathname === "/about",
       },
     ],
     // eslint-disable-next-line react-hooks/exhaustive-deps
