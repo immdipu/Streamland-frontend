@@ -105,23 +105,26 @@ const Seasons = ({
       <div>
         {SeasonId && currentEpisode && (
           <>
-            <div className="flex gap-2 items-center mt-3">
-              <h3 className="w-fit pl-14 max-md:pl-2 max-md:text-sm text-neutral-400 flex items-center text-lg font-medium gap-3">
-                <SiVlcmediaplayer className="text-orange-400 " />
-                Now Playing :
-              </h3>
-              <div>
-                <span className="font-light max-md:text-sm">
-                  {parseInt(SeasonId.toString()) < 10
-                    ? `S0${SeasonId}`
-                    : "S" + SeasonId}
-                </span>
-                <span className="font-light max-md:text-sm">
-                  {parseInt(currentEpisode) < 10
-                    ? `e0${currentEpisode}`
-                    : "e" + currentEpisode}
-                </span>
+            <div className="flex max-md:flex-col max-md:items-start gap-2 items-center mt-3">
+              <div className="flex items-center gap-2">
+                <h3 className="w-fit pl-14 max-md:pl-2 max-md:text-sm text-neutral-400 flex items-center text-lg font-medium gap-3">
+                  <SiVlcmediaplayer className="text-orange-400 " />
+                  Now Playing :
+                </h3>
+                <div>
+                  <span className="font-light max-md:text-sm">
+                    {parseInt(SeasonId.toString()) < 10
+                      ? `S0${SeasonId}`
+                      : "S" + SeasonId}
+                  </span>
+                  <span className="font-light max-md:text-sm">
+                    {parseInt(currentEpisode) < 10
+                      ? `e0${currentEpisode}`
+                      : "e" + currentEpisode}
+                  </span>
+                </div>
               </div>
+
               <div className="flex gap-2  group ml-5 items-center float-right">
                 <PlayerTopToolTip />
               </div>
