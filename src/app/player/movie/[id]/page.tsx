@@ -3,9 +3,10 @@ import React, { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { useAppSelector } from "@/redux/hooks";
 import { userApis } from "@/app/userApi";
-import { toast } from "react-hot-toast";
 import { AddMediaDataTypes } from "@/types/userTypes";
 import { useMutation } from "@tanstack/react-query";
+import Link from "next/link";
+import PlayerTopToolTip from "@/app/component/PlayerTopTooltip/PlayerTopToolTip";
 
 const Page = ({ params }: any) => {
   const [showOverlay, setShowOverlay] = useState(true);
@@ -26,6 +27,7 @@ const Page = ({ params }: any) => {
   );
 
   const HanldeClick = () => {
+    localStorage.setItem("movieId", params.id);
     const datas: AddMediaDataTypes = {
       id: params.id,
       title: data?.title,
@@ -44,20 +46,27 @@ const Page = ({ params }: any) => {
   };
   return (
     <>
-      <div className="h-[80vh] pt-24 relative">
-        {showOverlay && (
-          <div
-            className="absolute inset-0 bg-black opacity-0"
-            onClick={HanldeClick}
-          ></div>
-        )}
-        <iframe
-          src={`https://autoembed.to/movie/tmdb/${params.id}`}
-          width="100%"
-          height="100%"
-          allowFullScreen
-          className="full"
-        />
+      <div className="pt-24">
+        <div className="mb-2 ml-16 flex items-center">
+          <PlayerTopToolTip />
+        </div>
+
+        <div className="h-[80vh]  relative">
+          {showOverlay && (
+            <div
+              className="absolute inset-0 bg-black opacity-0"
+              onClick={HanldeClick}
+            ></div>
+          )}
+          <iframe
+            // src={`https://autoembed.to/movie/tmdb/${params.id}`}
+            src={`https://www.2embed.cc/embed/${params.id}`}
+            width="100%"
+            height="100%"
+            allowFullScreen
+            className="full"
+          />
+        </div>
       </div>
     </>
   );

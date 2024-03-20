@@ -1,6 +1,5 @@
 import CarouselContainer from "./component/carousel/CarouselContainer";
 import { getTrendingListResponse } from "@/types/types";
-import dynamic from "next/dynamic";
 import {
   NowPlaying,
   TrendingMovies,
@@ -14,7 +13,7 @@ import { Apis } from "./tmdbApi/TmdbApi";
 import { Suspense } from "react";
 
 export const metadata: Metadata = {
-  title: "ShowMania | Home",
+  title: "ShowMania",
 };
 
 async function getTrendingList() {
@@ -33,9 +32,9 @@ export default async function Home() {
   const trendingPerson = Apis.TrendingPerson();
   return (
     <div className="bg-_black_bg pt-20">
-      <section className=" relative gap-7 max-lg:flex-col  flex overflow-hidden w-11/12 h-72 max-lg:h-fit  mx-auto">
+      <section className=" relative gap-7  max-lg:flex-col  flex overflow-hidden w-11/12 h-72 max-lg:h-fit  mx-auto">
         {data ? (
-          <div className="rounded-3xl shrink overflow-hidden">
+          <div className="rounded-3xl overflow-hidden  shadow-2xl shrink ">
             <CarouselContainer data={data} />
           </div>
         ) : (

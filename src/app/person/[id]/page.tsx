@@ -1,8 +1,11 @@
 import React from "react";
 import Images from "@/app/component/ImageComponent/Image";
 import { SingleActorProps } from "@/types/personTypes";
-import { serachItemProps } from "./../../../types/searchTypes";
 import PersonMovieShows from "@/app/component/person/PersonMovieShows";
+
+export const metadata = {
+  title: "ShowMania | Person",
+};
 
 async function getSinglePerson(id: string) {
   const res = await fetch(

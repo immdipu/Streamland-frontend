@@ -37,7 +37,11 @@ export const SocketProvider = ({ children }: { children: React.ReactNode }) => {
   );
 
   useEffect(() => {
-    const notificationSocket = io(`${process.env.NEXT_PUBLIC_SOCKET_URL}`);
+    const notificationSocket = io(`${process.env.NEXT_PUBLIC_SOCKET_URL}`, {
+      reconnectionAttempts: 5,
+      reconnectionDelay: 1000,
+      retries: 5,
+    });
     setNotificationSocket(notificationSocket);
     if (!user.isUserAuthenticated) return;
 
@@ -45,12 +49,10 @@ export const SocketProvider = ({ children }: { children: React.ReactNode }) => {
 
     function onConnect() {
       setIsOnline(true);
-      console.log("Socket connected");
     }
 
     function onDisconnect() {
       setIsOnline(false);
-      console.log("Socket disconnected");
     }
 
     function onOnlineUser(data: OnlineUsersTypese) {

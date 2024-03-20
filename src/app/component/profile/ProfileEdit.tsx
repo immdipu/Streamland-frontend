@@ -94,7 +94,7 @@ const ProfileEdit: React.FC<ProfileEditProps> = ({
       },
       onError: (data: any) => {
         toast.error(data.response.data);
-        console.log(data.response);
+        
       },
     }
   );

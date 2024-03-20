@@ -46,7 +46,7 @@ const Topnav = () => {
         pathname === "/chat" ? "pl-0" : "pl-56 max-md:pl-0"
       )}
     >
-      <section className="backdrop-blur-md  h-full flex items-center w-full px-5">
+      <section className="backdrop-blur-md  h-full flex items-center w-full px-5 max-md:px-1">
         <button
           onClick={() => {
             router.back();
@@ -62,7 +62,7 @@ const Topnav = () => {
         </button>
 
         <button
-          className={clsx("mr-5 hidden max-md:block")}
+          className={clsx("mr-5 hidden max-md:mr-2 max-md:block")}
           onClick={() =>
             GlobalContext?.setShowSidebar(!GlobalContext.showSider)
           }
@@ -72,8 +72,8 @@ const Topnav = () => {
 
         <SearchStatic />
 
-        <section className=" w-full flex justify-end mr-16 ">
-          <section className=" mr-10 flex items-center">
+        <section className=" w-full flex justify-end max-md:w-fit mr-16 max-md:mr-1 ">
+          <section className=" mr-10 max-md:mr-0 flex items-center">
             <Notification />
           </section>
           {AutoLogin.isLoading ? (
@@ -86,7 +86,7 @@ const Topnav = () => {
                 <Link
                   href={"/login"}
                   className={clsx(
-                    "bg-_genre_chip_bg  py-2 bg-opacity-60 border border-neutral-500 hover:border-opacity-75 duration-200 transition-colors  ease-linear border-opacity-25 px-4 block rounded-md  text-sm tracking-wider text-neutral-200",
+                    "bg-_genre_chip_bg max-md:flex max-md:items-center max-md:text-xs max-md:py-1 max-md:px-2  py-2 bg-opacity-60 border border-neutral-500 hover:border-opacity-75 duration-200 transition-colors  ease-linear border-opacity-25 px-4 block rounded-md  text-sm tracking-wider text-neutral-200",
                     pathname === "/login" && "hidden"
                   )}
                 >

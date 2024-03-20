@@ -1,33 +1,56 @@
 "use client";
-import React from "react";
+import React, { useCallback, useMemo } from "react";
 import SearchCard from "../search/SearchCard";
 import { serachItemProps } from "../../../types/searchTypes";
 import { useRouter, useSearchParams, useParams } from "next/navigation";
 import { createURL } from "@/utils/utils";
+import { useAutoAnimate } from "@formkit/auto-animate/react";
 
 const PersonMovieShows = ({ data }: { data: serachItemProps[] }) => {
   const router = useRouter();
   const searchParams = useSearchParams();
   const { id } = useParams();
+  const [parent, enableAnimations] = useAutoAnimate(/* optional config */);
 
   const handleSortbyCategories = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const newParams = new URLSearchParams(searchParams.toString());
     newParams.set("categories", e.target.value);
-    router.push(createURL(`/person/${id}`, newParams));
+    router.push(createURL(`/person/${id}`, newParams), { scroll: false });
   };
 
   const handleSortby = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const newParams = new URLSearchParams(searchParams.toString());
     newParams.set("sort", e.target.value);
-    router.push(createURL(`/person/${id}`, newParams));
+    router.push(createURL(`/person/${id}`, newParams), { scroll: false });
   };
 
-  const dataSort = (data: serachItemProps[]) => {
+  const DuplicateObjectFilter = (array: serachItemProps[]) => {
+    const seen = new Set();
+    const filteredArr = array.filter((el) => {
+      const duplicate = seen.has(el.id);
+      seen.add(el.id);
+      return !duplicate;
+    });
+    return filteredArr;
+  };
+
+  const dataSort = (datas: serachItemProps[]) => {
+    datas = DuplicateObjectFilter(datas);
     const params = new URLSearchParams(searchParams.toString());
     let sort = params.get("sort");
     const categories = params.get("categories");
 
-    let newData = data;
+    let newData = datas;
+
+    if (categories) {
+      if (categories === "all") {
+        newData = datas;
+      } else if (categories === "movie") {
+        newData = newData.filter((item) => item.media_type === "movie");
+      } else if (categories === "tv") {
+        newData = newData.filter((item) => item.media_type === "tv");
+      }
+    }
 
     if (sort) {
       if (sort === "alpha-asc") {
@@ -36,6 +59,10 @@ const PersonMovieShows = ({ data }: { data: serachItemProps[] }) => {
             return a.title.localeCompare(b.title);
           } else if (a.name && b.name) {
             return a.name.localeCompare(b.name);
+          } else if (a.name && b.title) {
+            return a.name.localeCompare(b.title);
+          } else if (a.title && b.name) {
+            return a.title.localeCompare(b.name);
           } else {
             return 0;
           }
@@ -47,6 +74,10 @@ const PersonMovieShows = ({ data }: { data: serachItemProps[] }) => {
             return b.title.localeCompare(a.title);
           } else if (a.name && b.name) {
             return b.name.localeCompare(a.name);
+          } else if (a.name && b.title) {
+            return b.title.localeCompare(a.name);
+          } else if (a.title && b.name) {
+            return b.name.localeCompare(a.title);
           } else {
             return 0;
           }
@@ -54,14 +85,9 @@ const PersonMovieShows = ({ data }: { data: serachItemProps[] }) => {
       }
 
       if (sort === "date-desc") {
-        newData = newData.filter((item) => {
-          if (item.release_date) {
-            return item.release_date !== "";
-          }
-          if (item.first_air_date) {
-            return item.first_air_date !== "";
-          }
-        });
+        newData = newData.filter(
+          (item) => item.release_date || item.first_air_date
+        );
 
         newData.sort((a, b) => {
           let aDate = a.release_date ? a.release_date : a.first_air_date;
@@ -77,15 +103,9 @@ const PersonMovieShows = ({ data }: { data: serachItemProps[] }) => {
       }
 
       if (sort === "date-asc") {
-        newData = newData.filter((item) => {
-          if (item.release_date) {
-            return item.release_date !== "";
-          }
-          if (item.first_air_date) {
-            return item.first_air_date !== "";
-          }
-        });
-
+        newData = newData.filter(
+          (item) => item.release_date || item.first_air_date
+        );
         newData.sort((a, b) => {
           let aDate = a.release_date ? a.release_date : a.first_air_date;
           let bDate = b.release_date ? b.release_date : b.first_air_date;
@@ -125,20 +145,14 @@ const PersonMovieShows = ({ data }: { data: serachItemProps[] }) => {
           return a.title.localeCompare(b.title);
         } else if (a.name && b.name) {
           return a.name.localeCompare(b.name);
+        } else if (a.name && b.title) {
+          return a.name.localeCompare(b.title);
+        } else if (a.title && b.name) {
+          return a.title.localeCompare(b.name);
         } else {
           return 0;
         }
       });
-    }
-
-    if (categories) {
-      if (categories === "all") {
-        newData = newData = data;
-      } else if (categories === "movie") {
-        newData = newData.filter((item) => item.media_type === "movie");
-      } else if (categories === "tv") {
-        newData = newData.filter((item) => item.media_type === "tv");
-      }
     }
 
     return newData;
@@ -159,10 +173,10 @@ const PersonMovieShows = ({ data }: { data: serachItemProps[] }) => {
             >
               <option value="alpha-asc">Alphabetically (A-Z)</option>
               <option value="alpha-desc">Alphabetically (Z-A)</option>
-              <option value="date-asc">Date (ascending)</option>
-              <option value="date-desc">Date (descending)</option>
-              <option value="rating-asc">Rating (ascending)</option>
-              <option value="rating-desc">Rating (descending)</option>=
+              <option value="date-asc">Date (Oldest)</option>
+              <option value="date-desc">Date (Newest)</option>
+              <option value="rating-asc">Rating (High to Low)</option>
+              <option value="rating-desc">Rating (Low to High)</option>=
             </select>
 
             <select
@@ -179,7 +193,10 @@ const PersonMovieShows = ({ data }: { data: serachItemProps[] }) => {
           </section>
         </div>
 
-        <section className="grid py-10 max-md:justify-center max-md:grid-cols-smallAutoFit grid-cols-autoFit gap-x-2 gap-y-9">
+        <section
+          ref={parent}
+          className="grid py-10 max-md:justify-center max-md:grid-cols-smallAutoFit grid-cols-autoFit gap-x-2 gap-y-9"
+        >
           {dataSort(data).map((item) => {
             return <SearchCard key={item.id} {...item} />;
           })}

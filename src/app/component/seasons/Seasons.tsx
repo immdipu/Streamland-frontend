@@ -1,17 +1,19 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 "use client";
 import React, { useState, useEffect, useRef } from "react";
-import Link from "next/link";
 import { useSearchParams, useParams } from "next/navigation";
 import clsx from "clsx";
 import Episode from "./Episodes";
 import { SiVlcmediaplayer } from "react-icons/si";
-import { seasonsProps, singleEpisodeTypes } from "@/types/types";
+import { BsQuestionCircle } from "react-icons/bs";
+import { seasonsProps } from "@/types/types";
 import SmallLoader from "../loader/SmallLoader";
 import { Apis } from "@/app/tmdbApi/TmdbApi";
-import { useQuery, useQueryClient, useMutation } from "@tanstack/react-query";
+import { useQuery, useMutation } from "@tanstack/react-query";
 import { AddMediaDataTypes } from "@/types/userTypes";
 import { userApis } from "@/app/userApi";
 import { useAppSelector } from "@/redux/hooks";
+import PlayerTopToolTip from "../PlayerTopTooltip/PlayerTopToolTip";
 
 import { useRouter } from "next/navigation";
 
@@ -62,6 +64,7 @@ const Seasons = ({
   );
 
   const HanldeClick = () => {
+    localStorage.setItem("tvId", params.id as string);
     const datas: AddMediaDataTypes = {
       id: params.id as string,
       name: Tvshowdata?.name,
@@ -79,19 +82,19 @@ const Seasons = ({
     setShowOverlay(false);
   };
 
+  useEffect(() => {
+    if (!SeasonId || !TotalEpisodes) {
+      router.push(
+        `/tv/${params.id}/seasons?s=${seasons![0].season_number}&e=${
+          seasons![0].episode_count
+        }&ce=1`
+      );
+    }
+  }, [SeasonId, TotalEpisodes, params.id]);
+
   const { data, isLoading, refetch, isFetching } = useQuery(
-    [
-      "allEpisodes",
-      params.id,
-      SeasonId ? SeasonId : seasons![0].season_number.toString(),
-      TotalEpisodes ? parseFloat(TotalEpisodes) : seasons![0].episode_count,
-    ],
-    () =>
-      Apis.GetAllEpisodes(
-        params.id as string,
-        SeasonId ? SeasonId : seasons![0].season_number.toString(),
-        TotalEpisodes ? parseFloat(TotalEpisodes) : seasons![0].episode_count
-      ),
+    ["allEpisodes", params.id, SeasonId, TotalEpisodes],
+    () => Apis.GetAllEpisodes(params.id as string, SeasonId, TotalEpisodes),
     {
       refetchOnWindowFocus: false,
       retry: 2,
@@ -221,6 +224,7 @@ const Seasons = ({
                   ref={Seasondropdown}
                 >
                   {seasons?.map((item) => {
+                    console.log("item", item);
                     return (
                       <div
                         key={item.id}
@@ -253,6 +257,8 @@ const Seasons = ({
                 ) : (
                   <>
                     {data &&
+                      SeasonId &&
+                      TotalEpisodes &&
                       data.map((item) => {
                         if (item === null) return;
                         return <Episode {...item} key={item.id} />;

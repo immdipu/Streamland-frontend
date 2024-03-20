@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 "use client";
 import React, { useEffect } from "react";
 import Images from "../ImageComponent/Image";
@@ -17,6 +18,7 @@ import IconButton from "@mui/material/IconButton";
 import Tooltip from "@mui/material/Tooltip";
 import CustomModal from "../modal/CustomModal";
 import FollowersList from "./FollowersFollowing/FollowersList";
+import { useAppSelector } from "@/redux/hooks";
 
 interface ProfileCardProps extends getUserDataTypes {
   role: Role;
@@ -38,8 +40,10 @@ const ProfileCard: React.FC<ProfileCardProps> = ({
   role,
 }) => {
   const [follow, setFollow] = React.useState<boolean>(isFollowing);
+  const user = useAppSelector((state) => state.auth);
   const queryClient = useQueryClient();
   const router = useRouter();
+  const [showFullImage, setShowFullImage] = React.useState<boolean>(false);
   const updateFollow = useMutation((id: string) => userApis.FollowUser(id), {
     onSuccess: (data) => {
       queryClient.invalidateQueries(["getUser"]);
@@ -88,10 +92,32 @@ const ProfileCard: React.FC<ProfileCardProps> = ({
     </div>
   );
 
+  if (profilePic.includes("s96-c")) {
+    if (user.role === Role.admin || ownProfile)
+      profilePic = profilePic.replace("s96-c", "s1000-c");
+    else profilePic = profilePic.replace("s96-c", "s300-c");
+  }
+
+  const HanldeshowFullImage = () => {
+    setShowFullImage(!showFullImage);
+  };
+
   return (
     <>
       <div className="flex max-md:flex-col pl-5 py-7 max-md:mx-4 mx-11 bg-neutral-800 border-b-_welcometext_lightblue border-b border-opacity-20  rounded-t-lg">
-        <div className="w-48 h-48  rounded-md">
+        <div className="w-48 h-48  rounded-md" onClick={HanldeshowFullImage}>
+          {showFullImage && (
+            <div className="fixed inset-0 py-2 px-3 bg-neutral-500 bg-opacity-40 backdrop-blur-sm z-50">
+              <p className="absolute top-0 right-0 bg-neutral-900 px-2 py-1 mr-3 mt-2 rounded-md hover:bg-neutral-600 cursor-pointer">
+                Close
+              </p>
+              <img
+                src={profilePic}
+                alt="profilePic"
+                className="w-full h-full object-contain"
+              />
+            </div>
+          )}
           <Images
             src={profilePic}
             alt={username}
