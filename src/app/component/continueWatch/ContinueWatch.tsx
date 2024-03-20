@@ -7,7 +7,7 @@ import Link from "next/link";
 
 async function getSingleMovie(id: string) {
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_BASE_URL}/3/movie/${id}?api_key=${process.env.NEXT_PUBLIC_API_KEY}`
+    `${process.env.NEXT_PUBLIC_BASE_URL}/3/movie/${id}?api_key=${process.env.NEXT_PUBLIC_API_KEY}&language=${process.env.NEXT_PUBLIC_LAN}`
   );
   if (!res.ok) {
     throw new Error("Failed to fetch data");
@@ -17,7 +17,7 @@ async function getSingleMovie(id: string) {
 
 async function getSingleShow(id: string) {
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_BASE_URL}/3/tv/${id}?api_key=${process.env.NEXT_PUBLIC_API_KEY}`
+    `${process.env.NEXT_PUBLIC_BASE_URL}/3/tv/${id}?api_key=${process.env.NEXT_PUBLIC_API_KEY}&language=${process.env.NEXT_PUBLIC_LAN}`
   );
   if (!res.ok) {
     throw new Error("Failed to fetch data");

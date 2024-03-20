@@ -29,7 +29,10 @@ const Episode: React.FC<singleEpisodeTypes> = ({
     <div
       onClick={() => {
         router.push(
-          `/tv/${params.id}/seasons?s=${season_number}&e=${TotalEpisodes}&ce=${episode_number}`
+          `/tv/${params.id}/seasons?s=${season_number}&e=${TotalEpisodes}&ce=${episode_number}`,
+          {
+            scroll: false,
+          }
         );
       }}
       className={clsx(

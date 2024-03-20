@@ -4,7 +4,7 @@ import { singleEpisodeTypes } from "@/types/types";
 export const Apis = {
   TrendingPerson: async () => {
     const res = await fetch(
-      `${process.env.BASE_URL}/3/trending/person/week?api_key=${process.env.API_KEY}`
+      `${process.env.BASE_URL}/3/trending/person/week?api_key=${process.env.API_KEY}&language=${process.env.NEXT_PUBLIC_LAN}`
     );
     if (!res.ok) {
       throw new Error("Failed to fetch data");
@@ -18,7 +18,7 @@ export const Apis = {
         process.env.BASE_URL ?? process.env.NEXT_PUBLIC_BASE_URL
       }/3/trending/movie/week?api_key=${
         process.env.API_KEY ?? process.env.NEXT_PUBLIC_API_KEY
-      }&page=${page}`
+      }&page=${page}&language=${process.env.NEXT_PUBLIC_LAN}`
     );
     if (!res.ok) {
       throw new Error("Failed to fetch data");
@@ -31,7 +31,7 @@ export const Apis = {
         process.env.BASE_URL ?? process.env.NEXT_PUBLIC_BASE_URL
       }/3/movie/top_rated?api_key=${
         process.env.API_KEY ?? process.env.NEXT_PUBLIC_API_KEY
-      }&page=${page}`
+      }&page=${page}&language=${process.env.NEXT_PUBLIC_LAN}`
     );
     if (!res.ok) {
       throw new Error("Failed to fetch data");
@@ -44,7 +44,7 @@ export const Apis = {
         process.env.BASE_URL ?? process.env.NEXT_PUBLIC_BASE_URL
       }/3/movie/popular?api_key=${
         process.env.API_KEY ?? process.env.NEXT_PUBLIC_API_KEY
-      }&page=${page}`
+      }&page=${page} &language=${process.env.NEXT_PUBLIC_LAN}`
     );
     if (!res.ok) {
       throw new Error("Failed to fetch data");
@@ -57,7 +57,7 @@ export const Apis = {
         process.env.BASE_URL ?? process.env.NEXT_PUBLIC_BASE_URL
       }/3/movie/now_playing?api_key=${
         process.env.API_KEY ?? process.env.NEXT_PUBLIC_API_KEY
-      }&page=${page}`
+      }&page=${page}&language=${process.env.NEXT_PUBLIC_LAN}`
     );
     if (!res.ok) {
       throw new Error("Failed to fetch data");
@@ -71,7 +71,7 @@ export const Apis = {
         process.env.BASE_URL ?? process.env.NEXT_PUBLIC_BASE_URL
       }/3/movie/upcoming?api_key=${
         process.env.API_KEY ?? process.env.NEXT_PUBLIC_API_KEY
-      }&page=${page}`
+      }&page=${page}&language=${process.env.NEXT_PUBLIC_LAN}`
     );
     if (!res.ok) {
       throw new Error("Failed to fetch data");
@@ -85,7 +85,7 @@ export const Apis = {
         process.env.BASE_URL ?? process.env.NEXT_PUBLIC_BASE_URL
       }/3/trending/tv/week?api_key=${
         process.env.API_KEY ?? process.env.NEXT_PUBLIC_API_KEY
-      }&page=${page}`
+      }&page=${page}&language=${process.env.NEXT_PUBLIC_LAN}`
     );
     if (!res.ok) {
       throw new Error("Failed to fetch data");
@@ -98,7 +98,7 @@ export const Apis = {
         process.env.BASE_URL ?? process.env.NEXT_PUBLIC_BASE_URL
       }/3/tv/airing_today?api_key=${
         process.env.API_KEY ?? process.env.NEXT_PUBLIC_API_KEY
-      }&page=${page}`
+      }&page=${page}&language=${process.env.NEXT_PUBLIC_LAN}`
     );
     if (!res.ok) {
       throw new Error("Failed to fetch data");
@@ -111,7 +111,7 @@ export const Apis = {
         process.env.BASE_URL ?? process.env.NEXT_PUBLIC_BASE_URL
       }/3/tv/on_the_air?api_key=${
         process.env.API_KEY ?? process.env.NEXT_PUBLIC_API_KEY
-      }&page=${page}`
+      }&page=${page}&language=${process.env.NEXT_PUBLIC_LAN}`
     );
     if (!res.ok) {
       throw new Error("Failed to fetch data");
@@ -124,7 +124,7 @@ export const Apis = {
         process.env.BASE_URL ?? process.env.NEXT_PUBLIC_BASE_URL
       }/3/tv/popular?api_key=${
         process.env.API_KEY ?? process.env.NEXT_PUBLIC_API_KEY
-      }&page=${page}`
+      }&page=${page}&language=${process.env.NEXT_PUBLIC_LAN}`
     );
     if (!res.ok) {
       throw new Error("Failed to fetch data");
@@ -137,7 +137,7 @@ export const Apis = {
         process.env.BASE_URL ?? process.env.NEXT_PUBLIC_BASE_URL
       }/3/tv/top_rated?api_key=${
         process.env.API_KEY ?? process.env.NEXT_PUBLIC_API_KEY
-      }&page=${page}`
+      }&page=${page}&language=${process.env.NEXT_PUBLIC_LAN}`
     );
     if (!res.ok) {
       throw new Error("Failed to fetch data");
@@ -155,7 +155,7 @@ export const Apis = {
     for (let i = 1; i <= totalEpisodes; i++) {
       try {
         const res = await axios.get(
-          `${process.env.NEXT_PUBLIC_BASE_URL}/3/tv/${tv_id}/season/${currSea}/episode/${i}?api_key=${process.env.NEXT_PUBLIC_API_KEY}`
+          `${process.env.NEXT_PUBLIC_BASE_URL}/3/tv/${tv_id}/season/${currSea}/episode/${i}?api_key=${process.env.NEXT_PUBLIC_API_KEY}&language=${process.env.NEXT_PUBLIC_LAN}`
         );
         Episodes.push(res.data);
       } catch (error) {

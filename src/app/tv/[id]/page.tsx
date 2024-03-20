@@ -4,7 +4,7 @@ import { SingleShowProps } from "@/types/types";
 
 async function getSingleTv(id: string) {
   const res = await fetch(
-    `${process.env.BASE_URL}/3/tv/${id}?api_key=${process.env.API_KEY}&append_to_response=credits,recommendations,similar`
+    `${process.env.BASE_URL}/3/tv/${id}?api_key=${process.env.API_KEY}&append_to_response=credits,recommendations,similar&language=${process.env.NEXT_PUBLIC_LAN}`
   );
   if (!res.ok) {
     throw new Error("Failed to fetch data");

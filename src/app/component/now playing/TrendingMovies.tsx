@@ -3,7 +3,7 @@ import Slider from "../silder/Slider";
 
 async function getNowPlaying() {
   const res = await fetch(
-    `${process.env.BASE_URL}/3/movie/popular?api_key=${process.env.API_KEY}`
+    `${process.env.BASE_URL}/3/movie/popular?api_key=${process.env.API_KEY}&language=${process.env.NEXT_PUBLIC_LAN}`
   );
   if (!res.ok) {
     throw new Error("Failed to fetch data");

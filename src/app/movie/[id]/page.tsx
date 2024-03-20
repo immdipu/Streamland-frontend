@@ -4,7 +4,7 @@ import { SingleShowProps } from "@/types/types";
 
 async function getSingleMovie(id: string) {
   const res = await fetch(
-    `${process.env.BASE_URL}/3/movie/${id}?api_key=${process.env.API_KEY}&append_to_response=credits,recommendations,similar`
+    `${process.env.BASE_URL}/3/movie/${id}?api_key=${process.env.API_KEY}&append_to_response=credits,recommendations,similar&language=${process.env.NEXT_PUBLIC_LAN}`
   );
   if (!res.ok) {
     throw new Error("Failed to fetch data");
@@ -14,6 +14,7 @@ async function getSingleMovie(id: string) {
 
 export async function generateMetadata({ params }: any) {
   const res: SingleShowProps = await getSingleMovie(params.id);
+  console.log("response", res);
   return {
     title: res.title ?? res.name,
   };

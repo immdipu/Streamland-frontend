@@ -29,6 +29,7 @@ const Seasons = ({
   const TotalEpisodes = searchParams.get("e");
   const currentEpisode = searchParams.get("ce");
   const [showSeasondropdown, setShowSeasondropdown] = useState(false);
+  const [player, setPlayer] = useState<1 | 2>(1);
   const Seasondropdown = useRef<HTMLElement>(null);
   const SeasonBtn = useRef<HTMLElement>(null);
   const SeasonBtn2 = useRef<HTMLDivElement>(null);
@@ -102,24 +103,52 @@ const Seasons = ({
       <div>
         {SeasonId && currentEpisode && (
           <>
-            <div className="flex gap-2 items-center mt-3">
-              <h3 className="w-fit pl-14 max-md:pl-2 max-md:text-sm text-neutral-400 flex items-center text-lg font-medium gap-3">
-                <SiVlcmediaplayer className="text-orange-400 " />
-                Now Playing :
-              </h3>
-              <div>
-                <span className="font-light max-md:text-sm">
-                  {parseInt(SeasonId) < 10 ? `S0${SeasonId}` : "S" + SeasonId}
-                </span>
-                <span className="font-light max-md:text-sm">
-                  {parseInt(currentEpisode) < 10
-                    ? `e0${currentEpisode}`
-                    : "e" + currentEpisode}
-                </span>
+            <div className="flex max-md:flex-col max-md:items-start gap-2 items-center mt-1">
+              <div className="flex items-center gap-2">
+                <h3 className="w-fit pl-14 max-md:pl-2 max-md:text-sm text-neutral-400 flex items-center text-lg font-medium gap-3">
+                  <SiVlcmediaplayer className="text-orange-400 " />
+                  Now Playing :
+                </h3>
+                <div>
+                  <span className="font-light max-md:text-sm">
+                    {parseInt(SeasonId.toString()) < 10
+                      ? `S0${SeasonId}`
+                      : "S" + SeasonId}
+                  </span>
+                  <span className="font-light max-md:text-sm">
+                    {parseInt(currentEpisode) < 10
+                      ? `e0${currentEpisode}`
+                      : "e" + currentEpisode}
+                  </span>
+                </div>
+              </div>
+
+              <div className="flex gap-2  group ml-5 items-center float-right">
+                <PlayerTopToolTip />
               </div>
             </div>
           </>
         )}
+      </div>
+      <div className="pl-12 gap-2 flex max-md:pl-2  mt-5">
+        <button
+          onClick={() => setPlayer(1)}
+          className={clsx(
+            " shadow-none px-4 py-1 rounded-sm ",
+            player === 1 ? "bg-blue-700" : "bg-neutral-800"
+          )}
+        >
+          Player 1
+        </button>
+        <button
+          onClick={() => setPlayer(2)}
+          className={clsx(
+            " shadow-none px-4 py-1 rounded-sm ",
+            player === 2 ? "bg-blue-700" : "bg-neutral-800"
+          )}
+        >
+          Player 2
+        </button>
       </div>
       <>
         <div className="flex h-[35rem] max-md:h-full max-md:flex-col">
@@ -130,15 +159,39 @@ const Seasons = ({
                 onClick={HanldeClick}
               ></div>
             )}
-            <iframe
-              src={`https://autoembed.to/tv/tmdb/${params.id}-${
-                SeasonId ? SeasonId : 1
-              }-${currentEpisode ? currentEpisode : 1}`}
-              width="100%"
-              height="100%"
-              allowFullScreen
-              className="h-full full"
-            />
+
+            {player === 1 && (
+              <iframe
+                // src={`https://autoembed.to/tv/tmdb/${params.id}-${
+                //   SeasonId ? SeasonId : 1
+                // }-${currentEpisode ? currentEpisode : 1}`}
+                src={`https://www.2embed.cc/embedtv/${params.id}&s=${
+                  SeasonId ? SeasonId : 1
+                }&e=${currentEpisode ? currentEpisode : 1}`}
+                width="100%"
+                height="100%"
+                allowFullScreen
+                className="h-full full"
+              />
+            )}
+
+            {player === 2 && (
+              <iframe
+                src={`https://play.123embed.net/tv/${params.id}-S${
+                  SeasonId ? SeasonId : 1
+                }/${currentEpisode ? currentEpisode : 1}`}
+                // src={`https://www.2embed.cc/embedtv/${params.id}&s=${
+                //   SeasonId ? SeasonId : 1
+                // }&e=${currentEpisode ? currentEpisode : 1}`}
+
+                width="100%"
+                height="100%"
+                allowFullScreen
+                className="h-full full"
+              />
+            )}
+            <br />
+            <br />
           </div>
           <div className=" w-[450px] max-md:w-full  py-6 px-3 ">
             <section className="bg-neutral-800 h-full overflow-y-auto rounded-3xl py-5 px-4">
