@@ -5,12 +5,13 @@ import { useAppSelector } from "@/redux/hooks";
 import { userApis } from "@/app/userApi";
 import { AddMediaDataTypes } from "@/types/userTypes";
 import { useMutation } from "@tanstack/react-query";
-import Link from "next/link";
+import clsx from "clsx";
 import PlayerTopToolTip from "@/app/component/PlayerTopTooltip/PlayerTopToolTip";
 
 const Page = ({ params }: any) => {
   const [showOverlay, setShowOverlay] = useState(true);
   const user = useAppSelector((state) => state.auth);
+  const [player, setPlayer] = useState<1 | 2>(1);
 
   const { data, isLoading } = useQuery(["getMovie", params.id], async () => {
     const res = await fetch(
@@ -51,6 +52,27 @@ const Page = ({ params }: any) => {
           <PlayerTopToolTip />
         </div>
 
+        <div className="pl-12 gap-2 flex max-md:pl-2  mt-5">
+          <button
+            onClick={() => setPlayer(1)}
+            className={clsx(
+              " shadow-none px-4 py-1 rounded-sm ",
+              player === 1 ? "bg-blue-700" : "bg-neutral-800"
+            )}
+          >
+            Player 1
+          </button>
+          <button
+            onClick={() => setPlayer(2)}
+            className={clsx(
+              " shadow-none px-4 py-1 rounded-sm ",
+              player === 2 ? "bg-blue-700" : "bg-neutral-800"
+            )}
+          >
+            Player 2
+          </button>
+        </div>
+        <br />
         <div className="h-[80vh]  relative">
           {showOverlay && (
             <div
@@ -58,15 +80,28 @@ const Page = ({ params }: any) => {
               onClick={HanldeClick}
             ></div>
           )}
-          <iframe
-            // src={`https://autoembed.to/movie/tmdb/${params.id}`}
-            src={`https://www.2embed.cc/embed/${params.id}`}
-            width="100%"
-            height="100%"
-            allowFullScreen
-            className="full"
-          />
+          {player === 1 && (
+            <iframe
+              // src={`https://autoembed.to/movie/tmdb/${params.id}`}
+              src={`https://www.2embed.cc/embed/${params.id}`}
+              width="100%"
+              height="100%"
+              allowFullScreen
+              className="full"
+            />
+          )}
+          {player === 2 && (
+            <iframe
+              src={`https://play.123embed.net/mv/${params.id}`}
+              width="100%"
+              height="100%"
+              allowFullScreen
+              className="h-full full"
+            />
+          )}
         </div>
+        <br />
+        <br />
       </div>
     </>
   );
