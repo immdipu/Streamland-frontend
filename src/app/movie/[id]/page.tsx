@@ -14,9 +14,24 @@ async function getSingleMovie(id: string) {
 
 export async function generateMetadata({ params }: any) {
   const res: SingleShowProps = await getSingleMovie(params.id);
-  console.log("response", res);
   return {
     title: res.title ?? res.name,
+    description: res.overview,
+    keywords: [
+      `${res?.title! || res?.name! || "Showmania"} movie`,
+      `${res?.title! || res?.name! || "Showmania"} movie online`,
+      `${res?.title! || res?.name! || "Showmania"} movie free`,
+      `${res?.title! || res?.name! || "Showmania"} movie free online`,
+      `${res?.title! || res?.name! || "Showmania"} movie free online streaming`,
+      `${res?.title! || res?.name! || "Showmania"} movie free online watch`,
+      `${res?.title! || res?.name! || "Showmania"} movie free online watch now`,
+      `${
+        res?.title! || res?.name! || "Showmania"
+      } movie free online watch now hd`,
+      `${
+        res?.title! || res?.name! || "Showmania"
+      } movie free online watch now hd 1080p`,
+    ],
   };
 }
 
