@@ -9,7 +9,7 @@ export const metadata = {
 
 async function getSinglePerson(id: string) {
   const res = await fetch(
-    `${process.env.BASE_URL}/3/person/${id}?api_key=${process.env.API_KEY}&append_to_response=combined_credits`
+    `${process.env.BASE_URL}/3/person/${id}?api_key=${process.env.API_KEY}&append_to_response=combined_credits&language=${process.env.NEXT_PUBLIC_LAN}`
   );
   if (!res.ok) {
     throw new Error("Failed to fetch data");

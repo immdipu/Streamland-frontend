@@ -103,7 +103,9 @@ const MoviesGrid: React.FC<MovieGridTypes> = ({ genre }) => {
           genre === "MOVIE" ? "movie" : "tv"
         }?api_key=${
           process.env.NEXT_PUBLIC_API_KEY
-        }&sort_by=popularity.desc&include_adult=false&page=${page}&with_genres=${id}`
+        }&sort_by=popularity.desc&include_adult=false&page=${page}&with_genres=${id} &language=${
+          process.env.NEXT_PUBLIC_LAN
+        }`
       );
 
       if (!res.ok) {
