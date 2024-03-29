@@ -4,8 +4,6 @@ import React, { useState, useEffect, useRef } from "react";
 import { useSearchParams, useParams } from "next/navigation";
 import clsx from "clsx";
 import Episode from "./Episodes";
-import { SiVlcmediaplayer } from "react-icons/si";
-import { BsQuestionCircle } from "react-icons/bs";
 import { seasonsProps } from "@/types/types";
 import SmallLoader from "../loader/SmallLoader";
 import { Apis } from "@/app/tmdbApi/TmdbApi";
@@ -13,9 +11,10 @@ import { useQuery, useMutation } from "@tanstack/react-query";
 import { AddMediaDataTypes } from "@/types/userTypes";
 import { userApis } from "@/app/userApi";
 import { useAppSelector } from "@/redux/hooks";
-import PlayerTopToolTip from "../PlayerTopTooltip/PlayerTopToolTip";
-
 import { useRouter } from "next/navigation";
+import SeasonHeader from "./molecules/SeasonHeader";
+import PlayerButton from "./atoms/PlayerButton";
+import EpisodeSkeletonLoader from "../loader/EpisodeSkeletonLoader";
 
 const Seasons = ({
   seasons,
@@ -26,6 +25,7 @@ const Seasons = ({
 }) => {
   const params = useParams();
   const user = useAppSelector((state) => state.auth);
+  const [player, setPlayer] = useState<1 | 2>(1);
   const searchParams = useSearchParams();
   const SeasonId = searchParams.get("s");
   const TotalEpisodes = searchParams.get("e");
@@ -103,58 +103,44 @@ const Seasons = ({
   return (
     <div>
       <div>
-        {SeasonId && currentEpisode && (
-          <>
-            <div className="flex max-md:flex-col max-md:items-start gap-2 items-center mt-3">
-              <div className="flex items-center gap-2">
-                <h3 className="w-fit pl-14 max-md:pl-2 max-md:text-sm text-neutral-400 flex items-center text-lg font-medium gap-3">
-                  <SiVlcmediaplayer className="text-orange-400 " />
-                  Now Playing :
-                </h3>
-                <div>
-                  <span className="font-light max-md:text-sm">
-                    {parseInt(SeasonId.toString()) < 10
-                      ? `S0${SeasonId}`
-                      : "S" + SeasonId}
-                  </span>
-                  <span className="font-light max-md:text-sm">
-                    {parseInt(currentEpisode) < 10
-                      ? `e0${currentEpisode}`
-                      : "e" + currentEpisode}
-                  </span>
-                </div>
-              </div>
-
-              <div className="flex gap-2  group ml-5 items-center float-right">
-                <PlayerTopToolTip />
-              </div>
-            </div>
-          </>
-        )}
+        <SeasonHeader SeasonId={SeasonId} currentEpisode={currentEpisode} />
+        <div>
+          <PlayerButton player={player} setPlayer={setPlayer} />
+        </div>
       </div>
       <>
-        <div className="flex h-[35rem] max-md:h-full max-md:flex-col">
-          <div className=" relative w-full py-6 flex-grow-1  max-md:h-[25rem] max-md:flex-shrink-0">
+        <div className="flex h-[35rem] max-lg:h-full max-lg:flex-col">
+          <div className=" relative w-full py-6 flex-grow-1 max-lg:h-[30rem] max-md:flex-shrink-0">
             {showOverlay && (
               <div
                 className="absolute inset-0  bg-black opacity-0"
                 onClick={HanldeClick}
               ></div>
             )}
-            <iframe
-              // src={`https://autoembed.to/tv/tmdb/${params.id}-${
-              //   SeasonId ? SeasonId : 1
-              // }-${currentEpisode ? currentEpisode : 1}`}
-              src={`https://www.2embed.cc/embedtv/${params.id}&s=${
-                SeasonId ? SeasonId : 1
-              }&e=${currentEpisode ? currentEpisode : 1}`}
-              width="100%"
-              height="100%"
-              allowFullScreen
-              className="h-full full"
-            />
+            {player == 1 && (
+              <iframe
+                src={`https://www.2embed.cc/embedtv/${params.id}&s=${
+                  SeasonId ? SeasonId : 1
+                }&e=${currentEpisode ? currentEpisode : 1}`}
+                width="100%"
+                height="100%"
+                allowFullScreen
+                className="h-full full"
+              />
+            )}
+            {player === 2 && (
+              <iframe
+                src={`https://autoembed.co/tv/tmdb/${params.id}-${
+                  SeasonId ? SeasonId : 1
+                }-${currentEpisode ? currentEpisode : 1}`}
+                width="100%"
+                height="100%"
+                allowFullScreen
+                className="h-full full"
+              />
+            )}
           </div>
-          <div className=" w-[450px] max-md:w-full  py-6 px-3 ">
+          <div className=" w-[450px] max-lg:w-full  py-6 px-3 max-md:px-1 ">
             <section className="bg-neutral-800 h-full overflow-y-auto rounded-3xl py-5 px-4">
               <section
                 className="flex items-center relative  bg-blue-700 hover:bg-opacity-60 cursor-pointer justify-center rounded-3xl"
@@ -182,13 +168,15 @@ const Seasons = ({
                   ref={Seasondropdown}
                 >
                   {seasons?.map((item) => {
-                    console.log("item", item);
                     return (
                       <div
                         key={item.id}
                         onClick={() => {
                           router.push(
-                            `/tv/${params.id}/seasons?s=${item.season_number}&e=${item.episode_count}&ce=1`
+                            `/tv/${params.id}/seasons?s=${item.season_number}&e=${item.episode_count}&ce=1`,
+                            {
+                              scroll: false,
+                            }
                           );
                         }}
                         className={clsx(
@@ -205,13 +193,9 @@ const Seasons = ({
                 </section>
               </section>
               {/* Episodes */}
-              <section className="w-80 max-md:w-full   h-[26rem] mt-4 seasonScroll overflow-y-auto flex gap-1 flex-col">
+              <section className="w-80  max-lg:w-full max-md:w-full   h-[26rem] mt-4 seasonScroll overflow-y-auto flex gap-1 flex-col">
                 {isLoading || isFetching ? (
-                  <>
-                    <div className="grid h-full place-content-center">
-                      <SmallLoader size={50} />
-                    </div>
-                  </>
+                  <EpisodeSkeletonLoader />
                 ) : (
                   <>
                     {data &&
