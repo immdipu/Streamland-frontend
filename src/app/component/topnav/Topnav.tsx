@@ -16,6 +16,7 @@ import { LoggedIn } from "@/redux/slice/authSlice";
 import { useAppDispatch } from "@/redux/hooks";
 import { Role } from "@/types/role";
 import Notification from "../notification/Notification";
+import TopNotification from "../notification/TopNotification";
 
 const Topnav = () => {
   const router = useRouter();
@@ -46,6 +47,7 @@ const Topnav = () => {
         pathname === "/chat" ? "pl-0" : "pl-56 max-md:pl-0"
       )}
     >
+      <TopNotification />
       <section className="backdrop-blur-md  h-full flex items-center w-full px-5 max-md:px-1">
         <button
           onClick={() => {

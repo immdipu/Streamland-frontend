@@ -6,6 +6,7 @@ import ProgressBar from "./component/progressbar/ProgressBar";
 const inter = Inter({ subsets: ["latin"] });
 import Analytics from "@/context/Analytics";
 import SurveyForm from "./surveyform/SurveyForm";
+import TopNotification from "./component/notification/TopNotification";
 
 export const metadata = {
   title: "ShowMania",
