@@ -5,6 +5,7 @@ import Sidebar from "./component/sidenav/Sidebar";
 import ProgressBar from "./component/progressbar/ProgressBar";
 const inter = Inter({ subsets: ["latin"] });
 import Analytics from "@/context/Analytics";
+import SurveyForm from "./surveyform/SurveyForm";
 
 export const metadata = {
   title: "ShowMania",
@@ -42,6 +43,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <Providers>
+          <SurveyForm />
           <div>
             <ProgressBar />
             <Sidebar />
