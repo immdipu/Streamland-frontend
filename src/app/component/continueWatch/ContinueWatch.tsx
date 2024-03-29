@@ -4,6 +4,7 @@ import { SingleShowProps } from "@/types/types";
 import Images from "../ImageComponent/Image";
 import { AiFillPlayCircle } from "react-icons/ai";
 import Link from "next/link";
+import Image from "next/image";
 
 async function getSingleMovie(id: string) {
   const res = await fetch(
@@ -70,18 +71,17 @@ const ContinueWatch = () => {
       <h2 className="font-medium pl-9 max-md:pl-6 my-4 text-xl text-_white ">
         Continue Watching
       </h2>
-      <section className="px-8 flex gap-10 flex-wrap max-md:px-1 mt-5 ">
+      <section className="px-8 flex gap-10 overflow-x-auto max-md:px-1 mt-5 ">
         {moviedata && (
-          <div className="w-72 relative slide-in-top">
-            <Images
+          <div className="w-72 max-md:w-52 shrink-0 relative slide-in-top">
+            <Image
               src={`https://image.tmdb.org/t/p/w200/${moviedata.backdrop_path}`}
               width={300}
               height={300}
-              alt={moviedata.title ?? moviedata.name}
-              ImageWidth={"full"}
-              Imageheight={150}
-              rounded="2xl"
+              alt={moviedata.title || "Movie poster"}
+              className=" w-full h-full object-cover rounded-2xl"
             />
+
             <Link
               href={`/player/movie/${MovieId}`}
               prefetch={false}
@@ -98,15 +98,13 @@ const ContinueWatch = () => {
           </div>
         )}
         {tvdata && (
-          <div className="w-72 relative slide-in-top">
-            <Images
+          <div className="w-72 max-md:w-52 shrink-0 relative slide-in-top">
+            <Image
               src={`https://image.tmdb.org/t/p/w200/${tvdata.backdrop_path}`}
               width={300}
               height={300}
-              alt={tvdata.title ?? tvdata.name}
-              ImageWidth={"full"}
-              Imageheight={150}
-              rounded="2xl"
+              alt={tvdata.title ?? "TV poster"}
+              className=" w-full h-full object-cover rounded-2xl"
             />
             <Link
               href={`/tv/${tvId}/seasons`}
