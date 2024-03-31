@@ -1,6 +1,6 @@
 import React from "react";
 import Images from "../ImageComponent/Image";
-import Logo from "../../../../public/ShowManialogo.png";
+import notFound from "../../../../public/notFound.png";
 import Link from "next/link";
 import "react-tooltip/dist/react-tooltip.css";
 import { Tooltip as ReactTooltip } from "react-tooltip";
@@ -58,7 +58,7 @@ const SearchCard: React.FC<serachItemProps> = ({
               alt={title}
             />
           ) : (
-            <Images src={Logo.src} width={500} height={500} alt={title} />
+            <Images src={notFound.src} width={500} height={500} alt={title} />
           )}
 
           <h3

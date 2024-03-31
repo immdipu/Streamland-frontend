@@ -4,6 +4,7 @@ import { MdClose } from "react-icons/md";
 
 const TopNotification = () => {
   const [show, setShow] = useState(true);
+  const [isMounted, setIsMounted] = useState<string>("correct");
 
   if (!show) return null;
 
