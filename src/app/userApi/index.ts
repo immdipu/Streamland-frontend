@@ -222,4 +222,12 @@ export const userApis = {
     );
     return res.data;
   },
+
+  survey: async (data: any) => {
+    const res = await axiosInstance().post(
+      `${process.env.NEXT_PUBLIC_USER_URL}/user/survey`,
+      data
+    );
+    return res.data;
+  },
 };

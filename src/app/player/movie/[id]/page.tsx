@@ -5,8 +5,9 @@ import { useAppSelector } from "@/redux/hooks";
 import { userApis } from "@/app/userApi";
 import { AddMediaDataTypes } from "@/types/userTypes";
 import { useMutation } from "@tanstack/react-query";
-import clsx from "clsx";
 import PlayerTopToolTip from "@/app/component/PlayerTopTooltip/PlayerTopToolTip";
+import PlayerButton from "@/app/component/seasons/atoms/PlayerButton";
+import clsx from "clsx";
 
 const Page = ({ params }: any) => {
   const [showOverlay, setShowOverlay] = useState(true);
@@ -47,9 +48,12 @@ const Page = ({ params }: any) => {
   };
   return (
     <>
-      <div className="pt-24">
-        <div className="mb-2 ml-16 flex items-center">
+      <div className="pt-20 ">
+        <div className="mb-2 mt-1 ml-2 flex flex-col justify-start items-start ">
           <PlayerTopToolTip />
+          <div className="-ml-14 mb-2 max-lg:ml-0">
+            <PlayerButton player={player} setPlayer={setPlayer} />
+          </div>
         </div>
 
         <div className="pl-12 gap-2 flex max-md:pl-2  mt-5">
@@ -92,11 +96,11 @@ const Page = ({ params }: any) => {
           )}
           {player === 2 && (
             <iframe
-              src={`https://play.123embed.net/mv/${params.id}`}
+              src={`https://autoembed.co/movie/tmdb/${params.id}`}
               width="100%"
               height="100%"
               allowFullScreen
-              className="h-full full"
+              className="full"
             />
           )}
         </div>

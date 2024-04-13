@@ -14,6 +14,8 @@ import ReccomendationMovie from "../reccomendation_movie/ReccomendationMovie";
 import CustomModal from "../modal/CustomModal";
 import AddToWatchlist from "../Buttons/AddToWatchlist";
 import Trailers from "../Trailer/Trailer";
+import Header from "./atoms/Header";
+import WatchButton from "./atoms/WatchButton";
 
 const SingleShow: React.FC<SingleShowProps> = ({
   id,
@@ -97,127 +99,109 @@ const SingleShow: React.FC<SingleShowProps> = ({
             />
           </div>
 
-          <section className="pl-72  max-md:justify-center  max-md:pl-0 max-md:flex-col   max-md:pt-44 h-60 max-md:h-full py-6 flex justify-between">
-            <div>
-              <h2 className="text-4xl max-md:text-center text-_show_title font-bold tracking-wide">
-                {TYPE === "MOVIE" && title}
-                {TYPE === "TV" && name}
-              </h2>
-              <div className="mt-4  max-md:flex max-md:justify-center max-md:flex-wrap">
-                <Genres TYPE={TYPE} data={genres} />
-              </div>
-              <div className="mt-3 pl-1 flex max-md:flex-wrap max-md:justify-center items-center gap-2">
-                <span className="text-_welcometext_lightblue font-Inter text-[13px]">
-                  {TYPE === "MOVIE" &&
-                    runtime &&
-                    convertMinutesToHours(runtime)}
-                  {TYPE === "TV" &&
-                    number_of_seasons &&
-                    number_of_seasons +
-                      `${number_of_seasons > 1 ? " Seasons" : " Season"}`}
-                </span>
-                {TYPE === "TV" && (
-                  <>
-                    <div className="bg-_white w-1 h-1 rounded-full mx-1 " />
-                    <span className="text-_welcometext_lightblue font-Inter text-[13px]">
-                      {number_of_episodes && number_of_episodes + " episodes"}
-                    </span>
-                  </>
-                )}
-                <div className="bg-_white w-1 h-1 rounded-full mx-1 " />
-                <span className="text-_welcometext_lightblue font-Inter text-[13px]">
-                  {TYPE === "MOVIE" && release_date ? release_date : ""}
-                  {TYPE === "TV" && status}
-                </span>
-                <div className="bg-_white w-1 h-1 rounded-full mx-1" />
-                <div className="flex items-center gap-2 ">
-                  <span className="text-_welcometext_lightblue text-xs">
-                    {vote_average.toFixed(1)}
-                  </span>
-                  <GiRoundStar className="text-yellow-400 text-sm mb-[1px]" />
-                </div>
-                <section>
-                  <Suspense
-                    fallback={
-                      <p>
-                        <SmallLoader size={10} />{" "}
-                      </p>
-                    }
-                  >
-                    <SeeMoreModal
-                      original_name={original_name}
-                      created_by={created_by}
-                      in_production={in_production}
-                      networks={networks}
-                      status={status}
-                      spoken_languages={spoken_languages}
-                      tagline={tagline}
-                      homepage={homepage}
-                      last_air_date={last_air_date}
-                    />
-                  </Suspense>
-                </section>
-
-                <CustomModal
-                  tooltip="watch Trailer"
-                  width={"1/2"}
-                  buttonElement={
-                    <p className="text-xs ml-1 hover:border-opacity-80 duration-150 ease-in transition-opacity border-_light_white border-opacity-30 text-_light_white border px-2 py-1 font-light rounded-md">
-                      Watch Trailer
-                    </p>
-                  }
-                  data={
-                    <div className="h-80">
-                      {<Trailers title={title || name || " "} type={TYPE} />}
-                    </div>
-                  }
-                />
-                <section>
-                  {TYPE === "MOVIE" ? (
-                    <AddToWatchlist
-                      release_date={release_date}
-                      backdrop_path={backdrop_path}
-                      media_type={"movie"}
-                      poster_path={poster_path}
-                      id={id}
-                      vote_average={vote_average}
-                      showAddToWatchlist={true}
-                      original_title={original_title}
-                      title={title}
-                    />
-                  ) : (
-                    <AddToWatchlist
-                      first_air_date={first_air_date}
-                      backdrop_path={backdrop_path}
-                      media_type={"tv"}
-                      original_title={original_title}
-                      poster_path={poster_path}
-                      id={id}
-                      vote_average={vote_average}
-                      showAddToWatchlist={true}
-                      name={name}
-                    />
-                  )}
-                </section>
+          <section className="pl-72  flex-col max-md:justify-center  max-md:pl-0 max-md:flex-col   max-md:pt-44  max-md:h-full py-6 flex justify-between">
+            <div className="flex justify-between items-center max-md:flex-col">
+              <Header TYPE={TYPE} name={name} title={title} />
+              <div className="max-md:mb-5">
+                {" "}
+                <WatchButton TYPE={TYPE} id={id} />
               </div>
             </div>
-            <div className=" mr-24 max-md:mr-0 max-md:mt-6 max-md:flex max-md:justify-center pt-3">
-              {TYPE === "MOVIE" && (
-                <Link
-                  href={`/player/movie/${id}`}
-                  className="text-_white  px-6 text-base tracking-wider py-2 rounded-lg bg-_genre_chip_bg"
-                >
-                  Watch
-                </Link>
-              )}
+
+            <div className="mt-4   max-md:flex max-md:justify-center max-md:flex-wrap">
+              <Genres TYPE={TYPE} data={genres} />
+            </div>
+            <div className="mt-3 pl-1 flex-wrap flex max-md:flex-wrap max-md:justify-center items-center gap-2">
+              <span className="text-_welcometext_lightblue font-Inter text-[13px]">
+                {TYPE === "MOVIE" && runtime && convertMinutesToHours(runtime)}
+                {TYPE === "TV" &&
+                  number_of_seasons &&
+                  number_of_seasons +
+                    `${number_of_seasons > 1 ? " Seasons" : " Season"}`}
+              </span>
               {TYPE === "TV" && (
-                <Link
-                  href={`/tv/${id}/seasons`}
-                  className="text-_white  px-6 text-base tracking-wider py-2 rounded-lg bg-_genre_chip_bg"
-                >
-                  Seasons
-                </Link>
+                <>
+                  <div className="bg-_white w-1 h-1 rounded-full mx-1 " />
+                  <span className="text-_welcometext_lightblue font-Inter text-[13px]">
+                    {number_of_episodes && number_of_episodes + " episodes"}
+                  </span>
+                </>
               )}
+              <div className="bg-_white w-1 h-1 rounded-full mx-1 " />
+              <span className="text-_welcometext_lightblue font-Inter text-[13px]">
+                {TYPE === "MOVIE" && release_date ? release_date : ""}
+                {TYPE === "TV" && status}
+              </span>
+              <div className="bg-_white w-1 h-1 rounded-full mx-1" />
+              <div className="flex items-center gap-2 ">
+                <span className="text-_welcometext_lightblue text-xs">
+                  {vote_average.toFixed(1)}
+                </span>
+                <GiRoundStar className="text-yellow-400 text-sm mb-[1px]" />
+              </div>
+              <section>
+                <Suspense
+                  fallback={
+                    <p>
+                      <SmallLoader size={10} />{" "}
+                    </p>
+                  }
+                >
+                  <SeeMoreModal
+                    original_name={original_name}
+                    created_by={created_by}
+                    in_production={in_production}
+                    networks={networks}
+                    status={status}
+                    spoken_languages={spoken_languages}
+                    tagline={tagline}
+                    homepage={homepage}
+                    last_air_date={last_air_date}
+                  />
+                </Suspense>
+              </section>
+
+              <CustomModal
+                tooltip="watch Trailer"
+                width={"1/2"}
+                buttonElement={
+                  <p className="text-xs ml-1 hover:border-opacity-80 duration-150 ease-in transition-opacity border-_light_white border-opacity-30 text-_light_white border px-2 py-1 font-light rounded-md">
+                    Watch Trailer
+                  </p>
+                }
+                data={
+                  <div className="h-80">
+                    {<Trailers title={title || name || " "} type={TYPE} />}
+                  </div>
+                }
+              />
+              <section>
+                {TYPE === "MOVIE" ? (
+                  <AddToWatchlist
+                    release_date={release_date}
+                    backdrop_path={backdrop_path}
+                    media_type={"movie"}
+                    poster_path={poster_path}
+                    id={id}
+                    vote_average={vote_average}
+                    showAddToWatchlist={true}
+                    original_title={original_title}
+                    title={title}
+                  />
+                ) : (
+                  <AddToWatchlist
+                    first_air_date={first_air_date}
+                    backdrop_path={backdrop_path}
+                    media_type={"tv"}
+                    original_title={original_title}
+                    poster_path={poster_path}
+                    id={id}
+                    vote_average={vote_average}
+                    showAddToWatchlist={true}
+                    name={name}
+                  />
+                )}
+              </section>
             </div>
           </section>
           <section>

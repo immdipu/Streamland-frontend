@@ -3,7 +3,6 @@ import { singleEpisodeTypes } from "@/types/types";
 import { useSearchParams, useParams } from "next/navigation";
 import { useRouter } from "next/navigation";
 import clsx from "clsx";
-import Tooltip from "@mui/material/Tooltip";
 
 const Episode: React.FC<singleEpisodeTypes> = ({
   id,
@@ -36,7 +35,7 @@ const Episode: React.FC<singleEpisodeTypes> = ({
         );
       }}
       className={clsx(
-        "flex gap-2 cursor-pointer items-center rounded-3xl px-5 py-[6px]",
+        "flex gap-2 cursor-pointer active:scale-90 duration-200 ease-linear items-center rounded-3xl px-5 py-[6px]",
         currentEpisode === episode_number.toString()
           ? "bg-_blue bg-opacity-50 font-normal text-white"
           : "bg-_black_bg hover:bg-neutral-700"
@@ -45,18 +44,18 @@ const Episode: React.FC<singleEpisodeTypes> = ({
       <p className=" flex-shrink-0 text-neutral-300 font-normal">
         Episode {episode_number}:
       </p>
-      <Tooltip title={name} placement="bottom">
-        <p
-          className={clsx(
-            "whitespace-nowrap overflow-ellipsis block font-light  text-sm overflow-hidden",
-            currentEpisode === episode_number.toString()
-              ? " text-white"
-              : "text-neutral-400"
-          )}
-        >
-          {name}
-        </p>
-      </Tooltip>
+
+      <p
+        title={name}
+        className={clsx(
+          "whitespace-nowrap overflow-ellipsis block font-light  text-sm overflow-hidden",
+          currentEpisode === episode_number.toString()
+            ? " text-white"
+            : "text-neutral-400"
+        )}
+      >
+        {name}
+      </p>
     </div>
   );
 };

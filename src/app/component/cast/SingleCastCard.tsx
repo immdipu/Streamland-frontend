@@ -3,7 +3,7 @@ import { castProps } from "@/types/types";
 import Images from "../ImageComponent/Image";
 import Link from "next/link";
 import { Tooltip as ReactTooltip } from "react-tooltip";
-import Logo from "../../../../public/ShowManialogo.png";
+import notFound from "../../../../public/notFound.png";
 const SingleCastCard: React.FC<castProps> = ({
   cast_id,
   name,
@@ -28,7 +28,7 @@ const SingleCastCard: React.FC<castProps> = ({
             alt={name}
           />
         ) : (
-          <Images src={Logo.src} width={125} height={0} alt={name} />
+          <Images src={notFound.src} width={125} height={0} alt={name} />
         )}
         <h3
           id={`movie${cast_id}`}

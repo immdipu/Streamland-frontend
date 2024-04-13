@@ -6,7 +6,7 @@ import Link from "next/link";
 import "react-tooltip/dist/react-tooltip.css";
 import { Tooltip as ReactTooltip } from "react-tooltip";
 import { GiRoundStar } from "react-icons/gi";
-import Logo from "../../../../public/ShowManialogo.png";
+import notFound from "../../../../public/notFound.png";
 import Images from "../ImageComponent/Image";
 import AddToWatchlist from "../Buttons/AddToWatchlist";
 
@@ -40,7 +40,7 @@ const SingleTvCard: React.FC<singleTVShowProps> = ({
             alt={name}
           />
         ) : (
-          <Images src={Logo.src} width={500} height={500} alt={name} />
+          <Images src={notFound.src} width={500} height={500} alt={name} />
         )}
 
         <h3

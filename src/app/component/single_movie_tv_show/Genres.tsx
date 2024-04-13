@@ -10,7 +10,7 @@ const Genres = ({
   TYPE: "MOVIE" | "TV";
 }) => {
   return (
-    <div className="flex gap-3 flex-wrap">
+    <div className="flex gap-3 flex-wrap max-md:justify-center">
       {data.map((item) => {
         if (TYPE === "MOVIE") {
           return (
