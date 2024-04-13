@@ -31,7 +31,6 @@ const Seasons = ({
   const TotalEpisodes = searchParams.get("e");
   const currentEpisode = searchParams.get("ce");
   const [showSeasondropdown, setShowSeasondropdown] = useState(false);
-  const [player, setPlayer] = useState<1 | 2>(1);
   const Seasondropdown = useRef<HTMLElement>(null);
   const SeasonBtn = useRef<HTMLElement>(null);
   const SeasonBtn2 = useRef<HTMLDivElement>(null);

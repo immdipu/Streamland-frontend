@@ -6,6 +6,9 @@ import { RiMovie2Line } from "react-icons/ri";
 import { BiHelpCircle, BiMessageSquareDots } from "react-icons/bi";
 import { SiAirplayvideo } from "react-icons/si";
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
+import { CiMail } from "react-icons/ci";
+import { MdSlideshow } from "react-icons/md";
+
 import { BsPersonCircle } from "react-icons/bs";
 import { useAppSelector } from "@/redux/hooks";
 
@@ -30,7 +33,7 @@ const useSidebarRoutes = () => {
       {
         label: "TV show",
         href: "/tv/genre",
-        icon: SiAirplayvideo,
+        icon: MdSlideshow,
         active: pathname === "/tv/genre",
       },
 
@@ -50,7 +53,7 @@ const useSidebarRoutes = () => {
       {
         label: "Chat",
         href: `/chat`,
-        icon: BiMessageSquareDots,
+        icon: CiMail,
         active: pathname === `/chat`,
       },
       {

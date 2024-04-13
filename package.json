@@ -30,6 +30,7 @@
     "emoji-mart": "^5.5.2",
     "eslint": "8.42.0",
     "eslint-config-next": "^13.5.4",
+    "framer-motion": "^11.0.28",
     "jwt-decode": "^3.1.2",
     "moment": "^2.29.4",
     "movie-trailer": "^3.2.2",
