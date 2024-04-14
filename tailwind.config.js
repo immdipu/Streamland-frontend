@@ -39,6 +39,7 @@ module.exports = {
         _show_title: "#e2e2e2",
       },
       fontSize: {
+        smm: "11px",
         xxs: "8px",
       },
     },

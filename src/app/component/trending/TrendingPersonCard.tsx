@@ -31,7 +31,7 @@ const TrendingPersonCard: React.FC<SingleTrendingPersonProp> = ({
       </div>
       <h3
         id={`person${id}`}
-        className="text-center mt-3 w-36 max-md:w-28 max-md:text-xs overflow-hidden text-ellipsis"
+        className="text-center text-_white mt-3 w-36 max-md:w-28 max-md:text-xs overflow-hidden text-ellipsis"
       >
         {original_name}
       </h3>

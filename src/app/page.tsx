@@ -31,17 +31,17 @@ export default async function Home() {
   const data: getTrendingListResponse[] = res.results;
   const trendingPerson = Apis.TrendingPerson();
   return (
-    <div className="bg-_black_bg pt-20">
-      <section className=" relative gap-7  max-lg:flex-col  flex overflow-hidden w-11/12 h-72 max-lg:h-fit  mx-auto">
+    <div className="bg-_black_bg ">
+      <section className=" relative gap-7   max-lg:flex-col  flex overflow-hidden w-full h-[75vh] max-lg:h-fit  ">
         {data ? (
-          <div className="rounded-3xl overflow-hidden  shadow-2xl shrink ">
+          <div className=" h-full       ">
             <CarouselContainer data={data} />
           </div>
         ) : (
           <div>No data found</div>
         )}
 
-        <Users />
+        {/* <Users /> */}
       </section>
       <section className="mt-8">
         <div>

@@ -20,7 +20,7 @@ export interface getTrendingListResponse {
   overview?: string;
   poster_path?: string;
   media_type: "movie" | "tv";
-  genre_id?: [];
+  genre_ids?: [];
   popularity?: number;
   release_date?: string;
   video?: boolean;

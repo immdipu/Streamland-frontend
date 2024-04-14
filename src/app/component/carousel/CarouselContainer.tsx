@@ -7,6 +7,12 @@ import { FaImdb } from "react-icons/fa";
 import Image from "next/image";
 import Link from "next/link";
 import moment from "moment";
+import {
+  MoviesgenresList,
+  MoviesgenresObject,
+  TvgenresObject,
+} from "@/utils/genreData";
+import GenresChip from "@/app/component/ui/GenresChip";
 
 interface dataProps {
   data: getTrendingListResponse[];
@@ -21,13 +27,13 @@ const CarouselContainer: React.FC<dataProps> = ({ data }) => {
       showIndicators={false}
       showArrows={false}
       emulateTouch
-      autoPlay
       infiniteLoop
       dynamicHeight={false}
+      className="!h-full"
     >
       {data.map((item: getTrendingListResponse) => {
         return (
-          <div key={item.id} className="h-full relative">
+          <div key={item.id} className="h-full  relative">
             <Image
               src={`https://image.tmdb.org/t/p/original/${item.backdrop_path!}`}
               width={500}
@@ -36,13 +42,30 @@ const CarouselContainer: React.FC<dataProps> = ({ data }) => {
               alt={(item.title || item.original_title) ?? "poster"}
               style={{ objectFit: "cover", height: "100%" }}
             />
-            <section className="absolute flex flex-col pl-10 justify-between inset-0 bg-gradient-to-r from-_black_bg   p-6">
-              <div className="w-1/2 max-md:w-10/12  flex flex-col gap-2 mt-5">
-                <h3 className="font-bold line-clamp-2 max-md:text-2xl leading-[45px] max-xl:text-xl text-start font-Inter text-4xl text-_sidenav_bg">
+            <section className="absolute  flex flex-col pl-10 justify-between inset-0 bg-gradient-to-r from-_black_bg   p-6">
+              <div className="  flex flex-col gap-2   mt-32">
+                <h3 className="font-semibold line-clamp-2 max-md:text-2xl leading-[45px] max-xl:text-xl text-start font-Inter text-3xl text-_sidenav_bg">
                   {item.media_type === "movie"
                     ? item.title || item.original_title
                     : item.name}
                 </h3>
+                <div className="gap-3 h-fit flex py-2">
+                  {item.genre_ids?.map((id) => {
+                    return (
+                      <GenresChip
+                        Type={item.media_type === "movie" ? "MOVIE" : "TV"}
+                        id={id}
+                        key={id}
+                        name={
+                          item.media_type === "movie"
+                            ? MoviesgenresObject[id]
+                            : TvgenresObject[id]
+                        }
+                      />
+                    );
+                  })}
+                </div>
+
                 <div className="flex items-center gap-2 ">
                   <FaImdb className="text-yellow-400 text-xl" />
                   <p className="text-_light_white text-sm font-sans">

@@ -40,9 +40,9 @@ const Images: React.FC<ImagesProps> = ({
         width={width}
         height={height}
         alt={alt ?? "poster"}
-        onLoadingComplete={(result) => {
-          if (result.naturalWidth === 0) {
-            setImgSrc(failedImage);
+        onLoad={(result) => {
+          if (result.currentTarget.src !== failedImage.src) {
+            setImgSrc(src);
           }
         }}
         onError={() => {

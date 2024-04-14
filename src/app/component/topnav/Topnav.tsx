@@ -17,6 +17,7 @@ import { useAppDispatch } from "@/redux/hooks";
 import { Role } from "@/types/role";
 import Notification from "../notification/Notification";
 import TopNotification from "../notification/TopNotification";
+import { useScroll, useMotionValueEvent } from "framer-motion";
 
 const Topnav = () => {
   const router = useRouter();
@@ -24,6 +25,15 @@ const Topnav = () => {
   const GlobalContext = useContext(SearchContext);
   const user = useAppSelector((state) => state.auth);
   const dispatch = useAppDispatch();
+  const { scrollY } = useScroll();
+
+  useMotionValueEvent(scrollY, "change", (latest) => {
+    if (latest > 300) {
+      document.querySelector(".topnav")?.classList.add("addblur");
+    } else {
+      document.querySelector(".topnav")?.classList.remove("addblur");
+    }
+  });
 
   const AutoLogin = useMutation(() => userApis.AutoLogin(), {
     onSuccess: (data) => {
@@ -48,7 +58,7 @@ const Topnav = () => {
       )}
     >
       {/* <TopNotification /> */}
-      <section className="backdrop-blur-md  h-full flex items-center w-full px-5 max-md:px-1">
+      <section className="  h-full topnav flex items-center w-full px-5 max-md:px-1">
         <button
           onClick={() => {
             router.back();
@@ -76,13 +86,13 @@ const Topnav = () => {
 
         <section className=" w-full flex justify-end max-md:w-fit mr-16 max-md:mr-1 ">
           <section className=" mr-10 max-md:mr-0 flex items-center">
-            <Notification />
+            {/* <Notification /> */}
           </section>
           {AutoLogin.isLoading ? (
             <SmallLoader size={30} />
           ) : (
             <>
-              {user.isUserAuthenticated ? (
+              {/* {user.isUserAuthenticated ? (
                 <UserAvatar />
               ) : (
                 <Link
@@ -94,7 +104,7 @@ const Topnav = () => {
                 >
                   Login
                 </Link>
-              )}
+              )} */}
             </>
           )}
         </section>

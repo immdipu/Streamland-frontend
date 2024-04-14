@@ -250,3 +250,7 @@ axis-horizontal,
     width: 100%;
     padding: 0 !important;
 }
+
+.addblur {
+    backdrop-filter: blur(7px);
+}
