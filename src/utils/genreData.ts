@@ -117,7 +117,9 @@ export const TvTab = [
   },
 ];
 
-export const MoviesgenresObject = {
+export const MoviesgenresObject: {
+  [key: number]: string;
+} = {
   28: "Action",
   12: "Adventure",
   16: "Animation",
@@ -139,7 +141,9 @@ export const MoviesgenresObject = {
   37: "Western",
 };
 
-export const TvgenresObject = {
+export const TvgenresObject: {
+  [key: number]: string;
+} = {
   10759: "Action & Adventure",
   16: "Animation",
   35: "Comedy",
