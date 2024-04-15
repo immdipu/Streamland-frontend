@@ -13,8 +13,8 @@ interface dataProps {
 const CarouselContainer: React.FC<dataProps> = ({ data }) => {
   const [index, setIndex] = useState(0);
   return (
-    <div className=" w-screen h-full ">
-      <section className=" w-1/2  absolute bottom-5  right-0  z-20 ">
+    <div className=" w-screen h-[85vh] ">
+      <section className=" w-1/2  absolute -bottom-16  right-0  z-20 ">
         <div
           onClick={() => {
             setIndex(index - 1);
@@ -49,8 +49,9 @@ const CarouselContainer: React.FC<dataProps> = ({ data }) => {
         </Carousel>
         <div />
       </section>
-
-      <Template item={data[index] || []} />
+      <div className="h-full">
+        <Template item={data[index] || []} />
+      </div>
     </div>
   );
 };
