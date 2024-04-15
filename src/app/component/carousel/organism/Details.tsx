@@ -11,7 +11,7 @@ interface DetailsProps {
 
 const Details: React.FC<DetailsProps> = ({ item }) => {
   return (
-    <div className="  flex flex-col gap-2  mt-32">
+    <div className="  flex flex-col gap-2  mt-32 max-lg:mt-16">
       <Title
         media_type={item.media_type}
         name={item.name}
@@ -19,7 +19,7 @@ const Details: React.FC<DetailsProps> = ({ item }) => {
         title={item.title}
       />
 
-      <div className="gap-3 h-fit flex py-2">
+      <div className="gap-3 max-lg:gap-2 h-fit flex py-2">
         <Genre data={item.genre_ids || []} media_type={item.media_type} />
       </div>
 
@@ -47,7 +47,7 @@ const Details: React.FC<DetailsProps> = ({ item }) => {
           {item.original_language?.toUpperCase()}
         </span>
       </div>
-      <div className=" text-start w-1/2 mt-5 group   font-Inter">
+      <div className=" text-start max-sm:hidden w-1/2 max-lg:w-full max-lg:mt-2 mt-5 group   font-Inter">
         <p className="text-_light_white line-clamp-3 group-hover:text-white leading-6 duration-200 transition-all ease-linear group-hover:line-clamp-none  text-sm">
           {item.overview}
         </p>

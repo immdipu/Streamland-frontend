@@ -36,7 +36,9 @@ const TrailerPlayer = ({
       className={clsx(
         "w-full  h-full group relative duration-300 transition-all ease-in-out",
         loadTrailer ? "block" : "hidden",
-        showTrailer ? "z-[55] scale-100 h-screen" : "z-0 scale-[1.35] h-inherit"
+        showTrailer
+          ? "z-[55] scale-100 h-screen"
+          : "z-0 scale-[1.35] max-sm:scale-150 h-inherit"
       )}
     >
       <iframe
