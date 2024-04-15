@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect } from "react";
+import React, { useEffect, Suspense } from "react";
 import Link from "next/link";
 import { BiSearch } from "react-icons/bi";
 import { useMutation } from "@tanstack/react-query";
@@ -65,83 +65,85 @@ const ChatSidebar = () => {
   );
 
   return (
-    <div
-      className={clsx(
-        "fixed  left-0 bottom-0 z-[51] py-2 bg-neutral-900 transition-all ease-in-out duration-100  max-w-sm w-full max-md:w-3/4 max-md:shrink shrink-0 h-full",
-        chat.showChatSidebar ? " max-md:left-0 " : "max-md:-left-96"
-      )}
-    >
-      <div className="flex items-center gap-1">
-        <button
-          className="px-1  ml-2 max-md:block hidden"
-          onClick={() => dispatch(toggelChatSidebar())}
-        >
-          <LuArrowLeft className="text-lg text-neutral-300" />
-        </button>
-        <div className="flex items-center h-10 bg-neutral-800 border border-neutral-600 border-opacity-30 px-2 rounded-full">
-          <BiSearch className="text-neutral-400 text-xl" />
-          <input
-            type="search"
-            placeholder="Search chat "
-            className=" bg-transparent h-full px-3 text-neutral-300 placeholder:text-neutral-500 my-1 outline-none  border-none"
-          />
-        </div>
-        <Link href={"/"}>
-          <BiHomeAlt2 className="text-xl ml-2 text-neutral-400" />
-        </Link>
-      </div>
-      {/* messages */}
-      <section className=" mt-12 flex flex-col gap-2 chatlist-container overflow-hidden hover:overflow-y-auto  max-h-[82%]">
-        <div>
-          <div className="flex items-center justify-around gap-2 mb-5 border-b border-neutral-700 ">
-            <div>
-              <button
-                className="pb-3"
-                onClick={() => {
-                  router.push("/chat?type=global");
-                }}
-              >
-                Global chat
-              </button>
-              <div
-                className={clsx(
-                  "border-b-4 border-blue-600 rounded-xl transition-opacity duration-200 ease-linear",
-                  currentChatType === "global" ? "opacity-100" : "opacity-0"
-                )}
-              />
-            </div>
-            <div>
-              <button
-                className="pb-3"
-                onClick={() => {
-                  router.push("/chat?type=personal");
-                }}
-              >
-                Personal chat
-              </button>
-              <div
-                className={clsx(
-                  "border-b-4 rounded-xl border-blue-600 transition-opacity duration-200 ease-linear",
-                  currentChatType === "personal" ? "opacity-100" : "opacity-0"
-                )}
-              />
-            </div>
-          </div>
-        </div>
-        {currentChatType === "global" && (
-          <div className="px-10 flex justify-center mb-5 ">
-            <CustomModal
-              buttonElement={CreateAgroup}
-              data={<CreateGroupForm />}
-              width={"20rem"}
+    <Suspense>
+      <div
+        className={clsx(
+          "fixed  left-0 bottom-0 z-[51] py-2 bg-neutral-900 transition-all ease-in-out duration-100  max-w-sm w-full max-md:w-3/4 max-md:shrink shrink-0 h-full",
+          chat.showChatSidebar ? " max-md:left-0 " : "max-md:-left-96"
+        )}
+      >
+        <div className="flex items-center gap-1">
+          <button
+            className="px-1  ml-2 max-md:block hidden"
+            onClick={() => dispatch(toggelChatSidebar())}
+          >
+            <LuArrowLeft className="text-lg text-neutral-300" />
+          </button>
+          <div className="flex items-center h-10 bg-neutral-800 border border-neutral-600 border-opacity-30 px-2 rounded-full">
+            <BiSearch className="text-neutral-400 text-xl" />
+            <input
+              type="search"
+              placeholder="Search chat "
+              className=" bg-transparent h-full px-3 text-neutral-300 placeholder:text-neutral-500 my-1 outline-none  border-none"
             />
           </div>
-        )}
-        <section>
-          {currentChatType === "global" ? <GroupChat /> : <PersonalChat />}
+          <Link href={"/"}>
+            <BiHomeAlt2 className="text-xl ml-2 text-neutral-400" />
+          </Link>
+        </div>
+        {/* messages */}
+        <section className=" mt-12 flex flex-col gap-2 chatlist-container overflow-hidden hover:overflow-y-auto  max-h-[82%]">
+          <div>
+            <div className="flex items-center justify-around gap-2 mb-5 border-b border-neutral-700 ">
+              <div>
+                <button
+                  className="pb-3"
+                  onClick={() => {
+                    router.push("/chat?type=global");
+                  }}
+                >
+                  Global chat
+                </button>
+                <div
+                  className={clsx(
+                    "border-b-4 border-blue-600 rounded-xl transition-opacity duration-200 ease-linear",
+                    currentChatType === "global" ? "opacity-100" : "opacity-0"
+                  )}
+                />
+              </div>
+              <div>
+                <button
+                  className="pb-3"
+                  onClick={() => {
+                    router.push("/chat?type=personal");
+                  }}
+                >
+                  Personal chat
+                </button>
+                <div
+                  className={clsx(
+                    "border-b-4 rounded-xl border-blue-600 transition-opacity duration-200 ease-linear",
+                    currentChatType === "personal" ? "opacity-100" : "opacity-0"
+                  )}
+                />
+              </div>
+            </div>
+          </div>
+          {currentChatType === "global" && (
+            <div className="px-10 flex justify-center mb-5 ">
+              <CustomModal
+                buttonElement={CreateAgroup}
+                data={<CreateGroupForm />}
+                width={"20rem"}
+              />
+            </div>
+          )}
+          <section>
+            {currentChatType === "global" ? <GroupChat /> : <PersonalChat />}
+          </section>
         </section>
-      </section>
-    </div>
+      </div>
+    </Suspense>
   );
 };
 

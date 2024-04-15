@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, Suspense } from "react";
 import Image from "next/image";
 import { ChatsTypes, MessageTypes } from "@/types/chatTypes";
 import { useAppSelector } from "@/redux/hooks";
@@ -44,7 +44,7 @@ const SingleUserCard: React.FC<ChatsTypes> = ({
   }, [chatId]);
 
   return (
-    <>
+    <Suspense>
       <div
         onClick={() => {
           router.push(`/chat?id=${_id}&type=${chatType}`);
@@ -96,7 +96,7 @@ const SingleUserCard: React.FC<ChatsTypes> = ({
           </div>
         </div>
       </div>
-    </>
+    </Suspense>
   );
 };
 

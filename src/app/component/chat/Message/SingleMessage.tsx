@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useRef, Suspense } from "react";
 import MessageHeader from "./MessageHeader";
 import { TbSend } from "react-icons/tb";
 import { useSearchParams } from "next/navigation";
@@ -184,7 +184,7 @@ const SingleMessage = () => {
   };
 
   return (
-    <>
+    <Suspense>
       <section className=" absolute bottom-0 flex  top-0  max-md:w-full  w-[calc(100%-384px)]">
         <section className="flex-col w-full">
           {currentActiveChat && (
@@ -259,7 +259,7 @@ const SingleMessage = () => {
         </section>
         <RightSidebar ChatId={ChatId} />
       </section>
-    </>
+    </Suspense>
   );
 };
 

@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import { NowPlayingResponse, singleTVShowProps } from "@/types/types";
 import SingleCard from "../silder/SingleCard";
@@ -181,47 +181,49 @@ const MoviesGrid: React.FC<MovieGridTypes> = ({ genre }) => {
   }, [genreId, genre]);
 
   return (
-    <div style={{ overflow: "auto" }} ref={containerRef}>
-      {data && data.length > 0 ? (
-        <div className="pl-16 mt-16 h-full grid gap-y-9 max-md:pl-1 max-md:grid-cols-smallAutoFit max-md:justify-center max-md:mb-16 grid-cols-[repeat(auto-fit,minmax(167px,1fr))]">
-          {data.map((item) => {
-            if (genre === "MOVIE") {
-              return <SingleCard key={item.id} {...item} />;
-            }
-            if (genre === "TV") {
-              return <SingleTvCard key={item.id} {...item} />;
-            }
-            return "";
-          })}
-        </div>
-      ) : (
-        <>
-          <div className="bg-_black_bg grid place-content-center min-h-screen">
-            <div className="text-_white">Loading...</div>
+    <Suspense>
+      <div style={{ overflow: "auto" }} ref={containerRef}>
+        {data && data.length > 0 ? (
+          <div className="pl-16 mt-16 h-full grid gap-y-9 max-md:pl-1 max-md:grid-cols-smallAutoFit max-md:justify-center max-md:mb-16 grid-cols-[repeat(auto-fit,minmax(167px,1fr))]">
+            {data.map((item) => {
+              if (genre === "MOVIE") {
+                return <SingleCard key={item.id} {...item} />;
+              }
+              if (genre === "TV") {
+                return <SingleTvCard key={item.id} {...item} />;
+              }
+              return "";
+            })}
           </div>
-        </>
-      )}
+        ) : (
+          <>
+            <div className="bg-_black_bg grid place-content-center min-h-screen">
+              <div className="text-_white">Loading...</div>
+            </div>
+          </>
+        )}
 
-      {loading && hasMore && (
-        <div className="text-center py-4">
-          <SmallLoader size={34} />
-        </div>
-      )}
-      {!loading && !hasMore && <p className="text-white text-center">End</p>}
-      {showScrolltoTop && (
-        <button
-          className="fixed active:scale-95 shadow-md bottom-5 w-10 grid place-content-center cursor-pointer h-10 right-6 bg-neutral-700 rounded-full  "
-          onClick={() => {
-            window.scrollTo({
-              top: 0,
-              behavior: "smooth",
-            });
-          }}
-        >
-          <BiUpArrowAlt className="text-xl" />
-        </button>
-      )}
-    </div>
+        {loading && hasMore && (
+          <div className="text-center py-4">
+            <SmallLoader size={34} />
+          </div>
+        )}
+        {!loading && !hasMore && <p className="text-white text-center">End</p>}
+        {showScrolltoTop && (
+          <button
+            className="fixed active:scale-95 shadow-md bottom-5 w-10 grid place-content-center cursor-pointer h-10 right-6 bg-neutral-700 rounded-full  "
+            onClick={() => {
+              window.scrollTo({
+                top: 0,
+                behavior: "smooth",
+              });
+            }}
+          >
+            <BiUpArrowAlt className="text-xl" />
+          </button>
+        )}
+      </div>
+    </Suspense>
   );
 };
 

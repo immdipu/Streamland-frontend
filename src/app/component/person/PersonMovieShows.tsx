@@ -1,5 +1,5 @@
 "use client";
-import React, { useCallback, useMemo } from "react";
+import React, { Suspense } from "react";
 import SearchCard from "../search/SearchCard";
 import { serachItemProps } from "../../../types/searchTypes";
 import { useRouter, useSearchParams, useParams } from "next/navigation";
@@ -159,7 +159,7 @@ const PersonMovieShows = ({ data }: { data: serachItemProps[] }) => {
   };
 
   return (
-    <>
+    <Suspense>
       <section className="mt-14">
         <div className="flex max-md:flex-col max-md:items-start justify-between items-center sticky top-0">
           <h3 className="text-xl font-medium ">Movies and TV shows :</h3>
@@ -202,7 +202,7 @@ const PersonMovieShows = ({ data }: { data: serachItemProps[] }) => {
           })}
         </section>
       </section>
-    </>
+    </Suspense>
   );
 };
 

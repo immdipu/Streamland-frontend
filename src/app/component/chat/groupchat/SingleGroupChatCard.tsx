@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, Suspense } from "react";
 import moment from "moment";
 import { useAppSelector } from "@/redux/hooks";
 import { useSearchParams, useRouter } from "next/navigation";
@@ -43,7 +43,7 @@ const SingleGroupChatCard: React.FC<GroupChatTypes> = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [chatId]);
   return (
-    <>
+    <Suspense>
       <>
         <div
           onClick={() => {
@@ -94,7 +94,7 @@ const SingleGroupChatCard: React.FC<GroupChatTypes> = ({
           </div>
         </div>
       </>
-    </>
+    </Suspense>
   );
 };
 

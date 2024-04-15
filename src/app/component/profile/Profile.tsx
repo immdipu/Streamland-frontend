@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Suspense } from "react";
 import dynamic from "next/dynamic";
 import { useSearchParams, useParams } from "next/navigation";
 import { Col, Row } from "react-bootstrap";
@@ -59,10 +59,8 @@ const Profile = () => {
     );
   }
 
-  
-
   return (
-    <>
+    <Suspense>
       <div>
         <Row>
           <Col lg={12} md={12}>
@@ -95,7 +93,7 @@ const Profile = () => {
 
         <section></section>
       </div>
-    </>
+    </Suspense>
   );
 };
 

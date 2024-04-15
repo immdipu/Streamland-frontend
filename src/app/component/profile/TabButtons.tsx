@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useRef, Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import clsx from "clsx";
 import { Role } from "@/types/role";
@@ -26,7 +26,7 @@ const TabButtons: React.FC<TabButtonsProps> = ({
   }, [TabName]);
 
   return (
-    <>
+    <Suspense>
       <div className=" pl-8 flex gap-8 flex-wrap max-md:gap-3 relative">
         {Buttons.filter((item) => {
           if (item === "Edit Profile")
@@ -56,7 +56,7 @@ const TabButtons: React.FC<TabButtonsProps> = ({
           );
         })}
       </div>
-    </>
+    </Suspense>
   );
 };
 
