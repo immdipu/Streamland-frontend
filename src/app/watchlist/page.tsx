@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Suspense } from "react";
 import { Watchlist } from "../component";
 
 import { Metadata } from "next";
@@ -10,7 +10,9 @@ export const metadata: Metadata = {
 const page = () => {
   return (
     <div className="pt-20 pl-16">
-      <Watchlist />
+      <Suspense>
+        <Watchlist />
+      </Suspense>
     </div>
   );
 };

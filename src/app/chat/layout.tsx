@@ -1,6 +1,5 @@
-import React from "react";
+import React, { Suspense } from "react";
 import { ChatSidebar } from "../component";
-import RightSidebar from "../component/chat/RightSidebar/RightSidebar";
 
 export default function ChatLayout({
   children,
@@ -9,7 +8,9 @@ export default function ChatLayout({
 }) {
   return (
     <section>
-      <ChatSidebar />
+      <Suspense>
+        <ChatSidebar />
+      </Suspense>
       {children}
     </section>
   );

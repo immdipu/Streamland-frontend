@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Suspense } from "react";
 import { MovieGenreList, MoviesGrid } from "@/app/component";
 
 import { Metadata } from "next";
@@ -12,10 +12,14 @@ const page = () => {
     <div className="bg-_black_bg pt-20 ">
       <h2 className="text-_sidenav_bg text-2xl pl-16 max-md:pl-5">TV Shows</h2>
       <section>
-        <MovieGenreList genre="TV" />
+        <Suspense>
+          <MovieGenreList genre="TV" />
+        </Suspense>
       </section>
       <section className="bg-_black_bg">
-        <MoviesGrid genre={"TV"} />
+        <Suspense>
+          <MoviesGrid genre={"TV"} />
+        </Suspense>
       </section>
     </div>
   );
