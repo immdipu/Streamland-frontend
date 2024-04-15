@@ -72,6 +72,15 @@ export const userApis = {
     );
     return res.data;
   },
+  GetTrailer: async (searchTerm: string) => {
+    const res = await axiosInstance().post(
+      `${process.env.NEXT_PUBLIC_USER_URL}/media/trailer`,
+      {
+        searchTerm,
+      }
+    );
+    return res.data;
+  },
 
   SendFeeback: async (data: feedbackDataTypes) => {
     const res = await axios.post(

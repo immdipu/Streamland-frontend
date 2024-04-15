@@ -1,28 +1,44 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Details from "../organism/Details";
 import { getTrendingListResponse } from "@/types/types";
 import Image from "next/image";
 import Link from "next/link";
 import AddToWatchlist from "../../Buttons/AddToWatchlist";
+import { motion } from "framer-motion";
+import { useQuery } from "@tanstack/react-query";
+import { userApis } from "@/app/userApi";
 
 const Template = ({ item }: { item: getTrendingListResponse }) => {
+  const searchTerm = item.name || item.original_title || "";
+  const { data, isLoading } = useQuery(
+    ["getTrailer", item.name, item.original_title],
+    () => userApis.GetTrailer(searchTerm + " trailer")
+  );
+
   return (
-    <div key={item.id} className="h-full  relative">
-      {item.id.toString() !== "106379" && (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.7 }}
+      exit={{ opacity: 0 }}
+      key={item.id}
+      className="h-full  relative w-full "
+    >
+      {(isLoading || !data) && (
         <Image
           src={`https://image.tmdb.org/t/p/original/${item.backdrop_path!}`}
           width={500}
           height={500}
           priority
           alt={(item.title || item.original_title) ?? "poster"}
-          style={{ objectFit: "cover", height: "100%" }}
+          style={{ objectFit: "cover", height: "100%", width: "100%" }}
         />
       )}
-      <div className="w-full h-full border">
-        {item.id.toString() === "106379" && (
+      <div className="w-full scale-[1.35] h-full border relative">
+        {!isLoading && data && data.length > 0 && (
           <iframe
-            className="w-full h-full object-cover scale-150 "
-            src="https://www.youtube.com/embed/V-mugKDQDlg?si=c0-slokEPD-kIk1X&amp;controls=0 &amp;autoplay=1&amp;mute=1&amp;loop=1&amp;"
+            className="w-full h-full object-cover  "
+            src={`https://www.youtube.com/embed/${data[0].id}?controls=0&autoplay=1&mute=1&loop=1`}
             title="YouTube video player"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope;"
             referrerPolicy="strict-origin-when-cross-origin"
@@ -45,7 +61,7 @@ const Template = ({ item }: { item: getTrendingListResponse }) => {
           <AddToWatchlist {...item} showAddToWatchlist={true} />
         </div>
       </section>
-    </div>
+    </motion.div>
   );
 };
 
