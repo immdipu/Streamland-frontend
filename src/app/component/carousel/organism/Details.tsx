@@ -10,6 +10,7 @@ interface DetailsProps {
 }
 
 const Details: React.FC<DetailsProps> = ({ item }) => {
+  console.log(item);
   return (
     <div className="  flex flex-col gap-2  mt-32 max-lg:mt-16">
       <Title
@@ -41,7 +42,7 @@ const Details: React.FC<DetailsProps> = ({ item }) => {
           release_date={item.release_date}
         />
 
-        <Rating rating={item.popularity} />
+        <Rating rating={item.vote_average} />
 
         <span className=" ml-5 before:-left-4 relative content-['*'] before:absolute before:bg-neutral-400  before:bottom-1/2 before:top-1/2 before:w-[2px] before:rounded-full before:h-[2px]  leading-none text-xs text-_light_white ">
           {item.original_language?.toUpperCase()}
