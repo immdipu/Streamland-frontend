@@ -1,13 +1,12 @@
-import React, { useState } from "react";
-import Details from "../organism/Details";
-import { getTrendingListResponse } from "@/types/types";
+import { motion } from "framer-motion";
+import dynamic from "next/dynamic";
 import Image from "next/image";
 import Link from "next/link";
-import dynamic from "next/dynamic";
-import AddToWatchlist from "../../Buttons/AddToWatchlist";
-import { motion } from "framer-motion";
-const TrailerPlayer = dynamic(() => import("./TrailerPlayer"));
+import { useState } from "react";
 import { BsVolumeMuteFill } from "react-icons/bs";
+import AddToWatchlist from "../../Buttons/AddToWatchlist";
+import Details from "../organism/Details";
+const TrailerPlayer = dynamic(() => import("./TrailerPlayer"));
 
 const Template = ({ item }: { item: getTrendingListResponse }) => {
   const [loadTrailer, setLoadTrailer] = useState(false);

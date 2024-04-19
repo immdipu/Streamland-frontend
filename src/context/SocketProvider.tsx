@@ -1,12 +1,12 @@
 /* eslint-disable @next/next/no-img-element */
-import React, { createContext, useEffect, useState } from "react";
-import { io, Socket } from "socket.io-client";
-import { useAppSelector, useAppDispatch } from "@/redux/hooks";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { addOnlineUser, removeOnlineUser } from "@/redux/slice/chatSlice";
-import { OnlineUsersTypese, MessageTypes } from "@/types/chatTypes";
-import { usePathname } from "next/navigation";
-import toast from "react-hot-toast";
+import { MessageTypes, OnlineUsersTypese } from "@/types/chatTypes";
 import clsx from "clsx";
+import { usePathname } from "next/navigation";
+import React, { createContext, useEffect, useState } from "react";
+import toast from "react-hot-toast";
+import { Socket, io } from "socket.io-client";
 
 interface SocketContextProps {
   socket: Socket | null;

@@ -1,10 +1,9 @@
 "use client";
 import React, { useState } from "react";
-import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import { Carousel } from "react-responsive-carousel";
-import { getTrendingListResponse } from "@/types/types";
-import Template from "./template/Template";
+import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import MiniCarousel from "./template/MiniCarousel";
+import Template from "./template/Template";
 
 interface dataProps {
   data: getTrendingListResponse[];

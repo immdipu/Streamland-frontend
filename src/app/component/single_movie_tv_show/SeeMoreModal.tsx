@@ -1,28 +1,21 @@
 "use client";
-import React, { useState } from "react";
-import { CgMoreVerticalO } from "react-icons/cg";
 import {
-  Tooltip,
-  IconButton,
-  Modal,
   Backdrop,
   Box,
-  List,
-  ListItemButton,
   Collapse,
+  IconButton,
+  List,
+  Modal,
+  Tooltip,
 } from "@mui/material";
-import { useSpring, animated } from "@react-spring/web";
-import {
-  tvshowCreatorProps,
-  TVshowNetworkProps,
-  TVshowSpokenLanguage,
-} from "@/types/types";
-import ListItems from "../MuiComponent/ListItem";
-import { BiChevronDown, BiChevronUp } from "react-icons/bi";
-import Images from "../ImageComponent/Image";
-import Link from "next/link";
-import { AiOutlineClose } from "react-icons/ai";
 import Fade from "@mui/material/Fade";
+import Link from "next/link";
+import React from "react";
+import { AiOutlineClose } from "react-icons/ai";
+import { BiChevronDown, BiChevronUp } from "react-icons/bi";
+import { CgMoreVerticalO } from "react-icons/cg";
+import Images from "../ImageComponent/Image";
+import ListItems from "../MuiComponent/ListItem";
 
 const style = {
   position: "absolute" as "absolute",

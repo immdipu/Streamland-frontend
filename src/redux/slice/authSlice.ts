@@ -1,6 +1,6 @@
-import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { loginResponseTypes } from "@/types/userTypes";
 import { Role } from "@/types/role";
+import { loginResponseTypes } from "@/types/userTypes";
+import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
 interface initialStateProps {
   fullName: string | null;

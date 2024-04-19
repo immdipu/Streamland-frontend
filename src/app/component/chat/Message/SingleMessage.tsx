@@ -1,20 +1,20 @@
 "use client";
-import React, { useEffect, useState, useRef } from "react";
-import MessageHeader from "./MessageHeader";
-import { TbSend } from "react-icons/tb";
-import { useSearchParams } from "next/navigation";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { userApis } from "@/app/userApi";
-import toast from "react-hot-toast";
-import AllMessages from "./AllMessages";
-import { MessageTypes } from "@/types/chatTypes";
-import { useAppSelector } from "@/redux/hooks";
 import { useSocket } from "@/context/SocketProvider";
-import JoinGroup from "../groupchat/component/JoinGroup";
-import RightSidebar from "../RightSidebar/RightSidebar";
-import data, { Emoji } from "@emoji-mart/data";
+import { useAppSelector } from "@/redux/hooks";
+import { MessageTypes } from "@/types/chatTypes";
+import data from "@emoji-mart/data";
 import Picker from "@emoji-mart/react";
+import { useMutation } from "@tanstack/react-query";
+import { useSearchParams } from "next/navigation";
+import React, { useEffect, useRef, useState } from "react";
+import toast from "react-hot-toast";
 import { HiOutlineEmojiHappy } from "react-icons/hi";
+import { TbSend } from "react-icons/tb";
+import RightSidebar from "../RightSidebar/RightSidebar";
+import JoinGroup from "../groupchat/component/JoinGroup";
+import AllMessages from "./AllMessages";
+import MessageHeader from "./MessageHeader";
 
 interface sendMessageTypes {
   content: string;

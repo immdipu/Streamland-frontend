@@ -1,6 +1,4 @@
-import React from "react";
 import Seasons from "@/app/component/seasons/Seasons";
-import { SingleShowProps } from "@/types/types";
 
 async function getSingleTv(id: string) {
   const res = await fetch(

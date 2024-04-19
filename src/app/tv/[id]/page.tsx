@@ -1,6 +1,4 @@
-import React from "react";
 import SingleShow from "@/app/component/single_movie_tv_show/SingleShow";
-import { SingleShowProps } from "@/types/types";
 
 async function getSingleTv(id: string) {
   const res = await fetch(

@@ -1,9 +1,8 @@
-import React from "react";
-import { castProps } from "@/types/types";
-import Images from "../ImageComponent/Image";
 import Link from "next/link";
+import React from "react";
 import { Tooltip as ReactTooltip } from "react-tooltip";
 import notFound from "../../../../public/notFound.png";
+import Images from "../ImageComponent/Image";
 const SingleCastCard: React.FC<castProps> = ({
   cast_id,
   name,

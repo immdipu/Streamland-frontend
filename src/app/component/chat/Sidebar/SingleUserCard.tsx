@@ -1,14 +1,11 @@
-import React, { useEffect, useState, Suspense } from "react";
-import Image from "next/image";
-import { ChatsTypes, MessageTypes } from "@/types/chatTypes";
-import { useAppSelector } from "@/redux/hooks";
-import { useRouter } from "next/navigation";
-import moment from "moment";
-import { useSearchParams } from "next/navigation";
-import { useAppDispatch } from "@/redux/hooks";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { setCurrentActiveChat } from "@/redux/slice/chatSlice";
+import { ChatsTypes } from "@/types/chatTypes";
 import clsx from "clsx";
-import { useSocket } from "@/context/SocketProvider";
+import moment from "moment";
+import Image from "next/image";
+import { useRouter, useSearchParams } from "next/navigation";
+import React, { Suspense, useEffect } from "react";
 
 const SingleUserCard: React.FC<ChatsTypes> = ({
   _id,

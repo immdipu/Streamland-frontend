@@ -1,8 +1,7 @@
 import React, { Suspense } from "react";
-import { singleEpisodeTypes } from "@/types/types";
-import { useSearchParams, useParams } from "next/navigation";
-import { useRouter } from "next/navigation";
+
 import clsx from "clsx";
+import { useParams, useRouter, useSearchParams } from "next/navigation";
 
 const Episode: React.FC<singleEpisodeTypes> = ({
   id,

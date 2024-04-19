@@ -1,9 +1,8 @@
 "use client";
-import React, { useState, useRef, useEffect } from "react";
-import { castProps } from "@/types/types";
-import SingleCastCard from "./SingleCastCard";
 import clsx from "clsx";
+import { useEffect, useRef, useState } from "react";
 import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from "react-icons/md";
+import SingleCastCard from "./SingleCastCard";
 
 const Cast = ({ data }: { data: castProps[] }) => {
   const castContainerRef = useRef<HTMLDivElement | null>(null);

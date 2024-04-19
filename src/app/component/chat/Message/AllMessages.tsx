@@ -1,14 +1,13 @@
 "use client";
-import React, { useEffect } from "react";
-import { useQuery } from "@tanstack/react-query";
 import { userApis } from "@/app/userApi";
-import SenderText from "./SenderText";
-import ReceiverText from "./ReceiverText";
-import { MessageTypes } from "@/types/chatTypes";
-import { useAppSelector } from "@/redux/hooks";
 import { useSocket } from "@/context/SocketProvider";
-import toast from "react-hot-toast";
+import { useAppSelector } from "@/redux/hooks";
+import { MessageTypes } from "@/types/chatTypes";
+import { useQuery } from "@tanstack/react-query";
+import React, { useEffect } from "react";
 import AllMessagesSkeleton from "../../skeleton/AllMessagesSkeleton";
+import ReceiverText from "./ReceiverText";
+import SenderText from "./SenderText";
 
 interface AllMessagesProps {
   ChatId: string;

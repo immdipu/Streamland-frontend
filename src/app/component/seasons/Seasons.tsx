@@ -2,7 +2,6 @@
 import { Apis } from "@/app/tmdbApi/TmdbApi";
 import { userApis } from "@/app/userApi";
 import { useAppSelector } from "@/redux/hooks";
-import { seasonsProps } from "@/types/types";
 import { AddMediaDataTypes } from "@/types/userTypes";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import clsx from "clsx";

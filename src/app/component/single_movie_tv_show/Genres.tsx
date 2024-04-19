@@ -1,5 +1,3 @@
-import React from "react";
-import { genresProps } from "@/types/types";
 import Link from "next/link";
 
 const Genres = ({

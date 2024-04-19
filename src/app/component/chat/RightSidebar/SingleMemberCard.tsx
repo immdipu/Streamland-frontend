@@ -1,12 +1,12 @@
-import React, { useState, useEffect } from "react";
+import { useAppSelector } from "@/redux/hooks";
 import { User } from "@/types/chatTypes";
-import Image from "next/image";
 import { Role } from "@/types/role";
+import clsx from "clsx";
+import Image from "next/image";
+import React from "react";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import CustomModal from "../../modal/CustomModal";
 import MemberSeeMoreModal from "./MemberSeeMoreModal";
-import { useAppSelector } from "@/redux/hooks";
-import clsx from "clsx";
 
 interface UserExtended extends User {
   owner: string;

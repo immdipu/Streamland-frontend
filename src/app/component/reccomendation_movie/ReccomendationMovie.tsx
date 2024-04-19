@@ -1,6 +1,4 @@
-import React from "react";
 import Slider from "../silder/Slider";
-import { NowPlayingResponse } from "@/types/types";
 
 const ReccomendationMovie = ({
   results,

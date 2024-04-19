@@ -1,12 +1,11 @@
-import React, { useEffect, Suspense } from "react";
-import moment from "moment";
-import { useAppSelector } from "@/redux/hooks";
-import { useSearchParams, useRouter } from "next/navigation";
-import { useAppDispatch } from "@/redux/hooks";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { setCurrentActiveChat } from "@/redux/slice/chatSlice";
 import { GroupChatTypes } from "@/types/chatTypes";
 import clsx from "clsx";
+import moment from "moment";
 import Image from "next/image";
+import { useRouter, useSearchParams } from "next/navigation";
+import React, { Suspense, useEffect } from "react";
 
 const SingleGroupChatCard: React.FC<GroupChatTypes> = ({
   _id,

@@ -1,9 +1,9 @@
 "use client";
-import React, { useContext, useEffect, useState } from "react";
 import { SearchContext } from "@/context/GlobalProvider";
 import { SearchResultsProps, serachItemProps } from "@/types/searchTypes";
-import SearchCard from "./SearchCard";
+import { useContext, useEffect, useState } from "react";
 import SmallLoader from "../loader/SmallLoader";
+import SearchCard from "./SearchCard";
 
 const Search = () => {
   const searchProvider = useContext(SearchContext);

@@ -1,11 +1,10 @@
 "use client";
-import React, { use, useState } from "react";
-import dynamic from "next/dynamic";
-import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { userApis } from "@/app/userApi";
-import SingleUserCard from "./SingleUserCard";
 import { useAppSelector } from "@/redux/hooks";
 import { Role } from "@/types/role";
+import { useQuery } from "@tanstack/react-query";
+import dynamic from "next/dynamic";
+import SingleUserCard from "./SingleUserCard";
 const CustomModal = dynamic(() => import("@/app/component/modal/CustomModal"));
 const AllUsers = dynamic(() => import("./AllUsers"));
 

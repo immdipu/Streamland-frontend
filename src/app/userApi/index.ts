@@ -1,15 +1,15 @@
-import { axiosInstance } from "@/utils/AxiosInterceptor";
-import axios from "axios";
 import {
-  signupParamsTypes,
   AddMediaDataTypes,
-  getUserDataTypes,
-  feedbackDataTypes,
   EditProfileDataTypes,
-  getUserListTypes,
   FollowFollowingList,
+  feedbackDataTypes,
+  getUserDataTypes,
+  getUserListTypes,
+  signupParamsTypes,
   userList,
 } from "@/types/userTypes";
+import { axiosInstance } from "@/utils/AxiosInterceptor";
+import axios from "axios";
 
 import {
   ChatsTypes,

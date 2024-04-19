@@ -1,8 +1,8 @@
 "use client";
-import React, { useEffect, useState, useRef } from "react";
 import { SingleTrendingPersonProp } from "@/types/personTypes";
-import TrendingPersonCard from "./TrendingPersonCard";
+import React, { useRef, useState } from "react";
 import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from "react-icons/md";
+import TrendingPersonCard from "./TrendingPersonCard";
 
 interface TrendingPersonSliderProps {
   data: SingleTrendingPersonProp[];

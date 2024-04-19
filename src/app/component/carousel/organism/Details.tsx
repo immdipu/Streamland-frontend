@@ -1,9 +1,8 @@
 import React from "react";
-import { getTrendingListResponse } from "@/types/types";
-import Title from "../atom/Title";
 import Genre from "../atom/Genre";
-import ReleaseDate from "../atom/ReleaseDate";
 import Rating from "../atom/Rating";
+import ReleaseDate from "../atom/ReleaseDate";
+import Title from "../atom/Title";
 
 interface DetailsProps {
   item: getTrendingListResponse;

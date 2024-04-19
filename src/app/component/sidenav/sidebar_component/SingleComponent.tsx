@@ -1,8 +1,8 @@
 "use client";
-import React from "react";
 import { DesktopSingleComponentProps } from "@/types/types";
 import clsx from "clsx";
 import { AnimatePresence, motion } from "framer-motion";
+import React from "react";
 
 import Link from "next/link";
 

@@ -1,15 +1,15 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 "use client";
-import React, { useEffect, Suspense } from "react";
-import { useAppSelector } from "@/redux/hooks";
-import MoviesList from "./MoviesList";
-import { useQuery } from "@tanstack/react-query";
 import { userApis } from "@/app/userApi";
-import LoadingAnimation from "./LoadingAnimation";
+import { useAppSelector } from "@/redux/hooks";
 import { AddMediaResponse } from "@/types/userTypes";
-import { useRouter, useSearchParams } from "next/navigation";
-import clsx from "clsx";
 import { useAutoAnimate } from "@formkit/auto-animate/react";
+import { useQuery } from "@tanstack/react-query";
+import clsx from "clsx";
+import { useRouter, useSearchParams } from "next/navigation";
+import { useEffect } from "react";
+import LoadingAnimation from "./LoadingAnimation";
+import MoviesList from "./MoviesList";
 
 const Watchlist = () => {
   const user = useAppSelector((state) => state.auth);

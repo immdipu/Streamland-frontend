@@ -1,12 +1,11 @@
 "use client";
-import React, { useEffect, useRef, useState } from "react";
-import { useSearchParams } from "next/navigation";
-import { NowPlayingResponse, singleTVShowProps } from "@/types/types";
-import SingleCard from "../silder/SingleCard";
-import SmallLoader from "../loader/SmallLoader";
-import SingleTvCard from "../silder/SingleTvCard";
 import { Apis } from "@/app/tmdbApi/TmdbApi";
+import { useSearchParams } from "next/navigation";
+import React, { useEffect, useRef, useState } from "react";
 import { BiUpArrowAlt } from "react-icons/bi";
+import SmallLoader from "../loader/SmallLoader";
+import SingleCard from "../silder/SingleCard";
+import SingleTvCard from "../silder/SingleTvCard";
 
 interface MovieGridTypes {
   genre: "MOVIE" | "TV";

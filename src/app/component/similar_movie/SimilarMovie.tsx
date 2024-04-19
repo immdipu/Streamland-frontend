@@ -1,7 +1,4 @@
-import React, { useEffect } from "react";
 import Slider from "../silder/Slider";
-import { NowPlayingResponse, showType } from "@/types/types";
-
 const SimilarMovie = ({
   results,
   type,

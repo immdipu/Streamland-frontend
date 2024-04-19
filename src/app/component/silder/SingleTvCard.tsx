@@ -1,14 +1,12 @@
 "use client";
-import React from "react";
-import Image from "next/image";
-import { singleTVShowProps } from "@/types/types";
 import Link from "next/link";
-import "react-tooltip/dist/react-tooltip.css";
-import { Tooltip as ReactTooltip } from "react-tooltip";
+import React from "react";
 import { GiRoundStar } from "react-icons/gi";
+import { Tooltip as ReactTooltip } from "react-tooltip";
+import "react-tooltip/dist/react-tooltip.css";
 import notFound from "../../../../public/notFound.png";
-import Images from "../ImageComponent/Image";
 import AddToWatchlist from "../Buttons/AddToWatchlist";
+import Images from "../ImageComponent/Image";
 
 const SingleTvCard: React.FC<singleTVShowProps> = ({
   id,

@@ -1,9 +1,9 @@
-import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import {
   ChatsTypes,
   GroupChatTypes,
   OnlineUsersTypese,
 } from "@/types/chatTypes";
+import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
 interface initialStateProps {
   currentActiveChat: ChatsTypes | GroupChatTypes | null;

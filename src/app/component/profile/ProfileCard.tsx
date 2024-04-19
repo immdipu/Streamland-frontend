@@ -1,24 +1,24 @@
 /* eslint-disable @next/next/no-img-element */
 "use client";
-import React, { useEffect } from "react";
-import Images from "../ImageComponent/Image";
-import { BsCalendar2Week } from "react-icons/bs";
-import { HiMail } from "react-icons/hi";
-import { BiMoviePlay } from "react-icons/bi";
-import { getUserDataTypes } from "@/types/userTypes";
-import { Role } from "@/types/role";
-import moment from "moment";
 import { userApis } from "@/app/userApi";
-import { useQueryClient, useMutation } from "@tanstack/react-query";
-import { toast } from "react-hot-toast";
-import clsx from "clsx";
-import { useRouter } from "next/navigation";
-import { AiOutlineMessage } from "react-icons/ai";
+import { useAppSelector } from "@/redux/hooks";
+import { Role } from "@/types/role";
+import { getUserDataTypes } from "@/types/userTypes";
 import IconButton from "@mui/material/IconButton";
 import Tooltip from "@mui/material/Tooltip";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import clsx from "clsx";
+import moment from "moment";
+import { useRouter } from "next/navigation";
+import React from "react";
+import { toast } from "react-hot-toast";
+import { AiOutlineMessage } from "react-icons/ai";
+import { BiMoviePlay } from "react-icons/bi";
+import { BsCalendar2Week } from "react-icons/bs";
+import { HiMail } from "react-icons/hi";
+import Images from "../ImageComponent/Image";
 import CustomModal from "../modal/CustomModal";
 import FollowersList from "./FollowersFollowing/FollowersList";
-import { useAppSelector } from "@/redux/hooks";
 
 interface ProfileCardProps extends getUserDataTypes {
   role: Role;
