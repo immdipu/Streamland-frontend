@@ -1,20 +1,9 @@
 "use client";
-import React, { Children, ReactNode, useState } from "react";
-import { CgMoreVerticalO } from "react-icons/cg";
-import {
-  Tooltip,
-  IconButton,
-  Modal,
-  Backdrop,
-  Box,
-  List,
-  ListItemButton,
-  Collapse,
-} from "@mui/material";
+import { Backdrop, Modal, Tooltip } from "@mui/material";
 import Fade from "@mui/material/Fade";
-
-import { AiOutlineClose } from "react-icons/ai";
 import clsx from "clsx";
+import React, { ReactNode } from "react";
+import { AiOutlineClose } from "react-icons/ai";
 
 interface seeMoreModal {
   data: ReactNode;
@@ -30,8 +19,6 @@ const CustomModal: React.FC<seeMoreModal> = ({
   width = "full",
 }) => {
   const [open, setOpen] = React.useState(false);
-  const [Listopen, setListOpen] = React.useState(false);
-  const [openNetwork, setOpenNetwork] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
@@ -67,7 +54,7 @@ const CustomModal: React.FC<seeMoreModal> = ({
               className="absolute -right-5 -top-5  bg-_genre_chip_bg rounded-lg px-3 py-3 z-10 cursor-pointer"
               id="modalclosebtn"
             >
-              <AiOutlineClose />
+              <AiOutlineClose className="text-neutral-300" />
             </div>
             <section>{data}</section>
           </div>
