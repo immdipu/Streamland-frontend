@@ -3,10 +3,56 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "release": "release-it",
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
+  },
+  "realease-it": {
+    "git": {
+      "commitMessage": "chore(release): v${version}"
+    },
+    "github": {
+      "release": true
+    },
+    "npm": {
+      "publish": false
+    },
+    "plugins": {
+      "@release-it/conventional-changelog": {
+        "infile": "CHANGELOG.md",
+        "preset": {
+          "name": "conventionalcommits",
+          "types": [
+            {
+              "type": "feat",
+              "section": "Features"
+            },
+            {
+              "type": "fix",
+              "section": "Bug Fixes"
+            },
+            {
+              "type": "docs",
+              "section": "Documentation"
+            },
+            {
+              "type": "style",
+              "section": "Styles"
+            },
+            {
+              "type": "chore",
+              "section": "Miscellaneous Chores"
+            },
+            {
+              "type": "refactor",
+              "section": "Code Refactoring"
+            }
+          ]
+        }
+      }
+    }
   },
   "dependencies": {
     "@emoji-mart/data": "^1.1.2",
@@ -56,9 +102,14 @@
     "utf-8-validate": "^5.0.10"
   },
   "devDependencies": {
+    "@commitlint/cli": "^19.2.2",
+    "@commitlint/config-conventional": "^19.2.2",
+    "@release-it/conventional-changelog": "^8.0.1",
     "@tanstack/eslint-plugin-query": "^4.29.9",
     "@types/nprogress": "^0.2.0",
     "@typescript-eslint/eslint-plugin": "^7.7.0",
-    "@typescript-eslint/parser": "^7.7.0"
+    "@typescript-eslint/parser": "^7.7.0",
+    "husky": "^9.0.11",
+    "release-it": "^17.2.0"
   }
 }
