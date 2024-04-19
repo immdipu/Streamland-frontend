@@ -1,20 +1,17 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 "use client";
-import React, { useState, useEffect, useRef, Suspense } from "react";
-import { useSearchParams, useParams } from "next/navigation";
-import clsx from "clsx";
-import Episode from "./Episodes";
-import { seasonsProps } from "@/types/types";
-import SmallLoader from "../loader/SmallLoader";
 import { Apis } from "@/app/tmdbApi/TmdbApi";
-import { useQuery, useMutation } from "@tanstack/react-query";
-import { AddMediaDataTypes } from "@/types/userTypes";
 import { userApis } from "@/app/userApi";
 import { useAppSelector } from "@/redux/hooks";
-import { useRouter } from "next/navigation";
-import SeasonHeader from "./molecules/SeasonHeader";
-import PlayerButton from "./atoms/PlayerButton";
+import { seasonsProps } from "@/types/types";
+import { AddMediaDataTypes } from "@/types/userTypes";
+import { useMutation, useQuery } from "@tanstack/react-query";
+import clsx from "clsx";
+import { useParams, useRouter, useSearchParams } from "next/navigation";
+import { Suspense, useEffect, useRef, useState } from "react";
 import EpisodeSkeletonLoader from "../loader/EpisodeSkeletonLoader";
+import Episode from "./Episodes";
+import PlayerButton from "./atoms/PlayerButton";
+import SeasonHeader from "./molecules/SeasonHeader";
 
 const Seasons = ({
   seasons,
@@ -89,9 +86,10 @@ const Seasons = ({
         }&ce=1`
       );
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [SeasonId, TotalEpisodes, params.id]);
 
-  const { data, isLoading, refetch, isFetching } = useQuery(
+  const { data, isLoading, isFetching } = useQuery(
     ["allEpisodes", params.id, SeasonId, TotalEpisodes],
     () => Apis.GetAllEpisodes(params.id as string, SeasonId, TotalEpisodes),
     {

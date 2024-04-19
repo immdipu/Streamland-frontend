@@ -74,14 +74,6 @@ export interface genresProps {
   name: string;
 }
 
-export interface tvshowCreatorProps {
-  id: number;
-  credit_id: string;
-  name: string;
-  gender: number;
-  profile_path: string;
-}
-
 export interface TVshowNetworkProps {
   id: number;
   logo_path: string;

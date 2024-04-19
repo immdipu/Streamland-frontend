@@ -1,7 +1,7 @@
 import { SingleTrendingPersonProp } from "@/types/personTypes";
 import Link from "next/link";
-import Images from "../ImageComponent/Image";
 import { Tooltip as ReactTooltip } from "react-tooltip";
+import Images from "../ImageComponent/Image";
 
 const TrendingPersonCard: React.FC<SingleTrendingPersonProp> = ({
   gender,
