@@ -1,10 +1,9 @@
 "use client";
-import React, { useEffect, useState, useRef } from "react";
-import { NowPlayingResponse } from "@/types/types";
+import clsx from "clsx";
+import React, { useEffect, useRef, useState } from "react";
+import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from "react-icons/md";
 import SingleCard from "./SingleCard";
 import SingleTvCard from "./SingleTvCard";
-import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from "react-icons/md";
-import clsx from "clsx";
 
 interface dataProps {
   data: NowPlayingResponse[];

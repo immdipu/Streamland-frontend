@@ -50,6 +50,21 @@ axis-horizontal,
     animation: slide-in-top .5s cubic-bezier(.25, .46, .45, .94) both
 }
 
+.fade-in {
+    -webkit-animation: fadeIn .5s ease-in forwards;
+    animation: fadeIn .5 ease-in forwards;
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
 
 
 @-webkit-keyframes slide-in-top {

@@ -1,16 +1,14 @@
-import CarouselContainer from "./component/carousel/CarouselContainer";
-import { getTrendingListResponse } from "@/types/types";
+import { Metadata } from "next";
 import {
+  ContinueWatch,
   NowPlaying,
   TrendingMovies,
-  ContinueWatch,
   TrendingPerson,
-  Users,
 } from "./component";
-import { Metadata } from "next";
+import CarouselContainer from "./component/carousel/CarouselContainer";
 
-import { Apis } from "./tmdbApi/TmdbApi";
 import { Suspense } from "react";
+import { Apis } from "./tmdbApi/TmdbApi";
 
 export const metadata: Metadata = {
   title: "ShowMania",

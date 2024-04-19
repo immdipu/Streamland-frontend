@@ -1,10 +1,6 @@
 "use client";
-import React, { useEffect, useState } from "react";
-import { SingleShowProps } from "@/types/types";
-import Images from "../ImageComponent/Image";
-import { AiFillPlayCircle } from "react-icons/ai";
-import Link from "next/link";
-import Image from "next/image";
+import { useEffect, useState } from "react";
+import WatchCard from "./WatchCard";
 
 async function getSingleMovie(id: string) {
   const res = await fetch(
@@ -66,60 +62,29 @@ const ContinueWatch = () => {
     return <></>;
   }
 
+  console.log(moviedata, tvdata);
+
   return (
-    <div className="px-9 my-14 max-md:px-1 ">
+    <div className="px-9 my-14 max-md:px-1  ">
       <h2 className="font-medium pl-9 max-md:pl-6 my-4 text-xl text-_white ">
         Continue Watching
       </h2>
       <section className="px-8 flex gap-10 overflow-x-auto max-md:px-1 mt-5 ">
         {moviedata && (
-          <div className="w-72 max-md:w-52 shrink-0 relative slide-in-top">
-            <Image
-              src={`https://image.tmdb.org/t/p/w200/${moviedata.backdrop_path}`}
-              width={300}
-              height={300}
-              alt={moviedata.title || "Movie poster"}
-              className=" w-full h-full object-cover rounded-2xl"
-            />
-
-            <Link
-              href={`/player/movie/${MovieId}`}
-              prefetch={false}
-              className="absolute bg-gradient-to-t rounded-2xl from-neutral-800 inset-0 group items-end flex hover:backdrop-blur-[2px] "
-            >
-              <h2 className="text-lg ml-3 mb-2  w-full  max-md:text-center text-white h-fit font-medium tracking-wide">
-                {moviedata.title}{" "}
-                <span className="text-[10px] px-1 rounded-lg border border-_light_white border-opacity-50 font-light">
-                  Movie
-                </span>
-              </h2>
-              <AiFillPlayCircle className="text-8xl mr-4 mb-1 scale-0  group-hover:scale-110 transition-transform duration-150 ease-in-out " />
-            </Link>
-          </div>
+          <WatchCard
+            backdrop_path={moviedata.backdrop_path}
+            id={moviedata.id}
+            title={moviedata.title ?? "Movie"}
+            type="movie"
+          />
         )}
         {tvdata && (
-          <div className="w-72 max-md:w-52 shrink-0 relative slide-in-top">
-            <Image
-              src={`https://image.tmdb.org/t/p/w200/${tvdata.backdrop_path}`}
-              width={300}
-              height={300}
-              alt={tvdata.title ?? "TV poster"}
-              className=" w-full h-full object-cover rounded-2xl"
-            />
-            <Link
-              href={`/tv/${tvId}/seasons`}
-              prefetch={false}
-              className="absolute bg-gradient-to-t rounded-2xl from-neutral-800 inset-0 group items-end flex hover:backdrop-blur-[2px] "
-            >
-              <h2 className="text-lg ml-3 mb-2  w-full  max-md:text-center text-white h-fit font-medium tracking-wide">
-                {tvdata.name}
-                <span className="text-[10px] px-1 ml-1 rounded-lg border border-_light_white border-opacity-50 font-light">
-                  TV
-                </span>
-              </h2>
-              <AiFillPlayCircle className="text-8xl mr-4 mb-1 scale-0  group-hover:scale-110 transition-transform duration-150 ease-in-out " />
-            </Link>
-          </div>
+          <WatchCard
+            backdrop_path={tvdata.backdrop_path}
+            id={tvdata.id}
+            title={tvdata.name ?? tvdata.original_name ?? "Movie"}
+            type="tv"
+          />
         )}
       </section>
     </div>

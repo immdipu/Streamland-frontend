@@ -1,43 +1,34 @@
 "use client";
-import React from "react";
-import Image from "next/image";
-import { NowPlayingResponse } from "@/types/types";
+import { userApis } from "@/app/userApi";
+import { useAppSelector } from "@/redux/hooks";
+import { AddMediaDataTypes } from "@/types/userTypes";
+import Tooltip from "@mui/material/Tooltip";
+import { useMutation } from "@tanstack/react-query";
 import Link from "next/link";
-import "react-tooltip/dist/react-tooltip.css";
-import { Tooltip as ReactTooltip } from "react-tooltip";
+import React from "react";
+import { toast } from "react-hot-toast";
 import { GiRoundStar } from "react-icons/gi";
+import { TbPlaylistAdd } from "react-icons/tb";
+import { Tooltip as ReactTooltip } from "react-tooltip";
+import "react-tooltip/dist/react-tooltip.css";
 import notFound from "../../../../public/notFound.png";
 import Images from "../ImageComponent/Image";
-import Tooltip from "@mui/material/Tooltip";
-import { TbPlaylistAdd } from "react-icons/tb";
-import { useAppSelector } from "@/redux/hooks";
-import { useMutation } from "@tanstack/react-query";
-import { userApis } from "@/app/userApi";
-import { toast } from "react-hot-toast";
-import { AddMediaDataTypes } from "@/types/userTypes";
 
 const SingleCard: React.FC<NowPlayingResponse> = ({
   id,
-  adult,
   backdrop_path,
-  genre_ids,
-  original_language,
   original_title,
-  overview,
-  popularity,
   poster_path,
   release_date,
   title,
-  video,
   vote_average,
-  vote_count,
 }) => {
   const user = useAppSelector((state) => state.auth);
 
   const AddtoWatchlist = useMutation(
     (data: AddMediaDataTypes) => userApis.AddMedia(data),
     {
-      onSuccess: (data) => {
+      onSuccess: () => {
         toast.success("Added to your watchlist");
       },
       onError: (data: any) => {

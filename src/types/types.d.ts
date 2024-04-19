@@ -4,3 +4,10 @@ export interface DesktopSingleComponentProps {
   active: boolean;
   label: string;
 }
+
+interface WatchCardProps {
+  id: string;
+  backdrop_path: string;
+  title: string;
+  type: "tv" | "movie";
+}
