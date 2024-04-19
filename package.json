@@ -7,7 +7,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "prepare": "husky"
   },
   "realease-it": {
     "git": {
@@ -32,22 +33,6 @@
             {
               "type": "fix",
               "section": "Bug Fixes"
-            },
-            {
-              "type": "docs",
-              "section": "Documentation"
-            },
-            {
-              "type": "style",
-              "section": "Styles"
-            },
-            {
-              "type": "chore",
-              "section": "Miscellaneous Chores"
-            },
-            {
-              "type": "refactor",
-              "section": "Code Refactoring"
             }
           ]
         }
