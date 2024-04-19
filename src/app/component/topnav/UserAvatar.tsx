@@ -41,19 +41,23 @@ const UserAvatar = () => {
       <div
         ref={avatarREf}
         onClick={() => setShowModal(!showModal)}
-        className="bg-neutral-500 cursor-pointer relative p-[2px] rounded-md"
+        className="bg-neutral-500 rounded-full cursor-pointer relative p-[2px] "
       >
         {user.profilePic && (
           <img
             ref={avatarPicREf}
-            className="w-10 h-10 rounded-md object-cover"
+            className="w-10 h-10 rounded-full object-cover"
             src={user.profilePic}
             alt="user profile"
           />
         )}
-        {isOnline && (
-          <div className="bg-green-500 w-4 h-4 -top-1 border -right-1  rounded-full absolute" />
-        )}
+        <span
+          className={clsx(
+            "absolute bottom-0 right-0 w-3 h-3 rounded-full border-2 border-neutral-800 bg-green-500"
+          )}
+        >
+          {isOnline && " "}
+        </span>
       </div>
       <section
         ref={modal}

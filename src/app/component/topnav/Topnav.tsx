@@ -58,7 +58,7 @@ const Topnav = () => {
       )}
     >
       {/* <TopNotification /> */}
-      <section className="  h-full topnav flex items-center w-full px-5 max-md:px-1">
+      <section className="  h-full topnav flex  items-center w-full px-5 max-md:px-1">
         <button
           onClick={() => {
             router.back();
@@ -84,15 +84,15 @@ const Topnav = () => {
 
         <SearchStatic />
 
-        <section className=" w-full flex justify-end max-md:w-fit mr-16 max-md:mr-1 ">
+        <section className=" w-full flex justify-end  mr-16 max-md:mr-1 ">
           <section className=" mr-10 max-md:mr-0 flex items-center">
-            {/* <Notification /> */}
+            <Notification />
           </section>
           {AutoLogin.isLoading ? (
             <SmallLoader size={30} />
           ) : (
             <>
-              {/* {user.isUserAuthenticated ? (
+              {user.isUserAuthenticated ? (
                 <UserAvatar />
               ) : (
                 <Link
@@ -104,7 +104,7 @@ const Topnav = () => {
                 >
                   Login
                 </Link>
-              )} */}
+              )}
             </>
           )}
         </section>

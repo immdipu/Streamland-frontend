@@ -109,26 +109,7 @@ const Seasons = ({
             <PlayerButton player={player} setPlayer={setPlayer} />
           </div>
         </div>
-        <div className="pl-12 gap-2 flex max-md:pl-2  mt-5">
-          <button
-            onClick={() => setPlayer(1)}
-            className={clsx(
-              " shadow-none px-4 py-1 rounded-sm ",
-              player === 1 ? "bg-blue-700" : "bg-neutral-800"
-            )}
-          >
-            Player 1
-          </button>
-          <button
-            onClick={() => setPlayer(2)}
-            className={clsx(
-              " shadow-none px-4 py-1 rounded-sm ",
-              player === 2 ? "bg-blue-700" : "bg-neutral-800"
-            )}
-          >
-            Player 2
-          </button>
-        </div>
+
         <>
           <div className="flex h-[35rem] max-lg:h-full max-lg:flex-col">
             <div className=" relative w-full py-6 flex-grow-1 max-lg:h-[30rem] max-md:flex-shrink-0">

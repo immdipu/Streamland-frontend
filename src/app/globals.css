@@ -4,6 +4,15 @@
 @tailwind components;
 @tailwind utilities;
 
+
+:root {
+    --black: #171717;
+}
+
+body {
+    background-color: var(--black);
+}
+
 @layer base {
     html {
 
@@ -13,6 +22,8 @@
 
 
 }
+
+
 
 axis-horizontal,
 .carousel-root {

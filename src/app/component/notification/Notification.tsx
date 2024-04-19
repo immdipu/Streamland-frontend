@@ -41,7 +41,7 @@ const Notification = () => {
     <div className="relative">
       <div className="relative">
         <CiBellOn
-          className="text-3xl max-md:mx-2 text-neutral-400 max-md:text-xl cursor-pointer "
+          className="text-3xl max-md:mx-2 text-neutral-500 max-md:text-xl cursor-pointer "
           onClick={() => {
             setShowNotification(!showNotification);
             setNewNotification(false);
