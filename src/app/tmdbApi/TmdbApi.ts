@@ -1,5 +1,4 @@
 import axios from "axios";
-import { singleEpisodeTypes } from "@/types/types";
 
 export const Apis = {
   TrendingPerson: async () => {
@@ -131,6 +130,26 @@ export const Apis = {
     }
     return res.json();
   },
+
+  MultiSearch: async (query: string, page: number) => {
+    const res = await fetch(
+      `https://api.themoviedb.org/3/search/multi?api_key=${process.env.NEXT_PUBLIC_API_KEY}&language=en-US&query=${query}&page=${page}`
+    );
+    if (!res.ok) {
+      throw new Error("Failed to fetch data");
+    }
+    return res.json();
+  },
+  SingleSearch: async (query: string, page: number) => {
+    const res = await fetch(
+      `https://api.themoviedb.org/3/search/multi?api_key=${process.env.NEXT_PUBLIC_API_KEY}&language=en-US&query=${query}&page=${page}`
+    );
+    if (!res.ok) {
+      throw new Error("Failed to fetch data");
+    }
+    return res.json();
+  },
+
   TopRatedTv: async (page: number) => {
     const res = await fetch(
       `${
