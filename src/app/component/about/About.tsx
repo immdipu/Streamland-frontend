@@ -1,12 +1,12 @@
 "use client";
 /* eslint-disable react/no-unescaped-entities */
-import * as React from "react";
-import { styled } from "@mui/material/styles";
-import { BiChevronDown } from "react-icons/bi";
 import MuiAccordion from "@mui/material/Accordion";
-import MuiAccordionSummary from "@mui/material/AccordionSummary";
 import MuiAccordionDetails from "@mui/material/AccordionDetails";
+import MuiAccordionSummary from "@mui/material/AccordionSummary";
 import Typography from "@mui/material/Typography";
+import { styled } from "@mui/material/styles";
+import * as React from "react";
+import { BiChevronDown } from "react-icons/bi";
 
 const Accordion = styled((props: any) => (
   <MuiAccordion disableGutters elevation={0} square {...props} />

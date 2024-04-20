@@ -1,14 +1,13 @@
 /* eslint-disable @next/next/no-img-element */
 "use client";
-import React, { useEffect, useState, useRef } from "react";
-import { useAppSelector } from "@/redux/hooks";
-import { IoLogOut } from "react-icons/io5";
-import { BsPersonSquare } from "react-icons/bs";
+import { useSocket } from "@/context/SocketProvider";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { LoggedOut } from "@/redux/slice/authSlice";
-import { useAppDispatch } from "@/redux/hooks";
 import clsx from "clsx";
 import Link from "next/link";
-import { useSocket } from "@/context/SocketProvider";
+import { useEffect, useRef, useState } from "react";
+import { BsPersonSquare } from "react-icons/bs";
+import { IoLogOut } from "react-icons/io5";
 
 const UserAvatar = () => {
   const user = useAppSelector((state) => state.auth);
@@ -68,7 +67,7 @@ const UserAvatar = () => {
       >
         <ul className="flex flex-col gap-1">
           <li className="flex justify-center items-center gap-5 transition-colors duration-200 ease-linear px-4 py-2">
-            <span className="text-sm font-light text-center">
+            <span className="text-sm font-light text-center text-neutral-200">
               {user.fullName}
             </span>
           </li>
@@ -78,7 +77,7 @@ const UserAvatar = () => {
             className="flex  items-center gap-5 hover:bg-black transition-colors duration-200 ease-linear  px-4 py-2"
           >
             <BsPersonSquare className="text-neutral-400 text-xl" />
-            <span className="text-sm">Account</span>
+            <span className="text-sm text-neutral-300">Account</span>
           </Link>
           <li
             onClick={() => {
@@ -87,7 +86,7 @@ const UserAvatar = () => {
             className="flex items-center gap-5 hover:bg-black transition-colors duration-200 ease-linear cursor-pointer px-4 py-2"
           >
             <IoLogOut className="text-neutral-400 text-2xl" />
-            <span className="text-sm">Log out</span>
+            <span className="text-sm text-neutral-300">Log out</span>
           </li>
         </ul>
       </section>

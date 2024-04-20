@@ -7,6 +7,14 @@
 
 :root {
     --black: #171717;
+    --white: #ffffff;
+    --light-white: #fafbfd;
+    --gray: #3e3b3b;
+    --gray-light: #a7a7a7;
+    --gray-dark: #2b2b2b;
+    --gray-darker: #1f1f1f;
+    --gray-lighter: #b9b3b3a6;
+    --gray-lightest: #aeaeae;
 }
 
 body {

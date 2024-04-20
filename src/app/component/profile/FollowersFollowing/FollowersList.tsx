@@ -1,10 +1,10 @@
 "use client";
-import React from "react";
+import { userApis } from "@/app/userApi";
 import { useAppSelector } from "@/redux/hooks";
 import { useQuery } from "@tanstack/react-query";
-import { userApis } from "@/app/userApi";
-import SingleUserListCard from "./SingleUserListCard";
 import clsx from "clsx";
+import React from "react";
+import SingleUserListCard from "./SingleUserListCard";
 
 const FollowersList = ({
   id,
@@ -40,7 +40,7 @@ const FollowersList = ({
               " w-full text-base py-4  cursor-pointer max-md:text-xs hover:text-_sidenav_bg hover:bg-black duration-200 transition-all ease-linear hover:shadow-lg ",
               activeTab === "Followers"
                 ? "bg-black text-neutral-200"
-                : "bg-transparent"
+                : "bg-transparent text-neutral-300"
             )}
           >
             Followers
@@ -53,7 +53,7 @@ const FollowersList = ({
               " w-full text-base py-4  cursor-pointer max-md:text-xs hover:text-_sidenav_bg hover:bg-black duration-200 transition-all ease-linear hover:shadow-lg ",
               activeTab === "Following"
                 ? "bg-black text-neutral-200"
-                : "bg-transparent"
+                : "bg-transparent text-neutral-300"
             )}
           >
             Following

@@ -129,13 +129,13 @@ const ProfileCard: React.FC<ProfileCardProps> = ({
             objectFit="cover"
           />
         </div>
-        <div className="mt-4 pl-7 w-full max-md:pl-0 max-md:mt-2">
-          <div className=" w-full flex justify-between">
-            <h4 className="font-semibold text-xl flex items-center pb-0">
+        <div className="mt-0 pl-7  w-full max-md:pl-0 max-md:mt-2">
+          <div className=" w-full flex justify-between ">
+            <h4 className="font-semibold text-neutral-100 text-xl flex items-center pb-0">
               {fullName}{" "}
               <span
                 className={clsx(
-                  "font-light text-xs ml-4 rounded-3xl px-2 py-px ",
+                  "font-light text-[9px] leading-none ml-4 rounded-3xl px-2 py-1 ",
                   email_verified
                     ? "text-green-400 border border-green-500"
                     : "text-red-300 border border-red-300"
@@ -184,8 +184,8 @@ const ProfileCard: React.FC<ProfileCardProps> = ({
               )}
             </div>
           </div>
-          <p className=" mb-2 -translate-y-2 pb-2 ">
-            <span className="text-sm tracking-wide text-neutral-400 font-light">
+          <p className=" mb-2 pb-2 leading-none">
+            <span className="text-[13px] tracking-wide leading-none text-neutral-300 mt-1 font-light">
               @{username}
             </span>
           </p>

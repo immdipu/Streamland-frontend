@@ -1,13 +1,11 @@
 "use client";
-import React, { useState } from "react";
-import { useQuery } from "@tanstack/react-query";
-import { useAppSelector } from "@/redux/hooks";
-import { userApis } from "@/app/userApi";
-import { AddMediaDataTypes } from "@/types/userTypes";
-import { useMutation } from "@tanstack/react-query";
 import PlayerTopToolTip from "@/app/component/PlayerTopTooltip/PlayerTopToolTip";
 import PlayerButton from "@/app/component/seasons/atoms/PlayerButton";
-import clsx from "clsx";
+import { userApis } from "@/app/userApi";
+import { useAppSelector } from "@/redux/hooks";
+import { AddMediaDataTypes } from "@/types/userTypes";
+import { useMutation, useQuery } from "@tanstack/react-query";
+import { useState } from "react";
 
 const Page = ({ params }: any) => {
   const [showOverlay, setShowOverlay] = useState(true);

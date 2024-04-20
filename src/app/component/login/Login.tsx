@@ -1,16 +1,16 @@
 "use client";
-import React, { useEffect, useState, useRef, FormEvent } from "react";
-import { GoogleLogin } from "@react-oauth/google";
 import { userApis } from "@/app/userApi";
-import { useMutation } from "@tanstack/react-query";
-import FullScreenLoader from "../loader/FullScreenLoader";
-import { LoggedIn } from "@/redux/slice/authSlice";
-import { useDispatch } from "react-redux";
-import { toast } from "react-hot-toast";
-import { useRouter } from "next/navigation";
-import Link from "next/link";
 import { useAppSelector } from "@/redux/hooks";
+import { LoggedIn } from "@/redux/slice/authSlice";
+import { GoogleLogin } from "@react-oauth/google";
+import { useMutation } from "@tanstack/react-query";
 import clsx from "clsx";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { FormEvent, useEffect, useRef, useState } from "react";
+import { toast } from "react-hot-toast";
+import { useDispatch } from "react-redux";
+import FullScreenLoader from "../loader/FullScreenLoader";
 import SmallLoader from "../loader/SmallLoader";
 
 const Login = () => {
@@ -205,6 +205,7 @@ const Login = () => {
                     id="text"
                     autoFocus
                     ref={SignupFullName}
+                    placeholder="Your full name"
                     required
                     className="px-4 py-2 transition duration-300 border border-neutral-400 rounded focus:border-transparent focus:outline-none focus:ring-4 focus:ring-blue-200"
                   />
@@ -220,6 +221,7 @@ const Login = () => {
                     type="text"
                     ref={SignupUsername}
                     required
+                    placeholder="username"
                     id="text"
                     className="px-4 py-2 transition duration-300 border border-neutral-400 rounded focus:border-transparent focus:outline-none focus:ring-4 focus:ring-blue-200"
                   />
@@ -234,6 +236,7 @@ const Login = () => {
                 </label>
                 <input
                   type="email"
+                  placeholder="Your email"
                   id="email"
                   required
                   ref={SignupEmail}
@@ -252,6 +255,7 @@ const Login = () => {
                 <input
                   type="text"
                   id="password"
+                  placeholder="password"
                   ref={SignupPassword}
                   required
                   className="px-4 py-2 transition  duration-300 border border-neutral-400 rounded focus:border-transparent focus:outline-none focus:ring-4 focus:ring-blue-200"
@@ -291,6 +295,7 @@ const Login = () => {
                 </label>
                 <input
                   type="text"
+                  placeholder="Enter your email or username"
                   id="email"
                   autoFocus
                   ref={LoginEmailUser}
@@ -305,15 +310,10 @@ const Login = () => {
                   >
                     Password
                   </label>
-                  <a
-                    href="#"
-                    className="text-sm text-blue-200 hover:underline focus:text-blue-800"
-                  >
-                    Forgot Password?
-                  </a>
                 </div>
                 <input
                   type="text"
+                  placeholder="password"
                   id="password"
                   ref={LoginPassword}
                   className="px-4 py-2 transition duration-300 border border-neutral-400 rounded focus:border-transparent focus:outline-none focus:ring-4 focus:ring-blue-200"

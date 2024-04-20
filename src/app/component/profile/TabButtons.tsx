@@ -1,7 +1,7 @@
-import React, { useEffect, useState, useRef, Suspense } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
-import clsx from "clsx";
 import { Role } from "@/types/role";
+import clsx from "clsx";
+import { useRouter, useSearchParams } from "next/navigation";
+import React, { Suspense, useEffect, useState } from "react";
 
 interface TabButtonsProps {
   username: string;
@@ -45,10 +45,10 @@ const TabButtons: React.FC<TabButtonsProps> = ({
                 );
               }}
               className={clsx(
-                "px-2 text-sm py-1  cursor-pointer max-md:text-xs hover:text-_sidenav_bg hover:bg-_blue duration-200 transition-all ease-linear hover:shadow-lg rounded-lg",
+                "px-2 text-sm py-1  cursor-pointer max-md:text-xs border border-neutral-700 hover:text-_sidenav_bg hover:bg-_blue duration-200 transition-all ease-linear hover:shadow-lg rounded-md",
                 activeTab === item.split(" ").join("").toLowerCase()
-                  ? "bg-_blue text-_sidenav_bg"
-                  : ""
+                  ? "bg-_blue text-_sidenav_bg "
+                  : "text-neutral-300"
               )}
             >
               {item}

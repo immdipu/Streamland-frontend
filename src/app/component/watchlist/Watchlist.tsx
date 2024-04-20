@@ -31,7 +31,7 @@ const Watchlist = () => {
   if (!user.isUserAuthenticated) {
     return (
       <div>
-        <h2 className="text-2xl  mt-5">Movies Watchlist</h2>
+        <h2 className="text-2xl text-neutral-100  mt-5">Movies Watchlist</h2>
         <div className=" w-full h-96 grid place-content-center ">
           <p className="text-xl text-neutral-500">
             Please log in to see your watchlist.
@@ -44,7 +44,7 @@ const Watchlist = () => {
   if (isLoading) {
     return (
       <>
-        <h2 className="text-2xl  mt-5">Movies Watchlist</h2>
+        <h2 className="text-2xl text-neutral-100 mt-5">Movies Watchlist</h2>
         <div className="flex flex-col gap-2 mt-10">
           <LoadingAnimation />
           <LoadingAnimation />
@@ -60,17 +60,17 @@ const Watchlist = () => {
 
   return (
     <div>
-      <h2 className="text-2xl  mt-5">Movies Watchlist</h2>
+      <h2 className="text-2xl text-neutral-100 mt-5">Movies Watchlist</h2>
       <section className="flex gap-5 mt-5">
         <button
           onClick={() => {
             router.push("/watchlist?tab=watchlist");
           }}
           className={clsx(
-            " px-2 text-sm py-1 cursor-pointer max-md:text-xs hover:text-_sidenav_bg hover:bg-_blue duration-200 transition-all ease-linear hover:shadow-lg rounded-md",
+            " px-2 text-sm active:scale-90  py-1 cursor-pointer max-md:text-xs hover:text-_sidenav_bg hover:bg-_blue duration-200 transition-all ease-linear hover:shadow-lg rounded-md",
             searchParams.get("tab") === "watchlist"
               ? "bg-_blue text-_sidenav_bg"
-              : "bg-_genre_chip_bg"
+              : "border border-neutral-600 bg-neutral-700 text-neutral-300"
           )}
         >
           Watchlist
@@ -80,10 +80,10 @@ const Watchlist = () => {
             router.push("/watchlist?tab=history");
           }}
           className={clsx(
-            " px-2 text-sm py-1 cursor-pointer max-md:text-xs hover:text-_sidenav_bg hover:bg-_blue duration-200 transition-all ease-linear hover:shadow-lg rounded-md",
+            " px-3 active:scale-90  text-sm py-1 cursor-pointer max-md:text-xs hover:text-_sidenav_bg hover:bg-_blue duration-200 transition-all ease-linear hover:shadow-lg rounded-md",
             searchParams.get("tab") === "history"
               ? "bg-_blue text-_sidenav_bg"
-              : "bg-_genre_chip_bg"
+              : "border border-neutral-600 bg-neutral-700 text-neutral-300"
           )}
         >
           History

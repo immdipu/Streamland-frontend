@@ -1,19 +1,16 @@
 "use client";
-import React, { useEffect } from "react";
-import Link from "next/link";
-import { BiSearch } from "react-icons/bi";
-import { useMutation } from "@tanstack/react-query";
 import { userApis } from "@/app/userApi";
-import { useAppSelector } from "@/redux/hooks";
-import { useSearchParams } from "next/navigation";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { LoggedIn } from "@/redux/slice/authSlice";
-import { useAppDispatch } from "@/redux/hooks";
-import { useRouter } from "next/navigation";
 import { toggelChatSidebar } from "@/redux/slice/chatSlice";
-import { LuArrowLeft } from "react-icons/lu";
-import { BiHomeAlt2 } from "react-icons/bi";
-import { GoPlus } from "react-icons/go";
+import { useMutation } from "@tanstack/react-query";
 import clsx from "clsx";
+import Link from "next/link";
+import { useRouter, useSearchParams } from "next/navigation";
+import React, { useEffect } from "react";
+import { BiHomeAlt2, BiSearch } from "react-icons/bi";
+import { GoPlus } from "react-icons/go";
+import { LuArrowLeft } from "react-icons/lu";
 import CustomModal from "../../modal/CustomModal";
 import CreateGroupForm from "../groupchat/CreateGroupForm";
 import GroupChat from "../groupchat/GroupChat";
@@ -96,7 +93,7 @@ const ChatSidebar = () => {
           <div className="flex items-center justify-around gap-2 mb-5 border-b border-neutral-700 ">
             <div>
               <button
-                className="pb-3"
+                className="pb-3 text-neutral-100"
                 onClick={() => {
                   router.push("/chat?type=global");
                 }}
@@ -112,7 +109,7 @@ const ChatSidebar = () => {
             </div>
             <div>
               <button
-                className="pb-3"
+                className="pb-3 text-neutral-100"
                 onClick={() => {
                   router.push("/chat?type=personal");
                 }}

@@ -90,7 +90,7 @@ const SeeMoreModal: React.FC<seeMoreModal> = ({
               onClick={handleClose}
               className="absolute -right-5 -top-5 bg-_genre_chip_bg rounded-lg px-3 py-3 z-10 cursor-pointer"
             >
-              <AiOutlineClose />
+              <AiOutlineClose className="text-neutral-300" />
             </div>
             {original_name && (
               <>

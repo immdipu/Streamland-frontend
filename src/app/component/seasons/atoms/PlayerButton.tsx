@@ -1,5 +1,5 @@
-import React from "react";
 import clsx from "clsx";
+import React from "react";
 
 interface PlayerButtonProps {
   player: 1 | 2;
@@ -11,8 +11,10 @@ const PlayerButton: React.FC<PlayerButtonProps> = ({ player, setPlayer }) => {
     <div className="ml-14 max-md:ml-2 mt-3 flex gap-4">
       <button
         className={clsx(
-          "bg-_genre_chip_bg px-4 rounded-md py-1 text-sm max-md:text-xs",
-          player === 1 ? "bg-blue-600" : "text-neutral-300"
+          "bg-_genre_chip_bg px-4 rounded-md py-2 text-sm max-md:text-xs",
+          player === 1
+            ? "bg-blue-600 text-neutral-100 "
+            : "text-neutral-300 border border-neutral-600"
         )}
         onClick={() => setPlayer(1)}
       >
@@ -20,8 +22,10 @@ const PlayerButton: React.FC<PlayerButtonProps> = ({ player, setPlayer }) => {
       </button>
       <button
         className={clsx(
-          "bg-_genre_chip_bg px-4 rounded-md py-1 text-sm max-md:text-xs",
-          player === 2 ? "bg-blue-600" : "text-neutral-300"
+          "bg-_genre_chip_bg px-4 rounded-md py-2 text-sm max-md:text-xs",
+          player === 2
+            ? "bg-blue-600 text-neutral-100"
+            : "text-neutral-300 border-neutral-600"
         )}
         onClick={() => setPlayer(2)}
       >
