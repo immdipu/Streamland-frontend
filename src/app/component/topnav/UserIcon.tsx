@@ -1,3 +1,4 @@
+"use client";
 import { userApis } from "@/app/userApi";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { LoggedIn } from "@/redux/slice/authSlice";
@@ -20,8 +21,11 @@ const UserIcon = () => {
     onError: (data) => {
       console.log(data);
     },
+    retry: 2,
+    networkMode: "online",
   });
   useEffect(() => {
+    console.log("Auto login is running");
     AutoLogin.mutate();
 
     // eslint-disable-next-line react-hooks/exhaustive-deps

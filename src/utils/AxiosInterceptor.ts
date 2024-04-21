@@ -1,4 +1,4 @@
-import axios, { AxiosInstance, AxiosStatic } from "axios";
+import axios, { AxiosInstance } from "axios";
 
 export const axiosInstance = (): AxiosInstance => {
   const URL = process.env.NEXT_PUBLIC_USER_URL;

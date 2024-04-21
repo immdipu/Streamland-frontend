@@ -1,4 +1,5 @@
 import { Metadata } from "next";
+import { Suspense } from "react";
 import {
   ContinueWatch,
   NowPlaying,
@@ -6,8 +7,7 @@ import {
   TrendingPerson,
 } from "./component";
 import CarouselContainer from "./component/carousel/CarouselContainer";
-
-import { Suspense } from "react";
+import OnlineUsers from "./component/users/OnlineUsers";
 import { Apis } from "./tmdbApi/TmdbApi";
 
 export const metadata: Metadata = {
@@ -32,13 +32,15 @@ export default async function Home() {
     <div className="bg-_black_bg ">
       <section className=" relative gap-7  max-lg:flex-col  flex  w-full  max-lg:h-fit  ">
         {data ? <CarouselContainer data={data} /> : <div>No data found</div>}
-
-        {/* <Users /> */}
       </section>
       <section className="mt-8">
         <div>
           <ContinueWatch />
         </div>
+
+        <Suspense fallback={<div>Loading...</div>}>
+          <OnlineUsers />
+        </Suspense>
         <div>
           <NowPlaying />
         </div>
