@@ -18,7 +18,7 @@ const SingleUserRoundCard: FC<OnlineUsersTypes> = ({
     >
       <div className="w-24 overflow-hidden shrink-0 h-24 rounded-full ">
         <Images
-          src={`https://image.tmdb.org/t/p/w200/${profilePic}`}
+          src={profilePic}
           height={100}
           width={100}
           alt={fullName}
