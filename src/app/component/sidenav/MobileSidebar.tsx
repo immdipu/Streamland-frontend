@@ -1,9 +1,8 @@
 "use client";
-import React, { useState, useContext } from "react";
-import { BiCategory } from "react-icons/bi";
-import DesktopSidebar from "./DesktopSidebar";
-import clsx from "clsx";
 import { SearchContext } from "@/context/GlobalProvider";
+import clsx from "clsx";
+import { useContext } from "react";
+import DesktopSidebar from "./DesktopSidebar";
 
 const MobileSidebar = () => {
   const GlobalContext = useContext(SearchContext);
