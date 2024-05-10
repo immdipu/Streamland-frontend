@@ -6,6 +6,7 @@ import DesktopSidebar from "./DesktopSidebar";
 
 const MobileSidebar = () => {
   const GlobalContext = useContext(SearchContext);
+
   return (
     <>
       <div
