@@ -32,12 +32,12 @@ jobs:
           api_location: "" # Api source code path - optional
           output_location: "" # Built app content directory - optional
         env:
-        NEXT_PUBLIC_SOCKET_URL: ${{ secrets.NEXT_PUBLIC_SOCKET_URL }}
-        NEXT_PUBLIC_USER_URL: ${{ secrets.NEXT_PUBLIC_USER_URL }}
-        NEXT_PUBLIC_BASE_URL: ${{ secrets.NEXT_PUBLIC_BASE_URL }}
-        BASE_URL: ${{ secrets.BASE_URL }}
-        NEXT_PUBLIC_API_KEY: ${{ secrets.NEXT_PUBLIC_API_KEY }}
-        API_KEY: ${{ secrets.API_KEY }}
+          NEXT_PUBLIC_SOCKET_URL: ${{ secrets.NEXT_PUBLIC_SOCKET_URL }}
+          NEXT_PUBLIC_USER_URL: ${{ secrets.NEXT_PUBLIC_USER_URL }}
+          NEXT_PUBLIC_BASE_URL: ${{ secrets.NEXT_PUBLIC_BASE_URL }}
+          BASE_URL: ${{ secrets.BASE_URL }}
+          NEXT_PUBLIC_API_KEY: ${{ secrets.NEXT_PUBLIC_API_KEY }}
+          API_KEY: ${{ secrets.API_KEY }}
 
   close_pull_request_job:
     if: github.event_name == 'pull_request' && github.event.action == 'closed'
