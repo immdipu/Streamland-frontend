@@ -10,6 +10,9 @@
     "lint": "next lint",
     "prepare": "husky"
   },
+  "engines": {
+    "node": ">=16.0.0 <18"
+  },
   "commitlint": {
     "extends": [
       "@commitlint/config-conventional"

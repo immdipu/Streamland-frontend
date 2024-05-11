@@ -56,3 +56,4 @@ jobs:
         with:
           azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_JOLLY_HILL_0CA4ECE0F }}
           action: "close"
+          app_location: "/" # App source code path
