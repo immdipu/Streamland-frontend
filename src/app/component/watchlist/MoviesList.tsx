@@ -1,19 +1,18 @@
 "use client";
-import React from "react";
-import Images from "../ImageComponent/Image";
-import Link from "next/link";
-import { GiRoundStar } from "react-icons/gi";
-import { AddMediaResponse } from "@/types/userTypes";
 import { userApis } from "@/app/userApi";
-import { useMutation } from "@tanstack/react-query";
-import { toast } from "react-hot-toast";
-import SmallLoader from "../loader/SmallLoader";
-import clsx from "clsx";
-import { useQueryClient } from "@tanstack/react-query";
 import { useAppSelector } from "@/redux/hooks";
 import { Role } from "@/types/role";
-import moment from "moment";
+import { AddMediaResponse } from "@/types/userTypes";
 import { Tooltip } from "@mui/material";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import clsx from "clsx";
+import moment from "moment";
+import Link from "next/link";
+import React from "react";
+import { toast } from "react-hot-toast";
+import { GiRoundStar } from "react-icons/gi";
+import Images from "../ImageComponent/Image";
+import SmallLoader from "../loader/SmallLoader";
 
 const MoviesList: React.FC<AddMediaResponse> = ({
   _id,
@@ -64,8 +63,8 @@ const MoviesList: React.FC<AddMediaResponse> = ({
               />
             </div>
             <div className="flex flex-col">
-              <h3 className="text-2xl mt-2 font-medium max-md:text-base">
-                <span className="font-light text-xl  pr-1">{Index + 1}.</span>
+              <h3 className="text-2xl mt-2 text-white font-medium max-md:text-base">
+                <span className="font-light text-xl pr-1">{Index + 1}.</span>
                 {media_type === "movie" ? title : name}
               </h3>
               <div className="flex flex-col justify-between  h-full justify-self-stretch ">

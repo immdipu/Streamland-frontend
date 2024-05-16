@@ -25,7 +25,7 @@ const PlayerButton: React.FC<PlayerButtonProps> = ({ player, setPlayer }) => {
           "bg-_genre_chip_bg px-4 rounded-md py-2 text-sm max-md:text-xs",
           player === 2
             ? "bg-blue-600 text-neutral-100"
-            : "text-neutral-300 border-neutral-600"
+            : "text-neutral-300 border border-neutral-600"
         )}
         onClick={() => setPlayer(2)}
       >

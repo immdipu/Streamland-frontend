@@ -47,10 +47,10 @@ const Page = ({ params }: any) => {
   return (
     <>
       <div className="pt-20 ">
-        <div className="mb-2 mt-1 ml-2 flex flex-col justify-start items-start ">
-          <PlayerTopToolTip />
-          <div className="-ml-14 mb-2 max-lg:ml-0">
+        <div className=" ">
+          <div className="-ml-14 px-5 mb-2 max-md:flex-col max-md:pt-5 max-md:gap-9 flex justify-between max-lg:ml-0">
             <PlayerButton player={player} setPlayer={setPlayer} />
+            <PlayerTopToolTip />
           </div>
         </div>
         <div className="h-[80vh]  relative">

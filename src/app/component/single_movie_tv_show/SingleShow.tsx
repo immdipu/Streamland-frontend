@@ -44,17 +44,6 @@ const SingleShow: React.FC<SingleShowProps> = ({
   similar,
   recommendations,
 }) => {
-  let Trailer = (
-    <iframe
-      src={`https://autoembed.to/trailer/${
-        TYPE === "MOVIE" ? "movie" : TYPE === "TV" ? "tv" : ""
-      }/${id}`}
-      width="100%"
-      height="100%"
-      allowFullScreen
-    />
-  );
-
   return (
     <div>
       <div className="relative">
