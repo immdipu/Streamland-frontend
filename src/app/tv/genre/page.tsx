@@ -4,7 +4,7 @@ import { MovieGenreList, MoviesGrid } from "@/app/component";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "ShowMania | TV shows",
+  title: "streamland | TV shows",
 };
 
 const page = () => {

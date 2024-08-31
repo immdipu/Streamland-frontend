@@ -11,7 +11,7 @@ import OnlineUsers from "./component/users/OnlineUsers";
 import { Apis } from "./tmdbApi/TmdbApi";
 
 export const metadata: Metadata = {
-  title: "ShowMania",
+  title: "streamland",
 };
 
 async function getTrendingList() {

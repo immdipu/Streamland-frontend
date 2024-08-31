@@ -16,9 +16,9 @@ const page = () => {
   //           <p className="font-medium text-neutral-300">Hello Everyone,</p>
   //           <p className="text-neutral-400 font-light text-sm pt-6">
   //             <span className="text-neutral-200">I am Dipu,</span> the creator
-  //             of showMania, which I launched just a few short months ago in
+  //             of streamland, which I launched just a few short months ago in
   //             2023. Since then, it has been solely maintained by me. I still
-  //             have a lot of plans for showMania in the future, and I am
+  //             have a lot of plans for streamland in the future, and I am
   //             constantly working on improving it.
   //           </p>
   //           <br />

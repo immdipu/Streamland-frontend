@@ -16,22 +16,22 @@ export async function generateMetadata({ params }: any) {
     title: res.title ?? res.name,
     description: res.overview,
     keywords: [
-      `${res?.title! || res?.name! || "Showmania"} tv show`,
-      `${res?.title! || res?.name! || "Showmania"} tv show online`,
-      `${res?.title! || res?.name! || "Showmania"} tv show free`,
-      `${res?.title! || res?.name! || "Showmania"} tv show free online`,
+      `${res?.title! || res?.name! || "streamland"} tv show`,
+      `${res?.title! || res?.name! || "streamland"} tv show online`,
+      `${res?.title! || res?.name! || "streamland"} tv show free`,
+      `${res?.title! || res?.name! || "streamland"} tv show free online`,
       `${
-        res?.title! || res?.name! || "Showmania"
+        res?.title! || res?.name! || "streamland"
       } tv show free online streaming`,
-      `${res?.title! || res?.name! || "Showmania"} tv show free online watch`,
+      `${res?.title! || res?.name! || "streamland"} tv show free online watch`,
       `${
-        res?.title! || res?.name! || "Showmania"
+        res?.title! || res?.name! || "streamland"
       } tv show free online watch now`,
       `${
-        res?.title! || res?.name! || "Showmania"
+        res?.title! || res?.name! || "streamland"
       } tv show free online watch now hd`,
       `${
-        res?.title! || res?.name! || "Showmania"
+        res?.title! || res?.name! || "streamland"
       } tv show free online watch now hd 1080p`,
     ],
   };

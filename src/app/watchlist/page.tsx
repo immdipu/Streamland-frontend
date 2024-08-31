@@ -4,7 +4,7 @@ import { Watchlist } from "../component";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "ShowMania | Watchlist",
+  title: "streamland | Watchlist",
 };
 
 const page = () => {

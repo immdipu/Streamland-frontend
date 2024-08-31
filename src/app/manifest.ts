@@ -2,8 +2,8 @@ import { MetadataRoute } from "next";
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: "ShowMania | Movies & TV Shows",
-    short_name: "ShowMania",
+    name: "streamland | Movies & TV Shows",
+    short_name: "streamland",
     description:
       "Watch Movies & TV Shows Online Free ,plus chat with other users, share your thoughts, and engage in discussions.",
     start_url: "/",

@@ -4,7 +4,7 @@ import { SingleActorProps } from "@/types/personTypes";
 import PersonMovieShows from "@/app/component/person/PersonMovieShows";
 
 export const metadata = {
-  title: "ShowMania | Person",
+  title: "streamland | Person",
 };
 
 async function getSinglePerson(id: string) {

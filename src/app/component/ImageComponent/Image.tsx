@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import { StaticImageData } from "next/image";
-import failedImage from "@/assets/ShowManiaFailedImage.png";
+import failedImage from "@/assets/streamlandFailedImage.png";
 import clsx from "clsx";
 
 interface ImagesProps {

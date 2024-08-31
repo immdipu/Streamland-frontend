@@ -18,7 +18,7 @@ const Sidebarcomponent = () => {
         }}
         className="text-_white cursor-pointer z-[60] font-Helvetica text-2xl font-bold tracking-wider pl-7 mt-8"
       >
-        ShowMania
+        streamland
       </h1>
       <section className="mt-14 flex flex-col gap-6">
         {routes.map((item: DesktopSingleComponentProps) => {
