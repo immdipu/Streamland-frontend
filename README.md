@@ -54,7 +54,7 @@ We welcome contributions to Streamland! Feel free to open issues and pull reques
 
 ## 🔗 Related Repositories
 
-- [Streamland Backend](https://github.com/yourusername/streamland-backend) - The backend API for Streamland
+- [Streamland Backend](https://github.com/immdipu/streamland-backend) - The backend API for Streamland
 
 ## 📜 License
 
