@@ -1,9 +1,8 @@
 "use client";
-import React, { useState } from "react";
-import Image from "next/image";
-import { StaticImageData } from "next/image";
-import failedImage from "@/assets/streamlandFailedImage.png";
+import failedImage from "@/assets/StreamlandFailedImage.png";
 import clsx from "clsx";
+import Image, { StaticImageData } from "next/image";
+import React, { useState } from "react";
 
 interface ImagesProps {
   src: string;
